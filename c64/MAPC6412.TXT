@@ -38,11 +38,10 @@ use the information herein you do so at your own risk.
 
 The Project 64 etext of the ~Mapping The Commodore 64 book~, typed
 by David Holz <white-flame@geocities.com>, formatted to 71 columns and
-somewhat proofed by Cris Berneburg <pcgeek@compuserve.com>.
+somewhat proofed by Cris Berneburg <pcgeek@compuserve.com>. Corrected
+and currently maintained by Silver Dream ! <silverdr@wfmh.org.pl>
 
-MAPC6411.TXT, June 1998, etext #351#. This replaces MAPC6410.TXT from May 1998
-in which I had the wrong email addy for David Holz and misnumbered the
-etext as 352. -cjb
+MAPC6412.TXT, etext #351#. This replaces MAPC6411.TXT from June 1998
 
 Note from the tired typist:
 
@@ -1097,7 +1096,7 @@ three will be unused.
 
 A string variable will use the third byte for its length, and the
 fourth and fifth bytes for a pointer to the address of the string
-text, leaving the last two bytes unused.  Note that the acrual string
+text, leaving the last two bytes unused.  Note that the actual string
 text that is pointed to is located either in the part of the BASIC
 program where the string is first assigned a value, or in the string
 text storage area pointed to by location 51 ($33).
@@ -1109,7 +1108,7 @@ the dependent variable (the X of FN A(X)).  The final byte is not
 used.
 
 Knowing something about how variables are created can help your BASIC
-programming.  For example, you can see that nonarray integer variables
+programming.  For example, you can see that non-array integer variables
 take up no less space than floating point variables, and since most
 BASIC commands convert the integers to floating point, they do not
 offer a speed advantage either, and in many cases will actually slow
@@ -1131,10 +1130,10 @@ that is used to search for variables that are referenced.
 
 Another point to consider about the order in which to define variables
 is that arrays are created in a separate area of memory which starts
-at the end of the nonarray variable area.  Therefore, every time a
-nonarray variable is created, all of the arrays must be moved seven
+at the end of the non-array variable area.  Therefore, every time a
+non-array variable is created, all of the arrays must be moved seven
 bytes higher in memory in order to make room for the new variable.
-Therefore, it may help performance to avoid defining nonarray
+Therefore, it may help performance to avoid defining non-array
 variables after defining arrays.
 
 This pointer will be reset to one byte past the end of the BASIC
@@ -1310,7 +1309,7 @@ Pointer to the Address of the Current BASIC Statement
 
 This location contains the address (not the line number) of the text
 of the BASIC statement that is being executed.  The value of TXTPTR
-(122, $7A), the pointer tot he address of the BASIC text character
+(122, $7A), the pointer to the address of the BASIC text character
 currently being scanned, is stored here each time a new BASIC line
 begins execution.
 
@@ -1582,7 +1581,7 @@ in the older PET line, it was the only way to add such features).
 Diversion of the CHRGET routine for this purpose is generally referred
 to as a wedge.
 
-Since a wedge can greatly slow down execution speed, mose of the time
+Since a wedge can greatly slow down execution speed, most of the time
 it is set up so that it performs its preprocessing functions only when
 in direct or immediate mode.  The most well-known example of such a
 wedge is the "Universal DOS Support" program that allows easier
@@ -3477,7 +3476,7 @@ Save Area for CIA #1 Control Register A During Cassette Read
 677           $2A5
 Temporary Index to the Next 40-Column Line for Screen Scrolling
 
-678           $2A6
+678           $2A6           NTSCPAL
 PAL/NTSC Flag
 
 At power-on, a test is performed to see if the monitor uses the NTSC
@@ -3913,10 +3912,10 @@ VECTOR routine (64794, $FD1A), it does not seem to have the function
 of aiding in the addition of new commands.
 
 816-817       $330-$331      ILOAD
-Vector to Kernal LOAD Routine (Currently at 62622 ($F49E))
+Vector to Kernal LOAD Routine (Currently at 62622 ($F49E)) - (points to $F4A5)
 
 818-819       $332-$333      ISAVE
-Vector: Kernal SAVE Routine (Currently at 62941 ($F5DD))
+Vector: Kernal SAVE Routine (Currently at 62941 ($F5DD)) - (points to $F5ED)
 
 820-827       $334-$33B
 Unused
@@ -4829,7 +4828,7 @@ the argument reaches 0, the statement has no effect, and the next
 statement is executed.
 
 43371         $A96B          LINGET
-Convert an ASCII Decimal Number to a Two-Byte Binary Line Nmumber
+Convert an ASCII Decimal Number to a Two-Byte Binary Line Number
 
 This subroutine is used by several statements to read a decimal
 number, convert it to a two-byte integer line number (in low-byte,
@@ -6643,12 +6642,12 @@ of foreground and background text colors at once.
 40 FOR I=49152 TO 49188:READ A:POKE I,A:NEXT:POKE 53280,11
 50 PRINT CHR$(147):FOR I=1024 TO I+1000:POKE I,160:POKE I+54272,11:NEXT I
 60 FOR I=0 TO 15:FOR J=0 TO 15
-70 P=1196+(48*I)+J:POKE P,J+I:POKE P+54272,J:NEXT J,I
+70 P=1196+(40*I)+J:POKE P,J+I:POKE P+54272,J:NEXT J,I
 80 PRINT TAB(15)CHR$(5)"COLOR CHART":FOR I=1 TO 19:PRINT:NEXT
 85 PRINT "THIS CHART SHOWS ALL COMBINATIONS OF   "
 86 PRINT "FOREGROUND AND BACKGROUND COLORS.      "
 87 PRINT "FOREGROUND INCREASES FROM LEFT TO RIGHT"
-88 PRINT "BACKGROUND INCREASES FROM TOP TO BOTTOM"
+88 PRINT "BACKGROUND INCREASES FROM TOP TO BOTTOM";
 90 SYS 12*4096
 100 DATA 169,90,133,251,169,0,141,33,208,162,15,120,173,17,208,48
 105 DATA 251,173,18,208
@@ -7535,7 +7534,7 @@ default color value is 1 (white).
 Background Color 2
 
 This register sets the color for the 10 bit-pair of multicolor
-character graphics, and the background color for characters habing
+character graphics, and the background color for characters having
 screen codes 128-191 in extended background color text mode.  The
 default color value is 2 (red).
 
@@ -7575,19 +7574,19 @@ Sprite 1 Color Register (the default color value is 2, red)
 53289         $D029          SP2COL
 Sprite 2 Color Register (the default color value is 3, cyan)
 
-53290         $D01A          SP3COL
+53290         $D02A          SP3COL
 Sprite 3 Color Register (the default color value is 4, purple)
 
-53291         $D01B          SP4COL
+53291         $D02B          SP4COL
 Sprite 4 Color Register (the default color value is 5, green)
 
-53292         $D01C          SP5COL
+53292         $D02C          SP5COL
 Sprite 5 Color Register (the default color value is 6, blue)
 
-53293         $D01D          SP6COL
+53293         $D02D          SP6COL
 Sprite 6 Color Register (the default color value is 7, yellow)
 
-53294         $D01E          SP7COL
+53294         $D02E          SP7COL
 Sprite 7 Color Register (the default color value is 12, medium gray)
 
 Location Range: 53295-53311 ($D02F-$D03F)
@@ -8726,7 +8725,7 @@ demonstrate the use of these timers:
 270 S=0:IF LEN(S$)>1 THEN S=16*VAL(LEFT$(S$,1))
 280 SS=VAL(RIGHT$(S$,1)):S=S+SS:POKE56329,S:POKE56328,0
 290 POKE 53281,1:PRINT CHR$(147):POKE 53281,6
-300 POKE 1240,58:POKE 1243,58:POKE 1246,58:GOTO 20
+300 POKE 1240,58:POKE 1243,58:POKE 1246,58:RETURN
 
 56328         $DC08          TODTEN
 Time of Day Clock Tenths of Seconds
@@ -8898,7 +8897,8 @@ more information) is controlled by this bit.
 
 Bit 7.  This bit allows you to select from software whether the Time
 of Day Clock will use a 50 Hz or 60 Hz signal on the TOD pin in order
-to keep accurate time (the 64 uses a 60 Hz signal on that pin).
+to keep accurate time. SX-64 uses a 60 Hz signal on that pin. C-64
+uses the power line frequency (50 or 60Hz depending on the country).
 
 56335         $DC0F          CIACRB
 Control Register B
@@ -8916,8 +8916,8 @@ Bits 5-6:  Timer B input mode
            01 = Count signals on CNT line at pin 4 of User Port
            10 = Count each time that Timer A counts down to 0
            11 = Count Timer A 0's when CNT pulses are also present
-Bit 7:  Select Time of Day write (0=writing to TOD registers sets
-        alarm, 1=writing to TOD registers sets clock)
+Bit 7:  Select Time of Day write (1=writing to TOD registers sets
+        alarm, 0=writing to TOD registers sets clock)
 
 Bits 0-3.  This nybble performs the same functions for Timer B that
 Bits 0-3 of Control Register A perform for Timer A, except that Timer
@@ -9116,7 +9116,7 @@ generator ROM.  Providing that you lower the top of memory so that
 BASIC programs do not interfere, this area is wide open for sprite
 shapes, character graphics, and bitmap graphics.
 
-The drawbacks to useing this bank are the unavailability of the
+The drawbacks to using this bank are the unavailability of the
 character ROM and the limitation on BASIC program space (as little as
 14K).  The absence of the character ROM is a relatively minor
 nuisance, because you can always switch in the ROM and copy any or all
@@ -9215,7 +9215,7 @@ and 808 ($328) for more information).
 Below is a sample program which switches to Bank 3.  It includes a
 machine language transfer routine to move the ROM character set to
 RAM, and a short interrupt routine to correct the RESTORE key problem.
-After the switch is made, a loop isused to POKE characters into the
+After the switch is made, a loop is used to POKE characters into the
 new screen memory area.  Next, the character data is slowly erased, to
 show that the character set is now in RAM.  Then, a loop is used to
 read the locations of the character set, and write to the same
@@ -9451,8 +9451,8 @@ Bits 5-6:  Timer B input mode
            01 = Count signals on CNT line at pin 4 of User Port
            10 = Count each time that Timer A counts down to 0
            11 = Count Timer A 0's when CNT pulses are also present
-Bit 7:  Select Time of Day write (0=writing to TOD registers sets
-           alarm, 1=writing to ROD registers sets clock)
+Bit 7:  Select Time of Day write (1=writing to TOD registers sets
+           alarm, 0=writing to TOD registers sets clock)
 
 Location Range: 56592-56831 ($DD10-$DDFF)
 CIA #2 Register Images
@@ -9487,7 +9487,7 @@ Location Range: 57088-57343 ($DF00-$DFFF)
 CIA #2 Register Images
 
 This range of locations is not used directly by the 64's internal
-hardward, but is accessible via pin 10 of the Expansion Port.  One
+hardware, but is accessible via pin 10 of the Expansion Port.  One
 possible use for this I/O memory that Commodore has mentioned is an
 inexpensive parallel disk drive (which presumable would be much faster
 than the current serial model).
@@ -9576,7 +9576,7 @@ blocks, you must supply your own user-defined character set, or copy
 the ROM data to RAM.  A machine language routine for doing this is
 included in a sample program at the entry for 56576 ($DD00).
 
-As indicated above, you are by no means limited to useing the
+As indicated above, you are by no means limited to using the
 character data furnished by the ROM.  The availability of user-defined
 characters greatly extends the graphics power of the 64.  It allows
 you to create special text characters, like math or chemistry symbols
@@ -10521,10 +10521,10 @@ Send a Secondary Address to a Device on the Serial Bus after LISTEN
 
 This is a documented Kernal routine that can be entered from the jump
 table at 65427 ($FF93).  It sends a secondary address from the
-Accumulator to the device on the serial bus that has just been
-commanded to LISTEN.  This is usually done to give the device more
-particular instructions on how the I/O is to be carried out before
-information is sent.
+Accumulator (ORed with $60) to the device on the serial bus that has
+just been commanded to LISTEN.  This is usually done to give the
+device more particular instructions on how the I/O is to be carried
+out before information is sent.
 
 60871         $EDC7          TKSA
 Send a Secondary Address to a Device on the Serial Bus after TALK
@@ -10710,11 +10710,11 @@ Get One Byte from the Input Device
 This is a documented Kernal routine whose jump table entry point is at
 65508 ($FFE4).  The routine jumps through a RAM vector at 810 ($32A).
 Its function is to get a character from the current input device
-(whose device number is stored at 153 ($99)).  In practive, it
+(whose device number is stored at 153 ($99)).  In practice, it
 operates identically to the CHRIN routine below for all devices except
 for the keyboard.  If the keyboard is the current input device, this
 routine gets one character from the keyboard buffer at 631 ($277).  It
-depends on the IRQ interrupt routine to rad the keyboard and put
+depends on the IRQ interrupt routine to read the keyboard and put
 characters into the buffer.
 
 61783         $F157          CHRIN
@@ -10879,7 +10879,7 @@ This is a documented Kernal routine, whose entry in the jump table
 appears at 65493 ($FFD5).
 
 The routine jumps through a RAM vector at 816 ($330).  LOAD is used to
-transfer data froma device directly to RAM.  It can also be used to
+transfer data from a device directly to RAM.  It can also be used to
 verify RAM, comparing its contents to those of a disk or tape file.
 To choose between these operations you must set the Accumulator with a
 0 for LOAD, or a 1 for VERIFY.
@@ -10977,7 +10977,7 @@ keyboard queue is emptied.
 63227         $F6FB
 Set Kernal I/O Error Messages
 
-This subroutine is used to handle I/O errors from Kernal I?O routines.
+This subroutine is used to handle I/O errors from Kernal I/O routines.
 It calls CLRCHN to restore default I/O devices.  If Bit 6 of the flag
 at 157 ($9D) is set, it prints I/O ERROR followed by the error number,
 and then sets the Carry flag to indicate an error, with the error
@@ -11282,7 +11282,7 @@ This documented Kernal routine can be entered through its jump table
 vector at 65424 ($FF90).
 
 The routine controls the printing of error messages and control
-messages by the Kernal.  It Bit 6 is seto to 1 (bit value of 64),
+messages by the Kernal.  If Bit 6 is set to 1 (bit value of 64),
 Kernal control messages can be printed.  These messages include
 SEARCHING FOR, LOADING, and the like.  If Bit 6 is cleared to 0, these
 messages will not be printed (BASIC will clear this bit when a program
@@ -11296,7 +11296,7 @@ ERROR #nn) will be suppressed.  Note that BASIC has its own set of
 error messages (such as FILE NOT FOUND ERROR) which it uses in
 preference to the Kernal's message.
 
-65057         $E21           SETTMO
+65057         $FE21           SETTMO
 Set Time-Out Flag for IEEE Bus
 
 This documented Kernal routine can be entered fromthe jump table at
