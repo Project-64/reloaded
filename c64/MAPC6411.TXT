@@ -37,10 +37,12 @@ use the information herein you do so at your own risk.
 *********
 
 The Project 64 etext of the ~Mapping The Commodore 64 book~, typed
-by David Holz <david_holz@hotmail.com>, formatted to 71 columns and
+by David Holz <white-flame@geocities.com>, formatted to 71 columns and
 somewhat proofed by Cris Berneburg <pcgeek@compuserve.com>.
 
-MAPC6410.TXT, May 1998, etext #352#
+MAPC6411.TXT, June 1998, etext #351#. This replaces MAPC6410.TXT from May 1998
+in which I had the wrong email addy for David Holz and misnumbered the
+etext as 352. -cjb
 
 Note from the tired typist:
 
