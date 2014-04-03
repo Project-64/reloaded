@@ -43,7 +43,7 @@ by Marko Makela <Marko.Makela@hut.fi>. This etext was created by
 removing the HTML tags from the file c64-diss.html downloaded from
 http://www.hut.fi/~msmakela/cbm/docs/.
 
-C64DIS10.TXT, June 1996, etext #48.
+C64DIS11.TXT, Replaces C64DIS10.TXT from June 1996, etext #48.
 
 *********
 
@@ -56,9 +56,9 @@ Commodore 64 BASIC ROM Disassembly
 Version 1.0  (June 1994)
 
 
-A000   .WD $E394   ; RESET
+A000   .WD $E394	; RESET
 
-A002   .WD $E37B   ; Warm Start
+A002   .WD $E37B	; Warm Start
 
 
 ; CBMBASIC
@@ -624,27 +624,25 @@ A454   A0 00      LDY #$00
 A456   B1 22      LDA ($22),Y
 A458   48         PHA
 A459   29 7F      AND #$7F
-A45B   20 47 AB   JSR $AB47
+A45B   20 47 AB   JSR $AB47	; AB47 -> E10C -> CHROUT (FFD2) and handle errors from BASIC
 A45E   C8         INY
 A45F   68         PLA
 A460   10 F4      BPL $A456
 A462   20 7A A6   JSR $A67A
-A465   A9 69      LDA #$69   ; low  A369
-A467   A0 A3      LDY #$A3   ; high A369
-
-A469   20 1E AB   JSR $AB1E
-
+A465   A9 69      LDA #$69	; LO of $A369 "<SPC><SPC>ERROR"
+A467   A0 A3      LDY #$A3	; HI of $A369 "<SPC><SPC>ERROR"
+A469   20 1E AB   JSR $AB1E	; STROUT - Print Message from a String Whose Address Is in the .Y and .A Registers
 A46C   A4 3A      LDY $3A
 A46E   C8         INY
-A46F   F0 03      BEQ $A474
+A46F   F0 03      BEQ $A474	; READY - Print READY
 A471   20 C2 BD   JSR $BDC2
 
-A474   A9 76      LDA #$76   ; low A376
-
-A476   A0 A3      LDY #$A3   ; low A376
-A478   20 1E AB   JSR $AB1E
-A47B   A9 80      LDA #$80
-A47D   20 90 FF   JSR $FF90
+; READY - Print READY
+A474   A9 76      LDA #$76	; LO of $A376 "<CR><LF>READY.<CR><LF>"
+A476   A0 A3      LDY #$A3	; HI of $A376 "<CR><LF>READY.<CR><LF>"
+A478   20 1E AB   JSR $AB1E	; STROUT - Print Message from a String Whose Address Is in the .Y and .A Registers
+A47B   A9 80      LDA #$80	; enable error, suppress control messages
+A47D   20 90 FF   JSR $FF90	; SETMSG - Set the Message Control Flag
 
 A480   6C 02 03   JMP ($0302)   ; normally A483
 
@@ -666,7 +664,7 @@ A499   4C E1 A7   JMP $A7E1
 
 ; handle insert/delete basic lines
 
-A49C   20 6B A9   JSR $A96B
+A49C   20 6B A9   JSR $A96B	; LINGET - Convert an ASCII Decimal Number to a Two-Byte Binary Line Nmumber in LINNUM ($14/$15)
 A49F   20 79 A5   JSR $A579
 A4A2   84 0B      STY $0B
 A4A4   20 13 A6   JSR $A613
@@ -885,13 +883,16 @@ A610   85 7A      STA $7A
 A612   60         RTS
 
 
-; search for a line in a program
+; FINDLN Search for Line Number
+; This routine searches through the program text, trying to match the
+; two-byte integer line number that is stored in 20-21 ($14-$15).  If it
+; is found, 95-96 ($5F-$60) will be set as a pointer to the address of
+; the link field for that line, and the Carry flag will be set.  If it
+; is not found, the Carry flag will be cleared.
 
 A613   A5 2B      LDA $2B
 A615   A6 2C      LDX $2C
-
 A617   A0 01      LDY #$01
-
 A619   85 5F      STA $5F
 A61B   86 60      STX $60
 A61D   B1 5F      LDA ($5F),Y
@@ -994,21 +995,25 @@ A699   85 7B      STA $7B
 A69B   60         RTS
 
 
-; LIST command
+; LIST Perform LIST
 
-A69C   90 06      BCC $A6A4
-A69E   F0 04      BEQ $A6A4
-A6A0   C9 AB      CMP #$AB
-A6A2   D0 E9      BNE $A68D
-A6A4   20 6B A9   JSR $A96B
-A6A7   20 13 A6   JSR $A613
-A6AA   20 79 00   JSR $0079
-A6AD   F0 0C      BEQ $A6BB
-A6AF   C9 AB      CMP #$AB
-A6B1   D0 8E      BNE $A641
-A6B3   20 73 00   JSR $0073
-A6B6   20 6B A9   JSR $A96B
-A6B9   D0 86      BNE $A641
+; This routine saves the range of lines to be printed in pointers at
+; 95-96 ($5F- $60) and 20-21 ($14-$15), and then prints them out,
+; translating any tokens back to their ASCII equivalent.
+
+A69C   90 06      BCC $A6A4	; next character is NOT a token so it can be part of line number
+A69E   F0 04      BEQ $A6A4	; We have \0, meaning LIST with no arguments
+A6A0   C9 AB      CMP #$AB	; is that a "-" token?
+A6A2   D0 E9      BNE $A68D	; no, RTS
+A6A4   20 6B A9   JSR $A96B	; LINGET - Convert an ASCII Decimal Number to a Two-Byte Binary Line Number in LINNUM ($14/$15)
+A6A7   20 13 A6   JSR $A613	; FINDLN - Search for Line Number and put the address into $5f/$60
+A6AA   20 79 00   JSR $0079	; CHRGOT
+A6AD   F0 0C      BEQ $A6BB	; did we get \0? if yes, then dump return address (exit via warm start)
+A6AF   C9 AB      CMP #$AB	; did we get the token for "-"?
+A6B1   D0 8E      BNE $A641	; no - RTS
+A6B3   20 73 00   JSR $0073	; yes - CHRGET to fetch ending line number
+A6B6   20 6B A9   JSR $A96B	; LINGET - Convert an ASCII Decimal Number to a Two-Byte Binary Line Number in LINNUM ($14/$15)
+A6B9   D0 86      BNE $A641	; RTS
 A6BB   68         PLA
 A6BC   68         PLA
 A6BD   A5 14      LDA $14
@@ -1022,11 +1027,11 @@ A6C7   85 15      STA $15
 ; list lines from $5F/$60 to $14/$15
 
 A6C9   A0 01      LDY #$01
-A6CB   84 0F      STY $0F
+A6CB   84 0F      STY $0F	; GARBFL - flag for a string in quotes (print the string, rather than search the token)
 A6CD   B1 5F      LDA ($5F),Y
-A6CF   F0 43      BEQ $A714
-A6D1   20 2C A8   JSR $A82C
-A6D4   20 D7 AA   JSR $AAD7
+A6CF   F0 43      BEQ $A714	; JMP $E386 : LDX #$80 : JMP (IERROR) : Print READY.
+A6D1   20 2C A8   JSR $A82C	; Test STOP Key for Break in Program and bail out if yes
+A6D4   20 D7 AA   JSR $AAD7	; inside PRINT
 A6D7   C8         INY
 A6D8   B1 5F      LDA ($5F),Y
 A6DA   AA         TAX
@@ -1036,31 +1041,31 @@ A6DE   C5 15      CMP $15
 A6E0   D0 04      BNE $A6E6
 A6E2   E4 14      CPX $14
 A6E4   F0 02      BEQ $A6E8
-A6E6   B0 2C      BCS $A714
+A6E6   B0 2C      BCS $A714	; JMP $E386 : LDX #$80 : JMP (IERROR) : Print READY.
 A6E8   84 49      STY $49
-A6EA   20 CD BD   JSR $BDCD
+A6EA   20 CD BD   JSR $BDCD	; LINPRT - Output a Number in ASCII Decimal Digits
 A6ED   A9 20      LDA #$20
 A6EF   A4 49      LDY $49
 A6F1   29 7F      AND #$7F
-A6F3   20 47 AB   JSR $AB47
-A6F6   C9 22      CMP #$22
-A6F8   D0 06      BNE $A700
-A6FA   A5 0F      LDA $0F
-A6FC   49 FF      EOR #$FF
-A6FE   85 0F      STA $0F
+A6F3   20 47 AB   JSR $AB47	; AB47 -> E10C -> CHROUT (FFD2) and handle errors from BASIC
+A6F6   C9 22      CMP #$22	; is it a quotation mark?
+A6F8   D0 06      BNE $A700	; no - skip handling the quote mark
+A6FA   A5 0F      LDA $0F	; we got a quotation mark so we are either entering or leaving "quote mode"
+A6FC   49 FF      EOR #$FF	; so we toggle bots of the
+A6FE   85 0F      STA $0F	; flag at GARBFL
 A700   C8         INY
-A701   F0 11      BEQ $A714
+A701   F0 11      BEQ $A714	; line too long! JMP $E386 : LDX #$80 : JMP (IERROR) : Print READY.
 A703   B1 5F      LDA ($5F),Y
-A705   D0 10      BNE $A717
-A707   A8         TAY
-A708   B1 5F      LDA ($5F),Y
-A70A   AA         TAX
-A70B   C8         INY
-A70C   B1 5F      LDA ($5F),Y
-A70E   86 5F      STX $5F
-A710   85 60      STA $60
-A712   D0 B5      BNE $A6C9
-A714   4C 86 E3   JMP $E386
+A705   D0 10      BNE $A717	; not \0 (EOL) - go print it
+A707   A8         TAY		; yes - EOL - start afresh ($00 -> Y)
+A708   B1 5F      LDA ($5F),Y	; LO of next line pointer
+A70A   AA         TAX		; copy LO of next line pointer to X
+A70B   C8         INY		; point to HI of next line pointer
+A70C   B1 5F      LDA ($5F),Y	; HI of next line pointer
+A70E   86 5F      STX $5F	; put LO of next line pointer
+A710   85 60      STA $60	; put HI of next line pointer
+A712   D0 B5      BNE $A6C9	; if HI (only) of next line pointer is not \0 - rinse and repeat with next line
+A714   4C 86 E3   JMP $E386	; LDX #$80 : JMP (IERROR) : Print READY.
 
 
 ; print tokens routine
@@ -1093,7 +1098,7 @@ A735   30 F5      BMI $A72C
 A737   C8         INY
 A738   B9 9E A0   LDA $A09E,Y
 A73B   30 B2      BMI $A6EF
-A73D   20 47 AB   JSR $AB47
+A73D   20 47 AB   JSR $AB47	; AB47 -> E10C -> CHROUT (FFD2) and handle errors from BASIC
 A740   D0 F5      BNE $A737
 
 
@@ -1158,69 +1163,74 @@ A7AB   A9 81      LDA #$81   ; FOR block code
 A7AD   48         PHA
 
 
-; execute next statement
+; NEWSTT - Set Up Next Statement for Execution
+; --------------------------------------------
+; This routine tests for the STOP key, updates the pointer to the
+; current line number, and positions the text pointer to read the
+; beginning of the statement.
 
-A7AE   20 2C A8   JSR $A82C
-A7B1   A5 7A      LDA $7A
-A7B3   A4 7B      LDY $7B
-A7B5   C0 02      CPY #$02
+A7AE   20 2C A8   JSR $A82C	; Test STOP Key for Break in Program and bail out if YES
+A7B1   A5 7A      LDA $7A	; LO of TXTPTR (part of CHRGOT)
+A7B3   A4 7B      LDY $7B	; HI of TXTPTR (part of CHRGOT)
+A7B5   C0 02      CPY #$02	; Are we in "direct" mode? TXTPTR points to BUF ($02xx) when in direct mode
 A7B7   EA         NOP
-A7B8   F0 04      BEQ $A7BE
-A7BA   85 3D      STA $3D
-A7BC   84 3E      STY $3E
-A7BE   A0 00      LDY #$00
-A7C0   B1 7A      LDA ($7A),Y
-A7C2   D0 43      BNE $A807
-A7C4   A0 02      LDY #$02
-A7C6   B1 7A      LDA ($7A),Y
-A7C8   18         CLC
-A7C9   D0 03      BNE $A7CE
-A7CB   4C 4B A8   JMP $A84B
+A7B8   F0 04      BEQ $A7BE	; Yes, we are in "direct" mode and don't want to update OLDTXT
+A7BA   85 3D      STA $3D	; OLDTXT - Pointer to the Address of the Current BASIC Statement ($3d/$3e)
+A7BC   84 3E      STY $3E	; OLDTXT - Pointer to the Address of the Current BASIC Statement ($3d/$3e)
 
+A7BE   A0 00      LDY #$00	; Check what TXTPTR points to
+A7C0   B1 7A      LDA ($7A),Y	; Is it \0?
+A7C2   D0 43      BNE $A807	; No - let's check if that's a colon or ?SYNTAX  ERROR
+A7C4   A0 02      LDY #$02	; TXTPTR is \0 (EOL) - check what HI of next line pointer is
+A7C6   B1 7A      LDA ($7A),Y
+A7C8   18         CLC		; since we don't want to print "BREAK" message, C-flag has to be cleared
+A7C9   D0 03      BNE $A7CE	; HI of next line pointer is not \0 - continue with execution of the next line
+A7CB   4C 4B A8   JMP $A84B	; print "BREAK" (actually /don't/ print as we cleared the C-flag above) and get back to READY.
+
+; set next line as current for execution
 A7CE   C8         INY
 A7CF   B1 7A      LDA ($7A),Y
-A7D1   85 39      STA $39
+A7D1   85 39      STA $39	; LO of $39-$3A - CURLIN - Current BASIC Line Number
 A7D3   C8         INY
 A7D4   B1 7A      LDA ($7A),Y
-A7D6   85 3A      STA $3A
+A7D6   85 3A      STA $3A	; HI of $39-$3A - CURLIN - Current BASIC Line Number
 A7D8   98         TYA
-A7D9   65 7A      ADC $7A
-A7DB   85 7A      STA $7A
-A7DD   90 02      BCC $A7E1
-A7DF   E6 7B      INC $7B
+A7D9   65 7A      ADC $7A	; update TXTPTR to point to the beginning of the next line
+A7DB   85 7A      STA $7A	; LO of TXTPTR
+A7DD   90 02      BCC $A7E1	; same page
+A7DF   E6 7B      INC $7B	; HI of TXTPTR - next page
 
-A7E1   6C 08 03   JMP ($0308)   ; normally A7E4
+A7E1   6C 08 03   JMP ($0308)	; IGONE - Vector to the Routine That Executes the Next BASIC Program Token. Normally $A7E4
 
 
-; execute a statement
-
-A7E4   20 73 00   JSR $0073
-A7E7   20 ED A7   JSR $A7ED
-A7EA   4C AE A7   JMP $A7AE
+;42980         $A7E4          GONE
+;Read and Execute the Next Statement
+A7E4   20 73 00   JSR $0073	; CHRGET - Subroutine: Get Next BASIC Text Character (token?)
+A7E7   20 ED A7   JSR $A7ED	; execute it
+A7EA   4C AE A7   JMP $A7AE	; NEWSTT - Set Up Next Statement for Execution
 
 
 ; execute command in A
 
-A7ED   F0 3C      BEQ $A82B
+A7ED   F0 3C      BEQ $A82B	; did we get \0 (EOL) from CHRGET?
+A7EF   E9 80      SBC #$80	; is that a token?
+A7F1   90 11      BCC $A804	; no - perform LET
+A7F3   C9 23      CMP #$23	; is this a straight command token?
+A7F5   B0 17      BCS $A80E	; no - not a straight command token
 
-A7EF   E9 80      SBC #$80
+A7F7   0A         ASL		; yes, we have a straight command token, so
+A7F8   A8         TAY		; let's fetch the command's routine address (-1 byte)
+A7F9   B9 0D A0   LDA $A00D,Y	; from the STMDSP - Statement Dispatch Vector Table
+A7FC   48         PHA		; and put it on the stack
+A7FD   B9 0C A0   LDA $A00C,Y	; (LO of the address -1)
+A800   48         PHA		; so that after returning from 
+A801   4C 73 00   JMP $0073	; CHRGET - the CPU jumps to execute it
 
-A7F1   90 11      BCC $A804
-A7F3   C9 23      CMP #$23
-A7F5   B0 17      BCS $A80E
-A7F7   0A         ASL
-A7F8   A8         TAY
-A7F9   B9 0D A0   LDA $A00D,Y
-A7FC   48         PHA
-A7FD   B9 0C A0   LDA $A00C,Y
-A800   48         PHA
-A801   4C 73 00   JMP $0073
+A804   4C A5 A9   JMP $A9A5	; LET - Perform LET
 
-A804   4C A5 A9   JMP $A9A5
-
-A807   C9 3A      CMP #$3A   ; colon
-A809   F0 D6      BEQ $A7E1
-A80B   4C 08 AF   JMP $AF08
+A807   C9 3A      CMP #$3A  	; Do we have a colon here?
+A809   F0 D6      BEQ $A7E1	; yes, execute next statement in the line
+A80B   4C 08 AF   JMP $AF08	; no, SNERR - Print Syntax Error Message
 
 A80E   C9 4B      CMP #$4B   ; GO code
 A810   D0 F9      BNE $A80B
@@ -1245,8 +1255,7 @@ A829   84 42      STY $42
 A82B   60         RTS
 
 
-A82C   20 E1 FF   JSR $FFE1   ; test stop key
-
+A82C   20 E1 FF   JSR $FFE1	; STOP   (via 808 ($328) to 63213, $F6ED) check the STOP key
 
 ; STOP command
 
@@ -1256,7 +1265,7 @@ A82F   B0 01      BCS $A832
 ; END command
 
 A831   18         CLC
-A832   D0 3C      BNE $A870
+A832   D0 3C      BNE $A870	; RTS
 A834   A5 7A      LDA $7A
 A836   A4 7B      LDY $7B
 A838   A6 3A      LDX $3A
@@ -1271,17 +1280,16 @@ A847   84 3C      STY $3C
 A849   68         PLA
 A84A   68         PLA
 
-A84B   A9 81      LDA #$81   ; low  A381
-
-A84D   A0 A3      LDY #$A3   ; high A381
+A84B   A9 81      LDA #$81	; LO of $A381 "<CR><LF>BREAK"
+A84D   A0 A3      LDY #$A3	; HI of $A381 "<CR><LF>BREAK"
 A84F   90 03      BCC $A854
-A851   4C 69 A4   JMP $A469
-A854   4C 86 E3   JMP $E386
+A851   4C 69 A4   JMP $A469	; JSR $AB1E - STROUT ...
+A854   4C 86 E3   JMP $E386	; LDX #$80 : JMP (IERROR) : Print READY.
 
 
 ; CONT command
 
-A857   D0 17      BNE $A870
+A857   D0 17      BNE $A870	; RTS
 A859   A2 1A      LDX #$1A   ; error number
 A85B   A4 3E      LDY $3E
 A85D   D0 03      BNE $A862
@@ -1333,7 +1341,7 @@ A89D   4C AE A7   JMP $A7AE
 
 ; GOTO command
 
-A8A0   20 6B A9   JSR $A96B
+A8A0   20 6B A9   JSR $A96B	; LINGET - Convert an ASCII Decimal Number to a Two-Byte Binary Line Number in LINNUM ($14/$15)
 A8A3   20 09 A9   JSR $A909
 A8A6   38         SEC
 A8A7   A5 39      LDA $39
@@ -1375,7 +1383,7 @@ A8E2   .BY $2C
 A8E3   A2 11      LDX #$11
 A8E5   4C 37 A4   JMP $A437
 
-A8E8   4C 08 AF   JMP $AF08
+A8E8   4C 08 AF   JMP $AF08	; SNERR - Print Syntax Error Message
 
 
 ; remove GOSUB block from stack
@@ -1461,22 +1469,23 @@ A948   4C ED A7   JMP $A7ED
 
 A94B   20 9E B7   JSR $B79E
 A94E   48         PHA
-A94F   C9 8D      CMP #$8D   ; GOSUB code
+A94F   C9 8D      CMP #$8D	; GOSUB code
 A951   F0 04      BEQ $A957
-A953   C9 89      CMP #$89   ; GOTO code
+A953   C9 89      CMP #$89	; GOTO code
 A955   D0 91      BNE $A8E8
 A957   C6 65      DEC $65
 A959   D0 04      BNE $A95F
 A95B   68         PLA
 A95C   4C EF A7   JMP $A7EF
 A95F   20 73 00   JSR $0073
-A962   20 6B A9   JSR $A96B
-A965   C9 2C      CMP #$2C   ; comma
+A962   20 6B A9   JSR $A96B	; LINGET - Convert an ASCII Decimal Number to a Two-Byte Binary Line Number in LINNUM ($14/$15)
+A965   C9 2C      CMP #$2C	; comma
 A967   F0 EE      BEQ $A957
 A969   68         PLA
 A96A   60         RTS
 
-
+; 43371         $A96B          LINGET
+; Convert an ASCII Decimal Number to a Two-Byte Binary Line Nmumber in LINNUM ($14/$15)
 ; get decimal number into $14/$15
 
 A96B   A2 00      LDX #$00
@@ -1555,27 +1564,26 @@ A9D6   4C D0 BB   JMP $BBD0
 
 A9D9   68         PLA
 
-A9DA   A4 4A      LDY $4A
-
-A9DC   C0 BF      CPY #$BF
-A9DE   D0 4C      BNE $AA2C
+A9DA   A4 4A      LDY $4A	; FORPNT (HI address of the variable)
+A9DC   C0 BF      CPY #$BF	; Is the variable in question the TI$?
+A9DE   D0 4C      BNE $AA2C	; no, regular string
 
 
 ; assign to TI$
 
-A9E0   20 A6 B6   JSR $B6A6
-A9E3   C9 06      CMP #$06   ; length 6
+A9E0   20 A6 B6   JSR $B6A6		; part of FRESTR
+A9E3   C9 06      CMP #$06		; length 6
 A9E5   D0 3D      BNE $AA24
 A9E7   A0 00      LDY #$00
-A9E9   84 61      STY $61
-A9EB   84 66      STY $66
-A9ED   84 71      STY $71
-A9EF   20 1D AA   JSR $AA1D
-A9F2   20 E2 BA   JSR $BAE2
+A9E9   84 61      STY $61		; FACEXP
+A9EB   84 66      STY $66		; FACSGN
+A9ED   84 71      STY $71		; FBUFPT - LO
+A9EF   20 1D AA   JSR $AA1D		; Check if it's a digit and place in FAC / ARG
+A9F2   20 E2 BA   JSR $BAE2		; MUL10 - Multiply FAC1 by 10
 A9F5   E6 71      INC $71
 A9F7   A4 71      LDY $71
 A9F9   20 1D AA   JSR $AA1D
-A9FC   20 0C BC   JSR $BC0C
+A9FC   20 0C BC   JSR $BC0C		;MOVAF - Round and Move a Floating Point Number from FAC1 to FAC2
 A9FF   AA         TAX
 AA00   F0 05      BEQ $AA07
 AA02   E8         INX
@@ -1590,7 +1598,7 @@ AA11   20 9B BC   JSR $BC9B
 AA14   A6 64      LDX $64
 AA16   A4 63      LDY $63
 AA18   A5 65      LDA $65
-AA1A   4C DB FF   JMP $FFDB
+AA1A   4C DB FF   JMP $FFDB		; SETTIM - Set the Software Clock from the .A, .X, and .Y Registers (jiffy value)
 
 
 ; add next digit to float accum
@@ -1696,7 +1704,7 @@ AAB5   20 9E AD   JSR $AD9E
 AAB8   24 0D      BIT $0D
 AABA   30 DE      BMI $AA9A
 AABC   20 DD BD   JSR $BDDD
-AABF   20 87 B4   JSR $B487
+AABF   20 87 B4   JSR $B487	; STRLIT - Scan and Set Up Pointers to a String in Memory
 AAC2   20 21 AB   JSR $AB21
 AAC5   20 3B AB   JSR $AB3B
 AAC8   D0 D3      BNE $AA9D
@@ -1715,11 +1723,11 @@ AAD5   D0 10      BNE $AAE7
 ; end line on CMD output file
 
 AAD7   A9 0D      LDA #$0D
-AAD9   20 47 AB   JSR $AB47
+AAD9   20 47 AB   JSR $AB47	; AB47 -> E10C -> CHROUT (FFD2) and handle errors from BASIC
 AADC   24 13      BIT $13
 AADE   10 05      BPL $AAE5
 AAE0   A9 0A      LDA #$0A
-AAE2   20 47 AB   JSR $AB47
+AAE2   20 47 AB   JSR $AB47	; AB47 -> E10C -> CHROUT (FFD2) and handle errors from BASIC
 
 AAE5   49 FF      EOR #$FF
 
@@ -1759,10 +1767,9 @@ AB19   20 3B AB   JSR $AB3B
 AB1C   D0 F2      BNE $AB10
 
 
-; print string form AY
-
-AB1E   20 87 B4   JSR $B487
-
+;43806         $AB1E          STROUT
+;Print Message from a String Whose Address Is in the .Y and .A Registers
+AB1E   20 87 B4   JSR $B487	; STRLIT - Scan and Set Up Pointers to a String in Memory
 
 ; print string from $22/$23
 
@@ -1775,7 +1782,7 @@ AB28   CA         DEX
 
 AB29   F0 BC      BEQ $AAE7
 AB2B   B1 22      LDA ($22),Y
-AB2D   20 47 AB   JSR $AB47
+AB2D   20 47 AB   JSR $AB47	; AB47 -> E10C -> CHROUT (FFD2) and handle errors from BASIC
 AB30   C8         INY
 AB31   C9 0D      CMP #$0D
 AB33   D0 F3      BNE $AB28
@@ -1812,7 +1819,7 @@ AB57   A5 3F      LDA $3F
 AB59   A4 40      LDY $40
 AB5B   85 39      STA $39
 AB5D   84 3A      STY $3A
-AB5F   4C 08 AF   JMP $AF08
+AB5F   4C 08 AF   JMP $AF08	; SNERR - Print Syntax Error Message
 AB62   A5 13      LDA $13
 AB64   F0 05      BEQ $AB6B
 AB66   A2 18      LDX #$18
@@ -2232,7 +2239,7 @@ AE27   48         PHA
 AE28   20 33 AE   JSR $AE33
 AE2B   A5 4D      LDA $4D
 AE2D   4C A9 AD   JMP $ADA9
-AE30   4C 08 AF   JMP $AF08
+AE30   4C 08 AF   JMP $AF08	; SNERR - Print Syntax Error Message
 
 
 ; save rounded value of left operand
@@ -2339,7 +2346,7 @@ AEBF   A4 7B      LDY $7B
 AEC1   69 00      ADC #$00
 AEC3   90 01      BCC $AEC6
 AEC5   C8         INY
-AEC6   20 87 B4   JSR $B487
+AEC6   20 87 B4   JSR $B487	; STRLIT - Scan and Set Up Pointers to a String in Memory
 AEC9   4C E2 B7   JMP $B7E2
 
 AECC   C9 A8      CMP #$A8   ; NOT code
@@ -2390,10 +2397,10 @@ AEFD   A9 2C      LDA #$2C   ; comma
 AEFF   A0 00      LDY #$00
 
 AF01   D1 7A      CMP ($7A),Y
-AF03   D0 03      BNE $AF08
+AF03   D0 03      BNE $AF08	; SNERR - Print Syntax Error Message
 AF05   4C 73 00   JMP $0073
 
-
+; SNERR - Print Syntax Error Message
 AF08   A2 0B      LDX #$0B   ; error number
 
 AF0A   4C 37 A4   JMP $A437
@@ -2656,7 +2663,7 @@ B092   85 45      STA $45
 B094   20 79 00   JSR $0079
 B097   20 13 B1   JSR $B113
 B09A   B0 03      BCS $B09F
-B09C   4C 08 AF   JMP $AF08
+B09C   4C 08 AF   JMP $AF08	; SNERR - Print Syntax Error Message
 
 B09F   A2 00      LDX #$00
 B0A1   86 0D      STX $0D
@@ -2749,7 +2756,7 @@ B130   C0 C9      CPY #$C9   ; I$
 B132   F0 EF      BEQ $B123
 B134   C0 49      CPY #$49   ; I
 B136   D0 03      BNE $B13B
-B138   4C 08 AF   JMP $AF08
+B138   4C 08 AF   JMP $AF08	; SNERR - Print Syntax Error Message
 
 B13B   C9 53      CMP #$53   ; S
 B13D   D0 04      BNE $B143
@@ -3254,7 +3261,7 @@ B43E   68         PLA
 B43F   85 4F      STA $4F
 B441   20 79 00   JSR $0079
 B444   F0 03      BEQ $B449
-B446   4C 08 AF   JMP $AF08
+B446   4C 08 AF   JMP $AF08	; SNERR - Print Syntax Error Message
 
 B449   68         PLA
 B44A   85 7A      STA $7A
@@ -3291,7 +3298,7 @@ B46E   68         PLA
 B46F   A9 FF      LDA #$FF
 
 B471   A0 00      LDY #$00
-B473   F0 12      BEQ $B487
+B473   F0 12      BEQ $B487	; STRLIT - Scan and Set Up Pointers to a String in Memory
 
 B475   A6 64      LDX $64
 
@@ -3310,6 +3317,10 @@ B486   60         RTS
 
 
 ; get description of string into float accu
+;46215         $B487          STRLIT - Scan and Set Up Pointers to a String in Memory
+;This routine calculates the length of the string, and calls the
+;routine that allocates space in memory.  It then saves the string, or
+;creates a pointer to its location in the BASIC text input buffer at 512 ($200).
 
 B487   A2 22      LDX #$22   ; quote mark
 B489   86 07      STX $07
@@ -4906,9 +4917,9 @@ BDBD   .BY $9E,$6E,$6B,$28,$00
 
 ; print IN followed by line number
 
-BDC2   A9 71      LDA #$71   ; low  A371
-BDC4   A0 A3      LDY #$A3   ; high A371
-BDC6   20 DA BD   JSR $BDDA
+BDC2   A9 71      LDA #$71	; LO of $A371 "<SPC>IN<SPC>"
+BDC4   A0 A3      LDY #$A3	; HI of $A371 "<SPC>IN<SPC>"
+BDC6   20 DA BD   JSR $BDDA	; JMP $AB1E - STROUT
 BDC9   A5 3A      LDA $3A
 BDCB   A6 39      LDX $39
 
@@ -5558,7 +5569,7 @@ E20E   20 FD AE   JSR $AEFD
 E211   20 79 00   JSR $0079
 
 E214   D0 F7      BNE $E20D
-E216   4C 08 AF   JMP $AF08
+E216   4C 08 AF   JMP $AF08	; SNERR - Print Syntax Error Message
 
 
 ; get open/close parameters
@@ -5747,7 +5758,7 @@ E385   58         CLI
 
 E386   A2 80      LDX #$80
 
-E388   6C 00 03   JMP ($0300)   ; normally E38B
+E388   6C 00 03   JMP ($0300)	; IERROR vector - normally E38B
 
 
 ; handle error messages
@@ -5756,7 +5767,7 @@ E38B   8A         TXA
 E38C   30 03      BMI $E391
 E38E   4C 3A A4   JMP $A43A
 
-E391   4C 74 A4   JMP $A474
+E391   4C 74 A4   JMP $A474	; READY - Print READY
 
 
 ; RESET routine
@@ -7149,7 +7160,7 @@ ED09   09 40      ORA #$40
 ED0B   .BY $2C
 
 
-; send listen on serial bus
+; LISTEN - send listen on serial bus
 
 ED0C   09 20      ORA #$20
 ED0E   20 A4 F0   JSR $F0A4
@@ -7164,30 +7175,30 @@ ED19   20 40 ED   JSR $ED40
 ED1C   46 94      LSR $94
 ED1E   46 A3      LSR $A3
 ED20   68         PLA
-ED21   85 95      STA $95
+ED21   85 95      STA $95	; 149 / $95 - BSOUR - Buffered Character for Serial Bus
 ED23   78         SEI
-ED24   20 97 EE   JSR $EE97
+ED24   20 97 EE   JSR $EE97	; Set DATA line LO
 ED27   C9 3F      CMP #$3F
 ED29   D0 03      BNE $ED2E
-ED2B   20 85 EE   JSR $EE85
-ED2E   AD 00 DD   LDA $DD00
-ED31   09 08      ORA #$08
-ED33   8D 00 DD   STA $DD00
+ED2B   20 85 EE   JSR $EE85	; Set CLK line LO
+ED2E   AD 00 DD   LDA $DD00	;
+ED31   09 08      ORA #$08	; Set ATN line HI
+ED33   8D 00 DD   STA $DD00	;
 
 ED36   78         SEI
 
-ED37   20 8E EE   JSR $EE8E
-ED3A   20 97 EE   JSR $EE97
-ED3D   20 B3 EE   JSR $EEB3
+ED37   20 8E EE   JSR $EE8E	; Set CLK line HI
+ED3A   20 97 EE   JSR $EE97	; Set DATA line LO
+ED3D   20 B3 EE   JSR $EEB3	; Delay 1 millisecond in a busy loop
 
 
-; send byte from $95 on serial bus
+; send byte from $95 - BSOUR - on serial bus
 
 ED40   78         SEI
-ED41   20 97 EE   JSR $EE97
+ED41   20 97 EE   JSR $EE97	; Set DATA line LO
 ED44   20 A9 EE   JSR $EEA9
 ED47   B0 64      BCS $EDAD
-ED49   20 85 EE   JSR $EE85
+ED49   20 85 EE   JSR $EE85	; Set CLK line LO
 ED4C   24 A3      BIT $A3
 ED4E   10 0A      BPL $ED5A
 ED50   20 A9 EE   JSR $EEA9
@@ -7196,7 +7207,7 @@ ED55   20 A9 EE   JSR $EEA9
 ED58   B0 FB      BCS $ED55
 ED5A   20 A9 EE   JSR $EEA9
 ED5D   90 FB      BCC $ED5A
-ED5F   20 8E EE   JSR $EE8E
+ED5F   20 8E EE   JSR $EE8E	; Set CLK line HI
 ED62   A9 08      LDA #$08
 ED64   85 A5      STA $A5
 ED66   AD 00 DD   LDA $DD00
@@ -7204,12 +7215,12 @@ ED69   CD 00 DD   CMP $DD00
 ED6C   D0 F8      BNE $ED66
 ED6E   0A         ASL
 ED6F   90 3F      BCC $EDB0
-ED71   66 95      ROR $95
+ED71   66 95      ROR $95	; 149 / $95 - BSOUR - Buffered Character for Serial Bus
 ED73   B0 05      BCS $ED7A
 ED75   20 A0 EE   JSR $EEA0
 ED78   D0 03      BNE $ED7D
-ED7A   20 97 EE   JSR $EE97
-ED7D   20 85 EE   JSR $EE85
+ED7A   20 97 EE   JSR $EE97	; Set DATA line LO
+ED7D   20 85 EE   JSR $EE85	; Set CLK line LO
 ED80   EA         NOP
 ED81   EA         NOP
 ED82   EA         NOP
@@ -7246,11 +7257,11 @@ EDB7   90 4A      BCC $EE03
 
 ; send secondary address (listen) on serial bus
 
-EDB9   85 95      STA $95
+EDB9   85 95      STA $95	; 149 / $95 - BSOUR - Buffered Character for Serial Bus
 EDBB   20 36 ED   JSR $ED36
 
 EDBE   AD 00 DD   LDA $DD00
-
+; clear ATN bit on the serial bus
 EDC1   29 F7      AND #$F7
 EDC3   8D 00 DD   STA $DD00
 EDC6   60         RTS
@@ -7258,14 +7269,14 @@ EDC6   60         RTS
 
 ; send secondary address (talk) on serial bus
 
-EDC7   85 95      STA $95
+EDC7   85 95      STA $95	; 149 / $95 - BSOUR - Buffered Character for Serial Bus
 EDC9   20 36 ED   JSR $ED36
 
 EDCC   78         SEI
 
 EDCD   20 A0 EE   JSR $EEA0
 EDD0   20 BE ED   JSR $EDBE
-EDD3   20 85 EE   JSR $EE85
+EDD3   20 85 EE   JSR $EE85	; Set CLK line LO
 EDD6   20 A9 EE   JSR $EEA9
 EDD9   30 FB      BMI $EDD6
 EDDB   58         CLI
@@ -7282,7 +7293,7 @@ EDE4   D0 05      BNE $EDEB
 EDE6   48         PHA
 EDE7   20 40 ED   JSR $ED40
 EDEA   68         PLA
-EDEB   85 95      STA $95
+EDEB   85 95      STA $95	; 149 / $95 - BSOUR - Buffered Character for Serial Bus
 EDED   18         CLC
 EDEE   60         RTS
 
@@ -7290,7 +7301,7 @@ EDEE   60         RTS
 ; send talk on serial bus
 
 EDEF   78         SEI
-EDF0   20 8E EE   JSR $EE8E
+EDF0   20 8E EE   JSR $EE8E	; Set CLK line HI
 EDF3   AD 00 DD   LDA $DD00
 EDF6   09 08      ORA #$08
 EDF8   8D 00 DD   STA $DD00
@@ -7310,8 +7321,8 @@ EE07   A2 0A      LDX #$0A
 EE09   CA         DEX
 EE0A   D0 FD      BNE $EE09
 EE0C   AA         TAX
-EE0D   20 85 EE   JSR $EE85
-EE10   4C 97 EE   JMP $EE97
+EE0D   20 85 EE   JSR $EE85	; Set CLK line LO
+EE10   4C 97 EE   JMP $EE97	; Set DATA line LO
 
 
 ; input byte on serial bus
@@ -7319,14 +7330,14 @@ EE10   4C 97 EE   JMP $EE97
 EE13   78         SEI
 EE14   A9 00      LDA #$00
 EE16   85 A5      STA $A5
-EE18   20 85 EE   JSR $EE85
+EE18   20 85 EE   JSR $EE85	; Set CLK line LO
 EE1B   20 A9 EE   JSR $EEA9
 EE1E   10 FB      BPL $EE1B
 EE20   A9 01      LDA #$01
 EE22   8D 07 DC   STA $DC07
 EE25   A9 19      LDA #$19
 EE27   8D 0F DC   STA $DC0F
-EE2A   20 97 EE   JSR $EE97
+EE2A   20 97 EE   JSR $EE97	; Set DATA line LO
 EE2D   AD 0D DC   LDA $DC0D
 EE30   AD 0D DC   LDA $DC0D
 EE33   29 02      AND #$02
@@ -7340,7 +7351,7 @@ EE42   A9 02      LDA #$02
 EE44   4C B2 ED   JMP $EDB2
 
 EE47   20 A0 EE   JSR $EEA0
-EE4A   20 85 EE   JSR $EE85
+EE4A   20 85 EE   JSR $EE85	; Set CLK line LO
 EE4D   A9 40      LDA #$40
 EE4F   20 1C FE   JSR $FE1C
 EE52   E6 A5      INC $A5
@@ -7403,7 +7414,6 @@ EEA8   60         RTS
 
 
 EEA9   AD 00 DD   LDA $DD00
-
 EEAC   CD 00 DD   CMP $DD00
 EEAF   D0 F8      BNE $EEA9
 EEB1   0A         ASL
@@ -7604,7 +7614,7 @@ EFDF   F0 EC      BEQ $EFCD
 
 ; output of RS-232 device
 
-EFE1   85 9A      STA $9A
+EFE1   85 9A      STA $9A	; Set DFLT0 - Default Output (CMD) Device (Set to 3 for the Screen)
 EFE3   AD 94 02   LDA $0294
 EFE6   4A         LSR
 EFE7   90 29      BCC $F012
@@ -7626,7 +7636,7 @@ F00B   30 F9      BMI $F006
 
 F00D   A9 40      LDA #$40
 
-F00F   8D 97 02   STA $0297
+F00F   8D 97 02   STA $0297	; RSSTAT - RS-232: Mock 6551 Status Register
 F012   18         CLC
 F013   60         RTS
 
@@ -7904,15 +7914,15 @@ F1C8   F0 EE      BEQ $F1B8
 ; output a character
 
 F1CA   48         PHA
-F1CB   A5 9A      LDA $9A
-F1CD   C9 03      CMP #$03
+F1CB   A5 9A      LDA $9A	; 154/$9A DFLTO Default Output (CMD) Device (Set to 3 for the Screen)
+F1CD   C9 03      CMP #$03	; is it screen?
 F1CF   D0 04      BNE $F1D5
-F1D1   68         PLA
+F1D1   68         PLA		; yes
 F1D2   4C 16 E7   JMP $E716
 
 F1D5   90 04      BCC $F1DB
 F1D7   68         PLA
-F1D8   4C DD ED   JMP $EDDD
+F1D8   4C DD ED   JMP $EDDD	; CIOUT  (60893, $EDDD) output byte to serial bus
 
 F1DB   4A         LSR
 F1DC   68         PLA
@@ -7953,7 +7963,7 @@ F20B   4C FC F1   JMP $F1FC
 
 ; set input device
 
-F20E   20 0F F3   JSR $F30F
+F20E   20 0F F3   JSR $F30F	; Find the File in the Logical File Table
 F211   F0 03      BEQ $F216
 F213   4C 01 F7   JMP $F701
 
@@ -7992,31 +8002,31 @@ F248   8A         TXA
 
 F249   24 90      BIT $90
 F24B   10 E6      BPL $F233
-F24D   4C 07 F7   JMP $F707
+F24D   4C 07 F7   JMP $F707	; I/O error #5 - device not present
 
 
 ; set output device
 
-F250   20 0F F3   JSR $F30F
+F250   20 0F F3   JSR $F30F	; Find the File in the Logical File Table
 F253   F0 03      BEQ $F258
-F255   4C 01 F7   JMP $F701
+F255   4C 01 F7   JMP $F701	; I/O ERROR #3 - file not open
 
-F258   20 1F F3   JSR $F31F
-F25B   A5 BA      LDA $BA
+F258   20 1F F3   JSR $F31F	; Set LA ($b8), FA ($ba), SA ($b9) from LAT, FAT, SAT tables (X indexed)
+F25B   A5 BA      LDA $BA	; FA - Current Device Number
 F25D   D0 03      BNE $F262
-F25F   4C 0D F7   JMP $F70D
+F25F   4C 0D F7   JMP $F70D	; I/O ERROR #7 - not an output file
 
-F262   C9 03      CMP #$03
-F264   F0 0F      BEQ $F275
-F266   B0 11      BCS $F279
-F268   C9 02      CMP #$02
-F26A   D0 03      BNE $F26F
-F26C   4C E1 EF   JMP $EFE1
+F262   C9 03      CMP #$03	; Is it screen?
+F264   F0 0F      BEQ $F275	
+F266   B0 11      BCS $F279	; Higher than 3 - this will be serial device
+F268   C9 02      CMP #$02	; RS-232 device?
+F26A   D0 03      BNE $F26F	; No - then it will be tape.. (TODO - what about KBD?)
+F26C   4C E1 EF   JMP $EFE1	; Set RS-232 file as default output
 
-F26F   A6 B9      LDX $B9
-F271   E0 60      CPX #$60
-F273   F0 EA      BEQ $F25F
-F275   85 9A      STA $9A
+F26F   A6 B9      LDX $B9	; SA - Current Secondary Address
+F271   E0 60      CPX #$60	; Secondary address (ORed with $60) = 0?
+F273   F0 EA      BEQ $F25F	; yes - we deal with LOAD file here so I/O ERROR #7 - not an output file
+F275   85 9A      STA $9A	; Set DFLT0 - Default Output (CMD) Device (Set to 3 for the Screen)
 F277   18         CLC
 F278   60         RTS
 
@@ -8024,16 +8034,16 @@ F278   60         RTS
 ; set serial bus output device
 
 F279   AA         TAX
-F27A   20 0C ED   JSR $ED0C
-F27D   A5 B9      LDA $B9
-F27F   10 05      BPL $F286
-F281   20 BE ED   JSR $EDBE
-F284   D0 03      BNE $F289
-F286   20 B9 ED   JSR $EDB9
+F27A   20 0C ED   JSR $ED0C ; LISTEN
+F27D   A5 B9      LDA $B9	; SA - Current Secondary Address
+F27F   10 05      BPL $F286	; SA (ORed with $60) smaller than 127? then send SECOND - TODO - for serial only up to 31 are valid secondary addresses, aren't they? Up to 127 for other devices.. A bug?
+F281   20 BE ED   JSR $EDBE	; clear ATN bit on the serial bus
+F284   D0 03      BNE $F289	; 
+F286   20 B9 ED   JSR $EDB9	; SECOND
 F289   8A         TXA
-F28A   24 90      BIT $90
-F28C   10 E7      BPL $F275
-F28E   4C 07 F7   JMP $F707
+F28A   24 90      BIT $90	; STATUS - Kernal I/O Status Word (ST)
+F28C   10 E7      BPL $F275	; check bit 7 of STATUS (on serial - DEVICE NOT PRESENT flag). Set DFLT0, CLC and RTS if device present
+F28E   4C 07 F7   JMP $F707	; I/O error #5 - device not present
 
 
 ; close a file
@@ -8122,7 +8132,7 @@ F30F   A9 00      LDA #$00
 F311   85 90      STA $90
 F313   8A         TXA
 
-F314   A6 98      LDX $98
+F314   A6 98      LDX $98	; number of open files (index to files params table)
 
 F316   CA         DEX
 F317   30 15      BMI $F32E
@@ -8133,33 +8143,33 @@ F31E   60         RTS
 
 ; set file parameters depending on X
 
-F31F   BD 59 02   LDA $0259,X
-F322   85 B8      STA $B8
-F324   BD 63 02   LDA $0263,X
-F327   85 BA      STA $BA
-F329   BD 6D 02   LDA $026D,X
-F32C   85 B9      STA $B9
+F31F   BD 59 02   LDA $0259,X	; LAT table
+F322   85 B8      STA $B8		; LA - Current Logical File Number
+F324   BD 63 02   LDA $0263,X	; FAT table
+F327   85 BA      STA $BA		; FA - Current Device Number
+F329   BD 6D 02   LDA $026D,X	; SAT table
+F32C   85 B9      STA $B9		; SA - Current Secondary Address
 F32E   60         RTS
 
 
 ; close all files
 
 F32F   A9 00      LDA #$00
-F331   85 98      STA $98
+F331   85 98      STA $98	; 152 / $98 - LDTND - Number of Open I/O Files/Index to the End of File Tables
 
 
 ; restore I/O to default devices
 
 F333   A2 03      LDX #$03
-F335   E4 9A      CPX $9A
+F335   E4 9A      CPX $9A	; 154 / $9A - DFLTO - Default Output (CMD) Device (Set to 3 for the Screen)
 F337   B0 03      BCS $F33C
-F339   20 FE ED   JSR $EDFE
-F33C   E4 99      CPX $99
+F339   20 FE ED   JSR $EDFE	; ($FFAE) UNLSN  (60926, $EDFE) command serial bus device to UNLISTEN
+F33C   E4 99      CPX $99	; 153 / $99 - DFLTN - Default Input Device (Set to 0 for Keyboard)
 F33E   B0 03      BCS $F343
-F340   20 EF ED   JSR $EDEF
-F343   86 9A      STX $9A
+F340   20 EF ED   JSR $EDEF	; ($FFAB) UNTLK  (60911, $EDEF) command serial bus device to UNTALK
+F343   86 9A      STX $9A	; 154 / $9A - DFLTO - Default Output (CMD) Device (Set to 3 for the Screen)
 F345   A9 00      LDA #$00
-F347   85 99      STA $99
+F347   85 99      STA $99	; 153 / $99 - DFLTN - Default Input Device (Set to 0 for Keyboard)
 F349   60         RTS
 
 
@@ -8167,18 +8177,18 @@ F349   60         RTS
 
 F34A   A6 B8      LDX $B8
 F34C   D0 03      BNE $F351
-F34E   4C 0A F7   JMP $F70A
+F34E   4C 0A F7   JMP $F70A	; I/O error #6 - not input file
 
-F351   20 0F F3   JSR $F30F
+F351   20 0F F3   JSR $F30F	; Find the File in the Logical File Table
 F354   D0 03      BNE $F359
-F356   4C FE F6   JMP $F6FE
+F356   4C FE F6   JMP $F6FE	; I/O error #2 - file open
 
-F359   A6 98      LDX $98
-F35B   E0 0A      CPX #$0A
+F359   A6 98      LDX $98	; number of open files - index to file params table
+F35B   E0 0A      CPX #$0A	; compare to maximal number of open files
 F35D   90 03      BCC $F362
-F35F   4C FB F6   JMP $F6FB
+F35F   4C FB F6   JMP $F6FB	; I/O error #1 - too many open files
 
-F362   E6 98      INC $98
+F362   E6 98      INC $98	; increment the number of open files
 F364   A5 B8      LDA $B8
 F366   9D 59 02   STA $0259,X
 F369   A5 B9      LDA $B9
@@ -8191,7 +8201,7 @@ F377   F0 5A      BEQ $F3D3
 F379   C9 03      CMP #$03
 F37B   F0 56      BEQ $F3D3
 F37D   90 05      BCC $F384
-F37F   20 D5 F3   JSR $F3D5
+F37F   20 D5 F3   JSR $F3D5	; open file on serial bus device ?
 F382   90 4F      BCC $F3D3
 F384   C9 02      CMP #$02
 F386   D0 03      BNE $F38B
@@ -8215,7 +8225,7 @@ F3A3   F0 0A      BEQ $F3AF
 F3A5   20 EA F7   JSR $F7EA
 F3A8   90 18      BCC $F3C2
 F3AA   F0 28      BEQ $F3D4
-F3AC   4C 04 F7   JMP $F704
+F3AC   4C 04 F7   JMP $F704	; I/O error #4 - file not found
 
 F3AF   20 2C F7   JSR $F72C
 F3B2   F0 20      BEQ $F3D4
@@ -8251,25 +8261,25 @@ F3DB   F0 F6      BEQ $F3D3
 F3DD   A9 00      LDA #$00
 F3DF   85 90      STA $90
 F3E1   A5 BA      LDA $BA
-F3E3   20 0C ED   JSR $ED0C
+F3E3   20 0C ED   JSR $ED0C	; LISTEN
 F3E6   A5 B9      LDA $B9
 F3E8   09 F0      ORA #$F0
-F3EA   20 B9 ED   JSR $EDB9
+F3EA   20 B9 ED   JSR $EDB9	; SECOND
 F3ED   A5 90      LDA $90
 F3EF   10 05      BPL $F3F6
 F3F1   68         PLA
 F3F2   68         PLA
-F3F3   4C 07 F7   JMP $F707
+F3F3   4C 07 F7   JMP $F707	; I/O error #5 - device not present
 
 F3F6   A5 B7      LDA $B7
 F3F8   F0 0C      BEQ $F406
 F3FA   A0 00      LDY #$00
 F3FC   B1 BB      LDA ($BB),Y
-F3FE   20 DD ED   JSR $EDDD
+F3FE   20 DD ED   JSR $EDDD	; CIOUT  (60893, $EDDD) output byte to serial bus
 F401   C8         INY
 F402   C4 B7      CPY $B7
 F404   D0 F6      BNE $F3FC
-F406   4C 54 F6   JMP $F654
+F406   4C 54 F6   JMP $F654	; UNLISTEN, CLC, RTS
 
 
 ; open RS-232 device
@@ -8352,7 +8362,7 @@ F49D   60         RTS
 
 F49E   86 C3      STX $C3
 F4A0   84 C4      STY $C4
-F4A2   6C 30 03   JMP ($0330)   ; normally F4A5
+F4A2   6C 30 03   JMP ($0330)	; normally F4A5
 
 
 ; standard load ram entry
@@ -8426,7 +8436,7 @@ F526   50 CB      BVC $F4F3
 F528   20 EF ED   JSR $EDEF
 F52B   20 42 F6   JSR $F642
 F52E   90 79      BCC $F5A9
-F530   4C 04 F7   JMP $F704
+F530   4C 04 F7   JMP $F704	; I/O error #4 - file not found
 F533   4A         LSR
 F534   B0 03      BCS $F539
 F536   4C 13 F7   JMP $F713
@@ -8534,7 +8544,7 @@ F5E2   B5 00      LDA $00,X
 F5E4   85 C1      STA $C1
 F5E6   B5 01      LDA $01,X
 F5E8   85 C2      STA $C2
-F5EA   6C 32 03   JMP ($0332)   ; normally F5ED
+F5EA   6C 32 03   JMP ($0332)	; normally F5ED
 
 
 ; standard save ram entry
@@ -8555,19 +8565,19 @@ F602   4C 10 F7   JMP $F710
 F605   20 D5 F3   JSR $F3D5
 F608   20 8F F6   JSR $F68F
 F60B   A5 BA      LDA $BA
-F60D   20 0C ED   JSR $ED0C
+F60D   20 0C ED   JSR $ED0C	; LISTEN
 F610   A5 B9      LDA $B9
-F612   20 B9 ED   JSR $EDB9
+F612   20 B9 ED   JSR $EDB9	; SECOND
 F615   A0 00      LDY #$00
 F617   20 8E FB   JSR $FB8E
 F61A   A5 AC      LDA $AC
-F61C   20 DD ED   JSR $EDDD
+F61C   20 DD ED   JSR $EDDD	; CIOUT  (60893, $EDDD) output byte to serial bus
 F61F   A5 AD      LDA $AD
-F621   20 DD ED   JSR $EDDD
+F621   20 DD ED   JSR $EDDD	; CIOUT  (60893, $EDDD) output byte to serial bus
 F624   20 D1 FC   JSR $FCD1
 F627   B0 16      BCS $F63F
 F629   B1 AC      LDA ($AC),Y
-F62B   20 DD ED   JSR $EDDD
+F62B   20 DD ED   JSR $EDDD	; CIOUT  (60893, $EDDD) output byte to serial bus
 F62E   20 E1 FF   JSR $FFE1
 F631   D0 07      BNE $F63A
 
@@ -8579,7 +8589,7 @@ F639   60         RTS
 
 F63A   20 DB FC   JSR $FCDB
 F63D   D0 E5      BNE $F624
-F63F   20 FE ED   JSR $EDFE
+F63F   20 FE ED   JSR $EDFE	; ($FFAE) UNLSN  (60926, $EDFE) command serial bus device to UNLISTEN
 
 
 ; close serial bus device
@@ -8587,13 +8597,13 @@ F63F   20 FE ED   JSR $EDFE
 F642   24 B9      BIT $B9
 F644   30 11      BMI $F657
 F646   A5 BA      LDA $BA
-F648   20 0C ED   JSR $ED0C
+F648   20 0C ED   JSR $ED0C	; LISTEN
 F64B   A5 B9      LDA $B9
 F64D   29 EF      AND #$EF
 F64F   09 E0      ORA #$E0
-F651   20 B9 ED   JSR $EDB9
+F651   20 B9 ED   JSR $EDB9	; SECOND
 
-F654   20 FE ED   JSR $EDFE
+F654   20 FE ED   JSR $EDFE	; ($FFAE) UNLSN  (60926, $EDFE) command serial bus device to UNLISTEN
 
 F657   18         CLC
 F658   60         RTS
@@ -8709,38 +8719,38 @@ F6FA   60         RTS
 
 ; handle I/O errors
 
-F6FB   A9 01      LDA #$01   ; too many files
+F6FB   A9 01      LDA #$01	; too many files
 F6FD   .BY $2C
 
-F6FE   A9 02      LDA #$02   ; file open
+F6FE   A9 02      LDA #$02	; file open
 
 F700   .BY $2C
 
-F701   A9 03      LDA #$03   ; file not open
+F701   A9 03      LDA #$03	; file not open
 
 F703   .BY $2C
 
-F704   A9 04      LDA #$04   ; file not found
+F704   A9 04      LDA #$04	; file not found
 
 F706   .BY $2C
 
-F707   A9 05      LDA #$05   ; device not present
+F707   A9 05      LDA #$05	; device not present
 
 F709   .BY $2C
 
-F70A   A9 06      LDA #$06   ; not input file
+F70A   A9 06      LDA #$06	; not input file
 
 F70C   .BY $2C
 
-F70D   A9 07      LDA #$07   ; not output file
+F70D   A9 07      LDA #$07	; not output file
 
 F70F   .BY $2C
 
-F710   A9 08      LDA #$08   ; file name missing
+F710   A9 08      LDA #$08	; file name missing
 
 F712   .BY $2C
 
-F713   A9 09      LDA #$09   ; illegal device no.
+F713   A9 09      LDA #$09	; illegal device no.
 
 F715   48         PHA
 F716   20 CC FF   JSR $FFCC
@@ -9630,17 +9640,17 @@ FCE2   A2 FF      LDX #$FF
 FCE4   78         SEI
 FCE5   9A         TXS
 FCE6   D8         CLD
-FCE7   20 02 FD   JSR $FD02
+FCE7   20 02 FD   JSR $FD02	; check for cartridge presence
 FCEA   D0 03      BNE $FCEF
-FCEC   6C 00 80   JMP ($8000)   ; start cartridge
+FCEC   6C 00 80   JMP ($8000)	; start cartridge
 
 FCEF   8E 16 D0   STX $D016
-FCF2   20 A3 FD   JSR $FDA3
+FCF2   20 A3 FD   JSR $FDA3	; initialise I/O devices / CIAs
 FCF5   20 50 FD   JSR $FD50
 FCF8   20 15 FD   JSR $FD15
 FCFB   20 5B FF   JSR $FF5B
 FCFE   58         CLI
-FCFF   6C 00 A0   JMP ($A000)   ; start basic
+FCFF   6C 00 A0   JMP ($A000)	; start basic
 
 
 ; check for a cartridge
@@ -9661,8 +9671,8 @@ FD10   .BY $C3,$C2,$CD,$38,$30
 
 ; restore I/O vectors
 
-FD15   A2 30      LDX #$30   ; low  FD30
-FD17   A0 FD      LDY #$FD   ; high FD30
+FD15   A2 30      LDX #$30	; low  FD30
+FD17   A0 FD      LDY #$FD	; high FD30
 FD19   18         CLC
 
 
@@ -9683,25 +9693,25 @@ FD2F   60         RTS
 
 ; vectors for OS at $0314-$0333
 
-FD30   .WD $EA31   ; IRQ
-FD32   .WD $FE66   ; BRK
-FD34   .WD $FE47   ; NMI
-FD36   .WD $F34A   ; open
-FD38   .WD $F291   ; close
-FD3A   .WD $F20E   ; set input dev
-FD3C   .WD $F250   ; set output dev
-FD3E   .WD $F333   ; restore I/O
-FD40   .WD $F157   ; input
-FD42   .WD $F1CA   ; output
-FD44   .WD $F6ED   ; test stop key
-FD46   .WD $F13E   ; get
-FD48   .WD $F32F   ; abort I/O
-FD4A   .WD $FE66   ; unused (BRK)
-FD4C   .WD $F4A5   ; load ram
-FD4E   .WD $F5ED   ; save ram
+FD30   .WD $EA31	; IRQ
+FD32   .WD $FE66	; BRK
+FD34   .WD $FE47	; NMI
+FD36   .WD $F34A	; open
+FD38   .WD $F291	; close
+FD3A   .WD $F20E	; set input dev
+FD3C   .WD $F250	; set output dev
+FD3E   .WD $F333	; restore I/O
+FD40   .WD $F157	; input
+FD42   .WD $F1CA	; output
+FD44   .WD $F6ED	; test stop key
+FD46   .WD $F13E	; get
+FD48   .WD $F32F	; abort I/O
+FD4A   .WD $FE66	; unused (BRK)
+FD4C   .WD $F4A5	; load ram
+FD4E   .WD $F5ED	; save ram
 
 
-; initalise memory pointers
+; initialise memory pointers
 
 FD50   A9 00      LDA #$00
 FD52   A8         TAY
@@ -9747,13 +9757,13 @@ FD9A   60         RTS
 
 ; IRQ vectors
 
-FD9B   .WD $FC6A   ; cassette write A
-FD9D   .WD $FBCD   ; cassette write B
-FD9F   .WD $EA31   ; standard IRQ
-FDA1   .WD $F92C   ; cassette read
+FD9B   .WD $FC6A	; cassette write A
+FD9D   .WD $FBCD	; cassette write B
+FD9F   .WD $EA31	; standard IRQ
+FDA1   .WD $F92C	; cassette read
 
 
-; initaliase I/O devices
+; initialise I/O devices
 
 FDA3   A9 7F      LDA #$7F
 FDA5   8D 0D DC   STA $DC0D
@@ -9780,7 +9790,7 @@ FDD9   A9 2F      LDA #$2F
 FDDB   85 00      STA $00
 
 
-; initalise TAL1/TAH1 fpr 1/60 of a second
+; initialise TAL1/TAH1 for 1/60 of a second
 
 FDDD   AD A6 02   LDA $02A6
 FDE0   F0 0A      BEQ $FDEC
@@ -9798,7 +9808,7 @@ FDF3   8D 05 DC   STA $DC05
 FDF6   4C 6E FF   JMP $FF6E
 
 
-; initalise file name parameters
+; initialise file name parameters
 
 FDF9   85 B7      STA $B7
 FDFB   86 BB      STX $BB
@@ -9806,7 +9816,7 @@ FDFD   84 BC      STY $BC
 FDFF   60         RTS
 
 
-; inatalise file parameters
+; initalise file parameters
 
 FE00   85 B8      STA $B8
 FE02   86 BA      STX $BA
@@ -9877,7 +9887,7 @@ FE42   60         RTS
 ; NMI entry
 
 FE43   78         SEI
-FE44   6C 18 03   JMP ($0318)   ; normally FE47
+FE44   6C 18 03   JMP ($0318)	; normally FE47
 
 
 ; standard NMI routine
@@ -9893,7 +9903,7 @@ FE51   AC 0D DD   LDY $DD0D
 FE54   30 1C      BMI $FE72
 FE56   20 02 FD   JSR $FD02
 FE59   D0 03      BNE $FE5E
-FE5B   6C 02 80   JMP ($8002)   ; cartridge warm start
+FE5B   6C 02 80   JMP ($8002)	; cartridge warm start
 
 FE5E   20 BC F6   JSR $F6BC
 FE61   20 E1 FF   JSR $FFE1
@@ -9961,16 +9971,16 @@ FEC1   40         RTI
 
 ; baud rate tables
 
-FEC2   .WD $27C1   ; 50
-FEC4   .WD $1A3E   ; 75
-FEC6   .WD $11C5   ; 110
-FEC8   .WD $0E74   ; 134.5
-FECA   .WD $0CED   ; 150
-FECC   .WD $0645   ; 300
-FECE   .WD $02F0   ; 600
-FED0   .WD $0146   ; 1200
-FED2   .WD $00B8   ; 1800
-FED4   .WD $0071   ; 2400
+FEC2   .WD $27C1	; 50
+FEC4   .WD $1A3E	; 75
+FEC6   .WD $11C5	; 110
+FEC8   .WD $0E74	; 134.5
+FECA   .WD $0CED	; 150
+FECC   .WD $0645	; 300
+FECE   .WD $02F0	; 600
+FED0   .WD $0146	; 1200
+FED2   .WD $00B8	; 1800
+FED4   .WD $0071	; 2400
 
 
 ; input next bit on RS-232 and schedule TB2
@@ -10050,9 +10060,9 @@ FF4D   BA         TSX
 FF4E   BD 04 01   LDA $0104,X
 FF51   29 10      AND #$10
 FF53   F0 03      BEQ $FF58
-FF55   6C 16 03   JMP ($0316)   ; normally FE66
+FF55   6C 16 03   JMP ($0316)	; normally FE66
 
-FF58   6C 14 03   JMP ($0314)   ; normally EA31
+FF58   6C 14 03   JMP ($0314)	; normally EA31
 
 
 ; addition to I/O device initalisation
@@ -10074,106 +10084,61 @@ FF73   AD 0E DC   LDA $DC0E
 FF76   29 80      AND #$80
 FF78   09 11      ORA #$11
 FF7A   8D 0E DC   STA $DC0E
-FF7D   4C 8E EE   JMP $EE8E
+FF7D   4C 8E EE   JMP $EE8E	; Set CLK line HI
 
-FF80   .BY $03   ; kernal version number
+FF80   .BY $03	; kernal version number
 
 
 ; kernal vectors
 
-FF81   4C 5B FF   JMP $FF5B   ; initalise screen and keyboard
-FF84   4C A3 FD   JMP $FDA3   ; initalise I/O devices
-FF87   4C 50 FD   JMP $FD50   ; initalise memory pointers
-FF8A   4C 15 FD   JMP $FD15   ; restore I/O vectors
-FF8D   4C 1A FD   JMP $FD1A   ; set I/O vectors from XY
-
-FF90   4C 18 FE   JMP $FE18   ; control kernal messages
-
-FF93   4C B9 ED   JMP $EDB9   ; read secondary address after listen
-FF96   4C C7 ED   JMP $EDC7   ; read secondary address after talk
-
-FF99   4C 25 FE   JMP $FE25   ; read/set top of memory
-
-
-FF9C   4C 34 FE   JMP $FE34   ; read/set bottom of memory
-
-FF9F   4C 87 EA   JMP $EA87   ; scan keyboard
-FFA2   4C 21 FE   JMP $FE21   ; set timout for serial bus
-FFA5   4C 13 EE   JMP $EE13   ; input on serial bus
-FFA8   4C DD ED   JMP $EDDD   ; output byte on serial bus
-FFAB   4C EF ED   JMP $EDEF   ; send untalk on serial bus
-FFAE   4C FE ED   JMP $EDFE   ; send unlisten on serial bus
-FFB1   4C 0C ED   JMP $ED0C   ; send listen on serial bus
-FFB4   4C 09 ED   JMP $ED09   ; send talk on serial bus
-
-FFB7   4C 07 FE   JMP $FE07   ; read I/O status word
-
-
-FFBA   4C 00 FE   JMP $FE00   ; set file parameters
-
-
-FFBD   4C F9 FD   JMP $FDF9   ; set filename parameters
-
-
-FFC0   6C 1A 03   JMP ($031A)   ; (F34A) open a file
-
-
-FFC3   6C 1C 03   JMP ($031C)   ; (F291) close a file
-
-
-FFC6   6C 1E 03   JMP ($031E)   ; (F20E) set input device
-
-
-FFC9   6C 20 03   JMP ($0320)   ; (F250) set output device
-
-
-FFCC   6C 22 03   JMP ($0322)   ; (F333) restore I/O devices to default
-
-
-FFCF   6C 24 03   JMP ($0324)   ; (F157) input char on current device
-
-
-FFD2   6C 26 03   JMP ($0326)   ; (F1CA) output char on current device
-
-
-FFD5   4C 9E F4   JMP $F49E   ; load ram from device
-
-
-FFD8   4C DD F5   JMP $F5DD   ; save ram to device
-
-
-FFDB   4C E4 F6   JMP $F6E4   ; set real time clock
-
-
-FFDE   4C DD F6   JMP $F6DD   ; read real time clock
-
-
-FFE1   6C 28 03   JMP ($0328)   ; (F6ED) check stop key
-
-
-FFE4   6C 2A 03   JMP ($032A)   ; (F13E) get a character
-
-
-FFE7   6C 2C 03   JMP ($032C)   ; (F32F) close all channels and files
-
-
-FFEA   4C 9B F6   JMP $F69B   ; increment real time clock
-
-FFED   4C 05 E5   JMP $E505   ; read organisation of screen into XY
-
-FFF0   4C 0A E5   JMP $E50A   ; read/set XY cursor position
-
-
-FFF3   4C 00 E5   JMP $E500   ; read base address of I/O devices
+FF81   4C 5B FF   JMP $FF5B	; initalise screen and keyboard
+FF84   4C A3 FD   JMP $FDA3	; initalise I/O devices
+FF87   4C 50 FD   JMP $FD50	; initalise memory pointers
+FF8A   4C 15 FD   JMP $FD15	; restore I/O vectors
+FF8D   4C 1A FD   JMP $FD1A	; set I/O vectors from XY
+FF90   4C 18 FE   JMP $FE18	; control kernal messages
+FF93   4C B9 ED   JMP $EDB9	; read secondary address after listen
+FF96   4C C7 ED   JMP $EDC7	; read secondary address after talk
+FF99   4C 25 FE   JMP $FE25	; read/set top of memory
+FF9C   4C 34 FE   JMP $FE34	; read/set bottom of memory
+FF9F   4C 87 EA   JMP $EA87	; scan keyboard
+FFA2   4C 21 FE   JMP $FE21	; set timout for serial bus
+FFA5   4C 13 EE   JMP $EE13	; input on serial bus
+FFA8   4C DD ED   JMP $EDDD	; CIOUT - output byte on serial bus
+FFAB   4C EF ED   JMP $EDEF	; send untalk on serial bus
+FFAE   4C FE ED   JMP $EDFE	; send unlisten on serial bus
+FFB1   4C 0C ED   JMP $ED0C	; send listen on serial bus
+FFB4   4C 09 ED   JMP $ED09	; send talk on serial bus
+FFB7   4C 07 FE   JMP $FE07	; read I/O status word
+FFBA   4C 00 FE   JMP $FE00	; set file parameters
+FFBD   4C F9 FD   JMP $FDF9	; set filename parameters
+FFC0   6C 1A 03   JMP ($031A)	; (F34A) open a file
+FFC3   6C 1C 03   JMP ($031C)	; (F291) close a file
+FFC6   6C 1E 03   JMP ($031E)	; (F20E) set input device
+FFC9   6C 20 03   JMP ($0320)	; (F250) set output device
+FFCC   6C 22 03   JMP ($0322)	; (F333) restore I/O devices to default
+FFCF   6C 24 03   JMP ($0324)	; (F157) input char on current device
+FFD2   6C 26 03   JMP ($0326)	; (F1CA) output char on current device
+FFD5   4C 9E F4   JMP $F49E	; load ram from device
+FFD8   4C DD F5   JMP $F5DD	; save ram to device
+FFDB   4C E4 F6   JMP $F6E4	; set real time clock
+FFDE   4C DD F6   JMP $F6DD	; read real time clock
+FFE1   6C 28 03   JMP ($0328)	; (F6ED) check stop key
+FFE4   6C 2A 03   JMP ($032A)	; (F13E) get a character
+FFE7   6C 2C 03   JMP ($032C)	; (F32F) close all channels and files
+FFEA   4C 9B F6   JMP $F69B	; increment real time clock
+FFED   4C 05 E5   JMP $E505	; read organisation of screen into XY
+FFF0   4C 0A E5   JMP $E50A	; read/set XY cursor position
+FFF3   4C 00 E5   JMP $E500	; read base address of I/O devices
 
 
 ; unused
 
 FFF6   .BY $52,$52,$42,$59
 
-FFFA   .WD $FE43   ; NMI vector
-FFFC   .WD $FCE2   ; RESET vector
-FFFE   .WD $FF48   ; IRQ/BRK vector
+FFFA   .WD $FE43	; NMI vector
+FFFC   .WD $FCE2	; RESET vector
+FFFE   .WD $FF48	; IRQ/BRK vector
 
 
 Marko Makela
