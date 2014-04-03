@@ -1,3 +1,4 @@
+
   *********
 
   Welcome to Project 64!
@@ -4661,7 +4662,7 @@ stop tok64
   by a string variable (---$) helps your Commodore 64 find each program
   more easily. If the file-name is left out it can NOT be LOADed by name
   later on.
-    A secondary address of 1 will tell the KERNAL to LOAD the tape at a
+    A secondary address of I will tell the KERNAL to LOAD the tape at a
   later time, with the program currently in memory instead of the normal
   2048 location. A secondary address of 2 will cause an end-of-tape marker
   to follow the program. A secondary address of 3 combines both functions.
@@ -12363,7 +12364,7 @@ stop tok64
   PLA                 PLA Pull accumulator from stack                   PLA
 
   Operation:  A fromS                                   N Z C I D V
-                                                        / / _ _ _ _
+                                                        _ _ _ _ _ _
                                  (Ref: 8.6)
   +----------------+-----------------------+---------+---------+----------+
   | Addressing Mode| Assembly Language Form| OP CODE |No. Bytes|No. Cycles|
@@ -12501,7 +12502,7 @@ stop tok64
 ~
 
 
-  SEI                 SEI Set interrupt disable status                  SEI
+  SEI                 SEI Set interrupt disable status                  SED
                                                         N Z C I D V
   Operation:  1 -> I                                    _ _ _ 1 _ _
                                 (Ref: 3.2.1)
@@ -14064,14 +14065,14 @@ stop tok64
 
 
     Description: This routine sets the X and Y registers to the address of
-  the memory section where the memory mapped I/O devices are located. This
+  the memory section where the memory mapped 110 devices are located. This
   address can then be used with an offset to access the memory mapped I/O
   devices in the Commodore 64. The offset is the number of locations from
   the beginning of the page on which the I/O register you want is located.
   The X register contains the low order address byte, while the Y register
   contains the high order address byte.
     This routine exists to provide compatibility between the Commodore 64,
-  VIC-20, and future models of the Commodore 64. If the I/O locations for
+  VIC-20, and future models of the Commodore 64. If the J/0 locations for
   a machine language program are set by a call to this routine, they should
   still remain compatible with future versions of the Commodore 64, the
   KERNAL and BASIC.
@@ -15494,7 +15495,7 @@ stop tok64
           0100-010A     256-266    Floating to String Work Area
   BAD     0100-013E     256-318    Tape Input Error Log
 
-  BUF     0200-0258     512-600    System INPUT Buffer
+  BUF     0200-02S8     512-600    System INPUT Buffer
   LAT     0259-0262     601-610    KERNAL Table: Active Logical File No's.
   FAT     0263-026C     611-620    KERNAL Table: Device No. for Each File
   SAT     026D-0276     621-630    KERNAL Table: Second Address Each File
