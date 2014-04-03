@@ -4029,14 +4029,14 @@ For example, the letter A has a screen code value of 1.  Therefore,
 POKE 1024,1 should make the letter A appear in the top-left corner of
 the screen.
 
-However, you should be aware that the most current version of the
-Operating System initializes the color RAM which is used for the
-foreground color of text characters to the same value as the
-background color every time that the screen is cleared.  The result is
-that although the POKE will put a blue A on the screen, you won't be
-able to see it because it is the same color blue as the background.
-This can be remedied by POKEing a different value into color RAM
-(which starts at 55296 ($D800)).
+However, you should be aware that older versions of the Operating
+System initialized the color RAM which is used for the foreground
+color of text characters to the same value as the background color
+every time that the screen is cleared.  The result is that although
+the POKE will put a blue A on the screen, you won't be able to see
+it because it is the same color blue as the background. This can
+be remedied by POKEing a different value into color RAM (which
+starts at 55296 ($D800)).
 
 A POKE 1024,1:POKE 1024+54272,1 will put a white A in the upper-left
 corner of the screen.  The loop
