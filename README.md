@@ -1,2 +1,2 @@
-Repository of important textual documents pertaining to retro computing
-=====
+Repository of textual documents pertaining to retro computing
+====
