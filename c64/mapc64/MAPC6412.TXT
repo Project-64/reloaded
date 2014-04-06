@@ -6403,7 +6403,7 @@ Because of the unusual layout of bitmap screen data on the 64, it is
 fairly easy to transfer text characters to a bitmap screen, but it is
 somewhat awkward finding the bit which affects the screen dot having a
 given X-Y coordinate.  First, you must find the byte BY in which the
-bit resides, and then you must POKE a vlue into that byte which turns
+bit resides, and then you must POKE a value into that byte which turns
 the desired bit on or off.  Given that the horizontal position of the
 dot is stored in the variable X, its vertical position is in the
 variable Y, and the base address of the bitmap area is in the variable
