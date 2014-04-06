@@ -5759,7 +5759,7 @@ stop tok64
     POKE 56334,PEEK(56334)OR1      (TURNS INTERRUPTS ON)
 
 
-    The following POKE will switch out 1/0 and switch the CHARACTER ROM in:
+    The following POKE will switch out I/O and switch the CHARACTER ROM in:
 
     POKE 1,PEEK(1)AND251
 
