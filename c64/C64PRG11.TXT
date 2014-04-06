@@ -5218,7 +5218,7 @@ stop tok64
 
     The keyboard is treated as a set of switches organized into a matrix
   of 8 columns by 8 rows. The keyboard matrix is scanned for key switch-
-  closures by the KERNAL using the CIA #l 1/0 chip (MOS 6526 Complex
+  closures by the KERNAL using the CIA #1 I/O chip (MOS 6526 Complex
   Interface Adapter). Two CIA registers are used to perform the scan:
   register #0 at location 56320 ($DC00) for keyboard columns and
   register #l at location 56321 ($DC01) for keyboard rows.
@@ -5741,7 +5741,7 @@ stop tok64
   use programmable characters and want to copy some of the character ROM
   for some of your character definitions. In this case you must switch out
   the I/O register, switch in the character ROM, and do your copying. When
-  you're finished, you must switch the 1/0 registers back in again. During
+  you're finished, you must switch the I/O registers back in again. During
   the copying process (when I/O is switched out) no interrupts can be
   allowed to take place. This is because the I/O registers are needed to
   service the interrupts. If you forget and perform an interrupt, really
