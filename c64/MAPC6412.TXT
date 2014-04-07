@@ -17,12 +17,6 @@ of contents and indexes may have been changed from page number
 references to section number references. Please accept our apologies
 for these limitations, alterations, and possible omissions.
 
-Document names are limited to the 8.3 file convention of DOS. The
-first characters of the file name are an abbreviation of the original
-document name. The version number of the etext follows next. After
-that a letter may appear to indicate the particular source of the
-document. Finally, the document is given a .TXT extension.
-
 The author(s) of the original document and members of Project 64 make
 no representations about the accuracy or suitability of this material
 for any purpose.  This etext is provided "as-is".  Please refer to the
@@ -31,8 +25,14 @@ etext.  No other warantees, express or implied, are made to you as to
 the etext or any medium it may be on.  Neither the author(s) nor the
 members of Project 64 will assume liability for damages either from
 the direct or indirect use of this etext or from the distribution of
-or modification to this etext. Therefore if you read this document or
+or modification to this etext.  Therefore if you read this document or
 use the information herein you do so at your own risk.
+
+Document names are limited to the 8.3 file convention of DOS. The
+first characters of the file name are an abbreviation of the original
+document name. The version number of the etext follows next. After
+that a letter may appear to indicate the particular source of the
+document. Finally, the document is given a .TXT extension.
 
 *********
 
