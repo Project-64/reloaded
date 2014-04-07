@@ -36,7 +36,7 @@ This one is much more controversial.  God only knows how much I detest msdos and
 * documents file names will remain limited to 8.3 uppercase characters
 * version numbers for unaltered documents will remain as they were in the original archive
 * version numbers of the documents updated within this repository will be bumped  by one minor number over the highest available and will remain so for its life in the repository
-* If an updated version (with a higher version number than the original) is found elsewhere and the changes are merged into the version available here - 
+* If an updated version (with a higher version number than the originally used one) is found elsewhere and the changes are merged into the version available here - the version number will be updated accordingly
 
 A line in the etext like
 >MAPC6412.TXT, etext #351#. This replaces MAPC6411.TXT from June 1998
