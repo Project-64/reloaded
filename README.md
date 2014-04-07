@@ -12,8 +12,16 @@ Regards,
 
 silverdr
 
-Conventions
+Rules and Conventions
 ---------------------
+Textual representations __only__ are to be stored and revision-maintained in this repository. Textual formats mean (in the order of preference):
+* text/plain
+* application/x-tex
+* text/html
+* text/rtf
+
+Other, non-easily-editable formats are currently welcome only for inclusion in the list of documents awaiting to be processed into textual format.
+
 The original Project 64 documents contain a header with several important points:
 * The goal of Project 64 is to preserve Commodore 64 related documents in electronic text format that might otherwise cease to exist with the rapid advancement of computer technology and declining interest in 8-bit computers on the part of the general population.
 * Extensive efforts were made to preserve the contents of the original document.  However, certain portions, such as diagrams, program listings, and indexes may have been either altered or sacrificed due to the limitations of plain vanilla text.  Diagrams may have been eliminated where ASCII-art was not feasible.  Program listings may be missing display codes where substitutions were not possible.  Tables of contents and indexes may have been changed from page number references to section number references. Please accept our apologies for these limitations, alterations, and possible omissions.
@@ -24,13 +32,16 @@ All of the above points remain valid and unaltered.
 Some documents contain also one more header paragraph about the file format:
 * Document names are limited to the 8.3 file convention of DOS. The first characters of the file name are an abbreviation of the original document name. The version number of the etext follows next. After that a letter may appear to indicate the particular source of the document. Finally, the document is given a .TXT extension.
 
-This one is much more controversial.  God only knows how much I detest msdos and its "conventions",  which held the whole industry aback for more than a decade and keep haunting us until today. I am - however - willing to bury my personal feelings about "8.3 file convention of DOS" and "extensions" (SCNR) for the sake of continuity and consistency. This means that:
+This one is much more controversial.  God only knows how much I detest msdos and its "conventions",  which held computer science and the whole industry aback for more than a decade and still keep haunting us even today. I am - however - willing to bury my personal feelings about "8.3 file convention of DOS" and "extensions" (SCNR) for the sake of continuity and consistency. This means that:
 * documents file names will remain limited to 8.3 uppercase characters
 * version numbers for unaltered documents will remain as they were in the original archive
 * version numbers of the documents updated within this repository will be bumped  by one minor number over the highest available and will remain so for its life in the repository
+* If an updated version (with a higher version number than the original) is found elsewhere and the changes are merged into the version available here - 
 
 A line in the etext like
 >MAPC6412.TXT, etext #351#. This replaces MAPC6411.TXT from June 1998
 
 shall be used to distinguish and make it clear what document in what version it is updated from.
 * new documents will adhere to the original file naming specifications (huh - is it really me writing this?) for consistency with the original project.
+
+Unlike Dean I don't exclude possibility of accepting documents, which originated in languages other than English. Usually original language versions are in fact better than the translations. An example: "Das Große Floppybuch zur 1541", written originally by German authors and translated into English. While the English version (published by Abacus Software under the title "The Anatomy Of The 1541 Drive - A Complete Guide to Using The Commodore Disk Drive) is surprisingly good, I still have this kind of feeling that German book is somehow better. No, German is not my mother tongue.. ;-)
