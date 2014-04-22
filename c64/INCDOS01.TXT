@@ -1,0 +1,347 @@
+*********
+
+Welcome to Project 64!
+
+  The goal of Project 64 is to preserve Commodore 64 related documents
+in electronic text format that might otherwise cease to exist with the
+rapid advancement of computer technology and declining interest in 8-
+bit computers on the part of the general population.
+
+  Extensive efforts were made to preserve the contents of the original
+document.  However, certain portions, such as diagrams, program
+listings, and indexes may have been either altered or sacrificed due
+to the limitations of plain vanilla text.  Diagrams may have been
+eliminated where ASCII-art was not feasible.  Program listings may be
+missing display codes where substitutions were not possible.  Tables
+of contents and indexes may have been changed from page number
+references to section number references. Please accept our apologies
+for these limitations, alterations, and possible omissions.
+
+  The author(s) of the original document and members of Project 64 make
+no representations about the accuracy or suitability of this material
+for any purpose.  This etext is provided "as-is".  Please refer to the
+warantee of the original document, if any, that may included in this
+etext.  No other warantees, express or implied, are made to you as to
+the etext or any medium it may be on.  Neither the author(s) nor the
+members of Project 64 will assume liability for damages either from
+the direct or indirect use of this etext or from the distribution of
+or modification to this etext.  Therefore if you read this document or
+use the information herein you do so at your own risk.
+
+*********
+
+  The Project 64 etext of Inside Commodore DOS by Richard immers, Ph.D.
+and Gerald G. Neufeld, Ph.D. second edition. Converted to etext by
+Silver Dream !
+
+INCDOS01.TXT (WIP), April 2014
+
+*********
+
+
+
+
+~
+
+
+
+
+                              INSIDE
+                             COMMODORE
+                                DOS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+~
+
+
+
+                                INSIDE
+                              COMMODORE
+                                 DOS
+
+                                  by
+
+                        Richard immers, Ph.D.
+                        Adrian Public Schools
+                          Adrian, Michigan
+
+                                and
+
+                      Gerald G. Neufeld, Ph.D.
+                        Brandon University
+                         Brandon, Manitoba
+                              Canada
+
+
+                    Technical Illustrations by
+                        Diane M. Corralejo
+
+                           DATAMOST, Inc.
+            19821 Nordhoff Street, Northridge, CA 91324
+                          (818) 709-1202
+
+~
+
+
+
+                    First Printing, July 1984
+                  Second Printing, February 1985
+
+
+
+
+
+
+
+                 RESTON PUBLISHING COMPANY, INC.
+                    A Prentice-Hall Company
+                       Reston, Virginia
+
+                       ISBN 0-8359-3091-2
+
+                Copyright © 1984 by DATAMOST, Inc.
+                       All Rights Reserved
+
+This manual is published and copyrighted by DATAMOST, Inc. All rights are
+reserved by DATAMOST, Inc. Copying, duplicating, selling or otherwise
+distributing this product is hereby expressly forbidden except by prior written
+consent of DATAMOST, Inc.
+
+The words COMMODORE, CBM, COMMODORE 64, VIC-20, VIC-1541 and the Commodore logo
+are registered trademarks of Commodore Business Machines, Inc.
+
+Commodore Business Machines was not in any way involved in the writing or other
+preparation of this manual, nor were the facts presented here reviewed for
+accuracy by them.
+
+The information presented in this manual is the result of intensive study of
+the disassembly of the 1541 DOS. Every effort has been made to provide
+error-free information. However, neither the authors nor DATAMOST, Inc. can
+accept responsibility for any loss or damage, tangible or intangible, resulting
+from use or improper or unintended use of this information.
+
+                                                       Printed in U.S.A.
+
+~
+
+
+                        ACKNOWLEDGEMENTS
+
+A manual like this one would not be possible without a great deal of technical
+assistance. Mike Todd's Disk File column in the ICPUG Newsletter proved to be
+an invaluable source of insight into the inner workings of Commodore's DOS.
+Raeto West's book, Programming the PET/CBM, was a constant companion. Jim
+Butterfield's numerous articles also provided valuable bits and pieces of
+information. Brad Templeton's POWER™ system and PAL™ assembler made the
+development of the programs in this manual a real joy. These packages are
+commercially available from Professional Software Inc. In addition, both the
+PAL disassembler and MICROMON were used as tools for disassembling the 1541 DOS.
+
+We would also like to acknowledge the patience and forebearance of our families
+and friends. Without their support, producing this manual would have been
+considerably more difficult. Mike Louder of DATAMOST, Inc. also provided
+tremendous support for its production.
+
+Finally, we would like to extend a special note of thanks to Dr. Tom MacNeil
+and Nancy Neufeld for their diligent work in proofreading this manual.
+
+This manual was written on a Commodore computer system using the WordPro 4 Plus
+word processing system. The WordPro Plus™ Series is commercially available from
+Professional Software Inc. This sophisticated word processing system made
+editing and last minute revisions much easier.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+~
+
+
+
+                        TABLE OF CONTENTS
+
+Chapter 1 - INTRODUCTION
+            A Brief Word About the Programs
+            How to Type in the Programs
+
+Chapter 2 - USING THE 1541'S DOS
+            The Purpose of DOS
+            Communicating with the 1541
+            The Command Channel
+            Using the Command Channel
+            Diskette Housekeeping
+
+Chapter 3 - DISKETTE FORMATTING
+            Layout of Tracks and Sectors
+            Layout of a Sector
+            The Header Block
+            The Data Block
+
+Chapter 4 - DISKETTE ORGANIZATION
+            Information Management
+            The Directory You See
+            The Block Availablity Map
+            The Directory Entries
+            Program File Storage
+            Sequential File Storage
+            Relative File Storage
+            User File Storage
+            Deleted File Storage
+            Locked Files
+
+Chapter 5 - DIRECT-ACCESS PROGRAMMING
+            Introduction to Direct-Access Programming
+            Beginning Direct-Access Programming
+            Block-Read Command
+            Buffer-Pointer Command
+            Block-Write Command
+            Memory-Read Command
+            Memory-Write Command
+            Block-Allocate Command
+            Block-Free Command
+            Memory-Execute Command
+            Block Execute Command
+            Direct-Access Entomology
+
+                                7
+~
+
+Chapter 6 - INTERMEDIATE DIRECT-ACCESS PROGRAMMING
+
+Chapter 7 - DOS PROTECTION
+            Commodore's Data Encoding Scheme
+            Checksums
+            Description of DOS Error Messages
+            Analyzing a Protected Diskette
+            Duplicating a Protection Scheme
+            How to Create 21 Errors on a Full Track
+            How to Create a 21 Error on a Single Sector
+            How to Create a 23 Error on a Single Sector
+            How to Duplicate a 23 Error on a Single Sector
+            How to Create 23 Errors on a Full Track
+            How to Create 20 Errors on a Full Track
+            How to Create 27 Errors on a Full Track
+            How to Create a 22 Error on a Single Sector
+            How to Duplicate a 22 Error on a Single Sector
+            How to Format a Diskette with Multiple IDs
+            How to Backup a DOS Protected Diskette
+            How to Copy a File
+
+Chapter 8 - GETTING OUT OF TROUBLE
+            Unscratching a File
+            Recovering a Soft Sector
+            Recovering a Hard Sector
+            Recovering a Relative File
+            Recovering an Entire Diskette
+            Recovering a Physically Damaged Diskette
+            Recovering an Unclosed File
+            Recovering from a Short New
+            Recovering from a Full New
+
+Chapter 9 - OVERVIEW OF THE 1541 DOS
+            Introduction to 1541 DOS
+            The Hard Working 6502
+            Major IP Routines
+            Using the IP Routines
+            Major FDC Routines
+            Using the FDC Routines
+            The Recording Process
+            Block Diagram of the 1541
+            Writing Data to a Diskette
+            Reading Data From a Diskette
+            Summary Bugs in DOS 2.6
+            Write Incompatability with 4040
+            Late News
+
+-----------------------------------------------------Page 8-----------------------------------------------------
+﻿
+Appendix A - 1541 RAM VARIABLE DEFINITIONS
+
+Appendix B - ANALYSIS OF THE 1541's ROM
+
+Appendix C - PROGRAM LISTINGS
+
+Appendix D - MATHEMATICAL CONVERSION ROUTINES
+
+Index
+
+-----------------------------------------------------Page 9-----------------------------------------------------
+﻿
+Ignorance is a precious thing.
+Once lost, it can never be regained.
+
+-----------------------------------------------------Page 10-----------------------------------------------------
