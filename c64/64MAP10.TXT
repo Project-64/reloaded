@@ -261,7 +261,7 @@ D417	54295			Filter Resonance Control / Voice Input
 			7-4	Select Filter Resonance: 0-15
 			3	Filter External Input: 1 = Yes, 0 = No
 			2	Filter Voice 3 Output: 1 = Yes, 0 = No
-				Filter Voice 2 Output: 1 = Yes, 0 = No
+			1	Filter Voice 2 Output: 1 = Yes, 0 = No
 			0	Filter Voice 1 Output: 1 = Yes, 0 = No
 
 D418	54296			Select Filter Mode and Volume
@@ -474,7 +474,7 @@ LASTPT    0017-0018   23      Last temporary String Address.
 TEMPST    0019-0021   25      Stack for temporary Strings.
 INDEX     0022-0025   34      Utility Pointer Area.
 INDEX1    0022-0023   34      First Utility Pointer.
-INDEX2    0024-0025   36      Secong Utility Pointer.
+INDEX2    0024-0025   36      Second Utility Pointer.
 RESHO     0026-002A   38      Floating point product of Multiply and
                               Divide.
 TXTTAB    002B-002C   43      Pointer: Start of BASIC Text Area ($0801).
@@ -502,7 +502,7 @@ VARTXT    004B-004C   75      Temporary storage for TXTPTR during READ,
                               INPUT and GET.
 OPMASK    004D        77      Mask used during FRMEVL.
 TEMPF3    004E-0052   78      Temporary storage for FLPT value.
-FOUR6     0053        83      Length of String Variable during Garbege
+FOUR6     0053        83      Length of String Variable during garbage
                               collection.
 JMPER     0054-0056   84      Jump Vector used in Function Evaluation -
                               JMP followed by Address ($4C,$LB,$MB).
@@ -777,7 +777,7 @@ HEX	DECIMAL		BITS	DESCRIPTION
 					On-Chip I/O Port
 			0	/LORAM Signal (0=Switch	BASIC ROM Out)
 			1	/HIRAM Signal (0=Switch Kernal ROM Out)
-			2	/CHAREN Signal (O=Swith Char. ROM In)
+			2	/CHAREN Signal (O=Switch Char. ROM In)
 			3	Cassette Data Output Line
 			4	Cassette Switch Sense: 1 = Switch Closed
 			5	Cassette Motor Control
@@ -945,7 +945,7 @@ D412	54290			Voice 3: Control Register
 			0	Gate Bit: 1 = Start Att/Dec/Sus, 0 = Start
 				Release
 
-D413	54291		Envelope Generator 3: Attac/Decay Cycle Control
+D413	54291		Envelope Generator 3: Attack/Decay Cycle Control
 			7-4	Select Attack Cycle Duration: 0-15
 			3-0	Select Decay Cycle Duration: 0-15
 

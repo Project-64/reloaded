@@ -1037,7 +1037,7 @@ the computer will respond with:
 
   PRESS PLAY AND RECORD ON TAPE
 
-  Press both the record and play keys on the datassette.  The screen will
+  Press both the record and play keys on the Datasette.  The screen will
 blank, turning the color of the border.
   After  the  program  is  saved on tape, the READY prompt will reappear,
 indicating  that  you can start working on another program,  or just turn
@@ -2742,7 +2742,7 @@ the  word  DATA  at  the  end  of each row. Now fill in the grid with any
 design or use the balloon that we have. It's easiest to outline the shape
 first and then go back and fill in the grid.
   Now  if  you  think  of  all  the  squares  you  filled in as "ON" then
-substitute  a 1 for each filled square.  For the one's that aren't filled
+substitute  a 1 for each filled square.  For the  ones that aren't filled
 in, they're "OFF" so put a zero.
   Starting  on  the  first  row,  you need to convert the dots into three
 separate  pieces of data the computer can read.  Each set of 8 squares is
@@ -6520,8 +6520,8 @@ TRY THESE SETTINGS TO SIMULATE DIFFERENT INSTRUMENTS
 | Harpsichord| Sawtooth |       9      |        0      | Not applicable |
 | Xylophone  | Triangle |       9      |        0      | Not applicable |
 | Organ      | Triangle |       0      |      240      | Not applicable |
-| Colliape   | Triangle |       0      |      240      | Not applicable |
-| Accordian  | Triangle |     102      |        0      | Not applicable |
+| Calliope   | Triangle |       0      |      240      | Not applicable |
+| Accordion  | Triangle |     102      |        0      | Not applicable |
 | Trumpet    | Sawtooth |      96      |        0      | Not applicable |
 +------------+----------+--------------+---------------+----------------+
 
@@ -6544,7 +6544,7 @@ INDEX
 
 A
  Abbreviations, BASIC commands, D
- Accesories, INTRODUCTION, A
+ Accessories, INTRODUCTION, A
  Addition, 2.4-2.5, C
  AND operator, 5.4, C
  Animation, 4.1, 5.6, 6.2, E, G

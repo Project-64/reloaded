@@ -430,7 +430,7 @@ A346   .WD $A272   ; 10 out of memory
 A348   .WD $A27F   ; 11 undef'd statment
 A34A   .WD $A290   ; 12 bad subscript
 A34C   .WD $A29D   ; 13 redim'd array
-A34E   .WD $A2AA   ; 14 devision by zero
+A34E   .WD $A2AA   ; 14 division by zero
 A350   .WD $A2BA   ; 15 illegal direct
 A352   .WD $A2C8   ; 16 type mismatch
 A354   .WD $A2D5   ; 17 string too long
@@ -664,7 +664,7 @@ A499   4C E1 A7   JMP $A7E1
 
 ; handle insert/delete basic lines
 
-A49C   20 6B A9   JSR $A96B	; LINGET - Convert an ASCII Decimal Number to a Two-Byte Binary Line Nmumber in LINNUM ($14/$15)
+A49C   20 6B A9   JSR $A96B	; LINGET - Convert an ASCII Decimal Number to a Two-Byte Binary Line Number in LINNUM ($14/$15)
 A49F   20 79 A5   JSR $A579
 A4A2   84 0B      STY $0B
 A4A4   20 13 A6   JSR $A613
@@ -1051,7 +1051,7 @@ A6F3   20 47 AB   JSR $AB47	; AB47 -> E10C -> CHROUT (FFD2) and handle errors fr
 A6F6   C9 22      CMP #$22	; is it a quotation mark?
 A6F8   D0 06      BNE $A700	; no - skip handling the quote mark
 A6FA   A5 0F      LDA $0F	; we got a quotation mark so we are either entering or leaving "quote mode"
-A6FC   49 FF      EOR #$FF	; so we toggle bots of the
+A6FC   49 FF      EOR #$FF	; so we toggle bits of the
 A6FE   85 0F      STA $0F	; flag at GARBFL
 A700   C8         INY
 A701   F0 11      BEQ $A714	; line too long! JMP $E386 : LDX #$80 : JMP (IERROR) : Print READY.
@@ -1485,7 +1485,7 @@ A969   68         PLA
 A96A   60         RTS
 
 ; 43371         $A96B          LINGET
-; Convert an ASCII Decimal Number to a Two-Byte Binary Line Nmumber in LINNUM ($14/$15)
+; Convert an ASCII Decimal Number to a Two-Byte Binary Line Number in LINNUM ($14/$15)
 ; get decimal number into $14/$15
 
 A96B   A2 00      LDX #$00
@@ -1663,7 +1663,7 @@ AA7D   91 49      STA ($49),Y
 AA7F   60         RTS
 
 
-; PRINT# comand
+; PRINT# command
 
 AA80   20 86 AA   JSR $AA86
 AA83   4C B5 AB   JMP $ABB5
@@ -1796,7 +1796,7 @@ AB3B   A5 13      LDA $13
 AB3D   F0 03      BEQ $AB42
 AB3F   A9 20      LDA #$20   ; space
 AB41   .BY $2C
-AB42   A9 1D      LDA #$1D   ; csr right
+AB42   A9 1D      LDA #$1D   ; crsr right
 AB44   .BY $2C
 
 AB45   A9 3F      LDA #$3F   ; question mark
@@ -2047,7 +2047,7 @@ ACF8   4C 1E AB   JMP $AB1E
 
 ACFB   60         RTS
 
-; messages used dring READ
+; messages used during READ
 
 ; ?EXTRA IGNORED
 
@@ -2406,7 +2406,7 @@ AF08   A2 0B      LDX #$0B   ; error number
 AF0A   4C 37 A4   JMP $A437
 
 
-; recursive geet value
+; recursive get value
 
 AF0D   A0 15      LDY #$15
 AF0F   68         PLA
@@ -5193,7 +5193,7 @@ BFBA   49 FF      EOR #$FF
 BFBC   85 66      STA $66
 BFBE   60         RTS
 
-; floating point constands for EXP
+; floating point constants for EXP
 
 ; 1/LOG(2)
 
@@ -5225,7 +5225,7 @@ BFFA   20 23 BC   JSR $BC23
 BFFD   4C 00 E0   JMP $E000
 
 
-Commodore 64 KERNAL ($03) ROM dissasembly
+Commodore 64 KERNAL ($03) ROM disassembly
 
 
 Version 1.0  (June 1994)
@@ -5811,7 +5811,7 @@ E3C6   A9 48      LDA #$48   ; low  B248
 E3C8   A0 B2      LDY #$B2   ; high B248
 E3CA   8D 11 03   STA $0311
 E3CD   8C 12 03   STY $0312
-E3D0   A9 91      LDA #$91   ; lowh B391
+E3D0   A9 91      LDA #$91   ; low  B391
 E3D2   A0 B3      LDY #$B3   ; high B391
 E3D4   85 05      STA $05
 E3D6   84 06      STY $06
@@ -5962,7 +5962,7 @@ E4DD   91 F3      STA ($F3),Y
 E4DF   60         RTS
 
 
-; pause after finding a file on casette
+; pause after finding a file on cassette
 
 E4E0   69 02      ADC #$02
 E4E2   A4 91      LDY $91
@@ -6060,7 +6060,7 @@ E568   84 D3      STY $D3
 E56A   84 D6      STY $D6
 
 
-; set address of curent screen line
+; set address of current screen line
 
 E56C   A6 D6      LDX $D6
 E56E   A5 D3      LDA $D3
@@ -6414,7 +6414,7 @@ E789   85 C7      STA $C7
 E78B   C9 13      CMP #$13   ; home code
 E78D   D0 03      BNE $E792
 E78F   20 66 E5   JSR $E566
-E792   C9 1D      CMP #$1D   ; csr right
+E792   C9 1D      CMP #$1D   ; crsr right
 E794   D0 17      BNE $E7AD
 E796   C8         INY
 E797   20 B3 E8   JSR $E8B3
@@ -6428,7 +6428,7 @@ E7A6   A0 00      LDY #$00
 E7A8   84 D3      STY $D3
 E7AA   4C A8 E6   JMP $E6A8
 
-E7AD   C9 11      CMP #$11   ; csr down
+E7AD   C9 11      CMP #$11   ; crsr down
 E7AF   D0 1D      BNE $E7CE
 E7B1   18         CLC
 E7B2   98         TYA
@@ -6501,7 +6501,7 @@ E82B   F0 05      BEQ $E832
 E82D   09 40      ORA #$40
 E82F   4C 97 E6   JMP $E697
 
-E832   C9 11      CMP #$11   ; csr up
+E832   C9 11      CMP #$11   ; crsr up
 E834   D0 16      BNE $E84C
 E836   A6 D6      LDX $D6
 E838   F0 37      BEQ $E871
@@ -6518,7 +6518,7 @@ E84C   C9 12      CMP #$12    ; reverse off
 E84E   D0 04      BNE $E854
 E850   A9 00      LDA #$00
 E852   85 C7      STA $C7
-E854   C9 1D      CMP #$1D   ; csr left
+E854   C9 1D      CMP #$1D   ; crsr left
 E856   D0 12      BNE $E86A
 E858   98         TYA
 E859   F0 09      BEQ $E864
@@ -6818,7 +6818,7 @@ EA21   91 F3      STA ($F3),Y
 EA23   60         RTS
 
 
-; set colour memory adress parallel to screen
+; set colour memory address parallel to screen
 
 EA24   A5 D1      LDA $D1
 EA26   85 F3      STA $F3
@@ -6852,7 +6852,7 @@ EA57   AE 86 02   LDX $0286
 EA5A   A5 CE      LDA $CE
 EA5C   49 80      EOR #$80
 EA5E   20 1C EA   JSR $EA1C   ; display cursor
-EA61   A5 01      LDA $01   ; checl cassette sense
+EA61   A5 01      LDA $01   ; check cassette sense
 EA63   29 10      AND #$10
 EA65   F0 0A      BEQ $EA71
 EA67   A0 00      LDY #$00
@@ -6942,9 +6942,9 @@ EAFD   C9 14      CMP #$14   ; delete
 EAFF   F0 0C      BEQ $EB0D
 EB01   C9 20      CMP #$20   ; space
 EB03   F0 08      BEQ $EB0D
-EB05   C9 1D      CMP #$1D   ; csr right/left
+EB05   C9 1D      CMP #$1D   ; crsr right/left
 EB07   F0 04      BEQ $EB0D
-EB09   C9 11      CMP #$11   ; csr up/down
+EB09   C9 11      CMP #$11   ; crsr up/down
 EB0B   D0 35      BNE $EB42
 EB0D   AC 8C 02   LDY $028C
 EB10   F0 05      BEQ $EB17
@@ -7723,7 +7723,7 @@ F0A1   A9 00      LDA #$00
 F0A3   60         RTS
 
 
-; protect serial/casette routine from RS-232 NMI's
+; protect serial/cassette routine from RS-232 NMI's
 
 F0A4   48         PHA
 F0A5   AD A1 02   LDA $02A1
@@ -9436,7 +9436,7 @@ FBA5   60         RTS
 
 
 ; schedule CIA1 timer B and
-; invert casette write line
+; invert cassette write line
 
 FBA6   A5 BD      LDA $BD
 FBA8   4A         LSR
@@ -9854,7 +9854,7 @@ FE1E   85 90      STA $90
 FE20   60         RTS
 
 
-; set timeout on serail bus
+; set timeout on serial bus
 
 FE21   8D 85 02   STA $0285
 FE24   60         RTS
