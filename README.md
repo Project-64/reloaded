@@ -46,7 +46,7 @@ This one is much more controversial.  God only knows how much I detest msdos and
 * If an updated version (with a higher version number than the originally used one) is found elsewhere and the changes are merged into the version available here - the version number will be updated accordingly
 
 A line in the etext like
->MAPC6412.TXT, etext #351#. This replaces MAPC6411.TXT from June 1998
+>MAPC6412.TXT, etext #351#. This replaces MAPC6411.TXT from June 1998.
 
 shall be used to distinguish and make it clear what document in what version it is updated from.
 * new documents will adhere to the original file naming specifications (huh - is it really me writing this?) for consistency with the original project.
