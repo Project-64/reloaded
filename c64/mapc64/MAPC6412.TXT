@@ -41,7 +41,7 @@ by David Holz <white-flame@geocities.com>, formatted to 71 columns and
 somewhat proofed by Cris Berneburg <pcgeek@compuserve.com>. Corrected
 and currently maintained by Silver Dream ! <silverdr@wfmh.org.pl>
 
-MAPC6412.TXT, etext #351#. This replaces MAPC6411.TXT from June 1998
+MAPC6412.TXT, etext #351#. This replaces MAPC6411.TXT from June 1998.
 
 Note from the tired typist:
 
@@ -167,7 +167,7 @@ for technical information.  That Commodore has come out with such a
 thorough reference work so quickly after the introduction of the
 machine is much to their credit.  Because of the similarities between
 the 64 and previous Commodore computers, I have also relied heavily on
-ooks that deal with the PET/CBM.  Of particular interest are
+books that deal with the PET/CBM.  Of particular interest are
 Programming the PET/CBM by Raeto West, which should be subtitled
 "Everything You Ever Wanted to Know about Commodore Computers," and
 the PET/CBM Personal Computer Guide, Third Edition, Osborne/
@@ -288,7 +288,7 @@ If all the bits are added together (128+64+32+16+4+2+1), they total
 255, which is the maximum value of one byte.  What if you need to
 count higher than 255?  Use two bytes.
 
-By using a second bytere to count the number of 255's, 65536
+By using a second byte to count the number of 255's, 65536
 combinations are possible (256*256).  This is the same number as the
 bytes of memory in the Commodore 64.  Therefore, any byte can be
 addressed by a number using a maximum of two bytes.
@@ -298,7 +298,7 @@ number of 256's, is often used alone.  These units are known as pages.
 Page 0 starts at location zero (0*256), Page 1 starts at location 256
 (1*256), etc.
 
-You may see thn terms low-byte, high-byte order or LSB (Least
+You may see the terms low-byte, high-byte order or LSB (Least
 Significant Byte), MSB (Most Significant Byte) order, mentioned later
 in this book.  That refers to the way in which the Commodore 64
 usually deals with a two-byte address.  The byte of the address that
@@ -394,7 +394,7 @@ The entries in this book are organized at the most general level by
 large blocks 9the 256 page 0 locations, for example, or the 8192
 locations in the BASIC ROM).  At the beginning of these blocks, you
 will often find an explanation that will give you an idea of how the
-lcoations in that section are related.  Usually, this overview will
+locations in that section are related.  Usually, this overview will
 make it easier to understand the more detailed explanations of the
 individual locations in that block.
 
@@ -424,7 +424,7 @@ Occasionally, program samples will accompany these explanations.
 Sometimes the single-line descriptions will identify a location as a
 flag, a vector, or a pointer.  A flag is just a number that the
 program uses to store the outcome of a previous operation.  A pointer
-of vector is usually a two-byte location that holds a significant
+or vector is usually a two-byte location that holds a significant
 address.  Generally, the term pointer is used when the address points
 to the start of some data, and vector is used when the address points
 to the start of a machine language program.  However, sometimes these
@@ -441,7 +441,7 @@ context.
 Memory locations 0-255 ($0-$FF) have a special significance in 6502
 machine language programming (the 6510 microprocessor in the Commodore
 64 shares the same instruction set as the 6502).  Since these
-addresses cn be expressed using just one byte, instructions which
+addresses can be expressed using just one byte, instructions which
 access data stored in these locations are shorter and execute more
 quickly than do instructions which operate on addresses in higher
 memory, which requires two bytes.
@@ -484,7 +484,7 @@ contents of the corresponding bit on the Internal I/O Port (see
 location 1) can be written to by peripheral devices.  If the bit is
 set to 0, it indicates the direction of data flow as Input, which
 means that the corresponding bit of the I/O port will be affected by
-peripheral defices.  If the bit is set to 1, it indicates Output.  On
+peripheral devices.  If the bit is set to 1, it indicates Output.  On
 the 64, only Bits 0-5 are significant.  On power-up, this register is
 set to 239 ($EF), which indicates that all bits, except for Bit 4
 (which senses the cassette switch), are set up for Output.
@@ -598,7 +598,7 @@ the same location as the I/O devices (SID chip, VIC-II chip, and 6526
 CIA's), o I/O can occur when this ROM is switched in.
 
 The ability to switch in the character generator ROM is very useful to
-the programmer who wishes to expirement with user-defined characters.
+the programmer who wishes to experiment with user-defined characters.
 Modified character graphics is one of the  more powerful graphics
 tools available, but often the user will not want to redefine a whole
 character set at one time.  By reading the character ROM and
@@ -633,7 +633,7 @@ determining factor.  Signals can also be generated by means of plug-in
 expansion cartridges which are connected to the expansion port, and
 these can change the memory map.
 
-Two lines located on the exapansion port are called GAME and EXROM.
+Two lines located on the expansion port are called GAME and EXROM.
 When used in conjunction with the software-controlled lines noted
 above, these two hardware lines can enable cartridge ROM to replace
 various segments of ROM and/or RAM.
@@ -645,9 +645,9 @@ Kernal, or a 16k cartridge at $8000-$C000.
 
 When cartridge ROM is selected to replace the Kernal, a Max emulator
 mode is entered, which mimics the specification of the ill-fated Max
-Machine, a game machine which Commodore never produced for sale int he
+Machine, a game machine which Commodore never produced for sale in the
 U.S.  In this mode, only the first 6K of RAM are used, there is no
-access to the character ROM, and graphics data such as charactger
+access to the character ROM, and graphics data such as character
 dot-data is mapped down from 57344 ($E000) to 8192 ($2000).  Further
 hardware information may be obtained from the Commodore 64
 Programmer's Reference Guide.
@@ -963,12 +963,12 @@ less than that stored at 22 ($16), while 24 ($18) will contain a 0.
 Descriptor Stack for Temporary Strings
 
 The temporary string descriptor stack contains information about
-temporary strings which hve not yet been assigned to a string
+temporary strings which have not yet been assigned to a string
 variable.  An examples of such a temporary string is the literal
 string "HELLO" in the statement PRINT "HELLO".
 
 Each three-byte descriptor in this stack contains the length of the
-string, and its starting and ending locations, expresses as
+string, and its starting and ending locations, expressed as
 displacements within the BASIC storage area.
 
 34-37         $22-$25        INDEX
@@ -1010,7 +1010,7 @@ program:
 Such reconfiguring can be helpful in transferring programs from the 64
 to the PET, or vice versa.  Since the 64 automatically relocates BASIC
 program text, it can load and list PET programs even though the
-program file indicates a loading addresss that is different from the
+program file indicates a loading address that is different from the
 64 start of BASIC.  The PET does not have this automatic relocation
 feature, however, and it loads all BASIC programs at the two-byte
 address indicated at the beginning of the disk or tape file.
@@ -1025,7 +1025,7 @@ where the 64 does (with a POKE 41,8:POKE 2048,0).
 2.  Raising the lowest location used for BASIC text in order to create
 a safe area in low memory.  For example, if you wish to use the
 high-resolution graphics mode, you may want to put the start of screen
-memory at 8192 ($2000).  The high-resolution moe requires 8K of
+memory at 8192 ($2000).  The high-resolution mode requires 8K of
 memory, and you cannot use the lowest 8K for this purpose because it
 is already being used for the zero-page assignments.
 
@@ -1041,7 +1041,7 @@ data, or user-defined character sets.
 
 3.  Keeping two or more programs in memory simultaneously.  By
 changing this pointer, you can keep more than one BASIC program in
-memory at one time, and switch back and forth betwenn them.  Examples
+memory at one time, and switch back and forth between them.  Examples
 of this application can be found in COMPUTE!'s First Book of PET/CBM,
 pages 66 and 163.
 
@@ -1056,13 +1056,13 @@ technique).
 
 b) You can have two programs in memory at once and use the concept in
 (2) above to allow an easier way to create a safe area in low memory.
-The first program is just onw line that sets the start of BASIC
+The first program is just one line that sets the start of BASIC
 pointer to the address of the second program which is located higher
 in memory, and then runs that second program.
 
 4. Since this address is used as the address of the first byte to
 SAVE, you can save any section of memory by changing this pointer to
-indicate the starting address, and the pointer 45-46 ($2D-$2D) to
+indicate the starting address, and the pointer 45-46 ($2D-$2E) to
 indicate the address of the byte after the last byte that you wish to
 save.
 
@@ -1071,7 +1071,7 @@ Pointer to the Start of the BASIC Variable Storage Area
 
 This location points to the address which marks the end of the BASIC
 program text area, and the beginning of the variable storage area.
-All nonarray variables are stored here, as are string descriptors (for
+All non-array variables are stored here, as are string descriptors (for
 the address of the area where the actual text of strings is stored,
 see location 51 ($33)).
 
@@ -1169,12 +1169,12 @@ byte after the last byte to SAVE.
 47-48          $2F-$30       ARYTAB
 Pointer to the Start of the BASIC Array Storage Area
 
-This location points to the address of the end of nonarray variable
+This location points to the address of the end of non-array variable
 storage, and the beginning of array variable storage.  The format for
 array storage is as follows:
 
 The first two bytes hold the array name.  The format and high-bit
-patterns are the same as for nonarray variables (see 45 ($2D) above),
+patterns are the same as for non-array variables (see 45 ($2D) above),
 except that there is no equivalent to the function definition.
 
 Next comes a two-byte offset to the start of the next array, low byte
@@ -1185,12 +1185,12 @@ dimension+1 (DIMensioning an array always makes space for 0, so A(0)
 can be used).
 
 Finally come the values of the variables themselves.  The format for
-these values is the same as with nonarray values, but each value only
+these values is the same as with non-array values, but each value only
 takes up the space required; that is, floating point variables use
 five bytes each, integers two bytes, and string descriptors three
 bytes each.
 
-Remember that as with nonarray string, the actual string text is
+Remember that as with non-array string, the actual string text is
 stored elsewhere, in the area which starts at the location pointed to
 in 51-52 ($33- $34).
 
@@ -1237,7 +1237,7 @@ by the routines which build strings or move them in memory.
 Pointer to the Highest Address Used by BASIC
 
 The power-on/reset routine tests each byte of RAM until it comes to
-the BASIC ROM, and sets this pointer to the adress of the highest byte
+the BASIC ROM, and sets this pointer to the address of the highest byte
 of consecutive RAM found (40959, $9FFF).
 
 There are two circumstances under which this pointer may be changed
@@ -1403,7 +1403,7 @@ the address of program text which is currently being read.
 Mask for Comparison Operation
 
 The expression evaluation routine creates a mask here which lets it
-know whether the current comparieson operation is a less-than (1),
+know whether the current comparison operation is a less-than (1),
 equals (2), or greater-than (4) comparison.
 
 78-79         $4E-$4F        DEFPNT
@@ -1595,7 +1595,7 @@ below to provide a better understanding of how it works.
 119 $77           INC TXTPTR+1 ; increment high byte of TXTPTR
 121 $79   CHRGOT  LDA          ; load byte from where TXTPTR points
                                ; entry here does not update TXTPTR,
-                               ; allowing you to readl the old byte again
+                               ; allowing you to read the old byte again
 122 $7A   TXTPTR  $0207        ; pointer is really the LDA operand
                                ; TXTPTR+1 points to 512-580 ($200-$250)
                                ; when reading from the input buffer
@@ -1631,7 +1631,7 @@ the PET/CBM, Raeto Collin West, pages 365-68.
 
 While the wedge is a good, quick technique for adding new commands, a
 much more elegant method exists for accomplishing this task on the
-VIC-20 and 64 withouth slowing BASIC down to the extent that the wedge
+VIC-20 and 64 without slowing BASIC down to the extent that the wedge
 does.  See the entries for the BASIC RAM vector area at 768-779
 ($300-$30B) for more details.
 
@@ -1652,7 +1652,7 @@ it can be considered random.  If X is negative, the seed value is
 changed to a number that corresponds to a scrambled floating point
 representation of the number X itself.
 
-Given a particular seed value, the same pseudorandom series of numbers
+Given a particular seed value, the same pseudo-random series of numbers
 will always be returned.  This can be handy for debugging purposes,
 but not where you wish to have truly random numbers.
 
@@ -1922,7 +1922,7 @@ This location is used to temporarily store each bit of serial data
 that is received, as well as for miscellaneous tasks by tape I/O.
 
 168           $A8            BITCI
-RS-232 Input Bit Count/Cassete Temporary Storage
+RS-232 Input Bit Count/Cassette Temporary Storage
 
 This location is used to count the number of bits of serial data that
 has been received.  This is necessary so that the serial routines will
@@ -1946,7 +1946,7 @@ received character should be treated as data or as a synchronization
 character.
 
 171           $AB            RIPRTY
-RS-232 Input Parity/Cassete Leader Counter
+RS-232 Input Parity/Cassette Leader Counter
 
 This location is used to help detect if data was lost during RS-232
 transmission, or if a tape leader is completed.
@@ -2084,10 +2084,10 @@ desired.
 
 As with the disk drive, the LOAD and SAVE commands use secondary
 addresses of 0 and 1 respectively to indicate whether the operation
-should be relocating or nonrelocating.
+should be relocating or non-relocating.
 
 When the 1515 or 1525 Printer is opened with a secondary address of 7,
-the uppercase/lowercase character set is used.  If it is openend with
+the uppercase/lowercase character set is used.  If it is opened with
 a secondary address of 0, or without a secondary address, the
 uppercase/graphics character set will be used.
 
@@ -2176,7 +2176,7 @@ after the initial header.
 197           $C5            LSTX
 Matrix Coordinate of Last Key Pressed, 64=None Pressed
 
-During every normal IRQ interrput this location is set with the value
+During every normal IRQ interrupt this location is set with the value
 of the last keypress, to be used in keyboard debouncing.  The
 Operating System can check if the current keypress is the same as the
 last one, and will not repeat the character if it is.
@@ -2189,7 +2189,7 @@ returned for each key pressed are shown at the entry for location 203
 198           $C6            NDX
 Number of Characters in Keyboard Buffer (Queue)
 
-The value here indicates the number of charracters waiting in the
+The value here indicates the number of characters waiting in the
 keyboard buffer at 631 ($277).  The maximum number of characters in
 the keyboard buffer at any one time is determined by the value in
 location 649 ($289), which defaults to 10.
@@ -2221,7 +2221,7 @@ separation and terminator characters with INPUT statements.  If you
 try to INPUT a string that has a comma or colon, the INPUT will read
 only up to that character and issue an EXTRA IGNORED error message.
 You can avoid this by entering the input string in quotes, but this
-places on the user the burder of remembering the quote marks.  One
+places on the user the burden of remembering the quote marks.  One
 solution is to use the statements:
 
 POKE 198,3:POKE 631,34: POKE 632,34: POKE 633,20
@@ -2239,7 +2239,7 @@ Flag: Print Reverse Characters? 0=No
 
 When the [CTRL][RVS-ON] characters are printer (CHR$(18)), this flag
 is set to 18 ($12), and the print routines will add 128 ($80) to the
-screen code of each character which is printed, so that the caracter
+screen code of each character which is printed, so that the character
 will appear on the screen with its colors reversed.
 
 POKEing this location directly with a nonzero number will achieve the
@@ -2247,12 +2247,12 @@ same results.  You should remember, however, that the contents of this
 location are returned to 0 not only upon entry of a [CTRL][RVS-OFF]
 character (CHR$(146)), but also at every carriage return.  When this
 happens, characters printed thereafter appear with the normal
-comination of colors.
+combination of colors.
 
 200           $C8            INDX
 Pointer: End of Logical Line for Input
 
-This pointer indicates the column number of the last nonblank
+This pointer indicates the column number of the last non-blank
 character on the logical line that is to be input.  Since a logical
 line can be up to 80 characters long, this number can range from 0-79.
 
@@ -2268,8 +2268,8 @@ one time.  Therefore, the logical line number might be anywhere from
 1-25.  Depending on the length of the logical line, the cursor column
 may be from 1-40 or 1-80.
 
-For a more detailed exaplanation of logical lines, see the description
-of the screen line link talbe, 217 ($D9).
+For a more detailed explanation of logical lines, see the description
+of the screen line link table, 217 ($D9).
 
 203           $CB            SFDX
 Matrix Coordinate of Current Key Pressed
@@ -2356,12 +2356,12 @@ of the character that is located at the cursor position, so that it
 may be restored when the cursor moves on.
 
 207           $CF            BLNON
-Flag: Was Last Curson Blink on or off?
+Flag: Was Last Cursor Blink on or off?
 
 This location keeps track of whether, during the current cursor blink,
 the character under the cursor was reversed, or was restored to
 normal.  This location will contain a 0 if the character is reversed,
-and a 1 if the character is restored to its nonreversed status.
+and a 1 if the character is restored to its non-reversed status.
 
 208           $D0            CRSW
 Flag: Input from Keyboard or Screen
@@ -2393,7 +2393,7 @@ mark on a given line--the first quote mark turns it on, the second
 turns it off, the third turns it back on, etc.
 
 If the editor is in this mode when a cursor control character or other
-nonprinting character is entered, a printed equivalent will appear on
+non-printing character is entered, a printed equivalent will appear on
 the screen instead of the cursor movement or other control operation
 taking place.  Instead, that action is deferred until the string is
 sent to the string by a PRINT statement, at which time the cursor
@@ -2402,7 +2402,7 @@ movement or other control operation will take place.
 The exception to this rule is the DELETE key, which will function
 normally within quote mode.  The only way to print a character which
 is equivalent to the DELETE key is by entering insert mode (see
-loctaion 216 ($D8)).  Quote mode may be exited by printing a closing
+location 216 ($D8)).  Quote mode may be exited by printing a closing
 quote, or by hitting the RETURN or SHIFT-RETURN keys.
 
 Sometimes, it would be handy to be able to escape from quote mode or
@@ -2461,7 +2461,7 @@ this way.
 Until the spaces that have been opened up are filled, the editor acts
 as if in quote mode (see location 212 ($D4), the quote mode flag).
 This means that cursor control characters that are normally
-nonprinting will leave a printed equivalent on the screen when
+non-printing will leave a printed equivalent on the screen when
 entered, instead of having their normal effect on cursor movement,
 etc.  The only difference between insert and quote mode is that the
 DELETE key will leave a printed equivalent in insert mode, while the
@@ -2499,7 +2499,7 @@ line.
 243-244       $F3-$F4        USER
 Pointer to the Address of the Current Screen Color RAM Location
 
-This poitner is synchronized with the pointer to the address of the
+This pointer is synchronized with the pointer to the address of the
 first byte of screen RAM for the current line kept in location 209
 ($D1).  It holds the address of the first byte of color RAM for the
 corresponding screen line.
@@ -2513,7 +2513,7 @@ matrix, each key can be used to print up to four different characters,
 depending on whether it is struck by itself or in combination with the
 SHIFT, CTRL, or Commodore logo keys.
 
-The tables pointed to y this address hold the ASCII value of each of
+The tables pointed to by this address hold the ASCII value of each of
 the 64 keys for one of these possible combinations of keypresses.
 When it comes time to print the character, the table that is used
 determines which character is printed.
@@ -2550,7 +2550,7 @@ Pointer: RS-232 Output Buffer
 
 This location points to the address of the 256-byte output buffer
 which is used for transmitting data to RS-232 devices (device number
-2)l
+2).
 
 251-254       $FB-$FE        FREEZP
 Four Free Bytes of Zero Page for User Programs
@@ -2615,7 +2615,7 @@ Tape Input Error Log
 
 Each tape block is saved twice consecutively, in order to minimize
 loss of data from transmission errors.  These 62 bytes serve as
-indices of which bytes in the tape block were not received corectly
+indices of which bytes in the tape block were not received correctly
 during the first transmission, so that corrections might be made on
 the second pass.
 
@@ -3020,7 +3020,7 @@ the same key remains pressed.  When the value gets to 0, location 651
 there reaches 0.  Thus a total of 22/60, or approximately 1/3, second
 will elapse before the first repeat of a key.  The value here will be
 held to 0 after the first repeat, so that subsequent keystroke
-repititions occur much more quickly.
+repetitions occur much more quickly.
 
 653           $28D           SHFLAG
 Flag: SHIFT/CTRL/Logo Keypress
@@ -3329,8 +3329,8 @@ RS-232: Nonstandard Bit Timing
 
 These locations are provided for storing a nonstandard user-defined
 baud rate, to be used when the low nybble of the control register at
-659 ($293) is set to 0.  They were presumable provided to conform to
-the nodel of the 6551 UART device, which allows a nonstandard baud
+659 ($293) is set to 0.  They were presumably provided to conform to
+the model of the 6551 UART device, which allows a non-standard baud
 rate to be generated from an external reference crystal.  However, the
 software emulation of that feature is not provided in the current
 version of the Kernal, and thus these locations are currently
@@ -3343,7 +3343,7 @@ stored in low byte, high byte order.  The system clock frequency for
 American television monitors (NTSC standard) is 1.02273 MHz, and for
 European monitors (PAL standard) .98525 MHz.
 
-663           $297           $RSSTAT
+663           $297           RSSTAT
 RS-232: Mock 6551 Status Register
 
 The contents of this register indicate the error status of RS-232 data
@@ -3440,7 +3440,7 @@ This index points to the ending byte within the 256-byte RS-232
 transmit buffer, and is used to add data to that buffer.
 
 671-672       $29F-$2A0      IRQTMP
-SAve Area for IRQ Vector During Cassette I/O
+Save Area for IRQ Vector During Cassette I/O
 
 The routines that read and write tape data are driven by an IRQ
 interrupt.  In order to hook one of these routines into the interrupt,
@@ -3503,7 +3503,7 @@ for graphics data storage.
 If the VIC-II ship is using the bottom 16K for graphics and memory
 (the default setting when the system is turned on), this is one of the
 few free areas available for storing sprite or character data.
-Locaitons 704-767 could be used for sprite data block number 11,
+Locations 704-767 could be used for sprite data block number 11,
 without interfering with BASIC program text or variables.
 
 Location Range: 768-779 ($300-$30B)
@@ -3597,7 +3597,7 @@ that executes the next program token.
 Vector to the Routine That Evaluates a Single-Term Arithmetic
 Expression
 
-This vector points to the address of the EVAL routinea t 44678 ($AE86)
+This vector points to the address of the EVAL routine at 44678 ($AE86)
 which, among other things, is used to evaluate BASIC functions such as
 INT and ABS.
 
@@ -3638,7 +3638,7 @@ POKE 781,10:POKE 782,5:POKE 783,0:SYS 65520:PRINT "HELLO"
 
 You can also use these locations to help you take advantage of Kernal
 routines that return information in the register.  For example, the
-SCREEN routine (58629,$E505) returns the number of screen rows int he
+SCREEN routine (58629,$E505) returns the number of screen rows in the
 .Y register, and the number of columns in the .X register.  Using this
 routine, a BASIC program could be written to run on machines with
 different screen formats (for example, the 64 and the VIC-20).  Just
@@ -3691,7 +3691,7 @@ Address of USR Routine (Low Byte First)
 These locations contain the target address of the USR command.  They
 are initialized by the Operating System to point to the BASIC error
 message handler routine, so that if you try to execute a USR call
-without changing these values, you wil receive an ILLEGAL QUANTITY
+without changing these values, you will receive an ILLEGAL QUANTITY
 error message.
 
 In order to successfully execute a USR call, you must first POKE in
@@ -3727,7 +3727,7 @@ signed integer in the range between 32767 and -32768, with Bit 7 of
 the high byte used to indicate the sign.
 
 To pass a value back through the USR function, you need to place the
-number into FAC1.  To conert a signed integer to floating point
+number into FAC1.  To convert a signed integer to floating point
 format, place the high byte into the Accumulator (.A), the low byte
 into the .Y register, and jump through the vector at locations 5-6
 with a JMP ($0005) instruction.  The floating point result will be
@@ -3965,7 +3965,7 @@ The difference between the two types of files is that a nonrelocatable
 program will always load at the address specified in the header.  A
 relocatable program will load at the current start of BASIC address
 unless the LOAD statement uses a secondary address of 1, in which case
-it will also be loaded at the addrss specified in the header.
+it will also be loaded at the address specified in the header.
 
 You should note that a program file uses the cassette buffer only to
 store the header block.  Actual program data is transferred directly
@@ -3977,7 +3977,7 @@ program OPENs a tape data file for reading or writing.  Subsequent
 data blocks start with an identifier byte of 2.  These blocks contain
 the actual data byte written by the PRINT #1 command, and read by the
 GET #1 and INPUT #1 commands.  Unlike the body of a program file,
-these blocks are temporarily stored in the cassette byffer when being
+these blocks are temporarily stored in the cassette buffer when being
 written or read.
 
 An identifier byte of 5 indicates that this block is the logical end
@@ -4008,14 +4008,14 @@ This is the default location of the video screen memory area, which
 contains the video matrix and the sprite data pointers.  Keep in mind,
 however, that the video screen memory area can be relocated to start
 on any even 1K boundary.  Its location at any given moment is
-getermined by the VIC-II chip memory control register at 53272
+determined by the VIC-II chip memory control register at 53272
 ($D018), and the VIC-II memory bank select bits on CIA #2 Data Port A
 (56576, $DD00).
 
 1024-2023     $400-$7E7
 Video Matrix: 25 Lines by 40 Columns
 
-The video matrix is where thext screen characters are stored in RAM.
+The video matrix is where text screen characters are stored in RAM.
 Normally, the VIC-II chip will treat each byte of memory here as a
 screen display code and will display the text character that
 corresponds to that byte of code.  The first byte of memory here will
@@ -4069,7 +4069,7 @@ bytes in order to arrive at an even 256 shape blocks in the 16K area
 of RAM which the VIC-II chip addresses.
 
 Each pointer holds the current data block being used to define the
-shape of one sprite.  The block numver used to define the shape of
+shape of one sprite.  The block number used to define the shape of
 Sprite 0 is held in location 2040 ($7F8), the Sprite 1 shape block is
 designated by location 2041 ($7F9), etc.  The value in the pointer
 times 64 equals the starting location of the sprite shape data table.
@@ -4119,7 +4119,7 @@ It is interesting to note that the NEW command does not zero out the
 text area but rather replaces the first link address in the BASIC
 program with two zeros, indicating the end of the program.  Therefore,
 you can recover a program from a NEW by replacing the first link
-adress, finding the address of the two zeros that actually mark the
+address, finding the address of the two zeros that actually mark the
 end of the program, and setting the pointers at 45, 47, and 49 (which
 all point to the end of a BASIC program before the program is RUN) to
 the byte following these zeros.
@@ -4166,7 +4166,7 @@ addressed at 40960 ($A000), where it would replace BASIC, or at 61440
 It is possible to have a 16K cartridge sitting at 32768 ($8000), such
 as Simon's BASIC, which can be turned on and off so that the BASIC ROM
 underneath can also be used.  Finally, it is even possible to have
-bank-selected cartridges, which turn banks of memory in the cartidge
+bank-selected cartridges, which turn banks of memory in the cartridge
 on and off alternately, so that a 32K program could fit into only 16K
 of addressing space.
 
@@ -4246,7 +4246,7 @@ part of other commands.  Where it is important for you to know the
 details of a particular routine, you will need to obtain a disassembly
 of that section and look at the machine language program itself.
 
-It should be noted that when BASIC is not neede,d it can be switched
+It should be noted that when BASIC is not needed, it can be switched
 out and the RAM underneath can be accessed by the VIC-II chip and used
 for screen graphics.  See location 56576 ($DD00) for more information.
 
@@ -4398,7 +4398,7 @@ expression A=3+4*6, the 4*6 operation is performed first, and 3 is
 added to the total).  The order in which they are performed is:
 
 1.  Expressions in parentheses
-2.  Exponentation (raising to a power, using the up-arrow symbol)
+2.  Exponentiation (raising to a power, using the up-arrow symbol)
 3.  Negation of an expression (-5, -A)
 4.  Multiplication and division
 5.  Addition and subtraction
@@ -4525,7 +4525,7 @@ message ends with a 0 character.  The messages are:
 1) Carriage return, OK, carriage return
 2) Space, space, ERROR
 3) Space, IN, space
-4) Carriage return, linefeed, READY., carraige return, linefeed
+4) Carriage return, linefeed, READY., carriage return, linefeed
 5) Carriage return, linefeed, BREAK
 
 41866-41911   $A38A-$A3B7    FNDFOR
@@ -4538,7 +4538,7 @@ FOR places on the stack, see location 256 ($100).
 41912         $A3B8          BLTU
 Open a Space in Memory for a New Program Line or Variable
 
-When a new nonarray variable is being created, or when a BASIC program
+When a new non-array variable is being created, or when a BASIC program
 line is being added or replaced, this routine is used to make room for
 the addition.  It first checks to see if space is available, and then
 moves the program text and/or variables to make room.
@@ -4655,7 +4655,7 @@ The CLR command closes all I/O files with the Kernal CLALL routine
 memory pointer at 55-56 ($37-$38) to the bottom of strings pointer at
 51-52 ($33-$34).  It also copies the pointer to the end of BASIC
 program text at 49-50 ($31-$31) to the pointer to the start of
-nonarray variables at 45-46 ($2D-$2E) and the start of array variables
+non-array variables at 45-46 ($2D-$2E) and the start of array variables
 at 47-48 ($2F-$30).  This makes these variables unusable (although the
 contents of these areas are not actually erased).  RESTORE is called
 to set the data pointer back to the beginning, and the stack is
@@ -4679,7 +4679,7 @@ translating any tokens back to their ASCII equivalent.
 42775         $A717          QPLOP
 Print BASIC Tokens as ASCII Characters
 
-This is the part of the LIST routine that chagnes one-byte program
+This is the part of the LIST routine that changes one-byte program
 tokens back to their ASCII text characters.  The routine is vectored
 through RAM at 774 ($306), so it is possible to list out new command
 words that you have added by changing this vector to detour through
@@ -4700,9 +4700,9 @@ Also, since the TO expression is evaluated only once, at the time FOR
 is performed, a statement such as FOR I=1 TO I+100 is valid.  The
 terminating value is not checked until NEXT is executed, so the loop
 statements always execute at least once.  The variable used by FOR
-must be a nonarray floating point variable.  Reusing the same FOR
+must be a non-array floating point variable.  Reusing the same FOR
 variable in a loop that is still active will cause the previous FOR
-loop and all intervening loops to be cancelled.
+loop and all intervening loops to be canceled.
 
 42926         $A7AE          NEWSTT
 Set Up Next Statement for Execution
@@ -4730,8 +4730,8 @@ value is less that 128 will cause LET to be executed.
 43037         $A81D          RESTOR
 Perform RESTORE
 
-The RESTORE command simply resetes the DATA pointer at 65-66 ($41-$42)
-from the start of BASIC pointer at 43-44 ($2B-$2V).
+The RESTORE command simply resets the DATA pointer at 65-66 ($41-$42)
+from the start of BASIC pointer at 43-44 ($2B-$2C).
 
 43052         $A82C
 Test STOP Key for Break in Program
@@ -4744,7 +4744,7 @@ Perform END
 
 The current line number and text pointers are preserved for a possible
 CONT command, and the READY prompt is printed.  If a STOP key break
-occured, the BREAK message is printed first.
+occurred, the BREAK message is printed first.
 
 43095         $A857          CONT
 Perform CONT
@@ -4839,7 +4839,7 @@ high-byte format), and check that it is in the correct range of
 Perform LET
 
 The LET command causes variables to be created and initialized, or to
-have a new value assigned.  It handles all types of array or nonarray
+have a new value assigned.  It handles all types of array or non-array
 variables:  strings, floating point, integers, ST, TI, and TI$.  The
 routine is composed of several subroutines that evaluate the variable,
 evaluate the assigned expression, check that the assigned value is
@@ -4864,7 +4864,7 @@ device.
 Perform PRINT
 
 The PRINT routine has many segments, which are required for the
-various options which can be added to it:  TAB, SPC, comman,
+various options which can be added to it:  TAB, SPC, comma,
 semicolon, variables, PI, ST, TI, and TI$.  Eventually, all output is
 converted to strings, and the Kernal CHROUT routine is called to print
 each character.
@@ -4957,7 +4957,7 @@ constants.
 At the end, the flag which shows whether the resulting value is string
 or numeric at 13 ($D) is set, and if the value is numeric, the flag at
 14 ($E) is set as well, to show if it is an integer or floating point
-numer.
+number.
 
 44675         $AE83          EVAL
 Convert a Single Numeric Term from ASCII Text to a Floating Point
@@ -5001,7 +5001,7 @@ Check for and Skip Comma
 
 This syntax checking device is the same in substance as the two
 checking routines above.  It is used when the next character should be
-a comma.  If it is not, a SYNTAX ERROR retults.  If it is, the
+a comma.  If it is not, a SYNTAX ERROR results.  If it is, the
 character is skipped and the next character is read.  Any character
 can be checked for and skipped this way by loading the character into
 the Accumulator and entering this routine from SYNCHR at 44799
@@ -5018,7 +5018,7 @@ Dispatch and Evaluate a Function
 
 If a BASIC function (like ASC("A")) is part of an expression, this
 routine will use the function dispatch table at 42242 ($A502) to set
-up the address of th proper function routine, and then branch to that
+up the address of the proper function routine, and then branch to that
 routine.
 
 45030         $AFE6          OROP
@@ -5038,7 +5038,7 @@ signifies false, while a result of -1 signifies true.
 Perform Comparisons
 
 This routine does the greater than (>), less than (<), and equal (=)
-comparisons for foating point numbers and strings.  The result in the
+comparisons for floating point numbers and strings.  The result in the
 Floating Point Accumulator will be 0 if the comparison is false, and
 -1 if it is true.
 
@@ -5152,13 +5152,13 @@ memory value is a 16-bit signed integer, and converts it to floating
 point accordingly.
 
 Of course, while the free memory space on the PET might have always
-been 32767 or less (the maximum value of a signed integer), sich is
+been 32767 or less (the maximum value of a signed integer), such is
 definitely not the case on the 64.  Because conversion is from a
 signed integer, any memory value over 32767 will be regarded as
 negative (the high bit is treated as a sign bit).  Therefore, for
 these higher values you must add twice the bit value of the high bit
 (65536) in order to come up with the correct value.  The expression
-FRE(0)-6556*(FRE(0)<0) will always return the correct amount of free
+FRE(0)-65536*(FRE(0)<0) will always return the correct amount of free
 memory.
 
 45969         $B391          GIVAYF
@@ -5187,7 +5187,7 @@ of 48 for the POS(X).
 Check If the Program is Running in Direct Mode, and If So Issue an Error
 
 This routine is called by statements that prohibit execution in direct
-mode.  It checks a flag that is set when a line without a linenumber
+mode.  It checks a flag that is set when a line without a line number
 is entered, and causes an ILLEGAL DIRECT error if the flag is set.
 
 46003         $B3B3          DEF
@@ -5255,7 +5255,7 @@ must be searched to find the valid text that is highest in memory.  If
 that string is not as high as it could be, it is moved up to replace
 any string that is no longer valid.  Then all of the string
 descriptors must be searched again to find the next highest string and
-move it up.  This continues until every string that is un use has been
+move it up.  This continues until every string that is in use has been
 covered.  After all have been moved up, the pointer to the bottom of
 string text at 51-52 ($33-$34) is changed to show the new bottom
 location.
@@ -5392,14 +5392,14 @@ program text.  The routine evaluates it, checks that it is a positive
 integer within the range 0-65535, and changes it from floating point
 to a two-byte integer in 20-21 ($14-$15).  It checks for and skips a
 comma, then gets a one-byte integer parameter in the .X register.  The
-routine is used to get the parameters for POKE an WAIT.
+routine is used to get the parameters for POKE and WAIT.
 
 47095         $B7F7          GETADR
 Convert a Floating Point Number to an Unsigned Two-Byte Integer
 
 This routine checks the number in the Floating Point Accumulator to
 make sure that it is a positive number less than 65536, and then calls
-the subroutine which conerts floatin point to integer.  It is used to
+the subroutine which converts floating point to integer.  It is used to
 get address parameters, for commands such as PEEK.
 
 47117         $B80D          PEEK
@@ -5642,7 +5642,7 @@ Print IN Followed by a Line Number
 Output a Number in ASCII Decimal Digits
 
 This routine is used to output the line number for the routine above.
-It converts thenumber whose high byte is in .A and whose low byte is
+It converts the number whose high byte is in .A and whose low byte is
 in .X to a floating point number.  It also calls the routine below,
 which converts the floating point number to an ASCII string.
 
@@ -5674,16 +5674,16 @@ TI$ to ASCII.
 48978         $BF52
 Unused area
 
-This unused area is filled with byts of 170 ($AA).
+This unused area is filled with bytes of 170 ($AA).
 
 49009         $BF71          SQR
 Perform SQR
 
 This routine moves the contents of FAC1 to FAC2, moves the constant
-0.5 to FAC1, and falls through to the exponentation routine.
+0.5 to FAC1, and falls through to the exponentiation routine.
 
 49019         $BF7B          FPWRT
-Performs Exponentation (Power Calculation Called for by UPARROW)
+Performs Exponentiation (Power Calculation Called for by UPARROW)
 
 This routine raises the value in FAC2 to the power in FAC1 and leaves
 the result in FAC1.
@@ -5693,8 +5693,8 @@ Perform NOT and >
 
 This negates the Floating Point Accumulator by exclusive ORing the
 sign byte with a constant of 255 ($FF).  Zero is left unchanged.  The
-results of this command follow rom the formula NOT X=-(X+1).
-Therefore, if you NOT a tatement that is true (-1), you get 0 (false).
+results of this command follow from the formula NOT X=-(X+1).
+Therefore, if you NOT a statement that is true (-1), you get 0 (false).
 
 49087         $BFBF          EXPCON
 Table of Constants for EXP and LOG in Five-Byte Floating Point Format
@@ -5707,7 +5707,7 @@ Perform EXP
 This routine calculates the natural logarithm e (2.718281828...)
 raised to the power in FAC1.  The result is left in FAC1.
 
-This routine is split between the BASIC ROM wich ends at 49151 ($BFFF)
+This routine is split between the BASIC ROM which ends at 49151 ($BFFF)
 and the Kernal ROM which begins at 57344 ($E000).  Therefore, a JMP
 $E000 instruction is tacked on to the end, which makes the BASIC
 routines in the 64 Kernal ROM three bytes higher in memory than the
@@ -5722,7 +5722,7 @@ area is not contiguous with the BASIC program text RAM area, it is not
 available for BASIC program or variable storage (it is not counted in
 the FRE(0) total).
 
-This area is fully available for any other use, however, sudh as
+This area is fully available for any other use, however, such as
 storing machine language subroutines for use with BASIC, alternate I/O
 drivers for parallel or IEEE devices, character graphics or sprite
 data, etc.
@@ -5763,7 +5763,7 @@ when necessary, as the I/O devices are needed for such niceties as
 reading he keyboard, and updating the screen display.
 
 It will appear from the map of the I/O devices below that many of the
-locations are not accounted for.  That is beause these devices tie up
+locations are not accounted for.  That is because these devices tie up
 more addressing space than they actually use.  Each of them uses only
 a few addresses, mostly on the bit level.
 
@@ -5863,7 +5863,7 @@ $D021) will determine the background color, as is usual.
 corresponding character in the group with codes 0-63.
 
 3.  For characters with codes 64-127 (SHIFTed characters), the
-background colors are deterined by the value in Background Color
+background colors are determined by the value in Background Color
 Register 1 (53282, $D022).
 
 4.  The value in Background Color Register 2 (53283, $D023) is used
@@ -5874,7 +5874,7 @@ Register 3 (53284, $D024) is used to determine the background color.
 
 
 In place of the normal text mode, a bitmap graphics mode is also
-abailable by setting Bit 5 of location 53265 ($D011).  In this mode,
+available by setting Bit 5 of location 53265 ($D011).  In this mode,
 each bit of data determines whether one dot on the screen will be set
 to either the background color or foreground color.  Within an 8 by 8
 dot area, the foreground and background colors may be individually
@@ -5947,7 +5947,7 @@ Each binary digit has a bit value that is two times greater than the
 last.  If the digit in the zero bit place is a 1, it has a value of 1
 (we count bit places from 0 to 7).  A 1 in the first bit place has a
 value of 2, the second bit has a value of 4, the third has a value of
-8, the fourth has a vlue of 16, the fifth a value of 32, the sixth a
+8, the fourth has a value of 16, the fifth a value of 32, the sixth a
 value of 64, and the seventh a value of 128.
 
 By making all of the possible combinations of 0's and 1's in all eight
@@ -5968,7 +5968,7 @@ a couple of sample sprite lines.
 
 As you can see, the first and last bytes are all 0's, so nothing will
 be displayed there.  The middle byte has six 1's, so it will be
-displayed as a line six dots long.  By adding the values of these dix
+displayed as a line six dots long.  By adding the values of these six
 bits (64+32+16+8+4+2), we get a byte value of 126.  Let's try another
 line.
 
@@ -6065,7 +6065,7 @@ display, some of these vertical positions will result in the sprite
 being partially or wholly offscreen.
 
 The visible viewing area starts at line 50 and extends to line 249.
-Therefore, any sprite whose vertical psition is 29 ($1D) or less will
+Therefore, any sprite whose vertical position is 29 ($1D) or less will
 be completely above the visible picture.  At vertical position 30
 ($1E), the bottom line of the sprite display becomes visible at the
 top of the screen.  At position 230 ($E6), the bottom line of the
@@ -6096,13 +6096,13 @@ The horizontal position value indicates the position of the leftmost
 dot of the sprite's 24-dot width.  The visible display is restricted
 to the 320 dot positions between positions 24 and 344.  At position 0
 the whole sprite is past the left edge of the visible screen.  At
-position 1 the righmost dot enters the display area, and at position
+position 1 the rightmost dot enters the display area, and at position
 24 ($18) the entire sprite is displayed on screen.  At position 321
 ($141) the rightmost dot goes past the right edge of the visible
 display area, and a position 355 ($158) the whole sprite has moved out
 of sight, off the right edge of the screen.
 
-These registers are all intialized to 0 at power-up.
+These registers are all initialized to 0 at power-up.
 
 53248         $D000          SP0X
 Sprite 0 Horizontal Position
@@ -6181,7 +6181,7 @@ Bit 6:  Enable extended color text mode (1=enable)
 Bit 7:  High bit (Bit 8) of raster compare register at 53266 ($D012)
 
 This is one of the two important multifunction control registers on
-the VIC-II chip.  Its defaule value is 155, which sets the high bit of
+the VIC-II chip.  Its default value is 155, which sets the high bit of
 the raster compare to 1, selects a 25-row display, disables the
 blanking feature, and uses a vertical scrolling offset of three scan
 lines.
@@ -6216,10 +6216,10 @@ the scroll, you must do a coarse scroll every time the value of the
 scroll bits goes from 7 to 0, or from 0 to 7.  This is accomplished by
 moving the display data for each line by 40 bytes in either direction,
 overwriting the data for the last line, and introducing a line of data
-at the opposite end of screen memory to replace it.  Obviously, ony a
+at the opposite end of screen memory to replace it.  Obviously, only a
 machine language program can move all of these lines quickly enough to
 maintain the effect of smooth motion.  The following BASIC program,
-however, will give you an iea of what vertical fine scrolling is like:
+however, will give you an idea of what vertical fine scrolling is like:
 
 10 POKE 53281,0:PRINTCHR$(5);CHR$(147)
 20 FORI=1 TO 27:
@@ -6252,7 +6252,7 @@ are set to 7.
 Bit 4.  Bit 4 of this register controls the screen blanking feature.
 When this bit is set to 0, no data can be displayed on the screen.
 Instead, the whole screen will be filled with the color of the frame
-(which is controlled by th eBorder Color Register at 53280 ($D020)).
+(which is controlled by the Border Color Register at 53280 ($D020)).
 
 Screen blanking is useful because of the way in which the VIC-II chip
 interacts with the 6510 microprocessor.  Since the VIC-II and the 6510
@@ -6263,7 +6263,7 @@ they want to address memory.
 The VIC-II chip was designed so that it fetches most of the data it
 needs during the part of the cycle in which the 6510 is not using the
 data bus.  But certain operations, such as reading the 40 screen codes
-needed for each line of text from video mmeory, or fetching sprite
+needed for each line of text from video memory, or fetching sprite
 data, require that the VIC-II chip get data at a faster rate than is
 possible just by using the off half of the 6510 cycle.
 
@@ -6419,7 +6419,7 @@ To turn the dot off,
 
 POKE BY, PEEK(BY) AND (255-2^(NOTX AND 7))
 
-The exponentation function takes a lot of time.  To speed things up,
+The exponentiation function takes a lot of time.  To speed things up,
 an array can be created, each of whose elements corresponds to a power
 of two.
 
@@ -6444,9 +6444,9 @@ explained above, and serves as a summary of that information.
 120 GOTO 120: REM LET IT STAY ON SCREEN
 
 As you can see, using BASIC to draw in bit-graphics mode is somewhat
-slow and tedious.  Machine language is much more suiable for
+slow and tedious.  Machine language is much more suitable for
 bit-graphics plotting.  For a program that lets you replace some BASIC
-ommands with high-res drawing commands, see the article "Hi-Res
+commands with high-res drawing commands, see the article "Hi-Res
 Graphics Made Simple," by Paul F. Schatz, in COMPUTE!'s First Book of
 Commodore 64 Sound and Graphics.
 
@@ -6546,7 +6546,7 @@ certain background color can be very inconvenient.  The easiest
 solution to this problem is to have a subroutine to the translation
 for you.  Since letters will appear normally in window 1, and window 3
 characters are simply window 1 characters reversed, you will only have
-problems with characters in windows 2 and 4.  To conver these
+problems with characters in windows 2 and 4.  To convert these
 characters, put your message in A$, and use the following subroutine:
 
 500 B$="":FOR I=1 TO LEN(A$):B=ASC(MID$(A$,I,1))
@@ -6826,7 +6826,7 @@ also enabled.
 
 If you are not in bitmap mode, and you select multicolor text
 character mode by setting this bit to 1, characters with a color
-nybble whose value is less than 8 are displyed normally.  There will
+nybble whose value is less than 8 are displayed normally.  There will
 be one background color and one foreground color.  But each dot of a
 character with a color nybble whose value is over 7 can have any one
 of four different colors.
@@ -6875,7 +6875,7 @@ hi-res bitmap mode.
 
 Given that the horizontal position (0-159) of the dot is stored in the
 variable X, its vertical position is in the variable Y, and the base
-address of the bitmap area ia in the variable BASE, you can find the
+address of the bitmap area is in the variable BASE, you can find the
 desired byte with the formula:
 
 BY=BASE+(Y AND 248)*40+(Y AND 7)+(2*X AND 504)
@@ -6948,7 +6948,7 @@ Dot-Data area.  This area is where the data is stored (for more
 information on character shape data, see the alternate entry for
 location 53248 ($D000), the Character Generator ROM).
 
-Bits 1-3 can represent any even number from 0 to 14.  That numer
+Bits 1-3 can represent any even number from 0 to 14.  That number
 stands for the even 1K offset of the character data area from the
 beginning of VIC-II memory.  For example, if these bits are all set to
 0, it means that the character memory occupies the first 2K of VIC-II
@@ -7010,7 +7010,7 @@ For example, if the screen area starts 1024 bytes from the beginning
 of VIC- II memory, and the video chip is using Bank 2 (32768-49151),
 the actual starting address of screen memory is 32768+1024=33792
 ($8400).  For examples of how to change the video memory area, and of
-how to relocate the screen, see the entro for 56576 ($DD00).
+how to relocate the screen, see the entry for 56576 ($DD00).
 
 53273         $D019          VICIRQ
 VIC Interrupt Flag Register
@@ -7079,11 +7079,10 @@ entry.
 IRQ Mask Register
 
 Bit 0:  Enable Raster Compare IRQ (1=interrupt enabled)
-Bit 1:  Enable IRQ to occure when sprite collides with display of
-  normal
-        graphics data (1=interrupt enabled)
+Bit 1:  Enable IRQ to occur when sprite collides with display of
+        normal graphics data (1=interrupt enabled)
 Bit 2:  Enable IRQ to occur when two sprites collide (1=interrupt
-  enabled)
+        enabled)
 Bit 3:  Enable light pen to trigger an IRQ (1=interrupt enabled)
 Bits 4-7:  Not used
 
@@ -7124,7 +7123,7 @@ interrupt will occur.
 At the exact moment that the raster beam line number equals the number
 written to the register, Bit 0 of the status register will be set to
 1, showing that the conditions for a Raster Compare Interrupt have
-been fulfulled.  If the raster interrupt is enabled then,
+been fulfilled.  If the raster interrupt is enabled then,
 simultaneously, the interrupt program will be executed.  This allows
 the user to reset any of the VIC-II registers at any point in the
 display, and thus change character sets, background color, or graphics
@@ -7136,7 +7135,7 @@ the screen display.  Once you have written this interrupt routine, you
 must take the following steps to install it.
 
 1.  Set the interrupt disable flag in the status register with an SEI
-instruction.  This will disable all interrupts and prevent th system
+instruction.  This will disable all interrupts and prevent the system
 from crashing while you are changing the interrupt vectors.
 
 2.  Enable the raster interrupt.  This is done by setting Bit 0 of the
@@ -7179,7 +7178,7 @@ exactly once per screen refresh (every 1/60 second).
 Another thing that you should keep in mind is that at least two raster
 interrupts are required if you want to change only a part of the
 screen.  Not only must the interrupt routine change the display, but
-it must also set up another raster interrput that will change it back.
+it must also set up another raster interrupt that will change it back.
 
 The sample program below uses a raster-scan interrupt to divide the
 display into three sections.  The first 80 scan lines are in
@@ -7203,7 +7202,7 @@ statement is POKEd into memory.
 If you look at lines 49264-49276 of the BASIC program, you will see
 REMark statements that explain which VIC-II registers are affected by
 the DATA statements in each line.  The number in these DATA
-startements appear in the reverse order in which they are put into the
+statements appear in the reverse order in which they are put into the
 VIC register.  For example, line 49273 holds the data that will go
 into Control Register 2.  The last number, 8, is the one that will be
 placed into Control Register 2 while the top part of the screen is
@@ -7302,7 +7301,7 @@ positioned.  Its location can then be read in the light pen position
 registers (53267-8, $D013-4).
 
 Bit 2 enables the sprite-foreground collision interrupt.  This
-interrupt can occur if one of the srpte character's dots is touching
+interrupt can occur if one of the sprite character's dots is touching
 one of the dots from the foreground display of either text character
 or bitmap graphics.
 
@@ -7375,7 +7374,7 @@ Bit 7:  Select multicolor mode for Sprite 7 (1=multicolor, 0=hi-res)
 Sprite multicolor mode is very similar to text and bitmap multicolor
 modes (see Bit 4 of 53270, $D016).  Normally, the color of each dot of
 the sprite is controlled by a single bit of sprite shape data.  When
-thi mode is enabled for a sprite, by setting the corresponding bit of
+this mode is enabled for a sprite, by setting the corresponding bit of
 this register to 1, the bits of sprite shape data are grouped together
 in pairs, with each pair of bits controlling a double-wide dot of the
 sprite display.  By sacrificing some of the horizontal resolution (the
@@ -7391,7 +7390,7 @@ these bit-pairs display dot colors from the following sources:
 Like multicolor text characters, multicolor sprites all share two
 color registers.  While each sprite can display three foreground
 colors, only one of these colors in unique to that sprite.  The number
-of unique colors may be increated by combining more than one sprite
+of unique colors may be increased by combining more than one sprite
 into a single character.
 
 53277         $D01D          XXPAND
@@ -7612,7 +7611,7 @@ address of the chip.
 54272-54300   $D400-$D41C
 Sound Interface Device (SID) Registers
 
-Mmeory locations 54272-54300 ($D400-$D41C) are used to address the
+Memory locations 54272-54300 ($D400-$D41C) are used to address the
 6581 Sound Interface Device (SID).
 
 SID is a custom music synthesizer and sound effects generator chip
@@ -7643,7 +7642,7 @@ oscillator gated, as we say).  This is done by writing certain bits to
 the Control Register.  The waveform control lets you select one of
 four different waveforms, each of which has varying harmonic content
 that affects the tone quality of the sound.  By writing a 1 to the
-gate bit, you start the Attack/ Delay/Sustain cycle.  Afer rising to a
+gate bit, you start the Attack/ Delay/Sustain cycle.  After rising to a
 peak and declining to the Sustain volume, the volume will continue at
 the same level until you write a 0 to the gate bit.  Then, the Release
 cycle will start.  Make sure that you keep the same waveform bit set
@@ -7770,7 +7769,7 @@ waveform varies with a frequency proportionate to that of Oscillator
 1.  It can be used to imitate the sound of explosions, drums, and
 other unpitched noises.
 
-One of the four waveforms must be chosed in order to create a sound.
+One of the four waveforms must be chosen in order to create a sound.
 Setting more than one of these bits will result in a logical ANDing of
 the waveforms.  Particularly, the combination of the noise waveform
 and another is not recommended.
@@ -7786,7 +7785,7 @@ away.  This creates what is known as a volume envelope.
 The first phase of the envelope, in which the volume builds to a peak,
 is known as the attack phase.  The second, in which it declines to an
 intermediate level, is called the decay phase.  The third, in which
-the intermediate leve of volume is held, is known as the sustain
+the intermediate level of volume is held, is known as the sustain
 period.  The final interval, in which the sound fades away, is called
 the release part of the cycle.
 
@@ -7984,14 +7983,14 @@ below a certain level.  The band-pass filter reduces the volume of
 frequency components on both sides of the chosen frequency, thereby
 enhancing that frequency.  Finally, the high-pass and low-pass filters
 can be combined to form a notch reject filter, which reduces the
-folume of the frequency components nearest the selected frequency.
+volume of the frequency components nearest the selected frequency.
 These various filters can dramatically change the quality of the sound
 produced.
 
 The first two registers are used to select the filter cutoff
 frequency.  This is the frequency above or below which any sounds will
 be made quieter.  The further away from this level any frequency
-components are, the more their output volume will be suppresed (high-
+components are, the more their output volume will be suppressed (high-
 and low-pass filters reduce the volume of those components by 12 dB
 per octave away from the center frequency, while the band-pass filter
 attenuates them by 6 dB per octave).
@@ -8001,7 +8000,7 @@ numbers 0 to 2047).  This is made up of a high-byte and three low
 bits.  Therefore, to compute the frequency represented by the value in
 these registers, you must multiply the value in the high byte by 8,
 and add the value of the low three bits.  The range of cutoff
-freqnencies represented by these 2048 values stretches from 30 Hz to
+frequencies represented by these 2048 values stretches from 30 Hz to
 about 12,000 Hz.  The exact frequency may be calculated with the
 formula:
 
@@ -8077,7 +8076,7 @@ controlled by turning a knob.  The varying resistance is used to vary
 the voltage to two pins of the SID chip between 0 and +5 volts.
 Analog-to-digital (A/D) converters in the chip interpret these voltage
 levels as binary values and store the values in these registers.
-These registers return a number from 0 (minumum resistance) to 255
+These registers return a number from 0 (minimum resistance) to 255
 (maximum resistance) for each paddle in either of the ports, depending
 on the position of the paddle knob.
 
@@ -8111,7 +8110,7 @@ button 1 is pushed, and if Bit 3 is set to 0, button 2 is pushed.  On
 Port B, if Bit 2 is set to 0, button 3 is pushed, and if Bit 3 is set
 to 0, button 4 is pushed.
 
-The BASIC statements to test these buttons, thereore, are:
+The BASIC statements to test these buttons, therefore, are:
 
 PB(1)=(PEEK(56321)AND4)/4
 PB(2)=(PEEK(56321)AND8)/8
@@ -8264,7 +8263,7 @@ background color to that value (using the register at 53281 ($D021)),
 clear the screen, and return the background color in the desired
 value.
 
-The various garphics modes use this area differently than does the
+The various graphics modes use this area differently than does the
 regular text mode.  In high-resolution bitmap mode, this area is not
 used at all, but in multicolor bitmap mode it is used to determine the
 color of the 11 bit-pair for a given 8 by 8 dot area.
@@ -8522,7 +8521,7 @@ CIA #1 Data Direction Registers A and B
 
 These Data Direction Registers control the direction of data flow over
 Data Ports A and B.  Each bit controls the direction of the data on
-the corresponding bit of the port.  If teh bit of the Direction
+the corresponding bit of the port.  If the bit of the Direction
 Register is set to a 1, the corresponding Data Port bit will be used
 for data output.  If the bit is set to a 0, the corresponding Data
 Port bit will be used for data input.  For example, Bit 7 of Data
@@ -8969,7 +8968,7 @@ as the 1541 Disk Drive and 1525 printer), the RS-232 device (which is
 used for telecommunications), and the User Port, an eight-bit parallel
 port that can be turned to whatever purpose the user desires.  In
 addition, Data Port A has the important task of selecting the 16K bank
-ofmemory that will be used by the VIC-II chip for graphics.
+of memory that will be used by the VIC-II chip for graphics.
 
 Another significant difference between CIA chips #1 and #2 is that the
 interrupt line of CIA #1 is wired to the 6510 IRQ line, while that of
@@ -8990,7 +8989,7 @@ arrangement.  Since each byte of data is sent one bit at a time,
 however, the Serial Bus is at least eight times slower than the IEEE.
 It is presently used to control the 1541 Disk Drive and 1525 printer,
 and other devices (such as printer interface for Centronics- type
-parallel pritners and stringy floppy wafer tape storage units) can be
+parallel printers and stringy floppy wafer tape storage units) can be
 placed on this bus.
 
 Data Port A is used for communication with the Serial Bus.  Bits 5 and
@@ -9025,7 +9024,7 @@ be used as frequency counters, event counters, interval timers, etc.
 The advanced features of the CIA chip make almost any type of
 interfacing application possible, and in the near future we will
 probably see many interesting applications for the User Port on the
-64.  A pin description of tthe User Port connector is provided below:
+64.  A pin description of the User Port connector is provided below:
 
 User         RS-232
 Port  CIA    DB-25
@@ -9568,7 +9567,7 @@ stored within that 16K block.
 
 Since it would be very inconvenient for the VIC-II chip to be able to
 access the character data only at the 16K block which includes
-adresses 53248-57343 ($D000-$DFFF), the 64 uses an addressing trick
+addresses 53248-57343 ($D000-$DFFF), the 64 uses an addressing trick
 that makes the VIC-II chip see an image of the Character ROM at
 4096-8191 ($1000-$1FFF) and at 36864-40959 ($9000-$9FFF).  It is not
 available in the other two blocks.  To generate characters in these
@@ -9671,7 +9670,7 @@ displaced by three bytes from their location on the VIC.
 57411         $E043          POLY1
 Function Series Evaluation Subroutine 1
 
-This routine is used to evaluate more comples expressions, and calls
+This routine is used to evaluate more complex expressions, and calls
 the following routine to do the intermediate evaluation.
 
 57433         $E059          POLY2
@@ -9702,7 +9701,8 @@ the next RND value is obtained by multiplying the seed value in
 location 139 ($8B) by one of the constants above, adding the other
 constant, and scrambling the resulting bytes.  This produces the next
 number in a sequence.  So many numbers can be produced in this way
-before the sequence begins to repear that it can be considered random.
+before the sequence begins to reappear that it can be considered
+random.
 
 If the argument is negative, the argument itself is scrambled, and
 made the new seed.  This allows creation of a sequence that can be
@@ -9726,7 +9726,7 @@ point RND(0) value always have a value of 0.  Even if the clock was
 started, however, these registers keep time in Binary Coded Decimal
 (BCD) format, which means that they do not produce a full range of
 numbers from 0 to 255.  In addition, the Timer A high register output
-ranges only from 0 to 66, which also imits the range of the final
+ranges only from 0 to 66, which also limits the range of the final
 floating point value so that certain numbers are never chosen.
 
 57593         $E0F9
@@ -9766,7 +9766,7 @@ to the LOAD routine.
 Perform LOAD
 
 This routine sets the load address to the start of BASIC (from pointer
-at 43 ($2B)), and calls the Kerneal LOAD routine.  If the load is
+at 43 ($2B)), and calls the Kernal LOAD routine.  If the load is
 successful, it relinks the BASIC program so that the links agree with
 the address to which it is loaded, and it resets the end of BASIC
 pointer to reflect the new end of program text.  If the LOAD was done
@@ -9979,7 +9979,7 @@ commands.
 58551         $E4B7
 35 Unused Bytes (all have the value of 170 ($AA)
 
-Locaiton Range: 58586-65535 ($E4DA-$FFFF)
+Location Range: 58586-65535 ($E4DA-$FFFF)
 Kernal I/O Routines
 
 After the conclusion of BASIC comes the part of this ROM which can be
@@ -10008,8 +10008,8 @@ background, and thus they are invisible.
 
 This is a fairly serious problem, because the technique of POKEing
 characters to screen RAM has long been a staple of Commodore graphics
-programming.  Fortunately, the problem has an easy colution.  Since
-the Color RAM will be set to whatevere color is in Background Color
+programming.  Fortunately, the problem has an easy solution.  Since
+the Color RAM will be set to whatever color is in Background Color
 Register 0, what you have to do to initialize Color RAM to the color
 you desire is change the background color to the desired foreground
 color, clear the screen, and then change the background color back
@@ -10145,7 +10145,7 @@ at 60601 ($ECB9) to the VIC-II chip.
 58804         $E5B4          LP2
 Get a Character from the Keyboard Buffer
 
-This routine transfers the first character from the keybard buffer to
+This routine transfers the first character from the keyboard buffer to
 the .A register, bumps the rest of the characters one place up in
 line, and decrements the pointer, showing how many characters are
 waiting in the buffer.
@@ -10237,22 +10237,22 @@ PETASCII Color Code Equivalent Table
 This table gives the PETASCII values of the color change characters
 for each of the 16 possible colors.  These values are:
 
-144 ($90)  Change to color 0 (black)
-  5 ($05)  Change to color 0 (white)
- 28 ($1C)  Change to color 0 (red)
-159 ($9F)  Change to color 0 (cyan)
-156 ($9C)  Change to color 0 (purple)
- 30 ($1E)  Change to color 0 (green)
- 31 ($1F)  Change to color 0 (blue)
-158 ($9E)  Change to color 0 (yellow)
-129 ($81)  Change to color 0 (orange)
-149 ($95)  Change to color 0 (brown)
-150 ($96)  Change to color 0 (light red)
-151 ($97)  Change to color 0 (dark gray)
-152 ($98)  Change to color 0 (medium gray)
-153 ($99)  Change to color 0 (light green)
-154 ($9A)  Change to color 0 (light blue)
-155 ($9B)  Change to color 0 (light gray)
+144 ($90)  Change to color 0  (black)
+  5 ($05)  Change to color 1  (white)
+ 28 ($1C)  Change to color 2  (red)
+159 ($9F)  Change to color 3  (cyan)
+156 ($9C)  Change to color 4  (purple)
+ 30 ($1E)  Change to color 5  (green)
+ 31 ($1F)  Change to color 6  (blue)
+158 ($9E)  Change to color 7  (yellow)
+129 ($81)  Change to color 8  (orange)
+149 ($95)  Change to color 9  (brown)
+150 ($96)  Change to color 10 (light red)
+151 ($97)  Change to color 11 (dark gray)
+152 ($98)  Change to color 12 (medium gray)
+153 ($99)  Change to color 13 (light green)
+154 ($9A)  Change to color 14 (light blue)
+155 ($9B)  Change to color 15 (light gray)
 
 59626         $E8EA
 Scroll Screen
@@ -10278,7 +10278,7 @@ This subroutine is used by the scroll routine to move one screen line
 59872         $E9E0
 Set Temporary Color Pointer for Scrolling
 
-This subrouting sets up a pointer in 17-175 ($AE-$AF) to the Color RAM
+This subroutine sets up a pointer in 17-175 ($AE-$AF) to the Color RAM
 address that corresponds to the temporary screen line address in
 172-173 ($AC-$AD).
 
@@ -10454,7 +10454,7 @@ equals CHR$(29), CTRL-up arrow produces CHR$(30), and CTRL-= produces
 CHR$(31).
 
 Any of these combinations produce the same effect as the CHR$(X)
-statement.  For examble, CTRL-; moves the cursor over to the right,
+statement.  For example, CTRL-; moves the cursor over to the right,
 CTRL-N switches to lowercase, CTRL-R turns on reverse video, and
 CTRL-E changes the printing to white.
 
@@ -10809,7 +10809,7 @@ the logical file number of the file to be closed, and calling this
 routine.
 
 Closing an RS-232 file will de-allocate space at the top of memory for
-the receiving and trasmit buffers.  Closing a cassette file that was
+the receiving and transmit buffers.  Closing a cassette file that was
 opened for writing will force the last block to be written to
 cassette, even if it is not a full 192 bytes.  Closing a serial bus
 device will send an UNLISTEN command on the bus.  Remember, it is
@@ -10828,7 +10828,8 @@ This subroutine is used by many Kernal routines to find the position
 of the logical file in the logical file table at 601 ($259).
 
 62239         $F31F
-Set Current Logical File, Current Device, and Current Seconday Address
+Set Current Logical File, Current Device, and Current Secondary
+Address
 
 This subroutine is used to update the Kernal variables at 184-186
 ($B8-$BA) which holds the current logical file number, current device
@@ -11031,9 +11032,9 @@ Test Cassette Buttons and Handle Messages for Tape Write
 This routine tests the sense switch, and if no buttons are depressed
 it prints the PRESS PLAY & RECORD message, and loops until a cassette
 button is pressed, or until the STOP key is pressed.  If a button is
-pressed, it prints the message OK.  These messages cannot be supressed
-by changing the flag at 157 ($9D).  See the entry for 63511 ($F817)
-for more information.
+pressed, it prints the message OK.  These messages cannot be
+suppressed by changing the flag at 157 ($9D).  See the entry for 63511
+($F817) for more information.
 
 63553         $F841
 Start Reading a Block of Data from the Cassette
@@ -11062,7 +11063,7 @@ with the timing of the routines.
 Test the STOP Key during Cassette I/O Operations
 
 This subroutine is used to test the STOP key during tape I/O
-oeprations, and to stop I/O if it is pressed.
+operations, and to stop I/O if it is pressed.
 
 63714         $F8E2
 Adjust CIA #1 Timer A for Tape Bit Timing
@@ -11099,7 +11100,7 @@ This IRQ handler routine is one part of the write data to cassette
 routine
 
 64618         $FC6A
-Write Data fo Cassette--Part 1 (IRQ)
+Write Data to Cassette--Part 1 (IRQ)
 
 This IRQ handler routine is the other part of the write data to
 cassette routine.
@@ -11230,10 +11231,10 @@ uses.  The first points to Part 1 of the cassette write routine at
 Initialize CIA I/O Devices
 
 This documented Kernal routine, which can be entered through the jump
-table at 65412 ($FF84), intializes the Complex Interface Adapter (CIA)
-devices, and turns the volume of the SID chip off.  As part of this
-initialization, it sets CIA #1 Timer A to cause an IRQ interrupt every
-sixtieth of a second.
+table at 65412 ($FF84), initializes the Complex Interface Adapter
+(CIA) devices, and turns the volume of the SID chip off.  As part of
+this initialization, it sets CIA #1 Timer A to cause an IRQ interrupt
+every sixtieth of a second.
 
 65017         $FDF9          SETNAM
 Set Filename Parameters
@@ -11299,7 +11300,7 @@ preference to the Kernal's message.
 65057         $FE21           SETTMO
 Set Time-Out Flag for IEEE Bus
 
-This documented Kernal routine can be entered fromthe jump table at
+This documented Kernal routine can be entered from the jump table at
 65442 ($FFA2).
 
 The routine sets the time-out flag for the IEEE bus.  When timeouts
@@ -11331,7 +11332,7 @@ This is a documented Kernal routine, which can be entered through the
 jump table at location 65436 ($FF9C).
 
 It can be used to either read or set the bottom of RAM pointer.  If
-called with the Carry flag set, the address in the pointer willbe
+called with the Carry flag set, the address in the pointer will be
 loaded into the .X and .Y registers.  If called with the Carry flag
 cleared, the pointer will be changed to the address found in the .X
 and .Y registers.
@@ -11361,7 +11362,7 @@ BRK, Warm Start Routine
 This routine is executed when the STOP/RESTORE combination of
 keypresses occurs.  In addition, it is the default target address of
 the BRK instruction vector.  This routine calls the Kernal
-intialization routines RESTOR, IOINIT, and part of CINT.  It then
+initialization routines RESTOR, IOINIT, and part of CINT.  It then
 exits through the BASIC warm start vector at 40962 ($A002).
 
 65138         $FE72
@@ -11659,7 +11660,7 @@ press the cursor down key.  {5 SPACES} would mean to press the space
 bar five times.
 
 To indicate that a key should be shifted (hold down the SHIFT key
-while pressing the other key), the key would be unterlined in our
+while pressing the other key), the key would be underlined in our
 listings.  For example, _S_ would mean to type the S key while holding
 the SHIFT key.  This would appear on your screen as a heart symbol.
 If you find an underlined key enclosed in braces (e.g., {10 _N_}), you
@@ -11852,7 +11853,7 @@ bitmapped        01         Screen memory   High nybble ++
 * For all modes, the screen border color is controlled by POKEing
 location 53280 with the low nybble color value.
 
-+ In exteded color mode, Bits 6 and 7 of each byte of screen memory
++ In extended color mode, Bits 6 and 7 of each byte of screen memory
 serve as the bit-pair controlling background color.  Because only Bits
 0-5 are available for character selection, only characters with screen
 codes 0-63 can be used in this mode.
@@ -11971,7 +11972,7 @@ cassette
   motor control  01, 192
   switch sense  01
 character generator ROM  01, 4096, 36864, 53248
-charcter graphics  53248
+character graphics  53248
 CHAREN  01
 CHRGET  115, 58274
 CHR$  46828
