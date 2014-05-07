@@ -14,6 +14,7 @@ silverdr
 
 Rules and Conventions
 ---------------------
+####Contents format
 Textual representations __only__ are to be stored and revision-maintained in this repository. Textual formats mean (in the order of preference):
 * text/plain
 * application/x-tex
@@ -22,6 +23,12 @@ Textual representations __only__ are to be stored and revision-maintained in thi
 
 Other, non-easily-editable formats are currently welcome only for inclusion in the list of documents awaiting to be processed into textual format.
 
+####Spelling conflicts resolutions
+Whenever the original book or document contains an undeniable spelling mistake, it should be corrected. Spelling variant should be chosen according to the original language of the content. This includes also British vs. US spelling differences. In other words: if for example the original book was written by British author(s) and their spelling variant is British, misspelled words should be corrected to the proper, British spelling.
+
+Whenever the original content contains words, which are properly spelled in at least one of the language variant but would be considered as misspelled in another/other one(s) - the original spelling must be preserved. In other words: if for example the original book was written by British author(s) and their spelling variant is British, but they spelled some words correctly according to the US spelling only, those words must not be changed.
+
+####Project64 headers
 The original Project 64 documents contain a header with several important points:
 * The goal of Project 64 is to preserve Commodore 64 related documents in electronic text format that might otherwise cease to exist with the rapid advancement of computer technology and declining interest in 8-bit computers on the part of the general population.
 * Extensive efforts were made to preserve the contents of the original document.  However, certain portions, such as diagrams, program listings, and indexes may have been either altered or sacrificed due to the limitations of plain vanilla text.  Diagrams may have been eliminated where ASCII-art was not feasible.  Program listings may be missing display codes where substitutions were not possible.  Tables of contents and indexes may have been changed from page number references to section number references. Please accept our apologies for these limitations, alterations, and possible omissions.
@@ -44,4 +51,7 @@ A line in the etext like
 shall be used to distinguish and make it clear what document in what version it is updated from.
 * new documents will adhere to the original file naming specifications (huh - is it really me writing this?) for consistency with the original project.
 
-Unlike Dean I don't exclude possibility of accepting documents, which originated in languages other than English. Usually original language versions are in fact better than the translations. An example: "Das Große Floppybuch zur 1541", written originally by German authors and translated into English. While the English version (published by Abacus Software under the title "The Anatomy Of The 1541 Drive - A Complete Guide to Using The Commodore Disk Drive) is actually quite good, I still have this kind of feeling that German book is somehow better. No, German is not my mother tongue.. ;-)
+####Language of the documents
+Unlike Dean I do not exclude possibility of accepting documents, which originated in languages other than English. Very often original language versions are in fact better than the translations and I would find it rather unfair to deprive people who mastered other languages of the possibility to enjoy the content in its original language. An example: "Das Große Floppybuch zur 1541", written originally by German authors and translated into English. While the English version (published by Abacus Software under the title "The Anatomy Of The 1541 Drive - A Complete Guide to Using The Commodore Disk Drive) is actually quite good, I still have this kind of feeling that German book is somehow better. And no, German language is not my mother tongue.. ;-)
+
+This liberal approach to the language of maintained documents is limited to *original* language of the position to be included in the repository! In other words: position originally written in Czech (no, not my mother tongue either) should be accepted in both Czech and English but neither in Russian, nor in German nor in any other language.
