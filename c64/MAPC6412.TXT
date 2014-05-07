@@ -4702,7 +4702,7 @@ terminating value is not checked until NEXT is executed, so the loop
 statements always execute at least once.  The variable used by FOR
 must be a non-array floating point variable.  Reusing the same FOR
 variable in a loop that is still active will cause the previous FOR
-loop and all intervening loops to be canceled.
+loop and all intervening loops to be cancelled.
 
 42926         $A7AE          NEWSTT
 Set Up Next Statement for Execution
