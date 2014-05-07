@@ -30,7 +30,7 @@ use the information herein you do so at your own risk.
 
 *********
 
-  The Project 64 etext of Inside Commodore DOS by Richard immers, Ph.D.
+  The Project 64 etext of Inside Commodore DOS by Richard Immers, Ph.D.
 and Gerald G. Neufeld, Ph.D. second edition. Converted to etext by
 Silver Dream !
 
@@ -82,7 +82,7 @@ INCDOS01.TXT (WIP), April 2014
 
                                   by
 
-                        Richard immers, Ph.D.
+                        Richard Immers, Ph.D.
                         Adrian Public Schools
                           Adrian, Michigan
 
@@ -158,7 +158,7 @@ development of the programs in this manual a real joy. These packages are
 commercially available from Professional Software Inc. In addition, both the
 PAL disassembler and MICROMON were used as tools for disassembling the 1541 DOS.
 
-We would also like to acknowledge the patience and forebearance of our families
+We would also like to acknowledge the patience and forbearance of our families
 and friends. Without their support, producing this manual would have been
 considerably more difficult. Mike Louder of DATAMOST, Inc. also provided
 tremendous support for its production.
@@ -254,7 +254,7 @@ Chapter 3 - DISKETTE FORMATTING
 Chapter 4 - DISKETTE ORGANIZATION
             Information Management
             The Directory You See
-            The Block Availablity Map
+            The Block Availability Map
             The Directory Entries
             Program File Storage
             Sequential File Storage
@@ -324,7 +324,7 @@ Chapter 9 - OVERVIEW OF THE 1541 DOS
             Writing Data to a Diskette
             Reading Data From a Diskette
             Summary Bugs in DOS 2.6
-            Write Incompatability with 4040
+            Write Incompatibility with 4040
             Late News
 
 -----------------------------------------------------Page 8-----------------------------------------------------
@@ -345,3 +345,4 @@ Ignorance is a precious thing.
 Once lost, it can never be regained.
 
 -----------------------------------------------------Page 10-----------------------------------------------------
+
