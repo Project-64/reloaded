@@ -24,9 +24,9 @@ Textual representations __only__ are to be stored and revision-maintained in thi
 Other, non-easily-editable formats are currently welcome only for inclusion in the list of documents awaiting to be processed into textual format.
 
 ####Spelling conflicts resolutions
-Whenever the original book or document contains an undeniable spelling mistake, it should be corrected. Spelling variant should be chosen according to the original language of the content. This includes also UK vs. US spelling differences. In other words: if for example the original book was written by British author(s) and their spelling variant is British, misspelled words should be corrected to the proper, British spelling.
+Whenever the original book or document contains an undeniable spelling mistake, it should be corrected. Spelling variant for such correction should be chosen according to the original language of the content. This includes also UK vs. US spelling differences. In other words: if for example the original book was written by British author(s) using British spelling variant, misspelled words should be corrected to the proper, British spelling.
 
-Whenever the original content contains words, which are properly spelled in at least one of the language variants but would be considered as misspelled in another one - the original spelling must be preserved. In other words: if for example the original book was written by British author(s) and their spelling variant is British but they spelled some words correctly according to the US spelling only, those words must not be changed.
+Whenever the original content contains words, which are properly spelled in at least one of the language variants but would be considered as misspelled in another one - the original spelling must be preserved. In other words: if for example the original book was written by British author(s) but they spelled some words correctly according only to the US spelling variant, such words must not be changed.
 
 ####Project 64 headers
 The original Project 64 documents contain a header with several important points:
