@@ -2288,7 +2288,7 @@ End of the Project 64 etext of Commodore_64_ROM_Memory_Map.txt
 
 *********
 
-End of the Project 64 etext 64MAP10.TXT, several Commodore 64 memory
+End of the Project 64 etext 64MAP11.TXT, several Commodore 64 memory
 maps.
 
 *********
