@@ -1,188 +1,331 @@
-﻿INSIDE
+﻿*********
 
-COMMODORE
+Welcome to Project 64!
 
-DOS
+  The goal of Project 64 is to preserve Commodore 64 related documents
+in electronic text format that might otherwise cease to exist with the
+rapid advancement of computer technology and declining interest in 8-
+bit computers on the part of the general population.
 
------------------------------------------------------Page 1-----------------------------------------------------
-﻿
+  Extensive efforts were made to preserve the contents of the original
+document.  However, certain portions, such as diagrams, program
+listings, and indexes may have been either altered or sacrificed due
+to the limitations of plain vanilla text.  Diagrams may have been
+eliminated where ASCII-art was not feasible.  Program listings may be
+missing display codes where substitutions were not possible.  Tables
+of contents and indexes may have been changed from page number
+references to section number references. Please accept our apologies
+for these limitations, alterations, and possible omissions.
 
------------------------------------------------------Page 2-----------------------------------------------------
-﻿
-INSIDE
+  The author(s) of the original document and members of Project 64 make
+no representations about the accuracy or suitability of this material
+for any purpose.  This etext is provided "as-is".  Please refer to the
+warantee of the original document, if any, that may included in this
+etext.  No other warantees, express or implied, are made to you as to
+the etext or any medium it may be on.  Neither the author(s) nor the
+members of Project 64 will assume liability for damages either from
+the direct or indirect use of this etext or from the distribution of
+or modification to this etext.  Therefore if you read this document or
+use the information herein you do so at your own risk.
 
-COMMODORE
+*********
 
-DOS
+  The Project 64 etext of Inside Commodore DOS by Richard Immers, Ph.D.
+and Gerald G. Neufeld, Ph.D. second edition. Converted to etext by
+Silver Dream !
 
-by
+INCDOS01.TXT (WIP), April 2014
 
-Richard Immers, Ph.D.
+*********
 
-Adrian Public Schools
 
-Adrian, Michigan
 
-and
 
-Gerald G. Neufeld, Ph.D.
+~
 
-Brandon university Brandon, Manitoba
 
-Canada
 
-Technical Illustrations by
 
-Diane M. corralejo
+                              INSIDE
+                             COMMODORE
+                                DOS
 
-UDATAMOST
 
-19821 Nordhoff Street, Northridge, CA 91324
 
-(818) 709-1202
 
------------------------------------------------------Page 3-----------------------------------------------------
-﻿
-First Printing, July 1984
 
-Second Printing, February 1985
 
-RESTON PUBLISHING COMPANY, INC.
 
-A Prentice-Hall Company Reston, Virginia
 
-ISBN 0-8359-3091-2
 
-Copyright © 1984 by DATAMOST, Inc.
 
-All Rights Reserved
 
-This manual is published and copyrighted by DATAMOST, Inc. All rights are reserved by DATAMOST, Inc. Copying, duplicating, selling or otherwise distributing this product is hereby expressly forbidden except by prior written consent of DATAMOST, Inc.
 
-The words COMMODORE, CBM, COMMODORE 64, VIC-20, VIC-1541 and the Commodore logo are registered trademarks of Commodore Business Machines, Inc.
 
-Commodore Business Machines was not in any way involved in the writing or other preparation of this manual, nor were the facts presented here reviewed for accuracy by them.
 
-The information presented in this manual is the result of intensive study of the disassembly of the 1541 DOS. Every effort has been made to provide error-free information. However, neither the authors nor DATAMOST, Inc. can accept responsibility for any loss or damage, tangible or intangible, resulting from use or improper or unintended use of this information.
 
-Printed in U.S.A.
 
------------------------------------------------------Page 4-----------------------------------------------------
-﻿
-ACKNOWLEDGEMENTS
 
-A manual like this one would not be possible without a great deal of technical assistance. Mike Todd's Disk File column in the ICPUG Newsletter proved to be an invaluable source of insight into the inner workings of Commodore's DOS. Raeto West's book, Programming the PET/CBM, was a constant companion. Jim Butterfield's numerous articles
 
-also provided valuable bits and pieces of information. Brad Templeton's POWER™ system and PAL™ assembler made the development of the programs in this manual
 
-a real joy. These packages are commercially available from Professional Software Inc. In addition, both the PAL disassembler and MICROMON were used as tools for disassembling the 1541 DOS.
 
-We would also like to acknowledge the patience and forbearance of our families and friends. Without their support, producing this manual would have been considerably more difficult. Mike Louder of DATAMOST, Inc. also provided tremendous support for its production.
 
-Finally, we would like to extend a special note of thanks to Dr. Tom MacNeil and Nancy Neufeld for their diligent work in proofreading this manual.
 
-This manual was written on a Commodore computer system using the WordPro 4 Plus word processing system. The WordPro Plus™ Series is commercially available from Professional Software Inc. This sophisticated word processing system made editing and last minute revisions much easier.
 
------------------------------------------------------Page 5-----------------------------------------------------
-﻿
+~
 
------------------------------------------------------Page 6-----------------------------------------------------
-﻿
-TABLE OF CONTENTS
 
-Chapter 1 - INTRODUCTION A Brief Word About the Programs
 
-How to Type in the Programs
+                                INSIDE
+                              COMMODORE
+                                 DOS
+
+                                  by
+
+                        Richard Immers, Ph.D.
+                        Adrian Public Schools
+                          Adrian, Michigan
+
+                                and
+
+                      Gerald G. Neufeld, Ph.D.
+                        Brandon University
+                         Brandon, Manitoba
+                              Canada
+
+
+                    Technical Illustrations by
+                        Diane M. Corralejo
+
+                           DATAMOST, Inc.
+            19821 Nordhoff Street, Northridge, CA 91324
+                          (818) 709-1202
+
+~
+
+
+
+                    First Printing, July 1984
+                  Second Printing, February 1985
+
+
+
+
+
+
+
+                 RESTON PUBLISHING COMPANY, INC.
+                    A Prentice-Hall Company
+                       Reston, Virginia
+
+                       ISBN 0-8359-3091-2
+
+                Copyright © 1984 by DATAMOST, Inc.
+                       All Rights Reserved
+
+This manual is published and copyrighted by DATAMOST, Inc. All rights are
+reserved by DATAMOST, Inc. Copying, duplicating, selling or otherwise
+distributing this product is hereby expressly forbidden except by prior written
+consent of DATAMOST, Inc.
+
+The words COMMODORE, CBM, COMMODORE 64, VIC-20, VIC-1541 and the Commodore logo
+are registered trademarks of Commodore Business Machines, Inc.
+
+Commodore Business Machines was not in any way involved in the writing or other
+preparation of this manual, nor were the facts presented here reviewed for
+accuracy by them.
+
+The information presented in this manual is the result of intensive study of
+the disassembly of the 1541 DOS. Every effort has been made to provide
+error-free information. However, neither the authors nor DATAMOST, Inc. can
+accept responsibility for any loss or damage, tangible or intangible, resulting
+from use or improper or unintended use of this information.
+
+                                                       Printed in U.S.A.
+
+~
+
+
+                        ACKNOWLEDGEMENTS
+
+A manual like this one would not be possible without a great deal of technical
+assistance. Mike Todd's Disk File column in the ICPUG Newsletter proved to be
+an invaluable source of insight into the inner workings of Commodore's DOS.
+Raeto West's book, Programming the PET/CBM, was a constant companion. Jim
+Butterfield's numerous articles also provided valuable bits and pieces of
+information. Brad Templeton's POWER™ system and PAL™ assembler made the
+development of the programs in this manual a real joy. These packages are
+commercially available from Professional Software Inc. In addition, both the
+PAL disassembler and MICROMON were used as tools for disassembling the 1541 DOS.
+
+We would also like to acknowledge the patience and forbearance of our families
+and friends. Without their support, producing this manual would have been
+considerably more difficult. Mike Louder of DATAMOST, Inc. also provided
+tremendous support for its production.
+
+Finally, we would like to extend a special note of thanks to Dr. Tom MacNeil
+and Nancy Neufeld for their diligent work in proofreading this manual.
+
+This manual was written on a Commodore computer system using the WordPro 4 Plus
+word processing system. The WordPro Plus™ Series is commercially available from
+Professional Software Inc. This sophisticated word processing system made
+editing and last minute revisions much easier.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+~
+
+
+
+                        TABLE OF CONTENTS
+
+Chapter 1 - INTRODUCTION
+            A Brief Word About the Programs
+            How to Type in the Programs
 
 Chapter 2 - USING THE 1541'S DOS
-
-The Purpose of DOS
-
-Communicating with the 1541
-
-The Command Channel
-
-Using the Command Channel Diskette Housekeeping
+            The Purpose of DOS
+            Communicating with the 1541
+            The Command Channel
+            Using the Command Channel
+            Diskette Housekeeping
 
 Chapter 3 - DISKETTE FORMATTING
-
-Layout of Tracks and Sectors Layout of a Sector
-
-The Header Block The Data Block
+            Layout of Tracks and Sectors
+            Layout of a Sector
+            The Header Block
+            The Data Block
 
 Chapter 4 - DISKETTE ORGANIZATION
-
-Information Management The Directory You See
-
-The Block Availability Map The Directory Entries Program File Storage Sequential File Storage Relative File Storage
-
-User File Storage . 69 Deleted File Storage
-
-Locked Files
+            Information Management
+            The Directory You See
+            The Block Availability Map
+            The Directory Entries
+            Program File Storage
+            Sequential File Storage
+            Relative File Storage
+            User File Storage
+            Deleted File Storage
+            Locked Files
 
 Chapter 5 - DIRECT-ACCESS PROGRAMMING
+            Introduction to Direct-Access Programming
+            Beginning Direct-Access Programming
+            Block-Read Command
+            Buffer-Pointer Command
+            Block-Write Command
+            Memory-Read Command
+            Memory-Write Command
+            Block-Allocate Command
+            Block-Free Command
+            Memory-Execute Command
+            Block Execute Command
+            Direct-Access Entomology
 
-Introduction to Direct-Access Programming Beginning Direct-Access Programming
+                                7
+~
 
-Block-Read Command
-
-Buffer-Pointer Command Block-Write Command
-
-Memory-Read Command Memory-Write Command
-
-Block-Allocate Command Block-Free Command
-
-Memory-Execute Command
-
-Block Execute Command
-
-Direct-Access Entomology
-
------------------------------------------------------Page 7-----------------------------------------------------
-﻿
 Chapter 6 - INTERMEDIATE DIRECT-ACCESS PROGRAMMING
 
-Chapter 7 - DOS PROTECTION Commodore's Data Encoding Scheme
-
-Checksums
-
-Description of DOS Error Messages Analyzing a Protected Diskette Duplicating a Protection Scheme
-
-How to Create 21 Errors on a Full Track
-
-How to Create a 21 Error on a Single Sector How to Create a 23 Error on a Single Sector How to Duplicate a 23 Error on a Single Sector
-
-How to Create 23 Errors on a Full Track How to Create 20 Errors on a Full Track How to Create 27 Errors on a Full Track
-
-How to Create a 22 Error on a Single Sector How to Duplicate a 22 Error on a Single Sector How to Format a Diskette with Multiple IDs How to Backup a DOS Protected Diskette How to Copy a File
+Chapter 7 - DOS PROTECTION
+            Commodore's Data Encoding Scheme
+            Checksums
+            Description of DOS Error Messages
+            Analyzing a Protected Diskette
+            Duplicating a Protection Scheme
+            How to Create 21 Errors on a Full Track
+            How to Create a 21 Error on a Single Sector
+            How to Create a 23 Error on a Single Sector
+            How to Duplicate a 23 Error on a Single Sector
+            How to Create 23 Errors on a Full Track
+            How to Create 20 Errors on a Full Track
+            How to Create 27 Errors on a Full Track
+            How to Create a 22 Error on a Single Sector
+            How to Duplicate a 22 Error on a Single Sector
+            How to Format a Diskette with Multiple IDs
+            How to Backup a DOS Protected Diskette
+            How to Copy a File
 
 Chapter 8 - GETTING OUT OF TROUBLE
-
-Unscratching a File
-
-Recovering a Soft Sector Recovering a Hard Sector Recovering a Relative File
-
-Recovering an Entire Diskette
-
-Recovering a Physically Damaged Diskette Recovering an Unclosed File Recovering from a Short New Recovering from a Full New
+            Unscratching a File
+            Recovering a Soft Sector
+            Recovering a Hard Sector
+            Recovering a Relative File
+            Recovering an Entire Diskette
+            Recovering a Physically Damaged Diskette
+            Recovering an Unclosed File
+            Recovering from a Short New
+            Recovering from a Full New
 
 Chapter 9 - OVERVIEW OF THE 1541 DOS
-
-Introduction to 1541 DOS
-
-The Hard Working 6502 Major IP Routines
-
-Using the IP Routines Major FDC Routines
-
-Using the FDC Routines The Recording Process
-
-Block Diagram of the 1541 Writing Data to a Diskette
-
-Reading Data From a Diskette Summary Bugs in DOS 2.6
-
-Write Incompatability with 4040
-
-Late News
+            Introduction to 1541 DOS
+            The Hard Working 6502
+            Major IP Routines
+            Using the IP Routines
+            Major FDC Routines
+            Using the FDC Routines
+            The Recording Process
+            Block Diagram of the 1541
+            Writing Data to a Diskette
+            Reading Data From a Diskette
+            Summary Bugs in DOS 2.6
+            Write Incompatibility with 4040
+            Late News
 
 -----------------------------------------------------Page 8-----------------------------------------------------
 ﻿
@@ -199,10 +342,10 @@ Index
 -----------------------------------------------------Page 9-----------------------------------------------------
 ﻿
 Ignorance is a precious thing.
-
 Once lost, it can never be regained.
 
 -----------------------------------------------------Page 10-----------------------------------------------------
+
 ﻿
 CHAPTER 1
 
@@ -246,65 +389,26 @@ The programs in this book were designed to be not only useful and beneficial, bu
 
 Program listings in books and magazines often suffer from two problems: typographical errors that occur when the program is retyped into a word processor and the readability of Commodore's control characters (e.g., the reverse field heart that means Clear Screen). To overcome these problems, the program listings for this book were created using a special "lister" program. This lister program took a working BASIC program and converted it into a WordPro™ file. At the same time, control characters were spelled out in words and surrounded by curly brackets. For example, a reverse field heart was converted to {CLR}. The table below summarizes the listing conventions, the corresponding control characters, and the proper key/keys to press on your C64 or VIC-20.
 
-When You See
-
-{CLR}
-
-{HOME} {DOWN} {UP}
-
-{RIGHT} {LEFT}
-
-{RVS}
-
-{ROFF}
-
-What It Represents
-
-Clear Screen
-
-Home Cursor Cursor Down
-
-Cursor Up
-
-Cursor Right
-
-Cursor Left
-
-Reverse Field ON Reverse Field OFF
+	When You See	What It Represents	What You Type
+	------------	------------------	-------------
+	{CLR}			Clear Screen		Hold down SHIFT and press CLR/HOME
+	{HOME}			Home Cursor			Press CLR/HOME
+	{DOWN}			Cursor Down			Press CRSR/DOWN
+	{UP}			Cursor Up			Hold down SHIFT and press CRSR/DOWN
+	{RIGHT}			Cursor Right		Press CRSR/RIGHT
+	{LEFT}			Cursor Left			Hold down SHIFT and press CRSR/RIGHT
+	{RVS}			Reverse Field ON	Hold down CTRL and press 9
+	{ROFF}			Reverse Field OFF	Hold down CTRL and press 0
 
 12
 
-What You Type
-
-Hold down SHIFT and press
-
-CLR/HOME
-
-Press CLR/HOME Press CRSR/DOWN
-
-Hold down SHIFT and press
-
-CRSR/UP
-
-Press CRSR/RIGHT
-
-Hold down SHIFT and press
-
-CRSR/LEFT
-
-Hold down CTRL and press 9 Hold down CTRL and press 0
-
 -----------------------------------------------------Page 12-----------------------------------------------------
 ﻿
-NOTE 1: When a number appears inside the curly brackets, it means you repeat the
-
-control character immediately to the left of the number that many times. For example:
+NOTE 1: When a number appears inside the curly brackets, it means you repeat the control character immediately to the left of the number that many times. For example:
 
 {DOWN 5} means to press CRSR/DOWN five (5) times.
 
-NOTE 2: All programs have been listed in a column 40 characters wide. Except where
-
-special characters have been spelled out between curly brackets, the lines are listed exactly as they appear on a Commodore 64 display. Spaces must be typed in as listed. Where necessary, count the character columns to determine the appropriate number of spaces.
+NOTE 2: All programs have been listed in a column 40 characters wide. Except where special characters have been spelled out between curly brackets, the lines are listed exactly as they appear on a Commodore 64 display. Spaces must be typed in as listed. Where necessary, count the character columns to determine the appropriate number of spaces.
 
 Happy hunting and pecking!
 
@@ -325,8 +429,9 @@ A disk operating system (DOS) is a machine language program that controls a disk
 
 It does several different tasks:
 
-1. Handling communications between a disk drive and a computer. 2. Carrying out housekeeping chores such as formatting a diskette. 3. Managing the storage of information on a diskette.
-
+1. Handling communications between a disk drive and a computer.
+2. Carrying out housekeeping chores such as formatting a diskette.
+3. Managing the storage of information on a diskette.
 4. Reading and writing information onto a diskette's surface.
 
 In many computer systems, a DOS is loaded into the main computer's memory from diskette when the computer is first switched on. In this type of system many of the tasks are carried out using the computer's microprocessor and RAM. Commodore uses a different approach. All of Commodore's disk drives are intelligent peripherals. They do not have to use the computer's resources; they have their own. For example, the 1541 disk drive contains its own 6502 microprocessor, 2K of RAM, two 6522 I/O chips, and a DOS program permanently stored in 15.8K of ROM.
@@ -334,25 +439,21 @@ In many computer systems, a DOS is loaded into the main computer's memory from d
 The advantages of having an intelligent disk drive are:
 
 1. The DOS does not use any of the computer's memory.
-
-2. Some disk operations can be carried out independently from the CPU. 3. Disk operations do not slow down processing.
-
+2. Some disk operations can be carried out independently from the CPU.
+3. Disk operations do not slow down processing.
 4. One disk drive can be shared among several computers.
 
 The disadvantages of having an intelligent disk drive are:
 
 1. It is very difficult to customize DOS routines.
-
 2. You must replace the ROMs to convert to a new version of DOS.
 
 2.2 Communicating with the 1541
 
-Your Commodore 64 or VIC-20 can communicate with your 1541 disk drive in several
+Your Commodore 64 or VIC-20 can communicate with your 1541 disk drive in several ways:
 
-ways:
-
-1. Through the LOAD, SAVE, and VERIFY commands. 2. Through I/O using the command channel.
-
+1. Through the LOAD, SAVE, and VERIFY commands.
+2. Through I/O using the command channel.
 3. Through I/O using data communication channels.
 
 15
@@ -371,7 +472,7 @@ The command channel is used to send messages to the disk drive to carry out disk
 
 3. I/O using data communication channels:
 
-The 1541 DOS supports a variety of kinds of files: program files, sequential files, relative files, user files, and direct-access files. The storage and retrieval of information in files is carried out using a data communication channel. Although this manual provides detailed information regarding how files are stored and organized, no attempt is made to teach you how to develop programs that make extensive use of file handling. We would encourage readers who are interested in file handling techniques to refer to Jim Butter- field's series of articles in COMPUTE!. The only I/O applications discussed in this manual are those relating to direct-access programming (see Chapter 5).
+The 1541 DOS supports a variety of kinds of files: program files, sequential files, relative files, user files, and direct-access files. The storage and retrieval of information in files is carried out using a data communication channel. Although this manual provides detailed information regarding how files are stored and organized, no attempt is made to teach you how to develop programs that make extensive use of file handling. We would encourage readers who are interested in file handling techniques to refer to Jim Butterfield's series of articles in COMPUTE!. The only I/O applications discussed in this manual are those relating to direct-access programming (see Chapter 5).
 
 Since the rest of this manual makes extensive use of the command channel, let's examine it in some detail.
 
@@ -379,8 +480,8 @@ Since the rest of this manual makes extensive use of the command channel, let's 
 
 The command channel (channel number 15) is an important communication link between your computer and the 1541 disk drive. It has several important functions. You can use it to:
 
-1. Monitor the error status of the drive to ensure that everything is operating properly. 2. Send commands that direct the DOS to perform various housekeeping chores associated with disk handling.
-
+1. Monitor the error status of the drive to ensure that everything is operating properly.
+2. Send commands that direct the DOS to perform various housekeeping chores associated with disk handling.
 3. Send commands that direct the DOS to read or write information to specific areas on a diskette.
 
 This chapter focuses on the first two of these uses. Chapter 5 provides more detail on reading or writing to a diskette.
@@ -402,9 +503,7 @@ Let's go over each step to ensure that you know exactly what to do.
 
 1. Establishing communications using an OPEN statement.
 
-In order to establish a communication channel between your computer and your 1541 disk drive, you use an OPEN statement. An OPEN statement is a BASIC command
-
-which looks like this:
+In order to establish a communication channel between your computer and your 1541 disk drive, you use an OPEN statement. An OPEN statement is a BASIC command which looks like this:
 
 SYNTAX: OPEN file#, device#, channel#
 
@@ -432,7 +531,7 @@ In order to send commands from your computer to the 1541, you use a PRINT# state
 
 SYNTAX: PRINT# file#, "command"
 
-EXAMPLE: PRINT#15, "NO:MY DISKETTE,MD"
+EXAMPLE: PRINT#15, "N0:MY DISKETTE,MD"
 
 17
 
@@ -484,23 +583,18 @@ The INPUT# command and the GET# command operate in much the same way as the more
 ﻿
 You can check the error status of your disk drive using the command channel. The DOS monitors every disk operation as it is carried out and prepares a status report indicating whether or not the operation was completed successfully. The report consists of an error code number, an English language message, and the track and sector where the problem, if any, was encountered. Here is a subroutine that checks the error status.
 
-100 OPEN 15,8,15 : REM THE OPEN COMMAND CHANNEL
-
-500 INPUT#15,EN,EM$,ET,ES : REM INPUT THE ERROR STATUS
-
-51O IF EN < 20 THEN RETURN : REM NO ERROR ENCOUNTERED
-
-520 print en;EM$;et;es : REM PRINT THE ERROR STATUS ON SCREEN
-
-530 CLOSE 15 : END : REM ABORT ON BAD STATUS
+100 OPEN 15,8,15           : REM OPEN THE COMMAND CHANNEL
+		...
+500 INPUT#15,EN,EM$,ET,ES  : REM INPUT THE ERROR STATUS
+510 IF EN < 20 THEN RETURN : REM NO ERROR ENCOUNTERED
+520 PRINT EN;EM$;ET;ES     : REM PRINT THE ERROR STATUS ON SCREEN
+530 CLOSE 15 : END         : REM ABORT ON BAD STATUS
 
 Line 100 opens the command channel. It is a good idea to open the command channel at the beginning of your program and leave it open until the end. Line 500 inputs the status report. The error code number is stored in EN, the message in EM$, the track in ET, and the sector in ES. Error codes less than 20 may be ignored (line 510). A complete list of the error codes and messages is contained in the back of your 154l User's Manual. A detailed explanation of the nature and cause of many of these errors is provided in Chapter 7 on Disk Protection.
 
 4. CLOSE the command channel when you are done.
 
-After you have finished using the command channel, it should be closed. Recall that the open command has three parameters: the logical file number, the device number, and the channel number. The close command has only one, the logical file number. It
-
-looks like this:
+After you have finished using the command channel, it should be closed. Recall that the open command has three parameters: the logical file number, the device number, and the channel number. The close command has only one, the logical file number. It looks like this:
 
 SYNTAX: CLOSE file#
 
@@ -521,10 +615,11 @@ NOTE: Loading, running, or editing a program closes down all communication chann
 As your collection of programs grows, you will have to do some housekeeping to keep things in shape. Disk housekeeping chores include the following:
 
 1. Preparing a blank diskette for first-time use.
-
-2. Erasing the contents of a diskette currently in use. 3. Initializing a diskette. 4. Renaming a file.
-
-5. Scratching or erasing a file. 6. Copying a file.
+2. Erasing the contents of a diskette currently in use.
+3. Initializing a diskette.
+4. Renaming a file.
+5. Scratching or erasing a file.
+6. Copying a file.
 
 These operations are carried out by the DOS in response to commands sent to the drive using the command channel as indicated above. Once a disk housekeeping command is issued, the disk drive will carry out the task without further intervention by the computer. This means that you could edit or even RUN a program in RAM while the disk drive busily formats or validates a diskette. This is not really spooling. It occurs because the 1541 is an intelligent peripheral. The only thing that will cause your computer to wait for the disk drive to complete its task is your attempting to perform another disk operation. This includes closing the command channel.
 
@@ -534,49 +629,42 @@ The New Command
 
 When a fresh diskette is taken from its storage envelope, the 1541 cannot recognize it. The diskette must be formatted or newed prior to first-time use. Formatting or new- ing a diskette is performed by the DOS. The DOS proceeds to write concentric tracks made up of blocks/sectors to the diskette. In addition, a directory is set up, wherein the drive records information about all the files stored on the diskette. Chapter 3 provides a much more detailed account of this operation. The syntax for formatting a diskette is really quite simple:
 
-SYNTAX: OPEN 15, 8, 15 PRINT#15, "NO:DISK NAME,ID-
+SYNTAX:		OPEN 15,8,15
+			PRINT#15,"N0:DISK NAME,ID"
+			CLOSE 15
 
-CLOSE 15
+ALTERNATE:	PRINT#15,"N:DISK NAME,ID"
 
-ALTERNATE: PRINT#15, "N:DISK NAME,ID"
+EXAMPLE:	OPEN 15,8,15
+	 		PRINT#15,"NO:MY DISKETTE,MD"
+			CLOSE 15
 
-EXAMPLE: OPEN 15, 8, 15
-
-PRINT#15, "NO:MY DISKETTE,MD"
-
-CLOSE 15
-
-DOS 5.1: >NO:DISK NAME,ID
-
->N:DISK NAME,ID
+DOS 5.1:	>NO:DISK NAME,ID
+			>N:DISK NAME,ID
 
 20
 
 -----------------------------------------------------Page 20-----------------------------------------------------
 ﻿
-The disk command, "NO:MY DISKETTE,MD", is sent to the drive by the PRINT#15 statement. The command has three parameters. The first parameter within quotes is NO:. The N stands for NEW. The 0 is a holdover from the dual drive system and indicates which drive. The 0 is optional on the 1541 and may be omitted. The colon terminates the DOS command. The second parameter is the disk name. It is limited to 16 characters in length. Generally these are alphanumeric characters. In the example above, we named the diskette: MY DISKETTE. The disk name is cosmetic and appears in the directory for reference purposes only. It is not written anywhere else on the diskette. The disk name is followed by a comma. The DOS looks or parses for this. After the comma are two alphanumeric characters for the disk ID. In the above example we selected MD as our disk identifier. The ID is written to every block or sector on the diskette. It is impossible to alter. The DOS repeatedly looks at the ID of a sector to be sure that you have not switched diskettes on it. Each diskette should be formatted with a unique ID. This will prevent the DOS from inadvertently overwriting programs on what appears to be an identical diskette.
+The disk command, "N0:MY DISKETTE,MD", is sent to the drive by the PRINT#15 statement. The command has three parameters. The first parameter within quotes is N0:. The N stands for NEW. The 0 is a holdover from the dual drive system and indicates which drive. The 0 is optional on the 1541 and may be omitted. The colon terminates the DOS command. The second parameter is the disk name. It is limited to 16 characters in length. Generally these are alphanumeric characters. In the example above, we named the diskette: MY DISKETTE. The disk name is cosmetic and appears in the directory for reference purposes only. It is not written anywhere else on the diskette. The disk name is followed by a comma. The DOS looks or parses for this. After the comma are two alphanumeric characters for the disk ID. In the above example we selected MD as our disk identifier. The ID is written to every block or sector on the diskette. It is impossible to alter. The DOS repeatedly looks at the ID of a sector to be sure that you have not switched diskettes on it. Each diskette should be formatted with a unique ID. This will prevent the DOS from inadvertently overwriting programs on what appears to be an identical diskette.
 
 A "full" new on a diskette takes roughly 2-3 minutes. There is a quicker way to erase a diskette that has already been used. This is accomplished by leaving off the disk ID. For example:
 
-SYNTAX: OPEN 15, 8, 15 PRINT#15, "NO:DISK NAME-
+SYNTAX:		OPEN 15, 8, 15
+			PRINT#15, "N0:DISK NAME"
+			CLOSE 15
 
-CLOSE 15
+ALTERNATE:	PRINT#15, "N:DISK NAME"
 
-ALTERNATE: PRINT#15, "N:DISK NAME"
+EXAMPLE:	OPEN 15, 8, 15
 
-EXAMPLE: OPEN 15, 8, 15
+			PRINT#15, "N0:TEST DISKETTE"
+			CLOSE 15
 
-PRINT#15, "NO:TEST DISKETTE"
+DOS 5.1:	>N0:DISK NAME
+			>N:DISK NAME
 
-CLOSE 15
-
-DOS 5.1: >NO:DISK NAME
-
->N:DISK NAME
-
-Notice that no comma or ID follows the disk name. This command will work only on a diskette that has previously been formatted. It is referred to as a "short" new. A "short" new simply erases the first sector in the directory and writes an empty BAM (block availability map) to tell the DOS that we have a fresh diskette in use. NOTE: A diskette that is plagued by read or write errors does not have to be pitched. Copy the files to another diskette first. Then do a "full" new on the offending diskette. This will erase and reformat the entire diskette. A "short" new rewrites only sectors 0 and 1 of track 18 and will not eliminate any read or write errors. See Chapter 8 about
-
-how to recover from both a "short" new and a "full" new.
+Notice that no comma or ID follows the disk name. This command will work only on a diskette that has previously been formatted. It is referred to as a "short" new. A "short" new simply erases the first sector in the directory and writes an empty BAM (block availability map) to tell the DOS that we have a fresh diskette in use. NOTE: A diskette that is plagued by read or write errors does not have to be pitched. Copy the files to another diskette first. Then do a "full" new on the offending diskette. This will erase and reformat the entire diskette. A "short" new rewrites only sectors 0 and 1 of track 18 and will not eliminate any read or write errors. See Chapter 8 about how to recover from both a "short" new and a "full" new.
 
 The Initialize Command
 
@@ -586,23 +674,18 @@ Initialization has nothing to do with formatting. APPLE™ owners format a diske
 
 -----------------------------------------------------Page 21-----------------------------------------------------
 ﻿
-SYNTAX: OPEN 15, 8, 15
+SYNTAX:		OPEN 15, 8, 15
+			PRINT#15, "I0"
+			CLOSE 15
 
-PRINT#15, "10"
+ALTERNATE:	PRINT#15, "I"
 
-CLOSE 15
-
-ALTERNATE: PRINT#15, "I"
-
-DOS 5.1: >I0
-
->I
+DOS 5.1:	>I0
+			>I
 
 The I is short for INITIALIZE. The drive number can be ignored if you are using only one 1541. The drive motor purrs for a few seconds and then settles down. It's that simple. It is a good habit to initialize a diskette each time you insert it into your 1541 drive. This point cannot be overemphasized. Do it yourself. Do not rely upon the "autoinit" feature of the drive. Initialization prevents the DOS from overwriting files in the event that two diskettes with identical IDs are swapped. The drive cannot tell the difference between two diskettes with identical IDs since it is the ID that the DOS uses to identify a diskette. Initialization also assures you that a diskette is properly seated in the drive before use.
 
-The 1541 drive has a built in autoinitialization feature. Once it encounters an error it will retry a disk operation several times. Often it can recover from an error on its own. If it fails, it gives up. Before doing so, though, it will do a "bump." On a bump the read/write head is stepped outwards 45 tracks (slight overkill) to assure that it is on track 1. The drive clatters when a protrusion on the stepper motor's drive pulley bumps up against a mechanical stop. (It really isn't a melt down.) The head then steps inwards
-
-to track 18 and the DOS awaits further instructions. Self initialization avoids this scenario.
+The 1541 drive has a built in autoinitialization feature. Once it encounters an error it will retry a disk operation several times. Often it can recover from an error on its own. If it fails, it gives up. Before doing so, though, it will do a "bump." On a bump the read/write head is stepped outwards 45 tracks (slight overkill) to assure that it is on track 1. The drive clatters when a protrusion on the stepper motor's drive pulley bumps up against a mechanical stop. (It really isn't a melt down.) The head then steps inwards to track 18 and the DOS awaits further instructions. Self initialization avoids this scenario.
 
 Initialize every time you insert a diskette into the drive.
 
@@ -612,88 +695,61 @@ The Rename Command
 
 Occasionally you will want to change the name of a file stored on a diskette. To rename a file you first open the command channel and then send the rename command like this:
 
-syntax: OPEN 15, 8, 15
+SYNTAX:		OPEN 15, 8, 15
+			PRINT#15,"R0:NEW NAME=OLD NAME"
+			CLOSE 15
 
-PRINT#15, "RO:NEW NAME=OLD NAME"
+ALTERNATE:	PRINT#15, "R:NEW NAME=OLD NAME"
 
-CLOSE 15
+EXAMPLE:	OPEN 15, 8, 15
+			PRINT#15, "R0:DISPLAY T&S=DTS"
+			CLOSE 15
 
-ALTERNATE: PRINT#15, "R:NEW NAME=OLD NAME"
-
-EXAMPLE: OPEN 15, 8, 15
-
-PRINT#15, "RO:DISPLAY T&S=DTS"
-
-CLOSE 15
-
-DOS 5.1: >RO:NEW NAME=OLD NAME
-
->R:NEW NAME=OLD NAME
+DOS 5.1:	>R0:NEW NAME=OLD NAME
+			>R:NEW NAME=OLD NAME
 
 22
 
 -----------------------------------------------------Page 22-----------------------------------------------------
 ﻿
-Again the syntax is exacting but simple to follow. The RO: means to rename on drive 0. It is short for RENAMEO:. As before, the 0 is optional on the 1541. The next parameter is the new file name. A file name is generally alphanumeric in nature and 16 characters are allowed at the maximum. (Commas, colons, semicolons, and wild cards are not permitted. Cursor control and reverse video characters should be avoided.) The new file name is followed by an " = " sign. The last parameter is the existing or old file name. It must be spelled out exactly as it appears in the directory. Wild cards (*,?) are not allowed. If you make a typo on this parameter or the file does not appear in the directory, the rename command fails. No damage is done, so relax. In the above example our new file name is DISPLAY T&S. It replaces the old file name DTS. One final point. You cannot rename a file that is currently open for a read or write.
+Again the syntax is exacting but simple to follow. The R0: means to rename on drive 0. It is short for RENAME0:. As before, the 0 is optional on the 1541. The next parameter is the new file name. A file name is generally alphanumeric in nature and 16 characters are allowed at the maximum. (Commas, colons, semicolons, and wild cards are not permitted. Cursor control and reverse video characters should be avoided.) The new file name is followed by an "=" sign. The last parameter is the existing or old file name. It must be spelled out exactly as it appears in the directory. Wild cards (*,?) are not allowed. If you make a typo on this parameter or the file does not appear in the directory, the rename command fails. No damage is done, so relax. In the above example our new file name is DISPLAY T&S. It replaces the old file name DTS. One final point. You cannot rename a file that is currently open for a read or write.
 
 The Copy Command
 
 The copy command allows you to easily backup an existing file on your diskette. There are three restrictions attached. First, the new file must have a different name. Second, the copy command will not work on a relative file. Third, you must have enough room on the diskette. The copy command looks like this:
 
-SYNTAX:
+SYNTAX:		OPEN 15, 8, 15
+			PRINT#15, "C0:BACKUP=0:ORIGINAL"
+			CLOSE 15
 
-OPEN 15, 8, 15
+ALTERNATE:	PRINT#15, "C:BACKUP=ORIGINAL"
 
-PRINT#15, "CO:BACKUP=0:ORIGINAL-
+EXAMPLE:	OPEN 15, 8, 15
+			PRINT#15, "C0:MY PROGRAM B/U=0:MY PROGRAM"
+			CLOSE 15
 
-CLOSE 15
-
-ALTERNATE:
-
-PRINT#15, "C:BACKUP=ORIGINAL"
-
-EXAMPLE:
-
-OPEN 15, 8, 15
-
-PRINT#15, "CO:MY PROGRAM B/U=0:MY PROGRAM"
-
-CLOSE 15
-
-DOS 5.l:
-
->CO:BACKUP=0:ORIGINAL >C:BACKUP=ORIGINAL
+DOS 5.l:	>CO:BACKUP=0:ORIGINAL
+			>C:BACKUP=ORIGINAL
 
 The C is short for COPY. The new file above is called MY PROGRAM B/U. It is a backup copy of a previous program called MY PROGRAM. Note that we must specify the drive number twice. Again this is a holdover from a dual drive configuration. The C does not appear twice, however. The same restrictions that apply to the rename command are also in effect here, i.e., 16 character file name limit, use of restricted characters, etc. The drive number is optional. See the alternate syntax to save a few keystrokes.
 
 It is also possible to merge two or more sequential data files using the copy command. The syntax for this is as follows:
 
-SYNTAX:
-
-OPEN 15, 8, 15
-
-PRINT#15, "CO:COMBINED=0:FILE1,O:FILE2,0:FILE3" CLOSE 15
+SYNTAX:		OPEN 15, 8, 15
+			PRINT#15, "C0:COMBINED=0:FILE1,0:FILE2,0:FILE3" CLOSE 15
 
 23
 
 -----------------------------------------------------Page 23-----------------------------------------------------
 ﻿
-ALTERNATE:
+ALTERNATE:	PRINT#15, "C:COMBINED=FILE1,FILE2,FILE3"
 
-PRINT#15, "C:COMBINED=FILE1,FILE2,FILE3"
+EXAMPLE:	OPEN 15, 8, 15
+			PRINT#15, "C0:MAILFILE=0:NAME,0:ADDRESS,0:CITY"
+			CLOSE 15
 
-EXAMPLE:
-
-OPEN 15, 8, 15
-
-PRINT#15, "C0:MAILFILE=0:NAME,O:ADDRESS,0:CITY"
-
-CLOSE 15
-
-DOS 5.l:
-
-> CO:COMBINED=0:FILE1,O:FILE2,0:FILE3
-> C:COMBINED=FILEl,FILE2,FILE3
+DOS 5.l:	>C0:COMBINED=0:FILE1,0:FILE2,0:FILE3
+			>C:COMBINED=FILEl,FILE2,FILE3
 
 Our large file now consists of several files appended together. While this feature of the copy command is available, it is rarely used. Few programming techniques would require or ever utilize this feature. Note that this technique cannot be used to append a subroutine onto a BASIC program; the subroutine cannot be merged into the main program by the disk drive. You will need to use a programmer's aid like POWER™, SYSRES™, or BASIC AID™ for the C64 to do this.
 
@@ -701,33 +757,27 @@ The Scratch Command
 
 To get rid of an unwanted file, we scratch it. The only exception is an unclosed file. An unclosed file is one that appears in the directory as having zero blocks and whose file type is preceded by an asterisk (*SEQ, *PRG, etc.). This will be explained below. To scratch a file, first remove the write protect tab and key in:
 
-SYNTAX: OPEN 15, 8, 15 PRINT#15, "SO:FILE NAME"
+SYNTAX:		OPEN 15, 8, 15
+			PRINT#15, "S0:FILE NAME"
+			CLOSE 15
 
-CLOSE 15
+ALTERNATE:	PRINT#15, "S:FILE NAME"
 
-ALTERNATE: PRINT#15, "S:FILE NAME-
+EXAMPLE:	OPEN 15, 8, 15 PRINT#15, "S0:TESTING 123"
+			CLOSE 15
 
-EXAMPLE: OPEN 15, 8, 15 PRINT#15, "SO:TESTING 123"
-
-CLOSE 15
-
-DOS 5.1: >SO:FILE NAME
-
->S:FILE NAME
+DOS 5.1:	>S0:FILE NAME
+			>S:FILE NAME
 
 The scratch command requires a single parameter, the file name, preceded by S or SCRATCH. As before, the drive number is optional.
 
-There are some variations that incorporate wild cards. Wild cards in a file name are asterisks (*) or question marks (?). They should be used with utmost caution since more
+There are some variations that incorporate wild cards. Wild cards in a file name are asterisks (*) or question marks (?). They should be used with utmost caution since more than one file can be scratched at a time.
 
-than one file can be scratched at a time.
+EXAMPLE:	OPEN 15, 8, 15
+			PRINT#15, "S0:T*"
+			CLOSE 15
 
-EXAMPLE: OPEN 15, 8, 15
-
-PRINT#15, "SO:T*"
-
-CLOSE 15
-
-DOS 5.l: >so:T*
+DOS 5.l:	>S0:T*
 
 24
 
@@ -735,45 +785,38 @@ DOS 5.l: >so:T*
 ﻿
 In the above example all files beginning with the letter T, regardless of file type, will be scratched. In the event that no file starts with the letter T, none will be affected. Careless use of a wild card can have catastrophic results. For example:
 
-EXAMPLE: OPEN 15, 8, 15
+EXAMPLE:	OPEN 15, 8, 15
+			PRINT#15, "S0:*"
+			CLOSE 15
 
-PRINT#15, "SO:*" CLOSE 15
-
-DOS 5.l: >so:#
+DOS 5.l:	>S0:*
 
 The above command will scratch every file on the diskette. It is the equivalent of performing a short new on a diskette. Be careful!
 
 The second wild card is the question mark. It is used to mask out characters that are not of importance. Suppose we want to scratch a number of files whose names are all eight characters long and end in .C64. We could not use .C64* to scratch them since the match falls at the end of the file name. However, we could use:
 
-EXAMPLE: OPEN 15, 8, 15 PRINT#15, "SO:????.C64"
+EXAMPLE:	OPEN 15, 8, 15
+			PRINT#15, "S0:????.C64"
+			CLOSE 15
 
-CLOSE 15
-
-DOS 5.1: >SO:????.C64
+DOS 5.1:	>S0:????.C64
 
 Note that we used four question marks in the above example. An exact match of .C64 must occur on characters 5 through 8 of the file name. No match — no scratch. If we had 1541.C64 and C100.C64 on the disk, both would be scratched by the previous command. However, BACKUP.C64 would not be affected.
 
 More than one wild card can be used within the same command. For example:
 
-EXAMPLE: OPEN 15, 8, 15
+EXAMPLE:	OPEN 15, 8, 15
+			PRINT#15, "S0:T?ST*"
+			CLOSE 15
 
-PRINT#15, "SO:T7ST*"
-
-CLOSE 15
-
-DOS 5.1: >SO:T?ST*
+DOS 5.1:	>S0:T?ST*
 
 This command would scratch files with these names: TEST, TASTY, TESTING123. The
-
-file TOAST would not be affected. Note that it makes no sense to send a command like
-
-this: "S0:T*ST???". The asterisk has priority over the question mark. All characters that appear after the asterisk are ignored.
+file TOAST would not be affected. Note that it makes no sense to send a command like this: "S0:T*ST???". The asterisk has priority over the question mark. All characters that appear after the asterisk are ignored.
 
 A file type that begins with a * is unclosed: *SEQ, *PRG, etc. It was never closed properly. This can happen for a variety of reasons:
 
-1. The diskette may have been at its physical capacity and a disk-full situation occurred
-
-during a save or write to a diskette.
+1. The diskette may have been at its physical capacity and a disk-full situation occurred during a save or write to a diskette.
 
 2. A bad sector may have been encountered during a write to a diskette.
 
@@ -795,35 +838,22 @@ The Validate Command
 
 This command tells the DOS to reconstruct its map which shows where information is stored on the diskette, so it conforms to the files listed in the directory. This is a simple way to decorrupt a damaged diskette. However, it is not a failsafe command as will be explained shortly. A validate command looks like this:
 
-SYNTAX: OPEN 15, 8, 15
+SYNTAX:		OPEN 15, 8, 15
+			PRINT#15, "V0"
+			CLOSE 15
 
-PRINT#15, "VO"
+ALTERNATE:	PRINT#15, "V"
 
-CLOSE 15
-
-ALTERNATE: PRINT#15, "V"
-
-DOS 5.1: >VO
-
->V
+DOS 5.1:	>V0
+			>V
 
 The V is an abbreviation for VALIDATE. As before, the 0 is optional for the 1541 drive.
 
-What does a validate do? The DOS keeps a map that indicates which sectors on a diskette are currently in use. This map is stored on track 18, sector 0. It is referred to as the Block Availability Map or just the BAM for short. When the validate command is issued, all blocks are freed in the BAM on the diskette simulating a newly formatted blank diskette. The drive then picks up the first file in the directory and chains through the
+What does a validate do? The DOS keeps a map that indicates which sectors on a diskette are currently in use. This map is stored on track 18, sector 0. It is referred to as the Block Availability Map or just the BAM for short. When the validate command is issued, all blocks are freed in the BAM on the diskette simulating a newly formatted blank diskette. The drive then picks up the first file in the directory and chains through the entire file. As sectors are picked up along the way, they are allocated in the BAM as currently in use. If the file is traced successfully, all blocks associated with it are put back into the BAM as in use. The next file is then picked up out of the directory and the process continues. When all files have been traced, the new BAM is written to the diskette and the internal count now matches the directory contents.
 
-26
+So far so good. Now let's see what happens to an unclosed file. When the DOS encounters an unclosed file in the directory during a validate command, all it does is change the file type byte in the directory entry to a 0 (scratched file). No attempt is made to trace the file. When the validate operation is complete, the unclosed file will no longer appear in a directory listing and any blocks associated with it will be free. This is what you want to happen. Now let's see what happens if you attempt to SCRATCH an unclosed file.
 
------------------------------------------------------Page 26-----------------------------------------------------
-﻿
-entire file. As sectors are picked up along the way, they are allocated in the BAM as currently in use. If the file is traced successfully, all blocks associated with it are put back into the BAM as in use. The next file is then picked up out of the directory and the process continues. When all files have been traced, the new BAM is written to the diskette and the internal count now matches the directory contents.
-
-So far so good. Now let's see what happens to an unclosed file. When the DOS encounters an unclosed file in the directory during a validate command, all it does is change the file type byte in the directory entry to a 0 (scratched file). No attempt is made to trace the file. When the validate operation is complete, the unclosed file will no longer appear in a directory listing and any blocks associated with it will be free. This is what you want to happen. Now let's see what happens if you attempt to SCRATCH an unclosed
-
-file.
-
-When you scratch a file, two things happen: the file-type byte in the directory for this file is set to 0 (scratched file) and the DOS traces through the chain of sectors that make up the file and marks each sector it encounters as available for use (free) in the BAM. This is just what you want to have happen for a normal file, but it can poison the diskette when you try it on an unclosed file. Here's why. The last sector of an unclosed file was never written out to the diskette. As a result, the second to the last sector points to a sector that is not really part of the file. The DOS doesn't realize this and continues to follow the "chain." If you are lucky, the "unwritten sector" will be a empty sector (never used since the disk was formatted). If this happens, the DOS will stop because pointers point to a non-existent track and sector (75,1). If you are unlucky, the "unwritten sector" will be part of a file that you scratched last week and the pointer will just happen to point into the middle of that very important file you just saved yesterday. When this happens, the DOS will merrily deallocate the remaining sectors in your file. The next write operation to the diskette will see this nice big open space and the new information will be saved right on top of your active file. Now the situation has gone from bad to worse and is in fact pathological — hence a poisoned disk. The only solution is to inspect each file first to ensure that it is not tainted and then copy it onto another
-
-diskette.
+When you scratch a file, two things happen: the file-type byte in the directory for this file is set to 0 (scratched file) and the DOS traces through the chain of sectors that make up the file and marks each sector it encounters as available for use (free) in the BAM. This is just what you want to have happen for a normal file, but it can poison the diskette when you try it on an unclosed file. Here's why. The last sector of an unclosed file was never written out to the diskette. As a result, the second to the last sector points to a sector that is not really part of the file. The DOS doesn't realize this and continues to follow the "chain." If you are lucky, the "unwritten sector" will be a empty sector (never used since the disk was formatted). If this happens, the DOS will stop because pointers point to a non-existent track and sector (75,1). If you are unlucky, the "unwritten sector" will be part of a file that you scratched last week and the pointer will just happen to point into the middle of that very important file you just saved yesterday. When this happens, the DOS will merrily deallocate the remaining sectors in your file. The next write operation to the diskette will see this nice big open space and the new information will be saved right on top of your active file. Now the situation has gone from bad to worse and is in fact pathological — hence a poisoned disk. The only solution is to inspect each file first to ensure that it is not tainted and then copy it onto another diskette.
 
 The validate routine is aborted if an error (an unreadable sector) is encountered. When it aborts, nothing radical occurs. The new BAM is not written to the disk until the validation process has been completed. Don't worry about the blank BAM getting you in trouble; the DOS will read the old one back in before it allows you to write to the disk. However, the diskette still remains corrupted with no quick remedy in sight. Chapter 8 on recovery deals with this and other disasters.
 
@@ -846,9 +876,9 @@ This chapter describes the formatting process and the tracks and sectors of a di
 
 During the formatting (newing) process, the DOS divides the diskette into tracks and sectors. A track is a circular path on the diskette along which information is stored.
 
-Each track is concentric with the hole in the center of the diskette. There are a total of 35 tracks numbered from 1 to 35. Track 1 is the outermost track and track 35 is the
+Each track is concentric with the hole in the center of the diskette. There are a total of 35 tracks numbered from 1 to 35. Track 1 is the outermost track and track 35 is the innermost track. The read/write head may be positioned to any given track. The position of track 1 is determined by a mechanical stop that limits the outward movement of the read/write head. The other tracks are identified by their distance from track 1. The diagram below indicates the layout of the tracks on a formatted diskette.
 
-innermost track. The read/write head may be positioned to any given track. The position of track 1 is determined by a mechanical stop that limits the outward movement of the read/write head. The other tracks are identified by their distance from track 1. The diagram below indicates the layout of the tracks on a formatted diskette.
+					[track and sector layout diagrams omitted]
 
 29
 
@@ -856,24 +886,19 @@ innermost track. The read/write head may be positioned to any given track. The p
 ﻿
 Although there are only 35 tracks, the stepper motor can position the read/write head to more than 70 different positions. This might seem to imply that additional tracks could be recorded on the surface of the diskette to increase its storage capacity. Unfortunately, the accuracy of the head positioning mechanism and the width of the path of magnetization produced by the read/write head makes the use of these "phantom" tracks unreliable. If you would like to experiment with this, the programs described in Chapter 9 allow you to experiment with stepping the head around.
 
-Each track is divided into seventeen or more sectors (blocks). Each sector holds 256 bytes of data. (Some manufacturer's record data in 512 or 1024 byte sectors.) Whenever data is read from or written to a diskette, it is done one complete sector at a time.
+Each track is divided into seventeen or more sectors (blocks). Each sector holds 256 bytes of data. (Some manufacturers record data in 512 or 1024 byte sectors.) Whenever data is read from or written to a diskette, it is done one complete sector at a time.
 
 On Commodore disk drives, the tracks are not divided into a fixed number of sectors. The number of sectors depends on the track number. The outer tracks flower numbers) are longer and are divided into more sectors than the inner (higher numbered) tracks. The table below summarizes how the diskette is organized.
 
-Organization of Tracks and Sectors on a 1541 Formatted Diskette
+        Organization of Tracks and Sectors on a 1541 Formatted Diskette        
 
-Track Range of Sector Total Sectors Total Bytes
-
-Zone
- Numbers Numbers Per Track Per Track
-
-1 2 3 4
-
-1 to 17 18 to 24 25 to 30 31 to 35
-
-0 to 20 0 to 18 0 to 17 0 to 16
- 21 19 18 17
- 5376 4864 4608 4352
+               Track      Range of Sector     Total Sectors   Total Bytes
+      Zone    Numbers        Numbers            Per Track      Per Track
+      ----    --------    ---------------     -------------   -----------
+        1      1 to 17       0 to 20               21            5376
+        2     18 to 24       0 to 18               19            4864
+        3     25 to 30       0 to 17               18            4608
+        4     31 to 35       0 to 16               17            4352
 
 A total of 683 sectors are written at the time of initial formatting. Since the disk rotates at a constant speed of 300 rpm, you may wonder how Commodore manages to vary the number of sectors from zone to zone. This is accomplished by varying the rate at which data is read or written (changing the clock rate). Each of the four zones uses a different
 
@@ -881,35 +906,16 @@ A total of 683 sectors are written at the time of initial formatting. Since the 
 
 -----------------------------------------------------Page 30-----------------------------------------------------
 ﻿
-clock rate. This is accomplished by using a high speed clock and dividing the clock by N, where the value of N is determined by the zone. The table below summarizes the
+clock rate. This is accomplished by using a high speed clock and dividing the clock by N, where the value of N is determined by the zone. The table below summarizes the clock rates for each zone.
 
-clock rates for each zone.
+          Zone    Tracks    Divisor      Clock Rate      Bits/Rotation
+          ----   --------   -------   ----------------   -------------
+           1      1 to 17     13      307,692 bits/sec     61,538.4
+           2     18 to 24     14      285,714 bits/sec     57,142.8
+           3     25 to 30     15      266,667 bits/sec     53,333.4
+           4     31 to 35     16      250,000 bits/sec     50,000.0
 
-Zone
-
-1 2 3
-
-4
-
-Tracks
-
-1 to 17 18 to 24 25 to 30 31 to 35
-
-Divisor
-
-13 14 15 16
-
-Clock Rate
-
-307,692 bits/sec 285,714 bits/sec 266,667 bits/sec 250,000 bits/sec
-
-Bits/Rotation
-
-61,538.4 57,142.8 53,333.4 50,000.0
-
-This scheme provides a recording density that varies from about 4000 bits/inch on the
-
-outer tracks to almost 6000 bits/inch on the inner tracks.
+This scheme provides a recording density that varies from about 4000 bits/inch on the outer tracks to almost 6000 bits/inch on the inner tracks.
 
 If all of the possible bits could be used for data alone, we would be able to store a total of 2,027,676 bits or 253,459 bytes on a diskette. Unfortunately, not all of these bytes can be used for data. The total storage capacity of a diskette formatted on the 1541 is 174,848 bytes. The need for space to store a directory to keep track of the location of the files on a diskette (see Chapter 4) further reduces us to an effective storage capacity of 169,984 bytes (256 bytes * 664 sectors).
 
@@ -918,32 +924,32 @@ If all of the possible bits could be used for data alone, we would be able to st
 During the formatting (newing) process, the DOS creates and records onto the diskette all 683 sectors/blocks that will eventually be used for storing information. Each sector is comprised of two parts:
 
 1. A header block that identifies the sector.
-
 2. A data block that holds the 256 bytes of data.
 
 The diagram below illustrates how these parts are arranged.
 
-SECTOR #0
- SECTOR #1
-
-SECTOR #2
-
-HEADER BLOCK
-
-DATA BLOCK
-
-I
-
-HEADER BLOCK
- DATA BLOCK
-
-I
-
-HEADER BLOCK
-
-= sync mark
-
-= inter-sec gap
+      SECTOR #0                             SECTOR #1
+---------------------------------------------------------------------------
+| |              | |              |#| | |              | |                |
+| | HEADER BLOCK | |   DATA BLOCK |#| | | HEADER BLOCK | |   DATA BLOCK   | --+
+| |              | |              |#| | |              | |                |   |
+---------------------------------------------------------------------------   |
+                                                                              |
+                             +------------------------------------------------+
+                             |
+                             |             SECTOR #2   |\   
+                             |    ---------------------- \  
+                             |    |#| | |                 \ 
+                             +--> |#| | | HEADER BLOCK     x
+                                  |#| | |                 / 
+                                  ---------------------| /  
+                                                       |/   
+                                           
+                 ---              ---                 
+                 | |              |#|                 
+                 | | = sync mark  |#| = inter-sec gap 
+                 | |              |#|                 
+                 ---              ---                 
 
 The sectors are recorded in numerical sequence along the circular track. Each sector consists of an identifying header block followed by a data block. The sectors are separated from each other by an inter-record gap. A special character called a SYNC MARK is used to mark the beginning of each header or data block.
 
@@ -3362,7 +3368,7 @@ device# = 8
 
 channel# = the secondary address of the associated open statement (2 to 14)
 
-Opening a direct-access data channel establishes a communication link between the C64 and the 1541. In the first example, we opened logical file number 2 on the C64 side to device number 8 with a secondary address of 2 (channel number 2) on the 1541 side. The only time a channel number is ever referenced is as part of a direct-access command, e.g., a block-read command (Ul). Data is always read from disk (GET# file#, INPUT# file#,) or written to disk (PRINT# file#,) by way of the logical file number of the direct-access OPEN statement NOT the channel number. The logical file number and the channel number do not have to match as they do in our first OPEN example. They are two separate entities. The logical file number which resides on the C64 side passes read or write commands to the channel number on the 1541 side. Any similarity
+Opening a direct-access data channel establishes a communication link between the C64 and the 1541. In the first example, we opened logical file number 2 on the C64 side to device number 8 with a secondary address of 2 (channel number 2) on the 1541 side. The only time a channel number is ever referenced is as part of a direct-access command, e.g., a block-read command (U1). Data is always read from disk (GET# file#, INPUT# file#,) or written to disk (PRINT# file#,) by way of the logical file number of the direct-access OPEN statement NOT the channel number. The logical file number and the channel number do not have to match as they do in our first OPEN example. They are two separate entities. The logical file number which resides on the C64 side passes read or write commands to the channel number on the 1541 side. Any similarity
 
 72
 
@@ -3391,24 +3397,24 @@ NOTE: If you attempt to access a track less than 1, a track greater than 35, or 
 
 TRACK OR SECTOR.
 
-5.3 Block-Read Command (Ul)
+5.3 Block-Read Command (U1)
 
-The block-read command (Ul) transfers the contents of a given track and sector to an area of disk RAM commonly referred to as a buffer or workspace. The format of a block- read command (Ul) is:
+The block-read command (U1) transfers the contents of a given track and sector to an area of disk RAM commonly referred to as a buffer or workspace. The format of a block- read command (U1) is:
 
 SYNTAX:
 
 PRINT# file#.
- ■Ul"; channel#; drive#; track;
+ ■U1"; channel#; drive#; track;
 
 sector
 
 ALTERNATE:
 
-PRINT# file#, "Ul:" channel#; drive#; track;
+PRINT# file#, "U1:" channel#; drive#; track;
 
 sector
 
-PRINT# file#, "Ul: channel#, drive#, track,
+PRINT# file#, "U1: channel#, drive#, track,
 
 sector"
 
@@ -3442,7 +3448,7 @@ sector
 
 -----------------------------------------------------Page 73-----------------------------------------------------
 ﻿
-After a given track and sector has been transferred to a buffer with a block-read command (Ul), the buffer pointer is automatically left in position 255. Bytes 0-255 of the buffer are now accessible from the starting position, i.e., byte 0. The GET# command is normally used to retrieve one byte at a time from the buffer by way of the logical
+After a given track and sector has been transferred to a buffer with a block-read command (U1), the buffer pointer is automatically left in position 255. Bytes 0-255 of the buffer are now accessible from the starting position, i.e., byte 0. The GET# command is normally used to retrieve one byte at a time from the buffer by way of the logical
 
 file number of the direct-access OPEN statement. The GET# command is used rather
 
@@ -3450,7 +3456,7 @@ than INPUT# because the data may contain null bytes, carriage returns and/or lin
 
 the contents to the screen.
 
-lOO REM BLOCK-READ (Ul)
+lOO REM BLOCK-READ (U1)
 
 110 OPEN 15,8,15 120 PRINT#15,"I0"
 
@@ -3532,13 +3538,13 @@ An explanation of programming technique is in order here. Initialization (line 1
 
 channel (line 280).
 
-The alternate formats of the block-read command (Ul) in line 160 are:
+The alternate formats of the block-read command (U1) in line 160 are:
 
-print#15,"Ui:"2;0;i8;o
+print#15,"U1:"2;0;i8;o
 
-PRINT#15,"Ul:2,0,18,O"
+PRINT#15,"U1:2,0,18,O"
 
-Although the block-read command (Ul) comes in three basic flavors, line 160 uses the preferred format. It will be used in demonstration programs throughout the chapter for consistency. Alternate formats will appear in passing.
+Although the block-read command (U1) comes in three basic flavors, line 160 uses the preferred format. It will be used in demonstration programs throughout the chapter for consistency. Alternate formats will appear in passing.
 
 Additionally, lines 210-220 are often combined into one BASIC statement for the sake of efficiency:
 
@@ -3588,7 +3594,7 @@ llO OPEN 15,8,15 120 PRINT#15,"IO"
 
 150 OPEN 2,8,2,"*"
 
-160 PRINT#15,"Ul";2;0;18;0 170 INPUT#15,EN$,EM$,ET$,ES$
+160 PRINT#15,"U1";2;0;18;0 170 INPUT#15,EN$,EM$,ET$,ES$
 
 180 IF EN$O"00"GOTO 300
 
@@ -3630,7 +3636,7 @@ PRINT#15,"B-P:2,144"
 
 5.5 Block-Write Command (U2)
 
-The block-write command (U2) writes the data from a DOS buffer to any given track and sector on a diskette. The format of a block-write command (U2) parallels that of a block-read command (Ul). The format of a block-write command (U2) is:
+The block-write command (U2) writes the data from a DOS buffer to any given track and sector on a diskette. The format of a block-write command (U2) parallels that of a block-read command (U1). The format of a block-write command (U2) is:
 
 SYNTAX:
 
@@ -3672,7 +3678,7 @@ The first program listed below allows a disk name to be changed using a block-wr
 
 -----------------------------------------------------Page 77-----------------------------------------------------
 ﻿
-100 REM EDIT DISK NAME 110 F0RI=1T016
+100 REM EDIT DISK NAME 110 FOR I=1TO 16
 
 120 PAD$=PAD$+CHR$(160) 130 NEXTI
 
@@ -3688,7 +3694,7 @@ TO CONTINUE"
 
 180 GETC$:IFC$=""THEN180 190 IFC$OCHR$(13)GOTO180 200 PRINT"OK"
 
-210 0PEN15,8,15
+210 OPEN15,8,15
 
 220 PRINT#15,"I0"
 
@@ -3700,7 +3706,7 @@ TO CONTINUE"
 
 260 CLOSE15 270 END
 
-280 0PEN2,8,2,"#"
+280 OPEN 2,8,2,"#"
 
 290 PRINT#15,"Ui";2;o;i8;o 300 INPUT#15,EN$,EM$,ET$,ES$ 310 PRINT#15,"B-P";2; 2 320 GET#2,B$
 
@@ -3716,7 +3722,7 @@ TO CONTINUE"
 
 390 PRINT#15,"B-P";2;144
 
-400 F0RI=1T016
+400 FOR I=1TO 16
 
 410 GET#2,B$
 
@@ -3746,7 +3752,7 @@ TO CONTINUE"
 
 590 INPUT#15,EN$,EM$,ET$,ES$
 
-600 IFEN$="o6"GOT0640
+600 IFEN$="o6"GOTO 640
 
 610 PRINT"CDOWN3-"EN$", "EM$","ET$","ES$
 
@@ -3810,7 +3816,7 @@ T TAB<ROFF>"
 
 150 GETC$:IFC$=""THEN150 160 IFC$< >CHR$(13)GOTO150 170 PRINT"OK"
 
-180 0PEN15.8,15
+180 OPEN 15.8,15
 
 190 PRINT#15,"I0"
 
@@ -3822,9 +3828,9 @@ T TAB<ROFF>"
 
 230 CLOSE15 240 END
 
-250 0PEN2,8,2,"*"
+250 OPEN 2,8,2,"*"
 
-260 PRINT#15,"Ul";2;0;18;O 270 INPUT#15,EN$,EM$,ET$,ES$ 280 PRINT#15,"B-P";2;2 290 GET#2,B$
+260 PRINT#15,"U1";2;0;18;O 270 INPUT#15,EN$,EM$,ET$,ES$ 280 PRINT#15,"B-P";2;2 290 GET#2,B$
 
 300 IFB$=""THENB$=chr$(0 > 310 DOS=ASC(B$)
 
@@ -3838,7 +3844,7 @@ T TAB<ROFF>"
 
 360 PRINT#15,"B-P";2;162
 
-370 F0RI=1T02
+370 FOR I=1TO 2
 
 380 GET#2,B$
 
@@ -3854,7 +3860,7 @@ T TAB<ROFF>"
 
 500 INPUT"CD0WN3ARE YOU SURE (Y/N) YCLE FT 3>";Q$
 
-510 IFQ$0"Y"GOT0690
+510 IFQ$0"Y"GOTO 690
 
 520 NDI$=LEFT$(NDI$+CHR$(0),2 > 530 PRINT#15,"B-P";2;162 540 PRINT#2,NDI$;
 
@@ -4043,7 +4049,7 @@ HO OPEN 15,8,15 120 PRINT#15,"10"
 
 150 OPEN 2,8,2,"#1"
 
-160 print#15,"Ul";2;0;i8;o 170 INPUT#15,EN$,EM$,ET$,ES$
+160 print#15,"U1";2;0;i8;o 170 INPUT#15,EN$,EM$,ET$,ES$
 
 180 IF EN$0"00"GOTO 300
 
@@ -4161,7 +4167,7 @@ TO CONTINUE"
 
 160 GETC$:IFC$=""THEN160 170 IFC$OCHR$(13)GOTO160 180 PRINT"OK"
 
-190 0PEN15,8,15
+190 OPEN 15,8,15
 
 200 PRINT#15,"I0"
 
@@ -4189,7 +4195,7 @@ TO CONTINUE"
 
 340 1FLEN(F$ X >0ANDLEN(F$ X17GOTO360 350 GOTO920
 
-360 0PEN2,8,2,"0:"+F$+",P,R" 370 INPUT#15,EN$,EM$,ET$,ES$
+360 OPEN 2,8,2,"0:"+F$+",P,R" 370 INPUT#15,EN$,EM$,ET$,ES$
 
 380 IFEN$="O0"GOTO40O 390 GOTO940
 
@@ -4207,7 +4213,7 @@ TO CONTINUE"
 
 470 IFEN$="00"GOTO490 480 GOTO900
 
-490 0PEN2,8,2,"*2"
+490 OPEN 2,8,2,"*2"
 
 500 PRINT#15,"U1";2;o;t;s
 
@@ -4299,7 +4305,7 @@ RETURN
 
 REM HEXADECIMAL TO DECIMAL TME=0 H=0
 
-F0RI=1T016
+FOR I=1TO 16
 
 IFLEFT$(HD$,1)=MID$(H$,1,1)THENH=I:
 
@@ -4314,7 +4320,7 @@ l:GOTO1200
 1120 1130 1140 1150
  H=H-1 L=0
 
-F0RI=1T016
+FOR I=1TO 16
 
 IFRIGHT$(HD$,1)=MID$(H$,I,1)THENL=I
 
@@ -4522,7 +4528,7 @@ A block remains allocated until a diskette is validated. Unless a given track an
 
 The following program makes use of the block-allocate command to certify a formatted diskette. A worst-case binary pattern is written to any sector not currently in use. Bad sectors, if any, are allocated in the BAM. However, these bad sectors will be deallocated if the diskette is ever validated. (Sorry, but that's the nature of the beast.)
 
-100 REM CERTIFY A DISKETTE - 1541 110 F0RI=1T032
+100 REM CERTIFY A DISKETTE - 1541 110 FOR I=1TO 32
 
 120 NULL$=NULL$+CHR$(0)
 
@@ -4550,7 +4556,7 @@ il
 
 220 GETC$:IFC$=""THEN220 230 IFC$< >CHR$(13)GOTO220 240 PRINT"OK"
 
-250 0PEN15,8,15
+250 OPEN 15,8,15
 
 260 PRINT#15,"IO"
 
@@ -4572,7 +4578,7 @@ il
 
 )
 
-340 F0RI=0T0191
+340 FOR I=0TO 191
 
 350 GET#15,B$
 
@@ -4590,7 +4596,7 @@ il
 
 450 REM BUFFER 460 1=0
 
-470 FORJ=lT08
+470 FORJ=lTO 8
 
 480 PRINT#15,"M-W"CHR$(I)CHR$(4)CHR$(32)
 
@@ -4604,7 +4610,7 @@ WRITE$
 
 570 IFEN$="00"GOTO620 580 T=VAL(ET$)
 
-590 IFT=OANDC=060T0760 600 IFT=OGOTO8OO 610 S=VAL(ES$)
+590 IFT=OANDC=060TO 760 600 IFT=OGOTO8OO 610 S=VAL(ES$)
 
 620 T$=RIGHT$("O"+RIGHT$(STR$(T),LEN (STR *(T))-1),2)
 
@@ -4638,7 +4644,7 @@ WRITE$
 
 780 PRINT"{DOWN}{RVS}FAILED{ROFF}" 790 END 800 1=0
 
-810 FORJ=lT06
+810 FORJ=lTO 6
 
 820 PRINT#15,"M-W"CHR$(I)CHR$(4)CHR$(32) MID$(BAM$,1+1,32)
 
@@ -4924,7 +4930,7 @@ lOO REM BLOCK-EXECUTE
 
 130 INPUT#15,EN$,EM$,ET$,ES$
 
-140 IF EN$<>"O0"GOT0 250
+140 IF EN$<>"O0"GOTO  250
 
 97
 
@@ -4982,7 +4988,7 @@ a few of the DOS V2.6 direct-access anomalies we've found to date.
 
 Block-Read (B-R)
 
-Throughout the preceding section we relied solely upon the use of the Ul command to read a sector and not the traditional block-read command (B-R). Why? The block-read command (B-R) is unreliable, period. When the contents of a buffer are accessed with the GET# command — surprise, surprise! The number of bytes returned is a function of the number of the track you accessed. For example, a block-read (B-R) of any sector
+Throughout the preceding section we relied solely upon the use of the U1 command to read a sector and not the traditional block-read command (B-R). Why? The block-read command (B-R) is unreliable, period. When the contents of a buffer are accessed with the GET# command — surprise, surprise! The number of bytes returned is a function of the number of the track you accessed. For example, a block-read (B-R) of any sector
 
 98
 
@@ -5030,7 +5036,7 @@ line 160 from an 18 to a 1 like this:
 
 160 PRINT#15,"B-R";2;o;l;0
 
-After further experimentation on your own, you should have little trouble understanding why the Ul command replaces the block-read command (B-R). Not only do user manuals continue to promote the use of the block-read command (B-R), but they also either ignore the Ul command altogether or simply mention it in passing without even
+After further experimentation on your own, you should have little trouble understanding why the U1 command replaces the block-read command (B-R). Not only do user manuals continue to promote the use of the block-read command (B-R), but they also either ignore the U1 command altogether or simply mention it in passing without even
 
 a hint on how to use it.
 
@@ -5072,17 +5078,17 @@ Recall that we also neglected to mention the block-write command (B-W) which we 
 
 260 CLOSE 15 270 END
 
-Now run the original block-read (Ul) program that we wrote using this diskette. Be sure to change the track in line 160 from an 18 to a 1 as follows:
+Now run the original block-read (U1) program that we wrote using this diskette. Be sure to change the track in line 160 from an 18 to a 1 as follows:
 
-160 PRlNT#i5,"Ul";2;0;l;0
+160 PRlNT#i5,"U1";2;0;l;0
 
 If all goes according to our diabolical plan, byte 0 will contain a 5 which is exactly where our buffer-pointer ended up. We arbitrarily set it to position 6 in line 220 above and 256 bytes later it wraps around to position 5. (Remember that bytes are numbered from
 
 0 to 255 in a buffer area.)
 
-Now change the Ul to a B-R in line 160 and run the program again. This time, only 5 bytes can be accessed before an EOI signal is returned.
+Now change the U1 to a B-R in line 160 and run the program again. This time, only 5 bytes can be accessed before an EOI signal is returned.
 
-UJ and Ul-
+UJ and UI-
 
 Commodore has traditionally had a warm reset buried somewhere in ROM on every piece of hardware they have manufactured to date. The UJ command is to the 1541 what a SYS 64738 is to the C64, a warm reset. Or rather, that is what it's supposed to be. The issuance of a UJ command is supposed to reset the 1541. Instead, it hangs the 1541.
 
@@ -5096,9 +5102,7 @@ OPEN 15,8,15,"UJ" : CLOSE15
 
 Use U: in place of UJ.
 
-The same thing is true for the Ul- command although Commodore can't really be held responsible here. The Ul- command was implemented to set the 1541 to VIC-20 speed,
-
-not to take the C64 out to lunch.
+The same thing is true for the UI- command although Commodore can't really be held responsible here. The UI- command was implemented to set the 1541 to VIC-20 speed, not to take the C64 out to lunch.
 
 U3 -U9
 
@@ -5108,7 +5112,7 @@ are:
 
 User Number
 
-U3 (UC) U4 (UD) U5 (UE) U6 (UF) U7 (UG) U8 (UH) U9 (Ul)
+U3 (UC) U4 (UD) U5 (UE) U6 (UF) U7 (UG) U8 (UH) U9 (U1)
 
 Jump Address
 
@@ -5147,7 +5151,7 @@ DIRECT-ACCESS PROGRAMMING
 
 NOTE: This chapter is not intended for beginners. The reader is assumed to be relatively familiar with the direct-access programming commands described in Chapter 5.
 
-The intermediate level of direct-access programming involves passing requests directly to the Floppy Disk Controller (FDC) via the job queue. Normally a 1541 command is initiated on the C64 side (e.g., SAVE, a block-read (Ul), etc.). The command is interpreted by the 1541's 6502 Interface Processor (IP) as a set of simple operations called jobs. (This is analogous to the way the BASIC interpreter works inside the C64.) These jobs are poked into an area of 1541 RAM called the job queue. Every 10 milliseconds the job queue is scanned by the Floppy Disk Controller (FDC). If a job request is found the FDC executes it. The complete set of jobs that the FDC can perform are as follows:
+The intermediate level of direct-access programming involves passing requests directly to the Floppy Disk Controller (FDC) via the job queue. Normally a 1541 command is initiated on the C64 side (e.g., SAVE, a block-read (U1), etc.). The command is interpreted by the 1541's 6502 Interface Processor (IP) as a set of simple operations called jobs. (This is analogous to the way the BASIC interpreter works inside the C64.) These jobs are poked into an area of 1541 RAM called the job queue. Every 10 milliseconds the job queue is scanned by the Floppy Disk Controller (FDC). If a job request is found the FDC executes it. The complete set of jobs that the FDC can perform are as follows:
 
 1. Read a sector. 2. Write a sector.
 
@@ -5244,7 +5248,7 @@ $0000 - $00FF $0100 - $01FF $0200 - $03FF $0300 - $03FF $0400 - $04FF $0500 - $0
 
 Not available (COMMAND BUFFER) $0000 $0006 $0007 $0001 $0008 $0009 $0002 $000A $000B $0003 $000C $000D Not available (BAM)
 
-For example, a block-read command (Ul) issued by the C64 to read the contents of track 18, sector 0 into buffer number 0 ($0300-$03FF) is checked for a syntax error and then broken down by the IP. In time, the FDC will find an $80 (128) at address $0000 in the job queue table, a $12 (18) at address $0006 in the header table, and a $00 (0) at address $0007 in the header table. Armed with that information, the FDC will attempt to seek (find) the track and read the sector. Upon successful completion of the read, the contents of the sector will be transferred to buffer number 0 ($0300-$03FF) and a $01 (1) will be returned by the FDC to address $0000. (If the job request could not be completed for some reason, the job request would be aborted and the corresponding error code would be stored at address $0000 instead.) Interrogation of the error channel will transfer the IP counterpart of the FDC error code, the English message, the track
+For example, a block-read command (U1) issued by the C64 to read the contents of track 18, sector 0 into buffer number 0 ($0300-$03FF) is checked for a syntax error and then broken down by the IP. In time, the FDC will find an $80 (128) at address $0000 in the job queue table, a $12 (18) at address $0006 in the header table, and a $00 (0) at address $0007 in the header table. Armed with that information, the FDC will attempt to seek (find) the track and read the sector. Upon successful completion of the read, the contents of the sector will be transferred to buffer number 0 ($0300-$03FF) and a $01 (1) will be returned by the FDC to address $0000. (If the job request could not be completed for some reason, the job request would be aborted and the corresponding error code would be stored at address $0000 instead.) Interrogation of the error channel will transfer the IP counterpart of the FDC error code, the English message, the track
 
 104
 
@@ -6200,7 +6204,7 @@ If it's any comfort at all, a loader cannot check the integrity of said track ei
 ﻿
 INTERROGATE A TRACK scans a single track using the job queue. The track is found with a SEEK and then the integrity of each sector is verified with a READ. IP error codes are returned to the screen. No BUMP occurs. The routine may occasionally provide erroneous information. This is a major shortcoming of a READ from the queue. Certain errors are returned clean as a whistle (22, 23, 27). A partially formatted track (mid-track 21 error) or a smattering of 20 errors tend to throw the FDC into an absolute tizzy. Make note of this. Repeated runs of the same track often return a different error pattern. Errors tend to accumulate when a BUMP is overridden. Solution? See the following paragraph.
 
-SHAKE, RATTLE, AND ROLL also scans a single track by using a Ul command rather than a direct READ from the job queue. The track is still found by a SEEK, however, to prevent 29 errors in the event that multiple formatting played a part in the protection scheme. A 29 error is not an error per se. It is merely a stumbling block. A Ul without a SEEK to a multiple-formatted diskette will report a DISK ID MISMATCH. Information can be stored on a track with a different ID. A loader will retrieve it by the same method we're using here. Errors will force a BUMP so use discretion. Please note that a full track of 21 errors, 23 errors, or 27 errors does not need to be read with this routine. After you analyze a track, write the errors down and file your notes away for archival needs. Your 1541 will love you for it.
+SHAKE, RATTLE, AND ROLL also scans a single track by using a U1 command rather than a direct READ from the job queue. The track is still found by a SEEK, however, to prevent 29 errors in the event that multiple formatting played a part in the protection scheme. A 29 error is not an error per se. It is merely a stumbling block. A U1 without a SEEK to a multiple-formatted diskette will report a DISK ID MISMATCH. Information can be stored on a track with a different ID. A loader will retrieve it by the same method we're using here. Errors will force a BUMP so use discretion. Please note that a full track of 21 errors, 23 errors, or 27 errors does not need to be read with this routine. After you analyze a track, write the errors down and file your notes away for archival needs. Your 1541 will love you for it.
 
 INTERROGATE A DISKETTE is the lazy man's routine. It scans an entire diskette reporting only bad sectors to the screen. The program is essentially INTERROGATE A TRACK in a loop. Note that you may have to patch around a track to map the entire diskette. See the example patch above.
 
@@ -6290,7 +6294,7 @@ INPUT"{DOWN}ARE YOU SURE Y{LEFT 3}"
 
 IFQ$<>"Y"THENEND
 
-0PEN15,8,15
+OPEN 15,8,15
 
 PRINT#15,"10"
 
@@ -6308,7 +6312,7 @@ PRINT#15,"10"
 
 240 REM SEEK 250 J0B=176 260 GOSUB 400
 
-270 F0RI=0T023 280 READD
+270 FOR I=0TO 23 280 READD
 
 290 D$=D$+CHR$(D) 300 NEXTI
 
@@ -6360,7 +6364,7 @@ FULL TRACK 21 ERROR SOURCE LISTING
 
 100 REM 21.PAL 110 REM
 
-120 0PEN2,8,2,"@0:21.B,P,W"
+120 OPEN 2,8,2,"@0:21.B,P,W"
 
 130 REM
 
@@ -6427,7 +6431,7 @@ DESTROY A SECTOR
 
 190 IFQ$< >"Y"THEMEND
 
-200 0PEN15,8,15
+200 OPEN 15,8,15
 
 210 PRINT#15,"10"
 
@@ -6443,11 +6447,11 @@ DESTROY A SECTOR
 
 280 IFS=OTHENS=NS:GOTO300 290 S=S-1
 
-300 J0B=176 310 GOSUB 570 320 REM READ 330 J0B=128 340 GOSUB 570 350 F0RJ=0T07 360 F0RI=0T07 370 READD
+300 J0B=176 310 GOSUB 570 320 REM READ 330 J0B=128 340 GOSUB 570 350 FOR J=0TO 7 360 FOR I=0TO 7 370 READD
 
 380 D$(J)=D$(J)+CHR$(D> 390 NEXTI 400 NEXTJ 410 1=0
 
-420 F0RJ=OT07
+420 FOR J=OTO 7
 
 430 PRINT#15,"M-W"CHR$(I)CHR$(5)CHR$(8)D
 
@@ -6508,7 +6512,7 @@ SINGLE SECTOR 21 ERROR SOURCE LISTING
 
 100 REM DAS.PAL 110 REM
 
-120 0PEN2,8,2,"@0:DAS.B,P,W"
+120 OPEN 2,8,2,"@0:DAS.B,P,W"
 
 130 140 150 160 170 180 190 200 210 220 230 240 250 260 270 280 290 300 310 320 330 340 350 360 370
  REM
@@ -6625,7 +6629,7 @@ INPUT"{DOWN}ARE YOU SURE
 
 IF0$O"Y"THENEND
 
-0PEN15.8,15
+OPEN 15.8,15
 
 PRINT#15,"10"
 
@@ -6650,11 +6654,11 @@ GOSUB 550 REM READ J0B=128
 
 GOSUB 550
 
-F0RJ=0T011 F0RI=0T07 READD
+FOR J=0TO 11 FOR I=0TO 7 READD
 
 D$(J)=D$(J)+CHR$(D> NEXTI NEXTJ 1=0
 
-F0RJ=0T011
+FOR J=0TO 11
 
 PRINT#15, "M-WCHR$ (I) CHR$ (5) CHR$ (8) D
 
@@ -6705,7 +6709,7 @@ HR$(JOB)
 
 610 IFE$=""THENE$=CHR$(0> 620 E=ASC(E$)
 
-630 IFTRY=500GOT0660 640 IFEM27GOTO580 650 RETURN 660 CLOSE15
+630 IFTRY=500GOTO 660 640 IFEM27GOTO580 650 RETURN 660 CLOSE15
 
 670 PRINT"{DOWN}{RVS}FAILED{ROFF}" 680 END
 
@@ -6739,7 +6743,7 @@ SINGLE SECTOR 23 ERROR SOURCE LISTING
 
 100 REM 23A.PAL 110 REM
 
-120 0PEN2,8,2,"@0:23A.B.P,W"
+120 OPEN 2,8,2,"@0:23A.B.P,W"
 
 130 REM
 
@@ -6879,7 +6883,7 @@ INPUT"{DOWN}ARE YOU SURE Y{LEFT 3}"
 
 IFQ$< >"Y"THENEND
 
-0PEN15,8,15
+OPEN 15,8,15
 
 PRINT#15,"I0"
 
@@ -6906,17 +6910,17 @@ TO CONTINUE"
 
 PRINT"OK"
 
-0PEN15,3,15
+OPEN 15,3,15
 
 REM SEEK J0B=176
 
 GOSUB 650
 
-FORJ=OT010 F0RI=0T07 READD
+FORJ=OTO 10 FOR I=0TO 7 READD
 
 D$(J)=D$(J)+CHR$(D) NEXTI NEXTJ 1=0
 
-F0RJ=0T010
+FOR J=0TO 10
 
 PRINT#15,"M-W'CHR$ <I)CHR$(5)CHR$(8)D
 
@@ -6999,7 +7003,7 @@ DUPLICATE A SINGLE SECTOR 23 ERROR SOURCE LISTING
 
 100 REM 23B.PAL 110 REM
 
-120 0PEN2,8,2,"@0:23B.B,P,W"
+120 OPEN 2,8,2,"@0:23B.B,P,W"
 
 130 REM
 
@@ -7117,7 +7121,7 @@ FULL TRACK 23 ERROR
 
 170 IFQ$<>"Y"THENEND
 
-180 0PEN15,S,15
+180 OPEN 15,S,15
 
 190 PRINT315,"10"
 
@@ -7139,11 +7143,11 @@ FULL TRACK 23 ERROR
 ﻿
 320 GOSUB 580
 
-330 IFS>0GOTO460 340 F0RJ=0T011 350 F0RI=OT07 360 READD
+330 IFS>0GOTO460 340 FOR J=0TO 11 350 FOR I=OTO 7 360 READD
 
 370 D$(J)=D$(J)+CHR$(D) 380 NEXTI 390 NEXTJ 400 1=0
 
-410 F0RJ=0T011
+410 FOR J=0TO 11
 
 420 PRINT#15,"M-W"CHR$(I)CHR$(5)CHR$(8)D
 
@@ -7223,7 +7227,7 @@ FULL TRACK 23 ERROR SOURCE LISTING
 
 100 REM 23M.PAL 110 REM
 
-120 0PEN2,8,2,"@0:23M.B,P,W"
+120 OPEN 2,8,2,"@0:23M.B,P,W"
 
 130 REM
 
@@ -7343,7 +7347,7 @@ SINGLE SECTOR 20 ERROR
 
 190 IFQ$<>"Y"THENEND
 
-200 0PEN15,8,15
+200 OPEN 15,8,15
 
 210 PRINT#15,"I0"
 
@@ -7361,11 +7365,11 @@ SINGLE SECTOR 20 ERROR
 
 300 JOB=176 310 GOSUB 570 320 REM READ 330 J0B=128 340 GOSUB 570
 
-350 F0RJ=0T011 360 F0RI=0T07 370 READD
+350 FOR J=0TO 11 360 FOR I=0TO 7 370 READD
 
 380 D$(J)=D$(J)+CHR$(D) 390 NEXTI 400 NEXTJ 410 1=0
 
-420 F0RJ=0T011
+420 FOR J=0TO 11
 
 430 PRINT#15,"M-W"CHR$(I)CHR$(5)CHR$(8)D
 
@@ -7387,7 +7391,7 @@ HR$(224)
 
 500 IFE$=""THENE$=CHR$(0) 510 E=ASC(E$)
 
-520 IFEM27GOT0480 530 CLOSE15
+520 IFEM27GOTO 480 530 CLOSE15
 
 540 PRINT"{DOWN}DONE!" 550 END
 
@@ -7449,7 +7453,7 @@ SINGLE SECTOR 20 ERROR SOURCE LISTING
 
 REM 20.PAL REM
 
-0PEN2,8,
+OPEN 2,8,
 
 REM
 
@@ -7558,7 +7562,7 @@ FULL TRACK 20 ERROR
 ﻿
 170 IFQ$<>"Y"THENEND
 
-180 0PEN15,8,15
+180 OPEN 15,8,15
 
 190 PRINT#15."10"
 
@@ -7576,7 +7580,7 @@ FULL TRACK 20 ERROR
 
 280 J0B=176 290 GOSUB 580
 
-300 F0RI=0T023 310 READD
+300 FOR I=0TO 23 310 READD
 
 320 D$=D$+CHR$(D) 330 I$=I$+CHR$(0) 340 NEXTI
 
@@ -7594,11 +7598,11 @@ D$
 
 I$
 
-410 F0RJ=0T024 420 F0RI=0T07 430 READD
+410 FOR J=0TO 24 420 FOR I=0TO 7 430 READD
 
 440 D$(J)=D$(J)+CHR$(D) 450 NEXTI 460 NEXTJ 470 1=0
 
-480 F0RJ=0T024
+480 FOR J=0TO 24
 
 490 PRINT#15,"M-W"CHR$(I)CHR$(4)CHR$(8)D
 
@@ -7783,7 +7787,7 @@ REM REM
 
 120 130 140 150 160 170 180 190 200 210
 
-0PEN2,8,2,"@0:20M.
+OPEN 2,8,2,"@0:20M.
 
 REM
 
@@ -8071,7 +8075,7 @@ FULL TRACK 27 ERROR
 
 170 IFQ$<>"Y"THENEND
 
-180 0PEN15,8,15
+180 OPEN 15,8,15
 
 190 PRINT#15,"10"
 
@@ -8089,7 +8093,7 @@ FULL TRACK 27 ERROR
 
 280 J0B=176 290 GOSUB 580
 
-300 FORI=OT023 310 READD
+300 FORI=OTO 23 310 READD
 
 320 D$=D$+CHR$(D) 330 I$=I$+CHR$(0) 340 NEXTI
 
@@ -8111,11 +8115,11 @@ D$
 
 I$
 
-410 F0RJ=0T025 420 F0RI=0T07 430 READD
+410 FOR J=0TO 25 420 FOR I=0TO 7 430 READD
 
 440 D$(J)=D$(J)+CHR$(D) 450 NEXTI 460 NEXTJ 470 1=0
 
-480 F0RJ=0T025
+480 FOR J=0TO 25
 
 490 PRINT#15,"M-W"CHR$(I)CHR$(4)CHR$(8)D
 
@@ -8177,7 +8181,7 @@ FULL TRACK 27 SOURCE LISTING
 
 100 REM 27M.PAL 110 REM
 
-120 0PEN2,8,2,"@0:27M.B,P,W"
+120 OPEN 2,8,2,"@0:27M.B,P,W"
 
 130 REM
 
@@ -8424,7 +8428,7 @@ SINGLE SECTOR 22 ERROR
 
 180 IFQ$<>"Y"THENEND
 
-190 0PEN15,8, 15
+190 OPEN 15,8, 15
 
 200 PRINT#15,"10"
 
@@ -8518,7 +8522,7 @@ T,S
 ﻿
 180 IFQ$<>"Y"THENEND
 
-190 0PEN15,8,15
+190 OPEN 15,8,15
 
 200 PRINT#15,"10"
 
@@ -8548,7 +8552,7 @@ It
 
 390 GETC$:IFC$=""THEN390 400 IFC$OCHR$(13)GOTO390 410 PRINT"0K"
 
-420 0PEN15,8,15
+420 OPEN 15,8,15
 
 430 REM SEEK 440 J0B=176 450 GOSUB 550
 
@@ -8626,13 +8630,13 @@ IN DRIVE"
 
 ATTING ID"
 
-160 0PEN15,8,15
+160 OPEN 15,8,15
 
-170 F0RI=1T035 180 T(I)=1 190 NEXTI
+170 FOR I=1TO 35 180 T(I)=1 190 NEXTI
 
 200 J0B=176
 
-210 F0RT=1T035
+210 FOR T=1TO 35
 
 220 IFT(T)=0GOTO340 230 GOSUB 970
 
@@ -8657,7 +8661,7 @@ NEXTT T=18
 
 GOSUB 970 CLOSE15
 
-PRINT"{CLR3F0RMAT A
+PRINT"{CLR3FOR MAT A
 
 =CHR$(0)
 
@@ -8676,9 +8680,9 @@ IN DRIVE"
 
 GOSUB 910
 
-0PEN15,8.15
+OPEN 15,8.15
 
-F0RJ=0T06 F0RI=0T07 READD
+FOR J=0TO 6 FOR I=0TO 7 READD
 
 D$(J)=D$(J)+CHR$(D)
 
@@ -8686,7 +8690,7 @@ NEXTI NEXTJ
 
 1=0
 
-F0RJ=0T06
+FOR J=0TO 6
 
 500
 
@@ -8698,7 +8702,7 @@ PRINT#15, "M-
 
 510 1=1+8 520 NEXTJ
 
-530 F0RI=1T035
+530 FOR I=1TO 35
 
 540 PRINT#15,"M-W"CHR$(49+I)CHR$(4)CHR$(
 
@@ -8738,7 +8742,7 @@ HR$(0)CHR$(255) 740 J0B=144 750 GOSUB 970
 ﻿
 760 CLOSE15
 
-770 0PEN15,8,15
+770 OPEN 15,8,15
 
 780 PRINT#15,"NO:1541 FORMAT" 790 INPUT#15,EN$,EM$,ET$,ES$
 
@@ -8805,7 +8809,7 @@ MULTIPLE ID FORMATTING SOURCE LISTING
  FAD.PAL
 
 120
- 0PEN2,8,2,"@0:
+ OPEN 2,8,2,"@0:
 
 :fad.b,p,
 
@@ -8981,17 +8985,17 @@ Parameters: A formatted diskette.
 
 1541 BACKUP
 
-100 REM 1541 BACKUP 110 P0KE56,33 120 CLR
+100 REM 1541 BACKUP 110 POKE 56,33 120 CLR
 
-130 F0RI=1T0144 140 READD
+130 FOR I=1TO 144 140 READD
 
-150 P0KE49151+I,D
+150 POKE 49151+I,D
 
 160 NEXTI
 
 170 DIMT(35)
 
-180 F0RI=1T035 190 T(I)=1 200 NEXTI
+180 FOR I=1TO 35 190 T(I)=1 200 NEXTI
 
 210 READSRW,ERW
 
@@ -8999,19 +9003,19 @@ Parameters: A formatted diskette.
 
 230 PRINT"{DOWN}INSERT MASTER IN DRIVE" 240 GOSUB 1110
 
-250 0PEN15,8,15
+250 OPEN 15,8,15
 
 260 RW=8448
 
-270 F0RI=1T0126
+270 FOR I=1TO 126
 
-280 P0KE8447+I,0
+280 POKE 8447+I,0
 
 290 NEXTI
 
 300 RAM=8704
 
-310 P0KE252,34
+310 POKE 252,34
 
 320 C=0
 
@@ -9035,11 +9039,11 @@ Parameters: A formatted diskette.
 
 -----------------------------------------------------Page 162-----------------------------------------------------
 ﻿
-430 P0KE252,(RAM/256)
+430 POKE 252,(RAM/256)
 
 440 R=R+(NS+1) 450 GOTO620 460 REM READ
 
-470 F0RS=0T0NS 480 GOSUB1300
+470 FOR S=0TO NS 480 GOSUB1300
 
 490 PRINT"{HOME}{DOWN 7}{RVS}READING{ROF F} TRACK "T$" - SECTOR "S$ 500 J0B=128
 
@@ -9055,7 +9059,7 @@ Parameters: A formatted diskette.
 
 590 RAM=RAM+256
 
-600 P0KE252,(RAM/256)
+600 POKE 252,(RAM/256)
 
 610 NEXTS 620 NEXTT
 
@@ -9067,11 +9071,11 @@ Parameters: A formatted diskette.
 
 660 PRINT"CDOWN}INSERT CLONE IN DRIVE" 670 GOSUB 1110
 
-680 0PEN15,8,15
+680 OPEN 15,8,15
 
 690 RW=8448 700 RAM=8704
 
-710 P0KE252,34
+710 POKE 252,34
 
 720 REM SEEK
 
@@ -9091,7 +9095,7 @@ Parameters: A formatted diskette.
 
 840 RAM=RAM+(256*(NS+1))
 
-850 P0KE252,(RAM/256)
+850 POKE 252,(RAM/256)
 
 860 GOTO99O
 
@@ -9113,7 +9117,7 @@ Parameters: A formatted diskette.
 
 960 RAM=RAM+256
 
-970 P0KE252,(RAM/256)
+970 POKE 252,(RAM/256)
 
 980 NEXTS 990 NEXTT
 
@@ -9133,7 +9137,7 @@ ll
 
 1050 PRINT"DONE!" 1060 PRINT"
 
-1070 P0KE56,160
+1070 POKE 56,160
 
 1080 CLR 1090 END
 
@@ -9465,17 +9469,17 @@ Parameters: File name and file type.
 ﻿
 1541 COPY
 
-100 REM 1541 COPY 110 P0KE56.16
+100 REM 1541 COPY 110 POKE 56.16
 
 120 CLR
 
-130 P0KE251,0 140 P0KE252, 16 150 P0KE253,0
+130 POKE 251,0 140 POKE 252, 16 150 POKE 253,0
 
-160 P0KE254,16
+160 POKE 254,16
 
-170 F0RI=1T072 180 READD
+170 FOR I=1TO 72 180 READD
 
-190 P0KE49151+I,D
+190 POKE 49151+I,D
 
 200 NEXTI
 
@@ -9541,7 +9545,7 @@ Parameters: File name and file type.
 
 660 CLOSE15
 
-670 P0KE56,160
+670 POKE 56,160
 
 680 CLR 690 END
 
@@ -9557,7 +9561,7 @@ Parameters: File name and file type.
 
 800 REM INITIALIZATION
 
-810 0PEN15,8,15
+810 OPEN 15,8,15
 
 820 PRINT#15,"10"
 
@@ -9571,7 +9575,7 @@ Parameters: File name and file type.
 
 880 REM FILE NOT FOUND - FILE EXISTS
 
-890 0PEN2,8,2,"O:"+F$+","+T$+","+RW$ 900 INPUT#15,EN$,EM$,ET$,ES$
+890 OPEN 2,8,2,"O:"+F$+","+T$+","+RW$ 900 INPUT#15,EN$,EM$,ET$,ES$
 
 910 IFEN$="00"THENRETURN 920 CL0SE2
 
@@ -9612,7 +9616,7 @@ COPY A FILE SOURCE LISTING
 100 110 120 130 140 150 160 170 180 190 200 210 220 230 240 250 260 270 280 290 300 310 320 330 340 350 360 370 380 390 400 410 420 430 440 450
  REM COPY.PAL REM
 
-0PEN2,S,2,"@0:i
+OPEN 2,S,2,"@0:i
 
 REM
 
@@ -9670,7 +9674,7 @@ JSR *FFC9
 
 SAVE LDY #*00
 
-; 0PEN2,8,2
+; OPEN 2,8,2
 
 ; IN
 
@@ -9678,7 +9682,7 @@ SAVE LDY #*00
 
 close:
 
-J 0PEN2,8,2
+J OPEN 2,8,2
 
 171
 
@@ -10275,7 +10279,7 @@ USER JMP POSITION UTIL LDR COPY
 
 RENAME SCRATCH NEW
 
-Execute user routines (UO, Ul, U2, etc.).
+Execute user routines (UO, U1, U2, etc.).
 
 Position to record in relative file.
 
@@ -10479,11 +10483,11 @@ First, we'll start by inputting the four bytes we want to convert and storing th
 
 110 PRINT"<CLRJENTER FOUR BYTES (DECIMAL )<DOWN>"
 
-120 B$(O)="0":B$(1)="1":F0RK=0T07:P(K)=2
+120 B$(O)="0":B$(1)="1":FOR K=0TO 7:P(K)=2
 
 ~k:next
 
-130 F0RK=0T07:P(K)=2'N<:NEXT
+130 FOR K=0TO 7:P(K)=2'N<:NEXT
 
 140 OPEN 15,8,15
 
@@ -10491,7 +10495,7 @@ First, we'll start by inputting the four bytes we want to convert and storing th
 
 160 REM INPUT BYTES & STORE IN DISK RAM (*52/5)
 
-170 FOR K=0T03
+170 FOR K=0TO 3
 
 180 PRINT"BYTE#"K"=";:INPUT X
 
@@ -10537,7 +10541,7 @@ CHR$(0) 290 :
 
 420 SUB TO DISPLAY BINARY EQUIVALENTS 430 PRINT"7.";
 
-440 FOR L=7T00STEP-1 450 T=INT(X/2~L) 460 X=X-T*P(L) 470 PRINTB$(T);
+440 FOR L=7TO 0STEP-1 450 T=INT(X/2~L) 460 X=X-T*P(L) 470 PRINTB$(T);
 
 480 NEXT:PRINT:RETURN
 
@@ -11085,7 +11089,7 @@ The only problem that remains is to find out how much the head moves each time. 
 
 40 FOR TR=1 TO 35
 
-50 PRINT#15,"Ul:5 0"TR;0
+50 PRINT#15,"U1:5 0"TR;0
 
 60 PRINT#15,"M-R"CHR$(0)CHR$(28) 70 GET#15,X$:X=ASC(X$+CHR$(0)) 80 PRINT TRjX AND 3
 
@@ -11827,7 +11831,7 @@ people wonder if something went wrong; so they VERIFY to be sure the file has be
 
 3. The Block-Read (B-R) command:
 
-This command has been replaced by the Ul command and with good reason. The B-R command has two serious bugs that make it unusable on the 1541. The use of this command is NOT RECOMMENDED! See Chapter 5 for the gory details.
+This command has been replaced by the U1 command and with good reason. The B-R command has two serious bugs that make it unusable on the 1541. The use of this command is NOT RECOMMENDED! See Chapter 5 for the gory details.
 
 4. The Block-Write (B-W) command:
 
@@ -11877,7 +11881,7 @@ Commodore disk drives have traditionally used one or both of these commands to e
 
 from one of these commands. The command "U;" is the one to use to reset the 1541.
 
-7. Ul- command:
+7. U1- command:
 
 The 1541 manual indicates that this command is used to set the disk drive to operate correctly with the VIC-20. Current 1541's work with a VIC-20, period.
 
@@ -12332,9 +12336,9 @@ E
 
 190 DIM HX$(255),H$<15)
 
-191 FOR K=0 TO 9:H$<K)=CHR$(48+K):NEXT:F 0RK=10T015:H$ <K)=CHR$(55+K):NEXT
+191 FOR K=0 TO 9:H$<K)=CHR$(48+K):NEXT:F 0RK=10TO 15:H$ <K)=CHR$(55+K):NEXT
 
-200 F0RJ=0T0F:FORK=OTOF:HX$ <J*16+K)=H$ <J
+200 FOR J=0TO F:FORK=OTOF:HX$ <J*16+K)=H$ <J
 
 >+H$(K):NEXT:NEXT
 
@@ -12348,17 +12352,17 @@ HEXADECIMAL"
 
 240 PRINT"{DOWN} *0000":PRINT"{UP}"; 250 INPUT H$
 
-260 HL=CO:HH=C0:FORK=1T02:C=ASC(MID$(H$,
+260 HL=CO:HH=C0:FORK=1TO 2:C=ASC(MID$(H$,
 
 K) >-H0: IFOCATHENC=C-C7
 
-270 IF C<C0 OR OF THENPRINT"{UP 2}";:GO T0240
+270 IF C<C0 OR OF THENPRINT"{UP 2}";:GO TO 240
 
 280 D=ASC(MID$(H$,K+2))-HO:IFD >CATHEND=D
 
 -C7
 
-290 IF D<CO OR D>F THENPRINT"{UP 2}";:G0 T0240
+290 IF D<CO OR D>F THENPRINT"{UP 2}";:G0 TO 240
 
 300 HH=HH+C$CG" (C2-K) : HL=HL+D$CG~ (C2-K) : NEXTK
 
@@ -12368,7 +12372,7 @@ K) >-H0: IFOCATHENC=C-C7
 
 )
 
-330 0$="":FOR K=C0T0C7:GET#15.,A$: IF A$=N
+330 0$="":FOR K=C0TO C7:GET#15.,A$: IF A$=N
 
 *THENA$=Z$
 
@@ -12416,7 +12420,7 @@ FILE"
 
 100 Z$=A$:GOSUB 280:L=Z:IF ZF=1 GOTO 90 110 PRINT"{UP}"TAB(31)Z
 
-120 0PEN15,8,15,"10"
+120 OPEN 15,8,15,"10"
 
 130 OPEN 1,8,5,"@0:"+F$+",P,W" 140 INPUT#15,EN,EM$,ET,ES
 
@@ -18154,9 +18158,9 @@ DESCRIPTION OF WHAT ROM ROUTINE DOES
 
 Block read of a sector:
 
-Ul:
+U1:
 
-NOTE: The only real difference between a B-R command and a Ul (preferred) is that the Ul command move the last byte into the data buffer and stores $FF as the last byte read.
+NOTE: The only real difference between a B-R command and a U1 (preferred) is that the U1 command move the last byte into the data buffer and stores $FF as the last byte read.
 
 JSR to BLKPAR ($CC6F) to parse the block parameters.
 
@@ -32841,13 +32845,9 @@ resulting .X value is not $00, there are
 
 more to do so branch back to NM20.
 
-Transfer the bit map for this track from T0,X ($6F,X) to the BAM area (BMPNT),Y; ($6D,Y). Increment .Y and .X. If the new .X value is not. $03, we have more
+Transfer the bit map for this track from T0,X ($6F,X) to the BAM area (BMPNT),Y; ($6D,Y). Increment .Y and .X. If the new .X value is not. $03, we have more to transfer so branch back to NM30.
 
-to transfer so branch back to NM30.
-
-Compare the .Y value to $90. If it is less than $90, we have more tracks to
-
-do so branch back to NM10.
+Compare the .Y value to $90. If it is less than $90, we have more tracks to do so branch back to NM10.
 
 -----------------------------------------------------Page 389-----------------------------------------------------
 ﻿
@@ -36786,9 +36786,7 @@ timer count. .X=l
 
 .Y=most significa Loop to wait for Loop to wait for
 
-east si<
-
-gnificant byte
+least significant byte
 
 nt bit
 
@@ -37156,63 +37154,35 @@ Load .A with $55 and .X with the tail (inter-sector) gap from DTRCK ($0626) Loop
 
 Advance the header pointer HDRPNT($32/3) by 10 so it points to the start of the next header image.
 
-Decrement, the sector counter SECT ($0628) by 1 and test to see if any more sectors to do. If more, branch back to WRTSYN to do the next, sector. If no more, wait. for the last byte to be written out and
-
-then JSR to KILL ($FE00) to switch to
-
-read mode.
+Decrement, the sector counter SECT ($0628) by 1 and test to see if any more sectors to do. If more, branch back to WRTSYN to do the next, sector. If no more, wait for the last byte to be written out and then JSR to KILL ($FE00) to switch to read mode.
 
 Formatting done. Verify it!
 
 Set TRYS ($0623) to $C8 to limit, the number of attempts to verify to 200.
 
-Set BUFPNT ($30/1) to point to the start
-
-of the headers in buffer #0 ($0300) and set SECT ($0628) with the # of sectors on this track from SECTR ($43).
+Set BUFPNT ($30/1) to point to the start of the headers in buffer #0 ($0300) and set SECT ($0628) with the # of sectors on this track from SECTR ($43).
 
 429
 
 -----------------------------------------------------Page 429-----------------------------------------------------
 ﻿
-NAME
+NAME	ADDRESS	DESCRIPTION OF WHAT ROM ROUTINE DOES
 
-ADDRESS
+CMPR10	$FD39
 
-DESCRIPTION OF WHAT ROM ROUTINE DOES
+CMPR15	$FD40
 
-CMPR10 I $FD39
+CMPR20	$FD4E
 
-JSR to SYNC($F556) to wait, for a SYNC mark. Once found, set .X to $0A (there are 9 header characters to read) and .Y
+TSTDAT	$FD55
 
-$00 (point to character in header image)
+TST05	$FD58
 
-CMPR15
+TST10	$FD62
 
-CMPR20
+FMTEND	$FD67
 
-TSTDAT
-
-TST05
-
-TST10
-
-FMTEND
-
-SYNCLR
-
-$FD40
-
-$FD4E
-
-$FD55
-
-$FD58
-
-$FD62
-
-$FD67
-
-$FD75
+SYNCLR	$FD75
 
 $FD77
 
@@ -37222,11 +37192,18 @@ $FD96
 
 $FDA3
 
+
+
+
+
+
+
+JSR to SYNC($F556) to wait, for a SYNC mark. Once found, set .X to $0A (there are 9 header characters to read) and .Y $00 (point to character in header image)
+
+
 Loop to read header bytes and compare them to the image in the buffer. If any byte doesn't, match, branch to CMPR20.
 
-Header reads back OK so add 10 to BUFPNT
-
-($30) so it points to next header image.
+Header reads back OK so add 10 to BUFPNT ($30) so it points to next header image.
 
 JMP to TSTDAT ($FD62)
 
@@ -37234,33 +37211,17 @@ Bad verify. Decrement TRYS ($0623). If more attempts left, branch back to COMP (
 
 Header OK so check the data block.
 
-JSR to SYNC ($F556) to wait for the data block SYNC mark. Once found, set .Y to
-
-$BB to point to the start of the data block image in the overflow buffer
+JSR to SYNC ($F556) to wait for the data block SYNC mark. Once found, set .Y to $BB to point to the start of the data block image in the overflow buffer
 
 Loop to read and verify the 69 GCR bytes in the overflow buffer. If no match, branch to CMPR20 ($FD58) and try again.
 
-Overflow buffer OK so set .X to $FC
-
-(255-3; don't bother checking the OFF
-
-bytes at the end).
+Overflow buffer OK so set .X to $FC (255-3; don't bother checking the OFF bytes at the end).
 
 Loop to read and verify the 253 GCR bytes in data buffer #3. If no match, branch to CMPR20 ($FD58) and try again.
 
-Decrement the sector counter in SECT
+Decrement the sector counter in SECT ($0628) by 1 and test to see if any more to do. If more, branch back to CMPR10 to do next, sector. If no more, increment the track counter FTNUM ($51) and test if there are any more tracks to do. If all done, branch to FMTEND ($FD96). If more to do, JMP to END ($F99C) to step the head to the next, track.
 
-($0628) by 1 and test to see if any more
-
-to do. If more, branch back to CMPR10 to do next, sector. If no more, increment the track counter FTNUM ($51) and test if there are any more tracks to do. If all done, branch to FMTEND ($FD96). If more to do, JMP to END ($F99C) to step
-
-the head to the next, track.
-
-Set the track counter, FTNUM ($51) to
-
-$FF and the GCRFLG ($50) to 0. To flag a successful completion load .A with $01
-
-and JMP to ERRR ($F969).
+Set the track counter, FTNUM ($51) to $FF and the GCRFLG ($50) to 0. To flag a successful completion load .A with $01 and JMP to ERRR ($F969).
 
 Formatting and Verification Completed!
 
@@ -37834,11 +37795,7 @@ $FEEA
 
 PEA7A
 
-Store the value that is in .A on entry
-
-into the 6 522's data port 2, LEDPRT ($1C00; also called DSKCNT) and in the data direction register, LEDOUT ($1C02; also called DDRB2). Exit with a JMP to REA7D ($EA7D) to return to the LED blink
-
-routine.
+Store the value that is in .A on entry into the 6 522's data port 2, LEDPRT ($1C00; also called DSKCNT) and in the data direction register, LEDOUT ($1C02; also called DDRB2). Exit with a JMP to REA7D ($EA7D) to return to the LED blink routine.
 
 PATCH FOR 1541 DISK WITH SLOW SERIAL RECEIVE
 
@@ -37866,17 +37823,9 @@ NNMI
 
 NNMI10
 
-Load .A with the second character in the
+Load .A with the second character in the command buffer CMDBUF + 2 ($0202). Compare it with "-" and, if equal, branch to NNMI10 ($FF0D). If not a "-", subtract a " + " from it. If not zero, command must be a real U1 command so branch back to NMI ($FEE7) to do normal NMI.
 
-command buffer CMDBUF + 2 ($0202) . Compare it with "-" and, if equal, branch to NNMI10 ($FF0D). If not a "-", subtract a " + " from it. If not zero, command must.
-
-be a real Ul command so branch back to
-
-NMI ($FEE7) to do normal NMI.
-
-Store .A (contains zero or a "-") into
-
-DRVTRK+1 ($23) and do an RTS to continue
+Store .A (contains zero or a "-") into DRVTRK+1 ($23) and do an RTS to continue
 
 $FF10 - $FFE6 UNUSED GARBAGE
 
@@ -37914,43 +37863,23 @@ PROGRAM LISTINGS
 ﻿
 NOTE: Lines 830 and 930 contain a special character #166. This character can be typed by holding down the Commodore logo key in the lower left corner and pressing the + key.
 
-lOO REM DISPLAY A BLOCK AVAILABILITY MAP
-
-- 1541
-
-110 DIMN$<16)
-
-120 DEFFNS (I) =2'v (S-INT (S/8) *8) AND <B (INT (
-
-S/8>>)
-
-130 PRINT"{CLR*DISPLAY A BAM - 1541"
-
-140 PRINT"<DOWN>INSERT DISKETTE IN DRIVE
-
-II
-
-150 PRINT"{DOWN>PRESS <RVS>RETURN{ROFF*
-
-TO CONTINUE"
-
-160 GETC$:IFC$=""THEN160 170 IFC$OCHR$<13) GOTO 160 180 PRINT"OK"
-
-190 0PEN15,8,15
-
-200 PRINT#15,"10"
-
+lOO REM DISPLAY A BLOCK AVAILABILITY MAP - 1541
+110 DIM N$(16)
+120 DEFFNS (I) =2'v (S-INT (S/8) *8) AND <B (INT (S/8>>) FIXME
+130 PRINT"{CLR}DISPLAY A BAM - 1541"
+140 PRINT"{DOWN}INSERT DISKETTE IN DRIVE"
+150 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+160 GET C$:IF C$="" THEN 160
+170 IF C$<>CHR$(13) GOTO 160
+180 PRINT"OK"
+190 OPEN 15,8,15
+200 PRINT#15,"I0"
 210 INPUT#15,EN$,EM$,ET$,ES$
-
-220 IFEN$="00"OREN$="22"OREN$="23" GOTO 26
-
-O
-
-230 PRINT"<DOWN>"EN$", "EM$","ET$","ES$
-
-240 CLOSE15 250 END
-
-260 0PEN2,8,2,"#"
+220 IF EN$="00" OR EN$="22" OR EN$="23" GOTO 260
+230 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+240 CLOSE 15
+250 END
+260 OPEN 2,8,2,"#"
 
 270 PRINT#15,"Ui";2;0;l8;o 280 INPUT#15,EN$,EM$,ET$,ES$
 
@@ -37964,7 +37893,7 @@ O
 
 370 REM GET BLOCKS FREE 380 BF=0 390 B=4
 
-400 F0RI=1T035
+400 FOR I=1TO 35
 
 410 IFI=18THENI=I+l:B=B+4 420 PRINT#15,"B-P";2;B 430 GET#2,B$
 
@@ -37978,7 +37907,7 @@ O
 ﻿
 500 PRINT#15,"B-P";2;144
 
-510 F0RI=1T016 520 GOSUB1140
+510 FOR I=1TO 16 520 GOSUB1140
 
 530 N$(I>=CHR$(A) 540 NEXTI
 
@@ -37986,7 +37915,7 @@ O
 
 570 PRINT#15,"B-P";2;162
 
-580 F0RI=1T02 590 GOSUB1140
+580 FOR I=1TO 2 590 GOSUB1140
 
 600 ID$=ID$+CHR$(A> 610 NEXTI
 
@@ -38088,13 +38017,13 @@ VS> {R0FF}0R{#166}=EMPTY "; RIGHT$ (ID$, 1)
 
 900 PRINT#15,"B-P";2;4
 
-910 F0RT=1T035
+910 FOR T=1TO 35
 
 920 IFT/2<>INT(T/2)THENF$="{RVS} {ROFF}" :G0TO94O
 
 930 F$="{#166}" 940 GET#2,B$
 
-950 F0RI=0T02
+950 FOR I=0TO 2
 
 960 GET#2,B$
 
@@ -38135,7 +38064,7 @@ lOOO PRINT"{HOME$CDOWN 2}{RIGHT 2}";LEFT
 ﻿
 100 REM VIRTUAL DIRECTORY - 1541 HO CLR
 
-120 H$="0123456789ABCDEF" 130 FORI=OT05 140 READFT$(I> 150 NEXTI
+120 H$="0123456789ABCDEF" 130 FORI=OTO 5 140 READFT$(I> 150 NEXTI
 
 160 PRINT"{CLR3VIRTUAL DIRECTORY - 1541"
 
@@ -38147,7 +38076,7 @@ TO CONTINUE"
 
 190 GETC$:IFC$=""THEN190 200 IFC$< >CHR$(13)GOTO190 210 PRINT"OK"
 
-220 0PEN15,8,15
+220 OPEN 15,8,15
 
 230 PRINT#15,"10"
 
@@ -38189,17 +38118,17 @@ TO CONTINUE"
 
 460 OPEN4,3
 
-470 0PEN2,8,2,"#"
+470 OPEN 2,8,2,"#"
 
-480 0PEN3,8,3,"*0,P,R" 490 GET#3,B$
+480 OPEN 3,8,3,"*0,P,R" 490 GET#3,B$
 
-500 DOS=ASC(B$+CHR$(0)) 510 F0RI=3T0143
+500 DOS=ASC(B$+CHR$(0)) 510 FOR I=3TO 143
 
 520 GET#3,B$
 
 530 NEXTI
 
-540 F0RI=144T0159
+540 FOR I=144TO 159
 
 443
 
@@ -38211,17 +38140,17 @@ TO CONTINUE"
 
 580 GET#3,B$ 590 GET#3,B$
 
-600 F0RI=162T0163 61O GOSUB1360
+600 FOR I=162TO 163 61O GOSUB1360
 
 620 ID$=ID$+CHR$(A) 630 NEXTI
 
-640 F0RI=164T0255
+640 FOR I=164TO 255
 
 650 GET#3,B$
 
 660 NEXTI
 
-670 F0RI=1T06 680 PRINT#4 690 NEXTI
+670 FOR I=1TO 6 680 PRINT#4 690 NEXTI
 
 700 PRINT#4,"DISK NAME: "DN$ 710 PRINT#4,"DISK ID: "ID$ 720 PRINT#4,"FORMATTING ID: "FI$ 730 PRINT#4,"DOS TYPE: "DOS 740 PRINT#4,"BL0CKS ALLOCATED:"BA 750 PRINT#4,"BLOCKS FREE: "BF
 
@@ -38275,11 +38204,11 @@ A$
 
 1030 NULL=0
 
-1040 FORI=lT016 1050 GOSUB1360
+1040 FORI=lTO 16 1050 GOSUB1360
 
 1060 IFB$=CHR$(0)THENNULL=NULL+1 1070 F$=F$+CHR$(A) 1080 NEXTI
 
-1090 IFNULL=16 GOTO 1270 1100 F0RI=1T09
+1090 IFNULL=16 GOTO 1270 1100 FOR I=1TO 9
 
 1110 GET#3,B$
 
@@ -38309,7 +38238,7 @@ S$" "LA$
 
 *
 
-1230 GETC$:IFC$=""GOT01250 1240 GETC$:IFC$=""THEN1240 1250 IFE0I=1 GOTO 1270 1260  GOTO 780 1270 CL0SE4 1280 CLOSE3 1290 CL0SE2
+1230 GETC$:IFC$=""GOTO 1250 1240 GETC$:IFC$=""THEN1240 1250 IFE0I=1 GOTO 1270 1260  GOTO 780 1270 CL0SE4 1280 CLOSE3 1290 CL0SE2
 
 1300 INPUT#15,EN$,EM$,ET$,ES$
 
@@ -38348,7 +38277,7 @@ TO CONTINUE"
 
 140 GETC$:IFC$=""THEN140 150 IFC$OCHR$(13) GOTO 140 160 PRINT"OK"
 
-170 0PEN15,8,15
+170 OPEN 15,8,15
 
 180 PRINT#15,"10"
 
@@ -38366,7 +38295,7 @@ TO CONTINUE"
 
 260 CLOSE15 270 END
 
-280 0PEN2,8,2."0:"+F$+",?,R" 290 INPUT#15,EN$,EM$,ET$,ES$
+280 OPEN 2,8,2."0:"+F$+",?,R" 290 INPUT#15,EN$,EM$,ET$,ES$
 
 300 IFEN$="00" GOTO 320 310  GOTO 530
 
@@ -38475,17 +38404,17 @@ IFE >1ANDE<12THENEN$=RIGHT$(STR$(E+18
 ': GOTO 380
 
 370 380 390 400 410 420 430 440 450 460 470 480 490 500 510 520
- EN$="02":EM$="?TIMEOUT":GOT0390 EM$="READ ERROR" ET$=T$ ES$=S$
+ EN$="02":EM$="?TIMEOUT":GOTO 390 EM$="READ ERROR" ET$=T$ ES$=S$
 
 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
 
-IFE< >4ANDE< >5GOT0450 GOSUB1020 GOT0470 CLOSE15 END
+IFE< >4ANDE< >5GOTO 450 GOSUB1020 GOTO 470 CLOSE15 END
 
-IF0$="S"GOT055O
+IF0$="S"GOTO 55O
 
-0PEN4,4
+OPEN 4,4
 
-F0RI=1T06 PRINT#4 NEXTI
+FOR I=1TO 6 PRINT#4 NEXTI
 
 PRINT#4," DISPLAY TRACK & SE
 
@@ -38501,15 +38430,15 @@ OR "S$
 
 540 PRINT#4
 
-550 F0RK=0T01
+550 FOR K=0TO 1
 
 560 PRINT"{CLR}{RVS} DISPLAY TRA CK & SECTOR {ROFF}"
 
-570 PRINT"{HOME}{DOWN}{RVS} TRA CK "T$" - SECTOR "S$" {ROFF}" 580 PRINT"{HOME}{DOWN 2}" 590 FORJ=OT015 600 D=K*128+J*8 610 GOSUB 970
+570 PRINT"{HOME}{DOWN}{RVS} TRA CK "T$" - SECTOR "S$" {ROFF}" 580 PRINT"{HOME}{DOWN 2}" 590 FORJ=OTO 15 600 D=K*128+J*8 610 GOSUB 970
 
 620 BP$=" . "+DH$+": " 630 H$="" 640 A$=""
 
-650 F0RI=0T07
+650 FOR I=0TO 7
 
 660 PRINT#15,"M-R"CHR$(K*128+J*8+I)CHR$(
 
@@ -38529,7 +38458,7 @@ OR "S$
 
 780 IF0$="P" GOTO 800 790 GOSUB1020 800 NEXTK
 
-810 IFO$="P"THENCLOSE4 820 CLOSE15 830 GOT0110
+810 IFO$="P"THENCLOSE4 820 CLOSE15 830 GOTO 110
 
 840 REM JOB QUEUE 850 TRY=0
 
@@ -38547,7 +38476,7 @@ HR$(JOB)
 
 91O IFE$=""THENE$=CHR$(0) 920 E=ASC(E$)
 
-930 IFTRY=5O0GOT0950 940 IFEM27GOT0880 950 RETURN
+930 IFTRY=5O0GOTO 950 940 IFEM27GOTO 880 950 RETURN
 
 960 REM DECIMAL TO HEXADECIMAL
 
@@ -38595,7 +38524,7 @@ S
 
 210 IFQ$< >"Y"THENEND
 
-220 0PEN15,8,15
+220 OPEN 15,8,15
 
 230 PRINT#15,"10"
 
@@ -38611,9 +38540,9 @@ S
 
 300 PRINT"{DOWN}{RVSJPRINTING{ROFF} A CH AIN"
 
-310 0PEN4,4
+310 OPEN 4,4
 
-320 F0RI=1T06 330 PRINT#4 340 NEXTI
+320 FOR I=1TO 6 330 PRINT#4 340 NEXTI
 
 350 PRINT#4," DISPLAY A CHAI
 
@@ -38633,7 +38562,7 @@ A CHAIN {ROFF}"
 
 430 GOSUB1030 440 REM SEEK 450 J0B=176 460 GOSUB 910
 
-470 IFE01GOT0520 480 REM READ 490 J0B=128 500 GOSUB 910
+470 IFE01GOTO 520 480 REM READ 490 J0B=128 500 GOSUB 910
 
 451
 
@@ -38653,7 +38582,7 @@ A CHAIN {ROFF}"
 
 ES$
 
-590 IFE=40RE=5 GOTO 630 600 IFO$="P"GOT0810 610 GOSUB1090 620  GOTO 820
+590 IFE=40RE=5 GOTO 630 600 IFO$="P"GOTO 810 610 GOSUB1090 620  GOTO 820
 
 630 B$=RIGHT$(STR$(B),LEN(STR$(B))-1)
 
@@ -38709,7 +38638,7 @@ HR$(J0B)
 
 970 IFE$=""THENE$=CHR$(0) 980 E=ASC(E$)
 
-990 IFTRY=5OOGOT01O10 1000 IFEM27 GOTO 940 1010 RETURN
+990 IFTRY=5OOGOTO 1O10 1000 IFEM27 GOTO 940 1010 RETURN
 
 1020 REM STR$(T,S)
 
@@ -38738,7 +38667,7 @@ TO CONTINUE"
 ﻿
 100 REM EDIT TRACK & SECTOR - 1541
 
-110 P0KE56,159
+110 POKE 56,159
 
 120 CLR
 
@@ -38756,7 +38685,7 @@ ii
 
 )";t,s
 
-190 IFT<10RT>35GOT015SO
+190 IFT<10RT>35GOTO 15SO
 
 200 NS=20+2*(T>17)+(T>24)+(T>30)
 210 IF S<0 OR S>NS  GOTO  1580
@@ -38771,7 +38700,7 @@ B$
 
 280 INPUT"{DOWN}ARE YOU SURE Y{LEFT 3}" ;Q$
 
-290 IFQ$0"Y"GOT01580
+290 IFQ$0"Y"GOTO 1580
 
 300 OPEN15,8,15
 
@@ -38785,7 +38714,7 @@ B$
 
 370 GOSUB1620
 
-380 IFE01GOT0430 390 REM READ 400 J0B=128
+380 IFE01GOTO 430 390 REM READ 400 J0B=128
 
 410 GOSUB1620
 
@@ -38795,7 +38724,7 @@ B$
 
 ),2): GOTO 450
 
-440 EN$="02":EM$="?TIMEOUT":GOT0470
+440 EN$="02":EM$="?TIMEOUT":GOTO 470
 
 450 IFE=70RE=8THENEM$="WRITE ERROR":GOTO
 
@@ -38815,11 +38744,11 @@ B$
 ﻿
 S< SECTOR {ROFF}"
 
-530 PRINT"{HOME}{DOWN}{RVS} TRA CK "T$" - SECTOR "S$" {ROFF}" 540 PRINT"{HOME}{DOWN 2}" 550 FORJ=OT015 560 D=J*8+BP 570 GOSUB1740
+530 PRINT"{HOME}{DOWN}{RVS} TRA CK "T$" - SECTOR "S$" {ROFF}" 540 PRINT"{HOME}{DOWN 2}" 550 FORJ=OTO 15 560 D=J*8+BP 570 GOSUB1740
 
 580 BP$=" . "+DH$+": " 590 H$="" 600 A$=""
 
-610 FORI=OT07
+610 FORI=OTO 7
 
 620 PRINT#15, "M-R"CHR$(J*8-i-I+BP)CHR$(4)
 
@@ -38839,7 +38768,7 @@ S< SECTOR {ROFF}"
 
 750 PRINT"{DOWN}{RVS}EDIT{ROFF} TRACK "T *" - SECTOR "S$" (Y/N)?" 760 GOSUB1790
 
-770 IFQ$0"Y"GOT01390
+770 IFQ$0"Y"GOTO 1390
 
 780 PRINTCD$"PRESS {RVS}CLR{ROFF} TO EX I
 
@@ -38851,17 +38780,17 @@ T
 
 820 A=PEEK(S):IFA >127THENA=A-128 330 M=S
 
-340 P0KEM,A+128
+340 POKE M,A+128
 
 850 GETI$:IFI$=""THENS50 860 I=ASC(I$)
 
-870 IFI=147THENPOKEM,A:GOT01360 380 IFI=19THENP0KEM,A: GOTO 790
+870 IFI=147THENPOKEM,A:GOTO 1360 380 IFI=19THENPOKE M,A: GOTO 790
 
-890 IFI=141THENI=13 900 IFI013GOT0930
+890 IFI=141THENI=13 900 IFI013GOTO 930
 
 910 IFC=23ANDS<>1773THENPRINT"{RIGHT}";:  GOTO 1230
 
-920 IFS<1751THENPOKEM,A:FORI=CT023:PRINT
+920 IFS<1751THENPOKEM,A:FORI=CTO 23:PRINT
 
 "{RIGHT}";:S=S+1:NEXTI:S=S-1:C=23: GOTO 12
 
@@ -38887,7 +38816,7 @@ T
 
 {LEFT}";:NEXTI:C=23:S=S-18: GOTO 1300 1000 IFI< >17 GOTO 1020
 
-1010 IFS+40<1774THENS=S+40:GOTO1290 1020 IFI0145GOT01040
+1010 IFS+40<1774THENS=S+40:GOTO1290 1020 IFI0145GOTO 1040
 
 1030 IFS-40M150THENS=S-40:GOTO1290 1040 IFA=320RA=160 GOTO B50
 
@@ -38909,7 +38838,7 @@ T
 
 1160 I=R*16+L
 
-1170 P0KE40704+8*INT((M-l151)/40)+INT(C/
+1170 POKE 40704+8*INT((M-l151)/40)+INT(C/
 
 3), I
 
@@ -38919,9 +38848,9 @@ T
 
 128:GOTO1230
 
-1220 P0KEM+25-C+INT(C/3),1+128
+1220 POKE M+25-C+INT(C/3),1+128
 
-1230 IFC=23ANDS< >1773THENF0R1 = 1TO17:PRIN T"{RIGHT}";:NEXTI:C=l:S=S+18: GOTO 1300 1240 IFS=1773THENPRINT"{LEFT}";: GOTO 1300
+1230 IFC=23ANDS< >1773THENFOR 1 = 1TO17:PRIN T"{RIGHT}";:NEXTI:C=l:S=S+18: GOTO 1300 1240 IFS=1773THENPRINT"{LEFT}";: GOTO 1300
 
 1250 S=S+1 1260 C=C+1
 
@@ -38929,7 +38858,7 @@ T
 
 1280  GOTO 820 1290 PRINTI$;
 
-1300 A=PEEK(M):IFA>127THENA=A-128 1310 P0KEM,A
+1300 A=PEEK(M):IFA>127THENA=A-128 1310 POKE M,A
 
 1320  GOTO 820
 
@@ -38963,7 +38892,7 @@ TO CONTINUE"
 
 "T$" - SECTOR "S$"
 
-1460 F0RI=0T0127
+1460 FOR I=0TO 127
 
 1470 PRINT#15,"M-W"CHR$(I+BP)CHR$(4)CHR$
 
@@ -38981,7 +38910,7 @@ OMPLETE"
 
 1570  GOTO 141O
 
-1580 P0KE56,160
+1580 POKE 56,160
 
 1590 CLR 1600 END
 
@@ -39037,7 +38966,7 @@ TO CONTINUE"
 
 150 GETC$:IFC$=""THEN150 160 IFC$OCHR$(13) GOTO 150 170 PRINT"OK"
 
-180 0PEN15,8,15
+180 OPEN 15,8,15
 
 190 PRINT#15,"10"
 
@@ -39123,13 +39052,13 @@ TO CONTINUE"
 
 170 GETC$:IFC$=""THEN170 180 IFC$< >CHR$(13)GOTO170 190 PRINT"OK"
 
-200 0PEN15,8,15
+200 OPEN 15,8,15
 
 210 PRINT#15,"I0"
 
 220 INPUT#15,EN$,EM$,ET$,ES$
 
-230 IFEN$="00"GOT027b
+230 IFEN$="00"GOTO 27b
 
 240 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
 
@@ -39137,25 +39066,25 @@ TO CONTINUE"
 
 270 PRINT"{DOWN}{RVS}FETCHING{ROFF} DIRE CTORY"
 
-230 0PEN2,8,2,"*0,S,R"
+230 OPEN 2,8,2,"*0,S,R"
 
 290 INPUT#15,EN$,EM$,ET$,ES$
 
 300 IFEN$="00" GOTO 320 310  GOTO 240
 
-320 F0RI=0T0253
+320 FOR I=0TO 253
 
 330 GET#2,B$
 
 340 NEXTI 350 N=0
 
-360 F0RJ=0TO7
+360 FOR J=0TO7
 
 370 GET#2,B$
 
 380 IFB$=""THENB$=CHR$(0) 390 A=ASC(B$)
 
-400 IFA >127ANDA<133 GOTO 510 410 F0RI=0T02
+400 IFA >127ANDA<133 GOTO 510 410 FOR I=0TO 2
 
 420 GET#2,B$
 
@@ -39163,7 +39092,7 @@ TO CONTINUE"
 
 440 IFB$=""THENB$=CHR$(0 > 450 A=ASC(B$>
 
-460 IFA=0THENJ=7:NEXTJ: GOTO 820 470 F0RI=0T025
+460 IFA=0THENJ=7:NEXTJ: GOTO 820 470 FOR I=0TO 25
 
 480 GET#2,B$
 
@@ -39187,7 +39116,7 @@ TO CONTINUE"
 
 580 NULL=0
 
-590 F0RI=0T015 600 GET#2,B$
+590 FOR I=0TO 15 600 GET#2,B$
 
 610 IFB$=""THENB$=CHR$(0) 620 A=ASC(B$)
 
@@ -39195,13 +39124,13 @@ TO CONTINUE"
 
 690 IFNULL=16THENJ=7:NEXTJ: GOTO 820 700 F$(N)=F$ 710 N=N+1
 
-720 F0RI=0T010
+720 FOR I=0TO 10
 
 730 GET#2,B$
 
 740 NEXTI
 
-750 IFJ=7 GOTO 790 760 F0RI=0T01
+750 IFJ=7 GOTO 790 760 FOR I=0TO 1
 
 770 GET#2,B$
 
@@ -39219,7 +39148,7 @@ TO CONTINUE"
 
 900 N$=RIGHT$("00"+RIGHT$(STR$(N) ,LEN(ST R$(N))-l),3)
 
-910 F0RJ=0T0N-1
+910 FOR J=0TO N-1
 
 920 J$=RIGHT$("00"+RIGHT$(STR$(J+l),LEN( STR$(J+1))-l),3)
 
@@ -39257,7 +39186,7 @@ H -
 
 1090 GET#15,B$
 
-1100 T=ASC(B$+CHR$(0)) 1110 IFT=OGOT01170
+1100 T=ASC(B$+CHR$(0)) 1110 IFT=OGOTO 1170
 
 1120 GET#15,B$
 
@@ -39267,7 +39196,7 @@ H -
 
 THENI=I+2:R$="{RVSJ":GOTO1230
 
-1150 NB=NB+1 1160 GOT0980 1170 1=1+2
+1150 NB=NB+1 1160 GOTO 980 1170 1=1+2
 
 1180 R$="{ROFF}"
 
@@ -39285,7 +39214,7 @@ THENI=I+2:R$="{RVSJ":GOTO1230
 
 1260 F$(J)="{HOME}{RVS}"+J$+"{R0FF3"+R$+ LEFT$(CD$,I)+"{LEFT 3}"+F$(J)+" "+E$+"{R OFF} "
 
-1270 IFI=20ANDJ< >N-1THENF0RD=1T01000:NEX TD:PRINT"{CLR}":1=0
+1270 IFI=20ANDJ< >N-1THENFOR D=1TO 1000:NEX TD:PRINT"{CLR}":1=0
 
 1280 NEXTJ
 
@@ -39295,7 +39224,7 @@ THENI=I+2:R$="{RVSJ":GOTO1230
 
 1310 INPUT"{DOWN}SUMMARY INFORMATION (Y/ N) Y{LEFT 3}";Q$
 
-1320 IFQ$0"Y"GOT0110
+1320 IFQ$0"Y"GOTO 110
 
 1330 SI$="{CLR}{RVS} /"+N$+" SUMMAR
 
@@ -39303,7 +39232,7 @@ Y INFORMATION {ROFF}"
 
 1340 S=0
 
-1350 PRINTSI$ 1360 F0RI=0T09 1370 PRINTF$(S) 1380 S=S+1
+1350 PRINTSI$ 1360 FOR I=0TO 9 1370 PRINTF$(S) 1380 S=S+1
 
 1390 IFS=NTHENI=9 1400 NEXTI
 
@@ -39317,7 +39246,7 @@ Y INFORMATION {ROFF}"
 
 TYPE >C TO CONTINUE {ROFF}"
 
-1430 GETC$:IFC$=""THEN1430 1440 IFC$< >"C"GOTO1430 1450 GOT0110
+1430 GETC$:IFC$=""THEN1430 1440 IFC$< >"C"GOTO1430 1450 GOTO 110
 
 1460 PRINT"{DOWN}{RVS} TYPE 7C TO CONT INUE OR 'S' TO STOP {ROFF}" 1470 GETC$:IFC$=""THEN1470
 
@@ -39339,7 +39268,7 @@ CHR$(JOB)
 
 1580 IFE$=""THENE$=CHR$(0) 1590 E=ASC(E$>
 
-1600 IFTRY=5OOGOT01620 1610 IFEM27GOT01550 1620 RETURN
+1600 IFTRY=5OOGOTO 1620 1610 IFEM27GOTO 1550 1620 RETURN
 
 1630 REM STR$(T,S)
 
@@ -39385,7 +39314,7 @@ ii
 
 220 IFQ$<>"Y"THENEND
 
-230 0PEN15,8,15
+230 OPEN 15,8,15
 
 240 PRINT#15,"10"
 
@@ -39401,7 +39330,7 @@ ii
 
 330 J0B=176 340 GOSUB 630
 
-350 IFE=1 GOTO 380 360 GOT075O 370 REM READ 380 J0B=128 390 GOSUB 630
+350 IFE=1 GOTO 380 360 GOTO 75O 370 REM READ 380 J0B=128 390 GOSUB 630
 
 400 IFE=1 GOTO 430 410  GOTO 750 420 REM SEEK 430 T=TW 440 S=SW
 
@@ -39489,7 +39418,7 @@ HR$(JOB)
 
 180 IFQ$< >"Y"THENEND
 
-190 0PEN15,8,15
+190 OPEN 15,8,15
 
 200 PRINT#15,"10"
 
@@ -39503,9 +39432,9 @@ HR$(JOB)
 
 260 REM SEEK 270 J0B=176 280 GOSUB 570
 
-290 IFE=lGOT0320 300  GOTO 690 310 REM READ 320 J0B=128 330 GOSUB 570
+290 IFE=lGOTO 320 300  GOTO 690 310 REM READ 320 J0B=128 330 GOSUB 570
 
-340 IFE=1 GOTO 360 350 GOT0690 360 CLOSE15
+340 IFE=1 GOTO 360 350 GOTO 690 360 CLOSE15
 
 370 PRINT"{DOWN}INSERT CLONE IN DRIVE" 380 PRINT"PRESS {RVS}RETURN{ROFF} TO CON TINUE"
 
@@ -39593,7 +39522,7 @@ ll
 
 180 IFQ$<>"Y"THENEND
 
-190 0PEN15,8,15
+190 OPEN 15,8,15
 
 200 PRINT#15,"10"
 
@@ -39647,7 +39576,7 @@ HR$(T)CHR$(S)
 
 580 IFE$=""THENE$=CHR$(0) 590 E=ASC(E$)
 
-600 IFTRY=500 GOTO 640 610 IFEM27GOT0550 620 RETURN
+600 IFTRY=500 GOTO 640 610 IFEM27GOTO 550 620 RETURN
 
 630 REM ERROR HANDLER
 
@@ -39691,7 +39620,7 @@ ECTION (Y/N) Y{LEFT 3}";Q$
 
 140 IFQ$< >"Y"THENEND
 
-150 0PEN15,8,15
+150 OPEN 15,8,15
 
 160 REM SEEK
 
@@ -39769,7 +39698,7 @@ HR$(JOB)
 
 110 DIMT(35)
 
-120 F0RI=1T035 130 T(I)=1 140 NEXTI
+120 FOR I=1TO 35 130 T(I)=1 140 NEXTI
 
 ISO PRINT"{CLR}INTERROGATE FORMATTING ID 'S - 1541"
 
@@ -39777,11 +39706,11 @@ ISO PRINT"{CLR}INTERROGATE FORMATTING ID 'S - 1541"
 
 180 GETC$:IFC$=""THEN180 190 IFC$OCHR$(13) GOTO 180
 
-200 0PEN15,8,15
+200 OPEN 15,8,15
 
 210 PRINT"{CLR}" 220 REM SEEK
 
-230 F0RT=1T035
+230 FOR T=1TO 35
 
 240 IFT(T)=0 GOTO 440 250 GOSUB 550
 
@@ -39805,7 +39734,7 @@ ISO PRINT"{CLR}INTERROGATE FORMATTING ID 'S - 1541"
 
 O
 
-420 IFE=2THENID$="?HEADER BLOCKS NOT PRE SENT":GOT0450
+420 IFE=2THENID$="?HEADER BLOCKS NOT PRE SENT":GOTO 450
 
 430 IFE=9THENID$="?CHECKSUM ERROR IN HEA DERS": GOTO 450
 
@@ -39871,7 +39800,7 @@ INPUT"{DOWN}ARE YOU SURE Y{LEFT 3}"
 
 IFQ$<>"Y"THENEND
 
-0PEN15,8,15
+OPEN 15,8,15
 
 NS=20+2*(T>17)+(T>24)+(T>30) REM SEEK J0B=176
 
@@ -39947,9 +39876,9 @@ EM$="?TIME OUT" RETURN
 
 160 IFQ$<>"Y"THENEND
 
-170 0PEN15,S,15
+170 OPEN 15,S,15
 
-180 0PEN2,8,2,"#"
+180 OPEN 2,8,2,"#"
 
 190 PRINT"{CLR}" 200 REM SEEK 210 GOSUB 360
 
@@ -40004,65 +39933,43 @@ HR$(176)
 
 -----------------------------------------------------Page 478-----------------------------------------------------
 ﻿
-lOO REM INTERROGATE A DISKETTE - 1541 110 DIMT(35)
-
-120 F0RI=1T035 130 T(D=1 140 NEXTI
-
+l00 REM INTERROGATE A DISKETTE - 1541
+110 DIM T(35)
+120 FOR I=1TO 35 130 T(D=1 140 NEXTI
 150 PRINT"{CLR}INTERROGATE A DISKETTE - 1541"
-
 160 PRINT"{DOWN}INSERT MASTER IN DRIVE" 170 PRINT"{D0WN3PRESS {RVS}RETURN{ROFF} TO CONTINUE"
-
 180 GETC$:IFC$=""THEN1SO 190 IFC$< >CHR$(13)GOTO180
-
 200 PRINT"OK" 210 PRINT
-
-220 0PEN15,8,15
-
-230 F0RT=1T035
-
+220 OPEN 15,8,15
+230 FOR T=1TO 35
 240 IFT(T)=0 GOTO 390
-
 250 NS=20+2$(T >17) + (T >24) + (T >30) 260 REM SEEK 270 J0B=176 280 GOSUB 430 290 REM READ
-
-300 FORS=OTONS 310 J0B=128 320 GOSUB 430
-
+300 FORS=OTONS
+310 J0B=128
+320 GOSUB 430
 330 IFE=1 GOTO 380
-
 340 S$=R IGHT$(STR$(S),LEN(STR$(S))-1)
-
 350 IF3<10THENS$=" "+S$
-
-360 IFE >1ANDE<12THENEM$=STR$(E+18)+" REA
-
-D ERROR"
-
+360 IFE >1ANDE<12THENEM$=STR$(E+18)+" READ ERROR"
 370 PRINT"TRACK";T;"- SECTOR "S$" ="EM$
-
-380 NEXTS 390 NEXTT
-
-400 CLOSE15 410 END
-
-420 REM JOB QUEUE 430 TRY=0
-
-440 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(2)C
-
-HR$(T)CHR$(S)
-
-450 PRINT#15, "M-W"CHR$ (1) CHR$ (O) CHR$ (DC
-
-HR$(JOB)
-
+380 NEXTS
+390 NEXTT
+400 CLOSE15
+410 END
+420 REM JOB QUEUE
+430 TRY=0
+440 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(2)CHR$(T)CHR$(S)
+450 PRINT#15, "M-W"CHR$ (1) CHR$ (O) CHR$ (I) CHR$(JOB)
 460 TRY=TRY+1
-
 470 PRINT#15,"M-R"CHR$(1)CHR$(0)
-
 480 GET#15,E$
-
-490 IFE$=""THENE$=CHR$(0) 500 E=ASC(E$)
-
-510 IFTRY=500 GOTO 540 520 IFE>127 GOTO 460 530 RETURN
-
-540 EM$="?TIME OUT" 550 RETURN
+490 IFE$=""THENE$=CHR$(0)
+500 E=ASC(E$)
+510 IFTRY=500 GOTO 540
+520 IFE>127 GOTO 460
+530 RETURN
+540 EM$="?TIMEOUT"
+550 RETURN
 
 479
 
@@ -40071,115 +39978,79 @@ HR$(JOB)
 
 -----------------------------------------------------Page 480-----------------------------------------------------
 ﻿
-100 REM DUMP TRACK 8c SECTOR - 1541
-
-110 P0KE56,159
-
+100 REM DUMP TRACK & SECTOR - 1541
+110 POKE 56,159
 120 CLR
-
-130 PRINT" {CLR}DUMP TRACK 8< SECTOR - 154
-
-1"
-
-140 PRINT"{DOWN}INSERT DISKETTE IN DRIVE
-
-II
-
-150 I NPUT "{DOWN} TRACK 8c SECTOR (T,S)";T,
-
-S
-
-160 IFT<1ORT >35 GOTO 630
-
-170 NS=20+2*(T>17)+(T>24)+(T>30) 180 IFS<00RS>NS GOTO 630
-
-190 INPUT"{DOWN}ARE YOU SURE Y{LEFT 3}" ;Q$
-
-200 IFQ$O"Y" GOTO 630
-
-210 0PEN15,8,15
-
+130 PRINT"{CLR}DUMP TRACK & SECTOR - 1541"
+140 PRINT"{DOWN}INSERT DISKETTE IN DRIVE"
+150 INPUT"{DOWN} TRACK & SECTOR (T,S)";T,S
+160 IF T<1 OR T>35 GOTO 630
+170 NS=20+2*(T>17)+(T>24)+(T>30)
+180 IF S<0 OR S>NS GOTO 630
+190 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
+200 IF Q$<>"Y" GOTO 630
+210 OPEN 15,8,15
 220 PRINT#15,"IO"
-
 230 INPUT#15,EN$,EM$,ET$,ES$
-
-240 IFEN$="00" GOTO 290
-
+240 IF EN$="00" GOTO 290
 250 PRINT"{DOWN}"EN$","EM$","ET$","ES$
-
 260 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
-
-270 GETC$:IFC$=""THEN270 280 IFC$< >CHR$(13) GOTO 270
-
+270 GET C$:IF C$="" THEN 270
+280 IFC$<>CHR$(13) GOTO 270
 290 T$=RIGHT$(STR$(T),LEN(STR$(T))-l)
-
-300 IFT<1OTHENT$="O"+f$
-
-310 S$=RIGHT$(STR$(S),LEN(STR$(S))-1) 320 IFS<1OTHENS$="0"+S$ 330 REM SEEK 340 J0B=176 350 GOSUB 670
-
-360 IFE=01GOT0410 370 REM READ 380 J0B=128 390 GOSUB 670
-
-400 IFE=10RE=4ORE=5G0TO510
-
-410 IFE >1ANDE<12THENEN$=RIGHT$(STR$(E+18
-
-),2): GOTO 430
-
-420 EN$="02":EM$="?TIME OUT": GOTO 440 430 EM$="READ ERROR" 440 ET$=T$ 450 ES$=S$
-
+300 IF T<10 THEN T$="0"+T$
+310 S$=RIGHT$(STR$(S),LEN(STR$(S))-1)
+320 IF S<10 THEN S$="0"+S$
+330 REM SEEK
+340 JOB=176
+350 GOSUB 670
+360 IF E=01 GOTO 410
+370 REM READ
+380 J0B=128
+390 GOSUB 670
+400 IF E=1 OR E=4 OR E=5 GOTO 510
+410 IF E>1 AND E<12 THEN EN$=RIGHT$(STR$(E+18),2):GOTO 430
+420 EN$="02":EM$="?TIMEOUT":GOTO 440
+430 EM$="READ ERROR"
+440 ET$=T$
+450 ES$=S$
 460 PRINT"{DOWN}"EN$","EM$","ET$","ES$
-
-470 CLOSE15
-
-480 P0KE56,160
-
-490 CLR 500 END
-
-510 F0RJ=0T031 520 F0RI=0T07
-
-530 PRINT#15,"M-R"CHR$(J *8+1)CHR$(4)
+470 CLOSE 15
+480 POKE 56,160
+490 CLR
+500 END
+510 FOR J=0 TO  31
+520 FOR I=0 TO  7
+530 PRINT#15,"M-R"CHR$(J*8+1) CHR$(4)
 
 481
 
 -----------------------------------------------------Page 481-----------------------------------------------------
 ﻿
 540 GET#15,D$
-
 550 D=ASC(D$+CHR$(0))
-
 560 POKE(40704+J*8+I),D
-
-570 NEXTI 580 NEXTJ
-
-590 CL0SE15
-
-600 FRINT"{D0WN}D0NE!"
-
-610 PRINT"{D0WN3P0KE56,160:CLR"
-
+570 NEXT I
+580 NEXT J
+590 CLOSE 15
+600 FRINT"{DOWN}DONE!"
+610 PRINT"{DOWN 3}POKE 56,160:CLR"
 620 END
-
-630 POKE56,160
-
-640 CLR 650 END
-
-660 REM JOB QUEUE 670 TRY=0
-
-680 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(2)C
-
-HR$(T)CHR$(S)
-
-690 PRINT#15, " M-W" CHR$ (1) CHR$ (O) CHR$ (DC
-
-HR$(JOB)
-
+630 POKE 56,160
+640 CLR
+650 END
+660 REM JOB QUEUE
+670 TRY=0
+680 PRINT#15,"M-W" CHR$(8) CHR$(0) CHR$(2) CHR$(T) CHR$(S)
+690 PRINT#15,"M-W" CHR$(1) CHR$(0) CHR$(D) CHR$(JOB)
 700 TRY=TRY+1
-
-710 PRINT#15, "M-R"CHR$(DCHR$(0) 720 GET#15,E$
-
-730 IFE$=""THENE$=CHR$(0) 740 E=ASC(E$)
-
-750 IFTRY=500 GOTO 770 760 IFE>127 GOTO 700 770 RETURN
+710 PRINT#15,"M-R" CHR$(D) CHR$(0)
+720 GET#15,E$
+730 IF E$="" THEN E$=CHR$(0)
+740 E=ASC(E$)
+750 IF TRY=500 GOTO 770
+760 IF E>127 GOTO 700
+770 RETURN
 
 482
 
@@ -40360,7 +40231,7 @@ MATHEMATICAL CONVERSION ROUTINES
 240 B$(11)="11011" 
 250 B$(12)="01101" 
 260 B$(13)="11101" 
-270 B$(14)="llHO" 
+270 B$(14)="llHO" fixme
 280 B$(15)="10101"
 290 PRINT"{CLR}HEXADECIMAL TO GCR" 
 300 HG$=""
@@ -40396,7 +40267,7 @@ MATHEMATICAL CONVERSION ROUTINES
 -----------------------------------------------------Page 495-----------------------------------------------------
 ﻿
 570 FOR I=1 TO 8
-580 PRINT"A "; FIXME
+580 PRINT"A "; fixme
 590 NEXT I
 600 PRINT"{UP}"
 610 FOR I=l TO 5
@@ -40429,111 +40300,101 @@ MATHEMATICAL CONVERSION ROUTINES
 
 -----------------------------------------------------Page 496-----------------------------------------------------
 ﻿
-100 REM GCR TO HEXADECIMAL 110 H$="0123456789ABCDEF"
-
-120 DEFFNB (B) =2'x (B-INT (B/8) *S) ANDD 130 DIMB$(15)
-
-140 B$(0)="01010" 150 B$(l)="01011" 160 B$(2)="10010" 170 B$(3)="10011" 180 B$(4)="01110" 190 B$(5)="01111" 200 B$(6)="10110" 210 B$(7)="10111" 220 B$(3)="01001" 230 B$(9)="11001" 240 B$(10)="11010" 250 B$(ll)="11011" 260 B$(12)="01101" 270 B$(13)="11101" 280 B$(14)="11110" 290 B$(15)="10101"
-
-300 PRINT"CCLR}GCR TO HEXADECIMAL" 310 GH$=""
-
-320 INPUT"{DOWN}GCR (E.G. GH$
-
-330 IFLEN(GH$)=0THENEND 340 IFLEN(GH$)<>1OTHENEND 350 F0RI=1T05
-
-360 GH$(I)=MID$(GH$,1*2-1,2)
-
-370 NEXTI
-
-380 F0RJ=1T05 390 H(J)=0
-
-400 FOR1=1TO16
-
-410 IFLEFT$(GH$(J),D=MID$(H$,I,1)THENH(
-
-J)=l:1=16 420 NEXTI
-
-430 IFH(J)=0 GOTO 310 440 H(J)=H(J)-1 450 L(J)=0
-
-460 FORI=lT016
-
-470 IFRIGHT$(GH$(J) , D=MID$(H$, I, 1) THENL
-
-(J)=l:1=16 480 NEXTI
-
-490 IFL(J)=0 GOTO 310 500 L(J)=L(J)-1 510 NEXTJ
-
-520 F0RI=1T05
-
-530 HD(I)=H(I)*16+L(I) 540 NEXTI
-
-550 IMAGE$="" 560 F0RI=1T05
+100 REM GCR TO HEXADECIMAL
+110 H$="0123456789ABCDEF"
+120 DEF FN B(B) =2'x (B-INT(B/8)*S) AND D fixme
+130 DIM B$(15)
+140 B$(0)="01010"
+150 B$(l)="01011"
+160 B$(2)="10010"
+170 B$(3)="10011"
+180 B$(4)="01110"
+190 B$(5)="01111"
+200 B$(6)="10110"
+210 B$(7)="10111"
+220 B$(3)="01001"
+230 B$(9)="11001"
+240 B$(10)="11010"
+250 B$(11)="11011"
+260 B$(12)="01101"
+270 B$(13)="11101"
+280 B$(14)="11110"
+290 B$(15)="10101"
+300 PRINT"{CLR}GCR TO HEXADECIMAL"
+310 GH$=""
+320 INPUT"{DOWN}GCR (E.G. ";GH$ fixme
+330 IF LEN(GH$)=0 THEN END
+340 IF LEN(GH$)<>10 THEN END
+350 FOR I=1 TO 5
+360 GH$(I)=MID$(GH$,I*2-1,2)
+370 NEXT I
+380 FOR J=1 TO 5
+390 H(J)=0
+400 FOR I=1 TO 16
+410 IF LEFT$(GH$(J),1)=MID$(H$,I,1) THEN H(J)=l:I=16
+420 NEXT I
+430 IF H(J)=0 GOTO 310
+440 H(J)=H(J)-1
+450 L(J)=0
+460 FOR I=l TO 16
+470 IF RIGHT$(GH$(J),1)=MID$(H$,I,1) THEN L(J)=I:I=16
+480 NEXT I
+490 IF L(J)=0 GOTO 310
+500 L(J)=L(J)-1
+510 NEXT J
+520 FOR I=1 TO 5
+530 HD(I)=H(I)*16+L(I)
+540 NEXT I
+550 IMAGE$=""
+560 FOR I=1 TO 5
 
 497
 
 -----------------------------------------------------Page 497-----------------------------------------------------
 ﻿
 570 D=HD(I)
-
-530 F0RB=7T00 STEP-1
-
-590 IFFNB(B)=0THENIMAGE$=IMAGE$+"0":GOTO 610
-
-600 IMAGE$=IMAGE$+"1" 610 NEXTB 620 NEXTI
-
-630 PRINT"{DOWN}"IMAGE$ 640 PRINT"{UP}";
-
-650 F0RI=1T05
-
-660 PRINT"'" ";
-
-670 NEXTI
-
-680 PRINT"{UP}" 690 F0RI=1T08
-
-700 H$(I)=MID$(IMAGE$,1*5-4,5)
-
-710 NEXTI
-
-720 F0RJ=1T08 730 F0RI=0T015
-
-740 IFH$(J)=B$(I)THEND(J)=I+l:1=15 750 NEXTI 760 NEXTJ
-
-770 F0RI=1T08
-
-780 IFD(I)=OTHENBDE=1 790 NEXTI
-
-800 IFBDE=1 GOTO 940
-
-810 PRINT"{DOWN}GCR : "; 820 F0RI=1T05
-
-830 PRINTGH$(D" "; 840 NEXTI 850 PRINT
-
+530 FOR B=7 TO 0 STEP -1
+590 IF FN B(B)=0 THEN IMAGE$=IMAGE$+"0":GOTO 610
+600 IMAGE$=IMAGE$+"1"
+610 NEXT B
+620 NEXT I
+630 PRINT"{DOWN}"IMAGE$
+640 PRINT"{UP}";
+650 FOR I=1 TO 5
+660 PRINT"'" "; FIXME
+670 NEXT I
+680 PRINT"{UP}"
+690 FOR I=1 TO 8
+700 H$(I)=MID$(IMAGE$,I*5-4,5)
+710 NEXT I
+720 FOR J=1 TO 8
+730 FOR I=0 TO 15
+740 IF H$(J)=B$(I) THEN D(J)=I+l:1=15
+750 NEXT I
+760 NEXT J
+770 FOR I=1 TO 8
+780 IF D(I)=0 THEN BDE=1
+790 NEXT I
+800 IF BDE=1 GOTO 940
+810 PRINT"{DOWN}GCR : ";
+820 FOR I=1 TO 5
+830 PRINT GH$(I)" ";
+840 NEXT I
+850 PRINT
 860 PRINT"{DOWN}HEXADECIMAL: ";
-
-870 F0RI=1T08
-
-880 PRINTMID$(H$,D(I),1);
-
-890 IFI/2=INT(1/2)THENPRINT" ";
-
-900 NEXTI 910 PRINT
-
-920 PRINT"{DOWN}DONE!" 930 END
-
-940 F0RI=1T08
-
-950 IFD(I)=OTHENPRINT"{RVS}"H$(I)"{ROFF}
-
-";: GOTO 970
-
-960 PRINTH$(I);
-
-970 NEXTI
-
-980 PRINT"{DOWN}{RVS}BYTE DECODING ERROR
-
-{ROFF}" 990 END
+870 FOR I=1 TO 8
+880 PRINT MID$(H$,D(I),1);
+890 IF I/2=INT(1/2) THEN PRINT" ";
+900 NEXT I
+910 PRINT
+920 PRINT"{DOWN}DONE!"
+930 END
+940 FOR I=1 TO 8
+950 IF D(I)=0 THEN PRINT"{RVS}"H$(I)"{ROFF}";:GOTO 970
+960 PRINT H$(I);
+970 NEXT I
+980 PRINT"{DOWN}{RVS}BYTE DECODING ERROR{ROFF}"
+990 END
 
 498
 
@@ -40550,100 +40411,104 @@ INDEX
 ﻿
 INDEX
 
-aborted validate routine asterisks in file names autoinitialization feature
+-A-
+aborted validate routine
+asterisks in file names
+autoinitialization feature
 
-B
+-B-
 
-B-A BE B-F B-P
+B-A (block-allocate)
+B-E
+B-F (block free)
+B-P (buffer pointer)
 
 bad sectoring
-
 backup of a protected diskette
-
-BAM 21, 26, binary to GCR conversion bit copying
-
+BAM 21, 26
+binary to GCR conversion
+bit copying
 bit manipulation
-
 block allocate map
-
-block availability map block, data
-
-header
-
+block availability map
+block, data header
 block-allocate command 89,
-
 block-write command 71, 77,
-
 buffer 82
-
-buffer areas, organization of buffer-pointer command 71, 75 bugs in DOS 2.6 bump
-
+buffer areas, organization of
+buffer-pointer command 71, 75
+bugs in DOS 2.6
+bump
 byte separation
+bytes, determining 1
+bytes in the header block
+bytes per diskette 31
 
-bytes, determining 1 bytes in the header block bytes per diskette 31
+- C -
 
-C 23
+23
 
-carriage return as a delimiter chaining
-
+carriage return as a delimiter
+chaining
 checksum, header block 32
 
 501
 
 cards, wild 23,
-
-characters, synchronization 113- 14
-
-72,
+characters, synchronization 113- 14 72,
 
 -----------------------------------------------------Page 501-----------------------------------------------------
 ﻿
-checksums clock rates
-
-close - 19 coda obscura
-
+checksums
+clock rates
+close - 19
+coda obscura
 command channel
+command, validate
+commands
+	block-allocate
+	block-execute
+	block-free
+	block-read — 98
+	block-write 77,
+	copy
+	direct-access
+	DOS 15
+	initialize
+	LOAD
+	memory-execute 96
+	memory-write 85
+	rename 22-23
+	SAVE 16
+	scratch 24
+	validate
+	VERIFY 16
 
-command, validate commands,
+- C -
 
-block-allocate block-execute block-free
+Commodore encoding scheme
+Commodore file types
+communications,
+	computer-disk drive controller, 
+	floppy disk 103
+copying a locked file 70
+copy command 23
 
-block-read — 98
-
-block-write 77,
-
-copy
-
-direct-access
-
-DOS 15 initialize LOAD
-
-memory-execute 96 memory-write 85
-
-rename 22-23
-
-SAVE 16 scratch 24 validate
-
-VERIFY 16
-
-Commodore encoding scheme Commodore file types
-
-communications, computer-disk drive controller, floppy disk 103 coping a locked file 70 copy command 23
+- D -
 
 data block 113
-
-data communication channel 16 DEL
-
-deleted file 69-70 delimiter 55
-
+data communication channel 16
+DEL
+deleted file 69-70
+delimiter 55
 determining bytes 116
-
-DIR 49, 51 direct access 89
-
-direct-access commands 71-72 direct-access data channel 72
-
-disk commands, execution 83-184 disk drives, incompatibility 208 disk, full 91
-
+DIR 49, 51
+direct access 89
+direct-access commands 71-72
+direct-access data channel 72
+disk commands, execution 83-184
+disk drives, incompatibility 208
+disk, full 91
 disk ID 21
 
 502
@@ -40654,260 +40519,217 @@ codes, FDC job 109,
 
 -----------------------------------------------------Page 502-----------------------------------------------------
 ﻿
-disk interrogation disk management
-
+disk interrogation
+disk management
 disk protection schemes
-
-diskette, recovering a physically damaged diskette, recovering an entire DOS bugs
-
+diskette, recovering a physically damaged
+diskette, recovering an entire
+DOS bugs
 DOS, definition of
-
 DOS error messages
-
-DOS protection 1 DOS, tasks of
-
+DOS protection 1
+DOS, tasks of
 DOS 2.6 sync mark
-
 duplicating a protection scheme
 
-encoding scheme, Commodore end or identify
-
+- E -
+encoding scheme, Commodore
+end or identify
 EOI
-
 EOR
-
 EOR truth table
-
-error messages, DOS 104, error, illegal track or sector
-
-illegal quantity
-
-no channel
-
-recovery hard recovery soft
-
-time out write
-
+error messages, DOS 104
+error,
+	illegal track or sector
+	illegal quantity
+	no channel
+	recovery hard
+	recovery soft
+	time out write
 errors, hard
-
-read
-
-read/write soft
-
-write
-
+	read
+	read/write soft
+	write
 execute
-
 execution of disk commands 183-184
 
-FDC formatting routine FDC job codes 109,112 FDC main loop
+- F -
 
+FDC 103,
+FDC formatting routine
+FDC job codes 109,112
+FDC main loop
 FDC major entry points 190
-
 FDC read routine ....... 191
-
-FDC routines, major FDC routines, using 193-199
-
+FDC routines, major
+FDC routines, using 193-199
 FDC write routine _____________ 192
-
 fields of a directory 36
 
 503
 
-FDC 103,
-
 -----------------------------------------------------Page 503-----------------------------------------------------
 ﻿
-1541 binary to GCR look up table file, deleted
+1541 binary to GCR look up table
 
+file, deleted
 file name limits
-
-file open error file padding
-
-file, random access
-
-relative
-
-sequential data
-
-side sector
-
-user storage
+file open error
+file padding
+file,
+	random access
+	relative
+	sequential data
+	side sector
+	user storage
 
 file storage, program
 
-sequential
+	sequential
 
-file types, Commodore files, locked
-
+file types, Commodore
+files, locked
 fixed record length
-
 formatting a diskette
+	full disk
+	full new, recovering from
 
-full disk
-
-full new, recovering from
+- G -
 
 GCR conversion
-
 group coded recording
 
-H
+- H -
 
 hard error, recovery
-
 hard errors
-
 header block 31,
-
 header block, byte makeup
-
-header block checksum header block ID
-
+header block checksum
+header block ID
 header block layout 32
 
-I
+- I -
 
-I
-
-ID character -2 ID HI
-
+ID character -2 ID HI fixme
 illegal quantity error 74
-
 illegal track or sector error .......................... 91
-
 initialize command 2
-
 initializing a disk
 
 504
 
 floppy disk controller 103,
-
 forward pointer 42,
 
-incompatibility, write ... ................................. 208-209
+incompatibility, write ... ................................. 208-209 fixme
 
 file management 184-
 
 -----------------------------------------------------Page 504-----------------------------------------------------
 ﻿
 inter-sector gap 34,
-
 inter-sector tail
+IP error codes
+IP routines
 
-IP error codes IP routines
+- J -
 
-job codes job queue jobs
-
+job codes
+job queue
+jobs
 jump
 
+- L -
+
 last block signal
-
-layout of a header block length, fixed record 66
-
+layout of a header block
+	length
+	fixed record 66
 LOAD
-
 load address
-
-locating particular relative files locked file, coping
-
+locating particular relative files
+locked file, copying
 locked file, renaming 70
-
 locked files
 
-M
+- M -
 
-ME
+M-E (memory-execute)
 
-M-mode 177 MR
-
-M-W
-
+M-mode 177
+M-R (memory-read)
+M-W (memory-write)
 magnetic domains
-
 major FDC routines
+merging sequential files
+	with copy command
 
-merging sequential files with copy command
-
-N
+- N -
 
 N 21
-
 naming a file 20-21
-
 NEW
-
 newing a diskette
-
 no channel error
-
 null directory entry 47
 
 505
 
+FIXME:
 memory-execute command 72,
-
 memory-read command 71,
-
 memory-write command 71,
 
 103,
 
 -----------------------------------------------------Page 505-----------------------------------------------------
 ﻿
-o
+- O -
 
 organization of buffer areas
 
-P
+- P -
 
-padding the last block in a file parser routine
-
+padding the last block in a file
+parser routine
 PRG
-
-processor, interface program file storage programmer's aid
-
-protected diskette, analyzing protected diskette, backup of a protection, DOS
-
+processor, interface
+program file storage
+programmer's aid
+protected diskette, analyzing
+protected diskette, backup of a
+protection, DOS
 protection scheme, duplication
 
-Q
+- Q -
 
 question marks in file names
 
-R
+- R -
 
-random access file read errors read mode
-
+random access file
+read errors
+read mode
 read/write errors
-
 reallocating sectors 173
-
 record size
-
 recording process
-
 recovering a hard error
-
-recovering a physically damaged diskette 177 recovering a relative file recovering a scratched file recovering a soft error
-
+recovering a physically damaged diskette 177
+recovering a relative file
+recovering a scratched file
+recovering a soft error
 recovering an entire diskette
-
 recovering from a full new
-
-recovering scratched files recovery, relative file 176
-
+recovering scratched files
+recovery, relative file 176
 relative file
-
-relative file entries relative files
-
+relative file entries
+	relative files FIXME
 relative file, recovery
-
 rename command
-
 renaming a locked file
-
 reset, warm ______
 
 506
@@ -40915,72 +40737,55 @@ reset, warm ______
 recovering an unclosed file ....................................... 177-178
 
 recovering from a short new ....................................... 178-179
-
-pointer, forward 42,
+	pointer, forward 42,
 
 -----------------------------------------------------Page 506-----------------------------------------------------
 ﻿
+- S -
+
 SAVE
-
 save and replace operation
-
-scratch command scratched files
-
-scratched files, recovering scratching a file
-
+scratch command
+scratched files
+scratched files, recovering
+scratching a file
 scratching an unclosed file
-
 sector
-
-sector filling sequence sector layout
-
-sector number sectors
-
+sector filling sequence
+sector layout
+sector number
+sectors
 sequential data file
-
 sequential file storage
-
 short new, recovering from
-
 side sector
-
 side sector file
-
 signal, last block
-
 soft error, recovery 175
-
 soft errors 175
-
-ST 99 status variable
-
+ST 99
+status variable
 stopgap measure
-
-synchronization characters 113-114 sync mark 115
-
-sync mark, placement 114 sync mode
-
+synchronization characters 113-114
+sync mark 115
+sync mark, placement 114
+sync mode
 tail gap 34, 117
-
 time out error 112
-
 tracing a file 26-27
-
 track number 32
+tracks 29
+tracks on a formatted diskette 29
 
-tracks 29 tracks on a formatted diskette 29
-
-U
+- U -
 
 U1 71
 U2 71
-
-unclosed file, recovering
-
-177-178unclosed files 27
-
-unscratching a file 173 user file storage 69 using IP routines 185
-
+unclosed file, recovering 177-178
+unclosed files 27
+unscratching a file 173
+user file storage 69
+using IP routines 185
 using the FDC routines 193-199
 
 507
@@ -40989,20 +40794,17 @@ USR ...
 
 -----------------------------------------------------Page 507-----------------------------------------------------
 ﻿
-V
+- V -
 
 validate command 25,
-
-validate routine, aborted variable, status
-
+validate routine, aborted
+variable, status
 VERIFY
 
-W
+- W -
 
 warm reset
-
 wild cards
-
 wild cards in file names
 
 508
