@@ -104,7 +104,6 @@ INCDOS01.TXT (WIP), April 2014
                            DATAMOST, Inc.
             19821 Nordhoff Street, Northridge, CA 91324
                           (818) 709-1202
-
 -----------------------------------------------------Page 3-----------------------------------------------------
 ﻿
 
@@ -147,7 +146,6 @@ accept responsibility for any loss or damage, tangible or intangible, resulting
 from use or improper or unintended use of this information.
 
                                                        Printed in U.S.A.
-
 -----------------------------------------------------Page 4-----------------------------------------------------
 ﻿
 
@@ -176,20 +174,6 @@ This manual was written on a Commodore computer system using the WordPro 4 Plus
 word processing system. The WordPro Plus™ Series is commercially available from
 Professional Software Inc. This sophisticated word processing system made
 editing and last minute revisions much easier.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -----------------------------------------------------Page 5-----------------------------------------------------
 ﻿
 -----------------------------------------------------Page 6-----------------------------------------------------
@@ -292,7 +276,6 @@ Chapter 9 - OVERVIEW OF THE 1541 DOS
             Summary Bugs in DOS 2.6
             Write Incompatibility with 4040
             Late News
-
 -----------------------------------------------------Page 8-----------------------------------------------------
 ﻿
 Appendix A - 1541 RAM VARIABLE DEFINITIONS
@@ -304,10 +287,115 @@ Appendix C - PROGRAM LISTINGS
 Appendix D - MATHEMATICAL CONVERSION ROUTINES
 
 Index
-
 -----------------------------------------------------Page 9-----------------------------------------------------
 ﻿
 Ignorance is a precious thing.
 Once lost, it can never be regained.
-
 -----------------------------------------------------Page 10-----------------------------------------------------
+﻿
+CHAPTER 1
+
+INTRODUCTION
+
+This manual is intended to supplement the documentation provided in the 1541
+User's Manual. Although this manual is primarily designed to meet the needs of
+the intermediate to advanced programmer, it will also be of interest to the
+novice Commodore user who wants to know more about how his 1541 disk drive
+works. This manual is not intended to replace the documentation provided by
+Commodore Business Machines, Inc. and the reader is assumed to be relatively
+familiar with the contents of the 1541 User's Manual. For the sake of
+continuity and clarity, some of the information covered in the 1541 User's
+Manual is also presented here. However, the majority of the information
+presented in this manual is original and is the result of intensive disassembly
+and annotation of the 1541's DOS by the authors. Some information is based on
+articles and notes published in a variety of publications as well as
+discussions with other knowledgeable disk experts.
+
+This manual was not prepared with the assistance of Commodore Business
+Machines, Inc. Although we cannot guarantee the accuracy of all the information
+presented in this manual, the material has been thoroughly researched and
+tested.
+
+There were several reasons for writing Inside Commodore DOS:
+
+1. To correct errors and omissions in the 1541 User's Manual.
+2. To help you make more effective use of your disk drive.
+3. To provide complete information on diskette formatting.
+4. To provide complete information on the storage of files.
+5. To allow you to read and write data in non-standard ways.
+6. To help you make a backup copy of your "protected" diskettes.
+7. To help you recover damaged diskettes.
+8. To help you understand the operation of your disk drive.
+
+Although this manual focuses primarily on the 1541 disk drive, much of the
+information also applies to other Commodore disk drives.
+
+1.1 A Brief Word About the Programs
+
+This book contains listings for 46 ready-to-use programs written in BASIC.
+These programs are copyrighted. They may NOT be used commercially, in whole
+or in part, period. Since many of the programs are long, typing them all in
+would be a time consuming, tedious task. Feel free to share your typing efforts
+with a friend who has also purchased a copy of this book. In return, we simply
+ask that you do not share a program with someone who does not own a
+legitimate copy of this book.
+
+                                    11
+-----------------------------------------------------Page 11-----------------------------------------------------
+﻿
+The programs in this book are disk utilities. They do not use flashy graphics
+or sound. Rather, they are extremely powerful tools. Remember, any tool can be
+dangerous if it is used improperly. Be sure that you know what you are doing
+before you use a given program. Always experiment with a program on a test
+diskette before you actually use it on one that contains valuable programs or
+data. Practice makes perfect.
+
+Each program was individually tested on a variety of 1541 disk drives having a
+wide range of serial numbers. Moreover, each program always worked perfectly.
+Unfortunately, it is impossible to guarantee that a particular program will
+work with your model. If a given program does not seem to work properly, check
+your typing carefully. Any errors, especially in the DATA statements which
+contain a machine language program, will produce problems.
+
+As a courtesy to the more advanced programmer, we have also included the source
+listings for each machine language routine A source listing immediately follows
+a related BASIC program listing and has a file name ending in ".PAL". It is for
+use with the PAL assembler. Note: If you are using a different assembler, you
+may have to make some minor changes.
+
+The programs in this book were designed to be not only useful and beneficial,
+but instructive as well. Many of them illustrate the "state of the art" in
+the use of Commodore's direct-access disk commands. Enjoy!
+
+1.2 How to Type in the Programs
+
+Program listings in books and magazines often suffer from two problems:
+typographical errors that occur when the program is retyped into a word
+processor and the readability of Commodore's control characters (e.g., the
+reverse field heart that means Clear Screen). To overcome these problems, the
+program listings for this book were created using a special "lister" program.
+This lister program took a working BASIC program and converted it into a
+WordPro™ file. At the same time, control characters were spelled out in words
+and surrounded by curly brackets. For example, a reverse field heart was
+converted to {CLR}. The table below summarizes the listing conventions, the
+corresponding control characters, and the proper key/keys to press on your
+C64 or VIC-20.
+
+When You See		What It Represents	What You Type
+----------------	--------------------	--------------
+{CLR}			Clear Screen		Hold down SHIFT and press
+						CLR/HOME
+{HOME}			Home Cursor		Press CLR/HOME
+{DOWN}			Cursor Down		Press CRSR/DOWN
+{UP}			Cursor Up		Hold down SHIFT and press
+						CRSR/UP
+{RIGHT}			Cursor Right		Press CRSR/RIGHT
+{LEFT}			Cursor Left		Hold down SHIFT and press
+						CRSR/LEFT
+{RVS}			Reverse Field ON	Hold down CTRL and press 9
+{ROFF}			Reverse Field OFF	Hold down CTRL and press 0
+
+
+                                   12
+-----------------------------------------------------Page 12-----------------------------------------------------
+﻿
