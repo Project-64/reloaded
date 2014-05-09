@@ -1077,7 +1077,6 @@ file in the directory and chains through the
                                      26
 -----------------------------------------------------Page 26-----------------------------------------------------
 ﻿
-
 entire file. As sectors are picked up along the way, they are allocated in the
 BAM as currently in use. If the file is traced successfully, all blocks
 associated with it are put back into the BAM as in use. The next file is then
