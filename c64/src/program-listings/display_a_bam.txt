@@ -1,0 +1,111 @@
+100 REM DISPLAY A BLOCK AVAILABILITY MAP - 1541
+110 DIM N$(16)
+120 DEF FNS(I)=2^(S-INT(S/8)*8)AND(B(INT(S/8)))
+130 PRINT"{clear}DISPLAY A BAM - 1541"
+140 PRINT"{down}INSERT DISKETTE IN DRIVE"
+150 PRINT"{down}PRESS {rvrs on}RETURN{rvrs off} TO CONTINUE"
+160 GET C$:IF C$=""THEN 160
+170 IF C$<>CHR$(13)GOTO 160
+180 PRINT"OK"
+190 OPEN 15,8,15
+200 PRINT# 15,"I0"
+210 INPUT# 15,EN$,EM$,ET$,ES$
+220 IF EN$="00"OR EN$="22"OR EN$="23"GOTO 260
+230 PRINT"{down}"EN$", "EM$","ET$","ES$
+240 CLOSE 15
+250 END
+260 OPEN 2,8,2,"#"
+270 PRINT# 15,"U1";2;0;18;0
+280 INPUT# 15,EN$,EM$,ET$,ES$
+290 REM GET DOS
+300 PRINT# 15,"B-P";2;2
+310 GET#2,B$
+320 IF B$=""THEN B$=CHR$(0)
+330 DOS=ASC(B$)
+340 IF DOS=65 THEN DOS$="V2.6":GOTO 380
+350 IF DOS=1 THEN DOS$="V1.2":GOTO 380
+360 DOS$="V?.?"
+370 REM GET BLOCKS FREE
+380 BF=0
+390 B=4
+400 FOR I=1 TO 35
+410 IF I=18 THEN I=I+1:B=B+4
+420 PRINT# 15,"B-P";2;B
+430 GET#2,B$
+440 IF B$=""THEN B$=CHR$(0)
+450 A=ASC(B$)
+460 BF=BF+A
+470 B=B+4
+480 NEXT I
+490 REM GET DISK NAME
+500 PRINT# 15,"B-P";2;144
+510 FOR I=1 TO 16
+520 GOSUB 1140
+530 N$(I)=CHR$(A)
+540 NEXT I
+550 REM GET COSMETIC ID
+560 ID$=""
+570 PRINT# 15,"B-P";2;162
+580 FOR I=1 TO 2
+590 GOSUB 1140
+600 ID$=ID$+CHR$(A)
+610 NEXT I
+620 PRINT"{clear}   {rvrs on}TRACK{rvrs off}    11111111112222222222333333"
+630 PRINT"   12345678901234567890123456789012345"
+640 PRINT"{rvrs on}S{rvrs off}0                                     "N$(1);
+650 PRINT"{rvrs on}E{rvrs off}1                                     "N$(2);
+660 PRINT"{rvrs on}C{rvrs off}2                                     "N$(3);
+670 PRINT"{rvrs on}T{rvrs off}3                                     "N$(4);
+680 PRINT"{rvrs on}O{rvrs off}4                                     "N$(5);
+690 PRINT"{rvrs on}R{rvrs off}5                                     "N$(6);
+700 PRINT" 6                                     "N$(7);
+710 PRINT" 7                                     "N$(8);
+720 PRINT" 8                                     "N$(9);
+730 PRINT" 9                                     "N$(10);
+740 PRINT"10                                     "N$(11);
+750 PRINT"11                                     "N$(12);
+760 PRINT"12                                     "N$(13);
+770 PRINT"13                                     "N$(14);
+780 PRINT"14                                     "N$(15);
+790 PRINT"15                                     "N$(16);
+800 PRINT"16"
+810 PRINT"17"
+820 PRINT"18                                ";DOS$;" ";LEFT$(ID$,1);
+830 PRINT"19                          {rvrs on} {rvrs off}OR{$a6}=EMPTY ";RIGHT$(ID$,1);
+840 PRINT"20                     ";
+850 BF$=RIGHT$("  "+RIGHT$(STR$(BF),LEN(STR$(BF))-1),3)
+860 IF BF=1 THEN PRINT" ";BF$;" BLOCK FREE":GOTO 880
+870 PRINT BF$;" BLOCKS FREE"
+880 A$="."
+890 CR$="{right:35}"
+900 PRINT# 15,"B-P";2;4
+910 FOR T=1 TO 35
+920 IF T/2<>INT(T/2)THEN F$="{rvrs on} {rvrs off}":GOTO 940
+930 F$="{$a6}"
+940 GET#2,B$
+950 FOR I=0 TO 2
+960 GET#2,B$
+970 IF B$=""THEN B$=CHR$(0)
+980 B(I)=ASC(B$)
+990 NEXT I
+1000 PRINT"{home}{down:2}{right:2}";LEFT$(CR$,T);
+1010 NS=20+2*(T>17)+(T>24)+(T>30)
+1020 FOR S=0 TO NS
+1030 IF FNS(S)=0 THEN PRINT A$;:GOTO 1050
+1040 PRINT F$;
+1050 PRINT"{down}{left}";
+1060 NEXT S
+1070 NEXT T
+1080 PRINT"{home}{down:22}";
+1090 CLOSE 2
+1100 INPUT# 15,EN$,EM$,ET$,ES$
+1110 CLOSE 15
+1120 END
+1130 REM GET A BYTE
+1140 GET#2,B$
+1150 IF B$=""THEN B$=CHR$(0)
+1160 A=ASC(B$)
+1170 IF A>127 THEN A=A-128
+1180 IF A<32 OR A>95 THEN A=63
+1190 IF A=34 THEN A=63
+1200 RETURN
