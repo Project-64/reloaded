@@ -1117,9 +1117,9 @@ The BAM is where the DOS keeps track of which sectors (blocks) on the diskette c
 
 -----------------------------------------------------Page 36-----------------------------------------------------
 ﻿
-1541TEST/DEMO
+            1541TEST/DEMO
 
-TRACK 18 - SECTOR 0
+         TRACK 18 - SECTOR 0
 
 . 00: 12 01 41 00 15 FF FF 1F ..A.....  BAM TRACK   1
 . 08: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  2-3
@@ -1128,16 +1128,32 @@ TRACK 18 - SECTOR 0
 . 20: 15 FF FF 1F 15 FF FF IF ........  BAM TRACKS  8-9
 . 28: 15 FF FF 1F 15 FF FF IF ........  BAM TRACKS 10-11
 . 30: 15 FF FF 1F 15 FF FF IF ........  BAM TRACKS 12-13
-. 38: 11 D7 5F 1F 00 00 00 00 ........  BAM TRACKS 14-15
+. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
 . 40: 00 00 00 00 00 00 00 00 ........  BAM TRACKS 16-17
 . 48: 10 EC FF 07 00 00 00 00 ........  BAM TRACKS 18-19
-. 50: 00 00 00 00 12 BF FF 07 ........  BAM TRACKS 18-19
- 58 60 68 70 78 80 88
+. 50: 00 00 00 00 12 BF FF 07 .....?..  BAM TRACKS 20-21
+. 58: 13 FF FF 07 13 FF FF 07 ........  BAM TRACKS 22-23
+. 60: 13 FF FF 07 12 FF FF 03 ........  BAM TRACKS 24-25
+. 68: 12 FF FF 03 12 FF FF 03 ........  BAM TRACKS 26-27
+. 70: 12 FF FF 03 12 FF FF 03 ........  BAM TRACKS 28-29
+. 78: 12 FF FF 03 11 FF FF 01 ........  BAM TRACKS 30-31
+. 80: 11 FF FF 01 11 FF FF 01 ........  BAM TRACKS 32-33
+. 88: 11 FF FF 01 11 FF FF 01 ........  BAM TRACKS 34-35
+. 90: 31 35 34 31 54 45 53 54 1541TEST  DISK NAME
+. 98: 2F 44 45 4D 4F A0 A0 A0 /DEMO
+. A0: A0 A0 5A 58 A0 32 41 A0   ZX 2A   DOS TYPE & DISK ID
+. A8: A0 A0 A0 00 00 00 00 00    .....  UNUSED
+. B0: 00 00 00 00 00 00 00 00 ........
+. B8: 00 00 00 00 00 00 00 00 ........
+. C0: 00 00 00 00 00 00 00 00 ........
+. C8: 00 00 00 00 00 00 00 00 ........
+. D0: 00 00 00 00 00 00 00 00 ........
+. D8: 00 00 00 00 00 00 00 00 ........
+. E0: 00 00 00 00 00 00 00 00 ........
+. E8: 00 00 00 00 00 00 00 00 ........
+. F0: 00 00 00 00 00 00 00 00 ........
+. F8: 00 00 00 00 00 00 00 00 ........
 
-90 98 A0 A8 B0 B8 C0 C8 D0 D8 E0 E8 F0 F8
- 31 35 34 31 54 45 53 54 1541TEST DISK NAME 2f 44 45 4D 4F A0 A0 A0 /DEMO
-
-AO A0 5A 58 A0 32 41 A0 ZX 2A DOS TYPE & DISK ID A0 A0 A0 00 00 00 00 00 ..... 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
 As indicated above, the BAM does not take up all 256 bytes on this sector. There are several other things stored here as well. The table below identifies the various parts. Note that the sector dump above uses hexadecimal notation while the table below gives the decimal equivalents.
 
