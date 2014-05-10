@@ -1205,9 +1205,9 @@ Diskette name padded with shifted spaces Shifted spaces
 
 12 FF FF 03 11 FF FF 01 ........ BAM TRACKS
 
-11 FF FF Ol 11 FF FF 01 ........ BAM TRACKS
+11 FF FF 01 11 FF FF 01 ........ BAM TRACKS
 
-11 FF FF 01 11 FF FF Ol . BAM TRACKS
+11 FF FF 01 11 FF FF 01 . BAM TRACKS
 
 TRACKS
 
@@ -1339,7 +1339,7 @@ SECTOR NUMBER
 
 *5F
 
-OlOlllll
+0101llll
 
 111111
 
@@ -1349,7 +1349,7 @@ OlOlllll
 
 *1F
 
-00Olllll *
+0001llll *
 
 21111
 
@@ -1387,7 +1387,7 @@ SECTOR NUMBER
 
 *EC *FF *07
 
-lllOH00 11111111 00OOOlll *
+ll10H00 11111111 00OO01ll *
 
 111111 21111
 
@@ -1407,13 +1407,13 @@ amine this sector in detail.
 
 1541TEST/DEMO
 
-TRACK 18 - SECTOR Ol
+TRACK 18 - SECTOR 01
 
 . 00: 12 04 82 11 00 48 4F 57
 
 . 08: 20 54 4F 20 55 53 45 A0 TO USE
 
-lO: A0 A0 A0 A0 A0 00 00 00
+10: A0 A0 A0 A0 A0 00 00 00
 
 40
 
@@ -1431,7 +1431,7 @@ FILE ENTRY #1
 
 00 00 82 11 09 56 49 43 .....VIC FILE 2D 32 30 20 57 45 44 47 -20 WEDG 45 A0 A0 A0 A0 00 00 00 E 00 00 00 00 00 00 04 00
 
-00 00 82 13 00 46 2D 36 .....C-6 FILE 34 20 57 45 44 47 45 A0 4 WEDGE. A0 A0 A0 A0 A0 00 00 00 00 00 00 00 00 00 Ol 00
+00 00 82 13 00 46 2D 36 .....C-6 FILE 34 20 57 45 44 47 45 A0 4 WEDGE. A0 A0 A0 A0 A0 00 00 00 00 00 00 00 00 00 01 00
 
 00 00 82 13 01 44 4F 53 .....DOS FILE 20 35 2E 31 A0 A0 A0 A0 5.1 A0 A0 A0 A0 A0 00 00 00 00 00 00 00 00 00 04 00
 
@@ -1774,7 +1774,7 @@ DIRECTORY ENTRY 4
 . 68: 34 20 57 45 44 47 45 A0 4 WEDGE Starts on 19/0 ($13/$00)
 . 70: A0 A0 A0 A0 A0 00 00 00 ___ Name C-64
 
-. 78: 00 00 00 00 00 00 Ol 00 ........ File length: 1
+. 78: 00 00 00 00 00 00 01 00 ........ File length: 1
 
 DIRECTORY ENTRY 5
 
@@ -1854,12 +1854,12 @@ TRACK 18 - SECTOR 04
 
 . 98: 00 00 00 00 00 00 09 00 ........ File length: 9
 
-AO: 00 00 82 14 07 50 45 52 ..... SEQ File type = $82 =
+. A0: 00 00 82 14 07 50 45 52 ..... SEQ File type = $82 =
 . A8: 55 45 4E 54 49 41 4C 20 UENTIAL Starts on 20/7 ($14/$07)
 . B0: 46 49 4C 45 A0 00 00 00 FILE ___ Name:
 . B8: 00 00 00 00 00 00 05 00 ........ File length: 5
 
-CO: 00 00 82 0F Ol 52 41 4E ..... RAN File type = $82 =
+. C0: 00 00 82 0F 01 52 41 4E ..... RAN File type = $82 =
 . C8: 44 4F 4D 20 46 49 4C 45 DOM FILE Starts on 15/1 ($0F/$01)
 
 DO: A0 A0 A0 A0 A0 00 00 00 ___ Name:
@@ -1979,7 +1979,7 @@ TRACK 18 - SECTOR 04
 
 From the entry we see that "DIR" starts at track 16 ($10), sector 01 ($01) and that the file is four blocks long (4 + 0 * 256).
 
-. 00: 00 FF 82 lO 01 44 49 52
+. 00: 00 FF 82 10 01 44 49 52
 
 ** »*
 
@@ -1991,7 +1991,7 @@ From the entry we see that "DIR" starts at track 16 ($10), sector 01 ($01) and t
 
 Let's look at the first block in this file.
 
-TRACK 16 - SECTOR Ol
+TRACK 16 - SECTOR 01
 
 o0 08 10 18 20 28 30 38 40 48 50 58 60 68 70 78 80 88 90 98 A0 A8 B0 B8 C0 C8
  10 0B 01 04 0D 04 04 00
@@ -2000,7 +2000,7 @@ o0 08 10 18 20 28 30 38 40 48 50 58 60 68 70 78 80 88 90 98 A0 A8 B0 B8 C0 C8
 
 IE 04 05 00 99 22 93 22
 
-3A 89 20 31 30 30 30 30 : . lOOOO
+3A 89 20 31 30 30 30 30 : . 10OOO
 
 00 2E 04 0A 00 9F 31 2C 1 38 2C 30 2C 22 24 30 22 8,0,"*0"
 
@@ -2070,7 +2070,7 @@ Again, nothing much of interest. Chain to track 16 ($10), sector 12 ($0C).
 TRACK 16 - SECTOR 12
 
 . 00: 00 68 8B 20 41 24 B2 22 ___
-. 08: 44 22 20 A7 20 31 30 00 D" . lO
+. 08: 44 22 20 A7 20 31 30 00 D" . 10
 . 10: 2D 07 3C 28 8B 20 41 24 -.<(. A*
 . 18: B2 22 2E 22 20 B0 20 41 . ". " . A
 . 20: 24 B2 22 3E 22 20 B0 20 *.">" 
@@ -2258,7 +2258,7 @@ TRACK 18
 
 DIRECTORY " is the second file entry in the directory.
 
-. 20: 00 00 81 11 Ol 20 20 20
+. 20: 00 00 81 11 01 20 20 20
 
 ** »* **
 
@@ -2270,7 +2270,7 @@ DIRECTORY " is the second file entry in the directory.
 
 A sequential file is designated by an $81 in the directory. The first block of this file is stored on track 17 ($11), sector 1 ($01). We also see that " DIRECTORY " is two blocks long (2 + 0 * 256). Let's take a look at the first half of the starting data block.
 
-TRACK 17 - SECTOR Ol
+TRACK 17 - SECTOR 01
 
 00
 
@@ -2564,7 +2564,7 @@ TRACK 18 - SECTOR 01
 
 00 00 84 11 03 4D 41 47 ..... MAG Here's the 20 46 49 4C 45 A0 A0 A0 FILE ___ for the REL
 
-AO A0 A0 A0 A0 11 0D 96 00 00 00 00 00 00 B4 Ol
+AO A0 A0 A0 A0 11 0D 96 00 00 00 00 00 00 B4 01
 
 "MAG FILE" will serve as our demo throughout this section. Let's examine its directory entry in detail from track 18, sector 1.
 
@@ -2625,23 +2625,23 @@ TRACK 17 - SECTOR 13 SIDE SECTOR #0
 
 10 18 20 28 30 38 40 48 50 58 60 68 70 78 80 88
 
-OC 13 00 96 11 0D 0C 13 ........Forward pointer, SS #, 06 lO 13 0F 00 00 00 00 ........ and 6 pairs of side sector
+OC 13 00 96 11 0D 0C 13 ........Forward pointer, SS #, 06 10 13 0F 00 00 00 00 ........ and 6 pairs of side sector
 
 11 03 11 0E 11 04 11 0F ........ 120 pairs of data 11 05 11 10 11 06 11 11 ........
 
-11 07 11 12 11 OS 11 13 11 09 11 14 11 0A 11 0B 11 0C lO 00 10 0A 10 14 10 08 lO 12 10 06 10 10 10 04 lO 0E lO 02 lO 0C lO 01 lO 0B 10 03 10 0D 10 05 10 0F lO 07 lO 11 10 09 lO 13 0F 07 0F 11 0F 05 0F 0F 0F 03 0F 0D 0F Ol 0F 0B 0F 00 0F 0A 0F 14 0F 08 0F 12 0F 06 0F 10 0F 04 0F 0E 0F 02 0F 0C 0F 09 0F 13 0E 07 0E 11 0E 05 0E 0F 0E 03
+11 07 11 12 11 OS 11 13 11 09 11 14 11 0A 11 0B 11 0C 10 00 10 0A 10 14 10 08 10 12 10 06 10 10 10 04 10 0E 10 02 10 0C 10 01 10 0B 10 03 10 0D 10 05 10 0F 10 07 10 11 10 09 10 13 0F 07 0F 11 0F 05 0F 0F 0F 03 0F 0D 0F 01 0F 0B 0F 00 0F 0A 0F 14 0F 08 0F 12 0F 06 0F 10 0F 04 0F 0E 0F 02 0F 0C 0F 09 0F 13 0E 07 0E 11 0E 05 0E 0F 0E 03
 
 59
 
 -----------------------------------------------------Page 59-----------------------------------------------------
 ﻿
 90 98 A0 A8 B0 B8 C0 C8 D0 D8 E0 E8 F0 F8
- 0E 0D 0E 01 0E 0B 0E 00 0E 0A 0E 14 0E 08 0E 12 0E 06 0E lO 0E 04 0E 0E 0E 02 0E 0C 0E 09 0E 13 0D 07 0D 11 0D 05 0D 0F 0D 03 0D 0D 0D Ol 0D 0B 0D 00 0D 0A 0D 14 0D 08 0D 12 0D 06 0D 10 0D 04 0D 0E 0D 02 0D 0C 0D 09 0D 13 0C 07 0C 11 0C 05 0C 0F 0C 03 0C 0D 0C Ol 0C 0B 0C 00 0C 0A 0C 14 0C 08 0C 12 0C 06 0C 10 0C 04 0C 0E 0C 02 0C 0C
+ 0E 0D 0E 01 0E 0B 0E 00 0E 0A 0E 14 0E 08 0E 12 0E 06 0E 10 0E 04 0E 0E 0E 02 0E 0C 0E 09 0E 13 0D 07 0D 11 0D 05 0D 0F 0D 03 0D 0D 0D 01 0D 0B 0D 00 0D 0A 0D 14 0D 08 0D 12 0D 06 0D 10 0D 04 0D 0E 0D 02 0D 0C 0D 09 0D 13 0C 07 0C 11 0C 05 0C 0F 0C 03 0C 0D 0C 01 0C 0B 0C 00 0C 0A 0C 14 0C 08 0C 12 0C 06 0C 10 0C 04 0C 0E 0C 02 0C 0C
 
 Of primary interest are the first 16 bytes.
 
 . 00: 0C 13 00 96 11 0D 0C 13 
-. 08: 06 lO 13 0F 00 00 00 00
+. 08: 06 10 13 0F 00 00 00 00
 
 Bytes 0 and 1 show us that the next side sector resides at track 12 ($0C), sector 19 ($13). Byte 2 informs us that this is side sector 0. A maximum of 6 side sectors are used by any one relative file. This is determined solely by the physical storage capacity of the diskette (664 blocks free after formatting divided by 120 track and sector pointers in a side sector equals 5.53 side sectors). Side sectors are numbered from 0 to 5. Byte 3 shows us the record size again (150 bytes). Bytes 5-15 are the track and sector locations of the six possible side sectors. They can be tabled as follows:
 
@@ -2671,14 +2671,14 @@ TRACK 17 - SECTOR 13 SIDE SECTOR #0
 
 ** -**
 
-. 18: 11 05 11 lO 11 06 11 11
+. 18: 11 05 11 10 11 06 11 11
 . 20: 11 07 11 12 11 08 11 13
 . 28: 11 09 11 14 11 0A 11 0B
-. 30: 11 0C lO 00 10 0A 10 14
-. 38: 10 08 10 12 lO 06 10 10
+. 30: 11 0C 10 00 10 0A 10 14
+. 38: 10 08 10 12 10 06 10 10
 . 40: 10 04 10 0E 10 02 10 0C
 . 48: 10 01 10 0B 10 03 10 0D
-. 50: 10 05 lO 0F lO 07 lO 11
+. 50: 10 05 10 0F 10 07 10 11
 . 58: 10 09 10 13 0F 07 0F 11
 . 60: 0F 05 0F 0F 0F 03 0F 0D
 . 68: 0F 01 0F 0B 0F 00 0F 0A
@@ -2691,27 +2691,27 @@ TRACK 17 - SECTOR 13 SIDE SECTOR #0
 . A0: 0E 06 0E 10 0E 04 0E 0E
 . A8: 0E 02 0E 0C 0E 09 0E 13
 . B0: 0D 07 0D 11 0D 05 0D 0F
-. B8: 0D 03 0D 0D 0D Ol 0D 0B
+. B8: 0D 03 0D 0D 0D 01 0D 0B
 . C0: 0D 00 0D 0A 0D 14 0D 08
-. C8: 0D 12 0D 06 0D lO 0D 04
+. C8: 0D 12 0D 06 0D 10 0D 04
 . D0: 0D 0E 0D 02 0D 0C 0D 09
 . D8: 0D 13 0C 07 0C 11 0C 05
-. E0: 0C 0F 0C 03 0C 0D 0C Ol
+. E0: 0C 0F 0C 03 0C 0D 0C 01
 . E8: 0C 0B 0C 00 0C 0A 0C 14
-. F0: 0C 08 0C 12 0C 06 0C lO
+. F0: 0C 08 0C 12 0C 06 0C 10
 . F8: 0C 04 0C 0E 0C 02 0C 0C
 
 Let's trace the remaining side sectors now.
 
 TRACK 12 - SECTOR 19 SIDE SECTOR #1
 
-. 00: 06 lO 01 96 11 0D 0C 13 
+. 00: 06 10 01 96 11 0D 0C 13 
 . 08: 06 10 13 0F 00 00 00 00
 . 10: 0C 09 0B 13 0B 07 0B 11 
 . 18: 0B 05 0B 0F 0B 03 0B 0D 
 . 20: 0B 01 0B 0B 0B 00 0B 0A 
 . 28: 0B 14 0B 08 0B 12 0B 06 
-. 30: 0B lO 0B 04 0B 0E 0B 02 
+. 30: 0B 10 0B 04 0B 0E 0B 02 
 . 38: 0B 0C 0B 09 0A 13 0A 07 
 . 40: 0A 11 0A 05 0A 0F 0A 03 
 . 48: 0A 0D 0A 01 0A 0B 0A 00 
@@ -2794,7 +2794,7 @@ OE 13
 OD 0A 06 02 07 03 00
 
 09 09 08 08 08 08 08 07 07 07
- 04 09 05 01 14 lO
+ 04 09 05 01 14 10
 
 11
 
@@ -2927,14 +2927,14 @@ OC
 OD 0A 06 02 07 03
 
 06 06 05 05 05 05 05 04 04
- 02 09 05 Ol 14 10 0C
+ 02 09 05 01 14 10 0C
 
 11
 
 OD
 
 06 05 05 05 05 05 05 04 04
- 0C 13 0F 0B 08 04 09 05 Ol
+ 0C 13 0F 0B 08 04 09 05 01
  06 05 05 05 05 05 04 04 04
 
 07 03 00
@@ -2988,7 +2988,7 @@ OF
  03
  0D
  03
- Ol
+ 01
 
 80
 
@@ -3063,7 +3063,7 @@ AO
 
 : 02
 
-Ol
+01
 
 02
  0B
@@ -3088,10 +3088,10 @@ BO
 ﻿
 . B8: 02 10 02 04 02 0E 02 02
 . C0: 02 0C 02 09 01 13 01 07
-. C8: 01 11 01 05 Ol 0F 01 03
-. D0: 01 0D 01 Ol 01 0B 01 00
+. C8: 01 11 01 05 01 0F 01 03
+. D0: 01 0D 01 01 01 0B 01 00
 . D8: 01 0A 01 14 01 08 01 12
-. E0: 01 06 Ol 10 Ol 04 01 0E
+. E0: 01 06 01 10 01 04 01 0E
 . E8: 01 02 01 0C 01 09 13 0A
 . F0: 13 00 13 0B 13 01 13 0C
 . F8: 13 02 13 0D 13 03 13 0E
@@ -3137,7 +3137,7 @@ OD 00 06 08 0A 0C 0E
 
 11
 
-Ol
+01
 
 03 05
 
@@ -3225,7 +3225,7 @@ In the sequential data file portion of a relative file, the record length (recor
 
 TRACK 17 - SECTOR 14
 
-00 08 lO 18 20 28 30 38 40 48 50 58 60 68 70 78 80 88 90 98 A0
+00 08 10 18 20 28 30 38 40 48 50 58 60 68 70 78 80 88 90 98 A0
  11 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
 D3 4F 55 4E 44 20 D3 59 .OUND -Y 4E 54 48 45 53 49 53 0D NTHESIS. 41 4C 4C 0D C3 4F 4D 50 ALL..OMP 55 54 45 0D CA 41 4E 20 UTE..AN 38 33 0D 32 36 0D 2E 0D 83.26... 0D 2E 0D 2E 0D 2E 0D 2E 0D 2E 0D 2E 0D 2E 0D 2E 0D 2E 0D 2E 0D 2E 0D 2E 0D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -3273,7 +3273,7 @@ Just out of curiosity let's examine the last two sectors of our sequential file 
 
 TRACK 23 - SECTOR 02
 
-OO 08 lO 18 20 28 30 38 40 48 50 58 60 68 70 78
+OO 08 10 18 20 28 30 38 40 48 50 58 60 68 70 78
 
 17 0C 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
@@ -3622,7 +3622,7 @@ than INPUT# because the data may contain null bytes, carriage returns and/or lin
 
 the contents to the screen.
 
-lOO REM BLOCK-READ (U1)
+10O REM BLOCK-READ (U1)
 
 110 OPEN 15,8,15 120 PRINT#15,"I0"
 
@@ -3750,9 +3750,9 @@ byte position = 0 to 255
 
 The following program displays a disk name by reading only bytes 144 to 159 from track 18, sector 0.
 
-lOO REM BUFFER-POINTER
+10O REM BUFFER-POINTER
 
-llO OPEN 15,8,15 120 PRINT#15,"IO"
+l10 OPEN 15,8,15 120 PRINT#15,"IO"
 
 130 INPUT#15,EN$,EM$,ET$,ES$
 
@@ -4146,7 +4146,7 @@ The GET# command is used following a memory-read command to retrieve the content
 
 The next program selects buffer #0 ($0300 - $03FF) as a workspace and does a block- read of track 18, sector 0. Bytes are returned to the C64 side from buffer #0 with memory- read and GET# commands, and printed to the screen.
 
-lOO 110 120 130 140 150 160 170 180 190 200 210 220 230 240 250 260 270 280 290 300 310
+10O 110 120 130 140 150 160 170 180 190 200 210 220 230 240 250 260 270 280 290 300 310
  REM TWO PARAMETER MEMORY-READ
 
 OPEN 15,8,15 PRINT#15,"IO"
@@ -4205,7 +4205,7 @@ PRINT#15,"M-R:"CHR$(I)CHR$(3)
 
 Please note that we deliberately omitted the third parameter of the memory-read command in the preceding example. The following example incorporates all three parameters of the memory-read command to read a disk name.
 
-lOO REM THREE PARAMETER MEMORY-READ
+10O REM THREE PARAMETER MEMORY-READ
 
 HO OPEN 15,8,15 120 PRINT#15,"10"
 
@@ -4584,7 +4584,7 @@ The following program allocates every sector on a diskette. Run this program on 
 
 diskette.
 
-lOO REM BLOCK-ALLOCATE
+10O REM BLOCK-ALLOCATE
 
 110 OPEN 15,8,15 120 PRINT#15,"IO"
 
@@ -5090,7 +5090,7 @@ sector = 0 to the range for a given track
 
 The block-execute command could be used in a diagnostic routine but it is difficult to visualize any other advantage that this command has over a normal memory-execute command. The following program demonstrates one of the few block-execute commands you will probably ever see. (lights, camera, action!) Run this program using a test diskette.
 
-lOO REM BLOCK-EXECUTE
+10O REM BLOCK-EXECUTE
 
 110 OPEN 15,8,15 120 PRINT#15,"IO"
 
@@ -5426,7 +5426,7 @@ What happens, though, if we bypass the drive's parser routine and attempt to wor
 
 The following program works the job queue directly to read the block from track 18, sector 0 into buffer number 0 ($0300 - $03FF) and prints the contents to the screen. Sound vaguely familiar? It should. It's a modification of the first program we wrote under beginning direct-access programming.
 
-lOO REM JOB QUEUE READ
+10O REM JOB QUEUE READ
 
 110 OPEN 15,8,15 120 PRINT#15,"I0"
 
@@ -5948,7 +5948,7 @@ To appreciate the uniqueness of a sync mark we must first look at how a normal d
 
 Hexadecimal Binary High Nybble Low Nybble
 
-$12 (18) 00010010 00Olxxxx xxxxOOlO
+$12 (18) 00010010 00Olxxxx xxxxOO10
 
 Mathematically speaking, a 4-bit nybble can be decoded into any one of 16 different decimal values ranging from 0 (all bits turned off) to 15 (all bits turned on) as follows:
 
@@ -5997,7 +5997,7 @@ OOOlxxxx = $1 (1) = 01011
 
 STEP 3. Low Nybble to GCR Conversion
 
-xxxxOOlO = $2 (2) = 10010
+xxxxOO10 = $2 (2) = 10010
 
 STEP 4. GCR Concatenation
 
@@ -11424,7 +11424,7 @@ D$(0)="00":D$(1) 11"
 
 DIM FD$(16) FD$(0)="
 
-■Ol":D$(2)="lO":D$(
+■Ol":D$(2)="10":D$(
 
 260 270 280 290
  FD$(1)="01 FD$(2)="02 FD$(3)="03 FD$(9)="09
