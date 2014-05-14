@@ -1,4 +1,3 @@
-<<<<<<< HEAD:c64/src/Inside_Commodore_DOS(6).txt
 ﻿*********
 
 Welcome to Project 64!

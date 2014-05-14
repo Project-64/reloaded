@@ -89,13 +89,13 @@ INDEX
 
 - I -  PREFACE
 
-The SUPER EXPANDER 64 is a powerful extension of the BASIC language in the 
-computer Commodore 64.  In precedence it was necessary to treat with Peek or 
-Poke the specific locations of memory for have agreed to the graphic and 
-resounding characteristics of the computer.  Currently the SUPER EXPANDER 64 
-furnishes new BASIC commands, that allow to approach easily to the many 
-characteristics of the Commodore 64.  You must only "insert" the SUPER 
-EXPANDER 64 cartridge and power on the computer.  With SUPER EXPADER 64 is 
+The SUPER EXPANDER 64 is a powerful extension of the BASIC language in the
+computer Commodore 64.  In precedence it was necessary to treat with Peek or
+Poke the specific locations of memory for have agreed to the graphic and
+resounding characteristics of the computer.  Currently the SUPER EXPANDER 64
+furnishes new BASIC commands, that allow to approach easily to the many
+characteristics of the Commodore 64.  You must only "insert" the SUPER
+EXPANDER 64 cartridge and power on the computer.  With SUPER EXPADER 64 is
 possible:
 
 -	create graphic visualizations in high resolution;
@@ -109,60 +109,60 @@ possible:
 -	create music and sounds for games;
 -	define programmable function keys .
 
-Best part of the actions of executable BASIC planning with the SUPER 
-EXPANDER 64, could be performed also with the only BASIC but, when comes used 
-the SUPER EXPANDER 64,  programs result generally more compact, they come 
-performed very more quickly and more easy from develop: additionally the 
-SUPER EXPANDER 64 consents to realize many actions that they couldn't be 
+Best part of the actions of executable BASIC planning with the SUPER
+EXPANDER 64, could be performed also with the only BASIC but, when comes used
+the SUPER EXPANDER 64,  programs result generally more compact, they come
+performed very more quickly and more easy from develop: additionally the
+SUPER EXPANDER 64 consents to realize many actions that they couldn't be
 effect using BASIC only.
-This handbook has destined to readership already in possession of some 
-notions of BASIC programming and to acquaintance of the many characteristics 
-of the Commodore 64.  Commands and functions of the SUPER  EXPANDER 64 are 
-explained and equipped with specific programs.  For subsequent informations 
-concern to matters treated in the present handbook consult the "Handbook of 
+This handbook has destined to readership already in possession of some
+notions of BASIC programming and to acquaintance of the many characteristics
+of the Commodore 64.  Commands and functions of the SUPER  EXPANDER 64 are
+explained and equipped with specific programs.  For subsequent information
+concern to matters treated in the present handbook consult the "Handbook of
 the Commodore 64 user" and the "Handbook of the Commodore 64 Programmer".
-We are sure that you will find enjoy using SUPER EXPANDER 64 cartridge with 
+We are sure that you will find enjoy using SUPER EXPANDER 64 cartridge with
 the its many graphic and sound characteristics.  Also readers with "artistic"
-or "musical" modest preparation will be able to easily insert in the own 
-educational programs, of work and relaxation, bright graphics,  colored, 
+or "musical" modest preparation will be able to easily insert in the own
+educational programs, of work and relaxation, bright graphics,  colored,
 animate and various sounds.
 
 
 
 - II -  CONVENTIONS FOR USE
 
-Here below there is a brief list of some keys and symbols, and their use in 
-the manual of the SUPER EXPANDER 64.  This will also be of help to interpret 
-the syntax of the commands and functions, optional characteristics of them 
+Here below there is a brief list of some keys and symbols, and their use in
+the manual of the SUPER EXPANDER 64.  This will also be of help to interpret
+the syntax of the commands and functions, optional characteristics of them
 included.
 
-RETURN	To continue a program after the introduction of a line, press 
+RETURN	To continue a program after the introduction of a line, press
 		the RETURN key.
 
-SHIFT		To insert a capital letter , hold pressed the "SHIFT" key  
-		together with the desired key.  Both keys should be left at 
+SHIFT		To insert a capital letter , hold pressed the "SHIFT" key
+		together with the desired key.  Both keys should be left at
 		the same time.
 
-C=		This symbol represents the "Commodore" key  situated in the 
-		angle in lower part to left of the Commodore 64 keyboard 
+C=		This symbol represents the "Commodore" key  situated in the
+		angle in lower part to left of the Commodore 64 keyboard
 		(beside of the SHIFT key).
 
-<>		The angle parentheses indicate that the parameter into them is 
-		the requested information.  However, the same parameter could be 
+<>		The angle parentheses indicate that the parameter into them is
+		the requested information.  However, the same parameter could be
 		of varying nature.
 
-[]		The square parentheses indicate that the parameter into them is 
+[]		The square parentheses indicate that the parameter into them is
 		optional and can be omitted from the command syntax.
 
-...		Some consecutive points, "ellipsis", specify to repeat the 
+...		Some consecutive points, "ellipsis", specify to repeat the
 		preceding optional parameter.
 
-A command is a word key that could locate from only or have followed from one 
+A command is a word key that could locate from only or have followed from one
 or more indicators.  Each of these parameters is separate by a pointing sign,
-for example with a comma (,), a semicolon (;), a sign of "number" (#) or a 
+for example with a comma (,), a semicolon (;), a sign of "number" (#) or a
 space.
-A function is a word key continued immediately with parenthesis that contains 
-one or two matters.  For more explanations about commands and  functions, see 
+A function is a word key continued immediately with parenthesis that contains
+one or two matters.  For more explanations about commands and  functions, see
 the "Programmer's reference guide" for the Commodore 64.
 
 
@@ -200,7 +200,7 @@ Creation of Graphic Forms and Selection Color:
 		MOVSPR <number><,X1,Y1>
 		SPRCOL [smcr-1][,smcr-2]
 		SPRITE <number>[,[on/off][,first plane][,[property]
-	 	[,[x-exp][,[y-exp]][,mode]]]]]] 
+	 	[,[x-exp][,[y-exp]][,mode]]]]]]
 		SPRSAV <origin>,<destination>
 
 Embedded functions and user interface
@@ -264,54 +264,54 @@ Creation of Music and Sound with the SUPER EXPANDER 64:
 
 - 1 -  STARTING
 
-The SUPER EXPANDER 64 is a program on cartridge that furnishes 11 embedded 
-functions and 21 additional commands to the BASIC language of the Commodore 
+The SUPER EXPANDER 64 is a program on cartridge that furnishes 11 embedded
+functions and 21 additional commands to the BASIC language of the Commodore
 64.  Follow these simple denotations for start the SUPER EXPANDER 64 program:
 
-- Power off the computer (the computer ALWAYS goes down when you insert or 
+- Power off the computer (the computer ALWAYS goes down when you insert or
   get away the  cartridge).
 
-- Install the SUPER EXPANDER 64 cartridge with the label turned to high.  The 
+- Install the SUPER EXPANDER 64 cartridge with the label turned to high.  The
   open side must be turned toward who insert it.
 
-- Insert the SUPER EXPANDER 64 cartridge in the expansion port, situated to 
+- Insert the SUPER EXPANDER 64 cartridge in the expansion port, situated to
   left hand and under the power on led of the computer.
 
 - Power on the computer.
 
-It is now possible start to insert SUPER EXPANDER 64 commands directly from 
-keyboard  (DIRECT mode) or embed these additional commands in the BASIC 
-programs (PROGRAM mode).  In the DIRECT mode, insert simply the commands and 
-press RETURN for a direct execution.  In the PROGRAM mode, the additional 
-SUPER EXPANDER 64 commands  are inserted in the BASIC programs using standard 
+It is now possible start to insert SUPER EXPANDER 64 commands directly from
+keyboard  (DIRECT mode) or embed these additional commands in the BASIC
+programs (PROGRAM mode).  In the DIRECT mode, insert simply the commands and
+press RETURN for a direct execution.  In the PROGRAM mode, the additional
+SUPER EXPANDER 64 commands  are inserted in the BASIC programs using standard
 numbers of line.  Beat RUN to execute the program.
 
 IMPORTANT
 
-- If commands produce an illegible visualization, for example white letters 
-  on white background, press RUN/STOP and RESTORE keys simultaneously.  This 
-  brings computer to the original state, where all sprites are off, each 
-  sound comes interrupted and back to standard text mode. original state, 
-  where all sprites are off, each sound comes interrupted and back to 
+- If commands produce an illegible visualization, for example white letters
+  on white background, press RUN/STOP and RESTORE keys simultaneously.  This
+  brings computer to the original state, where all sprites are off, each
+  sound comes interrupted and back to standard text mode. original state,
+  where all sprites are off, each sound comes interrupted and back to
   standard text mode.  The program in memory remain unchanged.
 
-- The created programs using SUPER EXPANDER 64 commands require that the 
-  cartridge is inserted each time that a program comes performed.  In 
+- The created programs using SUPER EXPANDER 64 commands require that the
+  cartridge is inserted each time that a program comes performed.  In
   contrary case, the SUPER EXPANDER 64 commands produce errors.
 
-- In normal BASIC programs, the key-words has reduced to "token" to a 
-  character (or internal symbols) for save memory.  Key-words of the 
-  SUPER EXPANDER 64 are reduced to token of two characters.  Therefore, when 
-  SUPER EXPANDER 64 commands are used in IF/THEN expressions, you must put 
+- In normal BASIC programs, the key-words has reduced to "token" to a
+  character (or internal symbols) for save memory.  Key-words of the
+  SUPER EXPANDER 64 are reduced to token of two characters.  Therefore, when
+  SUPER EXPANDER 64 commands are used in IF/THEN expressions, you must put
   two points (:) between THEN and the key-word of the SUPER EXPANDER 64.
 
-- If in a SUPER EXPANDER 64 command comes omitted an optional parameter, the 
-  parameter will take on the value planned in a previous program.  This also 
-  happen if the parameter was planned in a previous program.  Therefore, we 
-  recommend you to don't omit optional parameters when any SUPER EXPANDER 64 
-  command is used for the first time in a program. Additionally, when you 
-  omit a parameter in a SUPER EXPANDER 64 command, you must use a comma like 
-  "delimitator" if after it other indicators come formulated.
+- If in a SUPER EXPANDER 64 command comes omitted an optional parameter, the
+  parameter will take on the value planned in a previous program.  This also
+  happen if the parameter was planned in a previous program.  Therefore, we
+  recommend you to don't omit optional parameters when any SUPER EXPANDER 64
+  command is used for the first time in a program. Additionally, when you
+  omit a parameter in a SUPER EXPANDER 64 command, you must use a comma like
+  "delimiter" if after it other indicators come formulated.
 
 
 
@@ -327,32 +327,32 @@ IMPORTANT
 
 TEXT AND GRAPHIC
 
-This chapter describes how to select graphic modes of the SUPER EXPANDER 64 
-and how to choose colors for design.  They come discussed also the ways to 
-trace points and lines, design panels, circles and regular polygons. It will 
-come indicated how to use visualizations of graphics and text togheter and 
+This chapter describes how to select graphic modes of the SUPER EXPANDER 64
+and how to choose colors for design.  They come discussed also the ways to
+trace points and lines, design panels, circles and regular polygons. It will
+come indicated how to use visualizations of graphics and text together and
 also how to characterize and move forms on the screen.
 
 
 2.1 - MODES SELECTION
 
-The SUPER EXPANDER 64 program supports 4 graphic modes: text, multi-color, 
-high resolution and split screen.  The desired mode can be select using the 
+The SUPER EXPANDER 64 program supports 4 graphic modes: text, multi-color,
+high resolution and split screen.  The desired mode can be select using the
 GRAPHIC command like show below:
 
 GRAPHIC <mode>[,clear]
 
-The required <mode> parameter is a number from 0 to 3 and it comes used for 
-select one of the four graphic modes. 
-When the optional parameter [,clear] is different from zero, the screen will 
-come brought again to the background color (see bureau Colors Selection) 
-after that the new mode has been select.  The following list show the four 
+The required <mode> parameter is a number from 0 to 3 and it comes used for
+select one of the four graphic modes.
+When the optional parameter [,clear] is different from zero, the screen will
+come brought again to the background color (see bureau Colors Selection)
+after that the new mode has been select.  The following list show the four
 graphic modes and correspondent values <mode> of them:
 
 0 = Standard text Mode
-1 = Multi-Color Mode (Bit Map) 
+1 = Multi-Color Mode (Bit Map)
 2 = High Resolution Mode (Bit Map)
-3 = Split Screen mode (contemporaneous Text and High Resolution) 
+3 = Split Screen mode (contemporaneous Text and High Resolution)
 
 Here below examples of the GRAPHIC command are show:
 
@@ -361,19 +361,19 @@ GRAPHIC 1		select the Multi-Color Mode
 GRAPHIC 2,1		select the High Resolution Mode and clear Bit Map screen
 
 100 M= 3: C=: GRAPHIC M, C
-110 REM line 100 selects the Split Screen Mode 
+110 REM line 100 selects the Split Screen Mode
     and clear the screen
 
-Another way to clear the screen without the use of GRAPHIC command is to use 
+Another way to clear the screen without the use of GRAPHIC command is to use
 the SCNCLR command.  This command has the same effect of an [,clear] parameter
 different from zero with the   GRAPHIC command.  The SCNCLR command comes used
 alone without parameters:
 
 100 SCNCLR	 Clear the screen in any mode.
 
-The RGR (0) function shows the last graphic mode selected displaying a number 
-from 0 to 3.  RGR (0) comes used exactly like indicated in examples: the 
-number that comes returned coincides to the <mode> value used in the GRAPHIC 
+The RGR (0) function shows the last graphic mode selected displaying a number
+from 0 to 3.  RGR (0) comes used exactly like indicated in examples: the
+number that comes returned coincides to the <mode> value used in the GRAPHIC
 command.  Here some examples:
 
 20 GRAPHIC 3: PRINT RGR (0): END
@@ -382,66 +382,66 @@ command.  Here some examples:
 100 IF RGR (0)> THEN: GRAPHIC 0,1
 110 PRINT "RETURN TO TEXT MODE"
 
-Here below is showed a brief description about every GRAPHIC mode and 
-characteristics (see THE COMMODORE 64 PROGRAMMER'S MANUAL for a more detailed 
+Here below is showed a brief description about every GRAPHIC mode and
+characteristics (see THE COMMODORE 64 PROGRAMMER'S MANUAL for a more detailed
 explanation).
 
 STANDARD TEXT MODE
 
-When you power on the computer, it is in the Standard Text mode.  In text 
-mode, maximum 1000 characters could be displayed (25 rows of 40 characters 
-each).  Each character comes represented through a matrix of 8x8 points in an 
+When you power on the computer, it is in the Standard Text mode.  In text
+mode, maximum 1000 characters could be displayed (25 rows of 40 characters
+each).  Each character comes represented through a matrix of 8x8 points in an
 any of the 16 available colors.
 
 HIGH RESOLUTION MODE
 
-The High Resolution mode comes used to create graphics at the maximum degree 
-of precision and detail.  In this mode the screen is used like a grid 
-with 320 horizontal points for 200 vertical points, so sketches appear very 
-precise and resolved.  Each zone of 8x8 points of the screen  (these zones 
-coincide to the characters position of the text) can be colored with two 
+The High Resolution mode comes used to create graphics at the maximum degree
+of precision and detail.  In this mode the screen is used like a grid
+with 320 horizontal points for 200 vertical points, so sketches appear very
+precise and resolved.  Each zone of 8x8 points of the screen  (these zones
+coincide to the characters position of the text) can be colored with two
 colors to choice (main color and background).
 
 MULTI-COLOR MODE
 
-With the Multi-Color mode the horizontal resolution comes sacrificed to the 
-capability of use more colors.  The screen is composed from 160 horizontal 
-points for 200 vertical points.  Each horizontal point is two times large 
-than in the High Resolution mode.  The MultiColor mode allows use up to 4 
-different colors in each zone of 8x8 points.  The 4 colors that you can set 
+With the Multi-Color mode the horizontal resolution comes sacrificed to the
+capability of use more colors.  The screen is composed from 160 horizontal
+points for 200 vertical points.  Each horizontal point is two times large
+than in the High Resolution mode.  The MultiColor mode allows use up to 4
+different colors in each zone of 8x8 points.  The 4 colors that you can set
 are Background, Main Color, Multi-Color 1 and Multi-Color 2.
 
 SPLIT SCREEN MODE
 
-The Split Screen mode gathers the High Resolution and Standard Text mode.  
-In the Split Screen  mode the upper part of the screen is a Bit Map at High 
-Resolution with 320 horizontal points and 160 vertical points.  The lower 
-part of the screen is a "window" where it is possible display five (5) lines 
-of Standard Text.  For more examples about the GRAPHIC mode, see photos on 
+The Split Screen mode gathers the High Resolution and Standard Text mode.
+In the Split Screen  mode the upper part of the screen is a Bit Map at High
+Resolution with 320 horizontal points and 160 vertical points.  The lower
+part of the screen is a "window" where it is possible display five (5) lines
+of Standard Text.  For more examples about the GRAPHIC mode, see photos on
 the rear of this handbook and the III Appendix PROGRAM EXAMPLES.
 
 
 2.2 - COLORS SELECTION
 
-On the Commodore 64 is possible independently to set the Background area, the 
-Frame and the Main Color on any of the 16 colors. You can set also two 
-multi-color "registers", but it will have effect only in GRAPHIC Multi-Color 
-mode.  With the SUPER EXPANDER 64 one can use the COLOR command to select 
-colors chosen for these areas or "color sources".  The syntax for the COLOR 
+On the Commodore 64 is possible independently to set the Background area, the
+Frame and the Main Color on any of the 16 colors. You can set also two
+multi-color "registers", but it will have effect only in GRAPHIC Multi-Color
+mode.  With the SUPER EXPANDER 64 one can use the COLOR command to select
+colors chosen for these areas or "color sources".  The syntax for the COLOR
 command is the following:
 
 COLOR [background][,[main color][,[mcr1][,[mcr2][,frame]]]]
 
-The [background] parameter determine the color of the Background.  The [main 
-color] parameter determine the color of the Main Color, that is the color of 
-characters in text mode and of best part of  forms design in High Resolution 
-mode.  [mcr1] and [mcr2] parameters are the Multi-Color registers.  
-The [,frame] parameter determines the color of the External Frame.  Any color 
-of the 16 available on the Commodore 64 can be used for each of  5 parameters 
-of the COLOR command.  From now we'll become reference to each of these 
-indicators like "color sources".  For select a color source for an area, you 
-must simply indicate the number of "code color" in the appropiate position of 
-the COLOR command.  Follows a list of colors and their correspondent color 
+The [background] parameter determine the color of the Background.  The [main
+color] parameter determine the color of the Main Color, that is the color of
+characters in text mode and of best part of  forms design in High Resolution
+mode.  [mcr1] and [mcr2] parameters are the Multi-Color registers.
+The [,frame] parameter determines the color of the External Frame.  Any color
+of the 16 available on the Commodore 64 can be used for each of  5 parameters
+of the COLOR command.  From now we'll become reference to each of these
+indicators like "color sources".  For select a color source for an area, you
+must simply indicate the number of "code color" in the appropriate position of
+the COLOR command.  Follows a list of colors and their correspondent color
 code:
 
 	COLOR		CODE	COLOR		CODE
@@ -454,33 +454,33 @@ code:
 	Blue		6	Blue clear	14
 	Yellow	7	Light grey	15
 
-Remembering of use a comma to delimit the omitting fields (these remain with 
-color formerly set).  For example, to obtain a black background, white 
-characters and a external grey frame, a COLOR command must be used like it 
+Remembering of use a comma to delimit the omitting fields (these remain with
+color formerly set).  For example, to obtain a black background, white
+characters and a external grey frame, a COLOR command must be used like it
 follows:
 
-COLOR 0,1,15     	It sets the color of the Background on black, the 
-			Main Color on white and the Frame on grey clear.  
-			This doesn't change the color of the Multi-Color 1 or 
+COLOR 0,1,15     	It sets the color of the Background on black, the
+			Main Color on white and the Frame on grey clear.
+			This doesn't change the color of the Multi-Color 1 or
 			the Multi-Color 2.
 
-COLOR, 3     	It sets only the Frame on Light Blue. Other areas maintain 
+COLOR, 3     	It sets only the Frame on Light Blue. Other areas maintain
 			the preceding set.
 
-Note that to change the Background color have a immediate effect only in 
-TEXT mode.  In any GRAPHIC mode the Background color formerly selected 
+Note that to change the Background color have a immediate effect only in
+TEXT mode.  In any GRAPHIC mode the Background color formerly selected
 appears when it starts to draw or after the SCNCLR command.
-For more examples about the COLOR command, see photos To check which colors 
-have been set for last, the RCLR function is used. The syntax for this 
+For more examples about the COLOR command, see photos To check which colors
+have been set for last, the RCLR function is used. The syntax for this
 function is the following:
 
 RCLR (<area>)
 
-The <area> parameter is a number from 0 to 4 that coincides at one of the 
-five areas of the screen which color of it is set by the COLR command.  
-For example, if <area> is 0, then RCLR will display the  color code (a number 
-from 0 to 15) that has been indicated for last for the background of the 
-screen.  It comes show here below how to examine each of color registers of 
+The <area> parameter is a number from 0 to 4 that coincides at one of the
+five areas of the screen which color of it is set by the COLR command.
+For example, if <area> is 0, then RCLR will display the  color code (a number
+from 0 to 15) that has been indicated for last for the background of the
+screen.  It comes show here below how to examine each of color registers of
 the screen:
 
 RCLR (0)	display the Background color code
@@ -493,78 +493,78 @@ A program example to test RCLR follows:
 
 10 COLOR 0,7,2,3,4
 20 FOR C= 0 TO 4
-30 PRINT RCLR (C) 
+30 PRINT RCLR (C)
 40 NEXT C
 
 
 2.3 - TRACING OF POINTS AND LINES
- 
+
 Before start to design, it is main point to understand a fundamental concept:
-the Cursor Pixel (CP).  The  CP is similar to the mobile cursor that can be 
+the Cursor Pixel (CP).  The  CP is similar to the mobile cursor that can be
 seen in the Text mode, that show where the next  character will appear.
-Also if it is invisible, the CP point out where the next point on the High 
-Resolution or Multi-Color screen will come allocated.  In the SUPER EXPANDER 
-64 commands where the optional coordinates are omitted, the CP is also used 
-like default coordinate.  Specific examples of the custom of the  CP like 
-default coordinate will be treated in the following explanations of the 
+Also if it is invisible, the CP point out where the next point on the High
+Resolution or Multi-Color screen will come allocated.  In the SUPER EXPANDER
+64 commands where the optional coordinates are omitted, the CP is also used
+like default coordinate.  Specific examples of the custom of the  CP like
+default coordinate will be treated in the following explanations of the
 command.
 
-The command LOCATE allows to dispose the CP in any point on the screen. 
-Results of the command LOCATE will not appear until when something will be 
+The command LOCATE allows to dispose the CP in any point on the screen.
+Results of the command LOCATE will not appear until when something will be
 designed.
 The syntax for the command LOCATE is:
 
 LOCATE <X,Y>
 
 the "X" part of the <X,Y> parameter required represent the horizontal distance
-across the screen express in number of points.  When "X" is even to 0, the CP 
-is on the left border of the screen. The "Y" part of the <X,Y> parameter 
+across the screen express in number of points.  When "X" is even to 0, the CP
+is on the left border of the screen. The "Y" part of the <X,Y> parameter
 represent the vertical distance along the screen express in number of points.
-When "Y" is even to 0, the CP is on the upper border of the screen. In the  
-SUPER EXPANDER 64 commands, if an optional X-Y coordinate is omitted, the 
-current CP is used like  default position.  For every SUPER EXPANDER 64 
-command that will be explain, will be specify of time in time which X-Y 
-coordinates are optional.  The X and Y coordinates can be itemize like value 
-and like discard from the present position of the CP.  Putting the plus sign 
-or a minus sign (+,-) before the X or Y value, the CP comes moved in a 
-positive or negative direction relatively to his actual position.  The plus 
-sign before the X value moves the CP to right and the sign minus moves the CP 
-to left. To the same way, the plus sign in front of the Y value moves the CP 
-to the lower part from his actual position, and the  sign minus moves the CP 
-to the top.  Wherever a X or Y coordinate of SUPER EXPANDER 64  absolute 
+When "Y" is even to 0, the CP is on the upper border of the screen. In the
+SUPER EXPANDER 64 commands, if an optional X-Y coordinate is omitted, the
+current CP is used like  default position.  For every SUPER EXPANDER 64
+command that will be explain, will be specify of time in time which X-Y
+coordinates are optional.  The X and Y coordinates can be itemize like value
+and like discard from the present position of the CP.  Putting the plus sign
+or a minus sign (+,-) before the X or Y value, the CP comes moved in a
+positive or negative direction relatively to his actual position.  The plus
+sign before the X value moves the CP to right and the sign minus moves the CP
+to left. To the same way, the plus sign in front of the Y value moves the CP
+to the lower part from his actual position, and the  sign minus moves the CP
+to the top.  Wherever a X or Y coordinate of SUPER EXPANDER 64  absolute
 values or discards.
 Some examples about LOCATE command follow:
 
 10 LOCATE 0,0 	  Sets the CP to the upper left angle of the screen.
-50 LOCATE 160,100	  Sets the CP in the exact center of the High Resolution 
+50 LOCATE 160,100	  Sets the CP in the exact center of the High Resolution
 			  screen.
-80 LOCATE -40, +20  Moves the CP of 40 points to left and of 20 to the lower 
+80 LOCATE -40, +20  Moves the CP of 40 points to left and of 20 to the lower
 			  part.
 
-In these examples the new positions of the CP have been set like an absolute 
-X and Y coordinate and also like a relative discard.  In this and other 
-commands of the SUPER EXPANDER 64 could be used an alternative way for 
-express the new position.  In the command LOCATE like in different other 
-commands for design, you can use a semicolon to the place of the comma to 
-express a distance and a relative angle to the present position of the CP.  
+In these examples the new positions of the CP have been set like an absolute
+X and Y coordinate and also like a relative discard.  In this and other
+commands of the SUPER EXPANDER 64 could be used an alternative way for
+express the new position.  In the command LOCATE like in different other
+commands for design, you can use a semicolon to the place of the comma to
+express a distance and a relative angle to the present position of the CP.
 For example:
 
 LOCATE 50;45
 
-The CP comes moved from actual position of him for a distance of 50 points to 
-an angle of 45 degrees.  The position of the CP could be altered from other 
-SUPER EXPANDER 64 commands, for example  DRAW, BOX, CIRCLE. You can discover 
-in any moment where CP is locate using the RDOT function, which will furnish 
-the X and Y coordinate, or the source of color for the CP on its actual 
+The CP comes moved from actual position of him for a distance of 50 points to
+an angle of 45 degrees.  The position of the CP could be altered from other
+SUPER EXPANDER 64 commands, for example  DRAW, BOX, CIRCLE. You can discover
+in any moment where CP is locate using the RDOT function, which will furnish
+the X and Y coordinate, or the source of color for the CP on its actual
 position.
 The syntax for the RDOT command is the following:
 
 RDOT (<data>)
 
-When the <data> parameter is 0, the X coordinate of the CP position comes 
-displayed, when 1 is the Y coordinate; and when the <data> parameter has the 
-value 2, a number from 0 to 3 comes displayed. This number represents the 
-source of color (like showed for the COLOR command) for the point to the 
+When the <data> parameter is 0, the X coordinate of the CP position comes
+displayed, when 1 is the Y coordinate; and when the <data> parameter has the
+value 2, a number from 0 to 3 comes displayed. This number represents the
+source of color (like showed for the COLOR command) for the point to the
 current position of the CP and it comes indicated in the following chart:
 
 0= Background
@@ -572,137 +572,137 @@ current position of the CP and it comes indicated in the following chart:
 2= Multi-Color 1
 3= Multi-Color 2
 
-The value of sources of color displays from RDOT (2) coincides to the 
+The value of sources of color displays from RDOT (2) coincides to the
 positions of parameter fields  in the COLOR command.
 Here some examples with the custom of the RDOT function:
 
-10 X= RDOT (0)			The horizontal position of the CP comes put in 
+10 X= RDOT (0)			The horizontal position of the CP comes put in
 					the variable "X."
 20 B= 1: PRINT RDOT (B)		Print the vertical position of the CP.
-30 LOCATE X,Y:CT=RDOT(2)	Identifies the source of color for the point 
+30 LOCATE X,Y:CT=RDOT(2)	Identifies the source of color for the point
 					in the X,Y position.
 
-Now is possible use the DRAW command for design on the screen simple straight 
+Now is possible use the DRAW command for design on the screen simple straight
 lines. The syntax for the DRAW command is the following:
 
 DRAW [source][,X1,Y1][ TO X2,Y1,Y2]...
 
-In the DRAW command,[ source] is the source of color for the line that must 
-be designed and it can  have values from 0 to 3, correspondent to the 
-preceding RDOT chart.  If [source] is omitted, for design comes used the 
-source of color for the Main Color.  The line begins to the position 
-[,X1,Y1].  If this parameter is omitted, the line begins to the current 
+In the DRAW command,[ source] is the source of color for the line that must
+be designed and it can  have values from 0 to 3, correspondent to the
+preceding RDOT chart.  If [source] is omitted, for design comes used the
+source of color for the Main Color.  The line begins to the position
+[,X1,Y1].  If this parameter is omitted, the line begins to the current
 position of the CP.  The line has described up to [X2,Y2] if they are present,
-otherwise on [X1,Y1] is designed an only point.  To design a line moves the 
-position of the CP on the last point drawed.  Can be used absolute values of 
-coordinate or relative discards, also for both the X-Y positions.   
-Additionally, an alternative form of the DRAW command that allows to describe 
-a line to depart from the actual CP with a definite angle until to a date 
+otherwise on [X1,Y1] is designed an only point.  To design a line moves the
+position of the CP on the last point drawn.  Can be used absolute values of
+coordinate or relative discards, also for both the X-Y positions.
+Additionally, an alternative form of the DRAW command that allows to describe
+a line to depart from the actual CP with a definite angle until to a date
 distance (using a point and comma to the place of the comma).  For example:
 
 DRAW [source][,<dist>;<angle>][ TO <dist>;<angle>]...
 
-The line will come described for the given distance (express in number of 
-points), to the itemized angle (express in degrees, where 0 degrees point out 
-an upright to the top) from the actual position of the CP.  Must be itemized 
-both parameters of the distance and of the angle.  Here follows some 
-examples of the DRAW command (be sure to itemize GRAPHIC 2,1 before try 
+The line will come described for the given distance (express in number of
+points), to the itemized angle (express in degrees, where 0 degrees point out
+an upright to the top) from the actual position of the CP.  Must be itemized
+both parameters of the distance and of the angle.  Here follows some
+examples of the DRAW command (be sure to itemize GRAPHIC 2,1 before try
 these examples):
 
 DRAW 1,100,50	 		design a point in the color of the Main Color1.
 DRAW TO 200, 100			The CP is used for begin the line to 100,150.
 DRAW, 10,10 TO 100,60
 DRAW 3 TO -20, +40		use a relative discard for X2, Y2.
-DRAW 2 TO 25;30			The line is long 25 points, to 30 degrees from 
+DRAW 2 TO 25;30			The line is long 25 points, to 30 degrees from
 					the actual CP.
 DRAW,10,10 TO 10,60 TO 100,60 TO 10,10
-DRAW 0,100,50			delete the point designed with the first 
+DRAW 0,100,50			delete the point designed with the first
 					example.
 
-For more examples about the DRAW command, see photos  on the rear of this 
+For more examples about the DRAW command, see photos  on the rear of this
 handbook and the III Appendix PROGRAM EXAMPLES.
- 
+
 
 2.4 - SKETCH OF PANELS, CIRCLES AND POLYGONS
 
-The BOX command allows to design a rectangle in any point of the screen. The 
-rectangle could be of any measure and have any proportion.  Characteristics 
-peculiars of the command BOX allows to rotate the rectangle of any angle or 
-color all panel automatically. 
+The BOX command allows to design a rectangle in any point of the screen. The
+rectangle could be of any measure and have any proportion.  Characteristics
+particular of the command BOX allows to rotate the rectangle of any angle or
+color all panel automatically.
 The syntax for the BOX command is the following:
 
 BOX [source]<,X1,Y1>[,[X2,Y2][,[angle][,filling]]]
 
-It in this example of syntax could be omitted any of the parameters [X2,Y2] 
-or [angle] or [filling].  However, is necessary assure to use commas like 
-delimitators in the case are itemized some indicators after those omitted.
-[source] is the source of color for the rectangle.  If [source] is omitted, 
+It in this example of syntax could be omitted any of the parameters [X2,Y2]
+or [angle] or [filling].  However, is necessary assure to use commas like
+delimiters in the case are itemized some indicators after those omitted.
+[source] is the source of color for the rectangle.  If [source] is omitted,
 it comes used the source of color of the Main Color.  The PANEL comes designed
-starting from [X2,Y2] if specified (otherwise, from the current position of 
-the CP), to the required position<,X1,Y1>.  The final position of the CP will 
-be to [X2,Y2] if the [angle] parameter is omitted or is even to zero. 
-Parameters [angle] and [,filling] are both optional.  The parameter [angle] 
-determine the degrees of gyration in hourly sense around the center of the 
-rectangle.  If the parameter [,filling]  is different  from zero, the panel 
-will come filled with the same color of the edge of the rectangle (source of 
+starting from [X2,Y2] if specified (otherwise, from the current position of
+the CP), to the required position<,X1,Y1>.  The final position of the CP will
+be to [X2,Y2] if the [angle] parameter is omitted or is even to zero.
+Parameters [angle] and [,filling] are both optional.  The parameter [angle]
+determine the degrees of gyration in hourly sense around the center of the
+rectangle.  If the parameter [,filling]  is different  from zero, the panel
+will come filled with the same color of the edge of the rectangle (source of
 color).
-Here some examples of the BOX command (It is necessary itemize GRAPHIC 2,1 
+Here some examples of the BOX command (It is necessary itemize GRAPHIC 2,1
 before try these  examples):
 
 BOX 1,10,10,60,60			design a quadrate.
-BOX 1, +80, +40			this panel uses a discard relative to the 
+BOX 1, +80, +40			this panel uses a discard relative to the
 					actual value of the CP.
 BOX, 10,10,60,60,45,1		rotate the quadrate and color it internally.
-BOX 1,0,0,319,199			design a panel around the High Resolution  
+BOX 1,0,0,319,199			design a panel around the High Resolution
 					screen as soon as to the inland of the frame.
 BOX 1,30; 45, 1			The distance and the angle from the CP determine
 					the position of the opposite angle.
 
-As you can see in the last example, BOX is another command that can be 
-altered for itemize a distance and an angle, with the simply use of a 
-semicolon to the place of a comma.  The actual position of the CP comes used 
-like the point of departure to design a rectangle.  So, the diagonal opposite 
-angle comes identified moving the CP for a distance of 30 to an angle of 45 
+As you can see in the last example, BOX is another command that can be
+altered for itemize a distance and an angle, with the simply use of a
+semicolon to the place of a comma.  The actual position of the CP comes used
+like the point of departure to design a rectangle.  So, the diagonal opposite
+angle comes identified moving the CP for a distance of 30 to an angle of 45
 degrees.  This point is after used like coordinates< X1,Y1>.
 
-With the CIRCLE command of the SUPER EXPANDER 64 can be designed arcs, 
-circles, ellipsis and  also triangles and other polygons.  
+With the CIRCLE command of the SUPER EXPANDER 64 can be designed arcs,
+circles, ellipsis and  also triangles and other polygons.
 The syntax for the CIRCLE command is the following:
 
 CIRCLE [source],[X1,Y1]<,X-radius>[,[Y-radius][,[start][,[end]
 [,[angle][,[inc]]]]]
 
-[source] is the source of color for the circle. The origin (or center) is 
-locate to [X1,Y1] (if omitted, the current CP comes used).  Like for the 
-preceding commands, in the CIRCLE command can be used absolute values, 
-relative discards or distance and angle for parameter [X1,Y1].  The parameter 
-<,X-radius> is necessary and determine the horizontal radius of the circle 
-expressed in number of points.  The optional indicator [Y-radius] determine 
-the upright radius of the circle expressed in number of points (if omitted, 
+[source] is the source of color for the circle. The origin (or center) is
+locate to [X1,Y1] (if omitted, the current CP comes used).  Like for the
+preceding commands, in the CIRCLE command can be used absolute values,
+relative discards or distance and angle for parameter [X1,Y1].  The parameter
+<,X-radius> is necessary and determine the horizontal radius of the circle
+expressed in number of points.  The optional indicator [Y-radius] determine
+the upright radius of the circle expressed in number of points (if omitted,
 the value <X-radius> comes used).
-The optional parameter [start] and [end] characterize the points of departure 
-and arrival of an arc in the circumference of the circle.  The default values 
-for [start] and [end] are respectively 0 and 360.  These points come data in 
-degrees (where 0 is upright toward the top, 90 is right hand, 180 is toward 
+The optional parameter [start] and [end] characterize the points of departure
+and arrival of an arc in the circumference of the circle.  The default values
+for [start] and [end] are respectively 0 and 360.  These points come data in
+degrees (where 0 is upright toward the top, 90 is right hand, 180 is toward
 the lower part, etc.). The parameter [angle] is 0 (example: no gyration).
-The final position of the CP will be on the circumference of the circle to 
-the angle of the arc [end].  Cause of the difference among the number of 
-horizontal and upright points on the protection, setting the X radius even to 
-the Y radius will come designed an ellipse and not a circle.  To design a 
-circle, the scale of the values of the radius should draw near to the report 
-among the number of the horizontal and upright points on the screen. This 
-report will depend on the graphic mode that is being used.  Subsequent 
-information  respect to the report among the X-Y coordinates will come to 
+The final position of the CP will be on the circumference of the circle to
+the angle of the arc [end].  Cause of the difference among the number of
+horizontal and upright points on the protection, setting the X radius even to
+the Y radius will come designed an ellipse and not a circle.  To design a
+circle, the scale of the values of the radius should draw near to the report
+among the number of the horizontal and upright points on the screen. This
+report will depend on the graphic mode that is being used.  Subsequent
+information  respect to the report among the X-Y coordinates will come to
 present in the explanation of the SCALE command.
-The SUPER EXPANDER 64 designs circles with a series of lines.  This is made 
-calculating the following point on the circumference of the circle and after 
-design a line from the preceding point.  The parameter [,inc], incremental 
-value, specific how much degrees the CP comes moved around to the circle 
-(in hourly sense) describing the following line.  The default value for the 
-increase is 2 degrees.  Increasing the incremental value, the contour of the 
-circle always becomes coarser, up to the point in which the circle appears 
+The SUPER EXPANDER 64 designs circles with a series of lines.  This is made
+calculating the following point on the circumference of the circle and after
+design a line from the preceding point.  The parameter [,inc], incremental
+value, specific how much degrees the CP comes moved around to the circle
+(in hourly sense) describing the following line.  The default value for the
+increase is 2 degrees.  Increasing the incremental value, the contour of the
+circle always becomes coarser, up to the point in which the circle appears
 like a regular polygon.
-Follows a series of examples that illustrate the CIRCLE command (It is 
+Follows a series of examples that illustrate the CIRCLE command (It is
 necessary itemize GRAPHIC 2,1 before try these examples):
 
 CIRCLE 1,160,100,100,75		Circle
@@ -712,27 +712,27 @@ CIRCLE, 60,40,20,18, 45		Octagon
 CIRCLE, 260,40,20, 90		Diamond
 CIRCLE, 60,140,20,18, 120	Triangle
 
-The PAINT command allows to color a limited area.  The syntax for PAINT is 
+The PAINT command allows to color a limited area.  The syntax for PAINT is
 the following:
 
 PAINT [source][,[X1,Y1][,stop]]
 
-[source] determine the source of the color to use (Background, Main Color, 
-Multi-Color1, Multi-Color2).  The fill will begin to the actual position of 
-the CP or to [X1,Y1] if itemized.  For the coordinate [X1,Y1] you can use 
-absolute values, relative discards or distance and angle.  The fill around 
-the position [X1,Y1] continue until it doesn't meet a delimitation.  The 
-parameter [,stop] specific what kind of delimitation will stop the color.  If 
-[,stop] is 0, PAINT will expand the color until to meet a delimitation that 
-has his same source of color.  If [,stop] is 1, PAINT will expand the color 
-until to any contour of Main Color or Multi-color.  The final position of the 
-CP will be to [X1,Y1] when the fill has completed.  If the coordinate [X1,Y1] 
+[source] determine the source of the color to use (Background, Main Color,
+Multi-Color1, Multi-Color2).  The fill will begin to the actual position of
+the CP or to [X1,Y1] if itemized.  For the coordinate [X1,Y1] you can use
+absolute values, relative discards or distance and angle.  The fill around
+the position [X1,Y1] continue until it doesn't meet a delimitation.  The
+parameter [,stop] specific what kind of delimitation will stop the color.  If
+[,stop] is 0, PAINT will expand the color until to meet a delimitation that
+has his same source of color.  If [,stop] is 1, PAINT will expand the color
+until to any contour of Main Color or Multi-color.  The final position of the
+CP will be to [X1,Y1] when the fill has completed.  If the coordinate [X1,Y1]
 are locate on a point of the same source of color used with the PAINT command,
 any fill won't have effected.  Example:
 
 CIRCLE 1,160,100,65,50: PAINT 1
 
-In the following examples the lines from 10 to 30 have performed before the 
+In the following examples the lines from 10 to 30 have performed before the
 PAINT command:
 
 10 COLOR 1, 11: GRAPHIC 1, 1
@@ -742,27 +742,27 @@ PAINT command:
 60 PAINT 2,110,100,0
 70 PAINT 0,110, 100
 
-The line 50 will fill the coincident portions of the two circles with the 
-actual color of Main Color.  The  line 60 will fill all the Multi-Color 
-circle described from the line 30.  Using a source of color with value 0 
-(color of Background) comes blanked an area and his contour like indicated 
-from the line 70.  Until now, in the program examples, the X and Y 
-coordinates have been use identical to those recognized from the computer 
-video chip control.  Beyond to this system of coordinates "standard," the  
+The line 50 will fill the coincident portions of the two circles with the
+actual color of Main Color.  The  line 60 will fill all the Multi-Color
+circle described from the line 30.  Using a source of color with value 0
+(color of Background) comes blanked an area and his contour like indicated
+from the line 70.  Until now, in the program examples, the X and Y
+coordinates have been use identical to those recognized from the computer
+video chip control.  Beyond to this system of coordinates "standard," the
 SUPER EXPANDER 64 furnishes an alternative series for the X and Y coordinates.
 
-Is possible to pass from a series to the other, using the command SCALE. 
+Is possible to pass from a series to the other, using the command SCALE.
 The syntax for the command SCALE is the following:
 
 SCALE <n>
 
 When <n> is 0, the SUPER EXPANDER 64 uses the system of standard coordinates.
-In the SCALE 0, the  X-Y coordinate for the limits of the screen depend on 
+In the SCALE 0, the  X-Y coordinate for the limits of the screen depend on
 the distinctive GRAPHIC mode that is in use.
-When <n> is 1, comes used the system of special coordinates of the SUPER 
-EXPANDER 64.  In SCALE 1, both X and Y coordinates change from 0 to 1023, 
-independently from any GRAPHIC mode selected.  The following chart show the 
-coordinates of the limit of the screen for each of the Bit Map GRAPHIC mode 
+When <n> is 1, comes used the system of special coordinates of the SUPER
+EXPANDER 64.  In SCALE 1, both X and Y coordinates change from 0 to 1023,
+independently from any GRAPHIC mode selected.  The following chart show the
+coordinates of the limit of the screen for each of the Bit Map GRAPHIC mode
 in both the series:
 
 Series  Mode				Coord.- X		Coord.- Y
@@ -771,9 +771,9 @@ Series  Mode				Coord.- X		Coord.- Y
 0	  Split Screen (GRAPHIC 3)	from 0 to 319	from 0 to 159
 1	  All the GRAPHIC mode		from 0 to 1023	from 0 to 1023
 
-You can see from the preceding chart that many activity of the programmation 
-can be more easy using SCALE 1, because it gives you the same X and Y 
-coordinate for all GRAPHIC mode.  Here a example of how to use both the 
+You can see from the preceding chart that many activity of the programmation
+can be easier using SCALE 1, because it gives you the same X and Y
+coordinate for all GRAPHIC mode.  Here a example of how to use both the
 scales in a program:
 
 10 COLOR 1,9,12: GRAPHIC 2,1
@@ -781,17 +781,17 @@ scales in a program:
 30 SCALE 1:COLOR,6:CIRCLE 1,512,512,140,280
 40 GOTO 40
 
-This program designs a brown circle on the screen using SCALE 0, so it 
-designs a  blue circle just inside the first, using SCALE 1. The origin of 
+This program designs a brown circle on the screen using SCALE 0, so it
+designs a  blue circle just inside the first, using SCALE 1. The origin of
 both circles are the exact center of the screen.
-From the chart of the coordinates of the screen limit it could be seen that 
-the range of values of the  X-Y coordinate engage reports decided 
-reciprocally.  These reports change to according of the distinctive GRAPHIC 
-mode that is being used.  The following chart show the reports of the values 
-of the X-Y coordinates for each of the GRAPHIC mode.  You can use some 
-ratioes in your programs to design "real" circles, quadrates,  etc. Using 
-these reports it is possible calculate the exact proportions of the forms 
-that want to be designed, also one could not appear "perfect", cause 
+From the chart of the coordinates of the screen limit it could be seen that
+the range of values of the  X-Y coordinate engage reports decided
+reciprocally.  These reports change to according of the distinctive GRAPHIC
+mode that is being used.  The following chart show the reports of the values
+of the X-Y coordinates for each of the GRAPHIC mode.  You can use some
+ratios in your programs to design "real" circles, quadrates,  etc. Using
+these reports it is possible calculate the exact proportions of the forms
+that want to be designed, also one could not appear "perfect", cause
 differences among varied monitors.
 
 Mode					To calculate X 	To calculate Y
@@ -799,58 +799,58 @@ Multi-Color (GRAPHIC 1)		.8* Y			1.25* X
 High Resolution (GRAPHIC 2)	1.6* Y		.625* X
 Split Screen (GRAPHIC 3)	1.6* Y		.625* X
 
-For more examples about BOX, CIRCLE, PAINT and SCALE commands, see photos  
+For more examples about BOX, CIRCLE, PAINT and SCALE commands, see photos
 on the rear of this handbook and the III Appendix PROGRAM EXAMPLES.
 
 
 2.5 - CONTEMPORANEOUS USE OF TEXTS AND GRAPHICS
 
-In this bureau, will come treated the CHAR command, that allows to use 
-contemporaneously a visualization of text (only capital letter and graphic 
-characters) and a visualization Bit Map to High Resolution and Multi-Color.  
-Against to the PRINT command that can be used only in the Text Standard mode 
-or in the five lines in low of the Split Screen mode, the CHAR command can 
+In this bureau, will come treated the CHAR command, that allows to use
+contemporaneously a visualization of text (only capital letter and graphic
+characters) and a visualization Bit Map to High Resolution and Multi-Color.
+Against to the PRINT command that can be used only in the Text Standard mode
+or in the five lines in low of the Split Screen mode, the CHAR command can
 arrange the text in any point on the screen, in any mode.
 The syntax for the CHAR command is the following:
 
 CHAR [source],<column,row>,<string>[,inversion]
 
-[source] is the source of color for the text.  In the High Resolution mode 
-and Split Screen only the values [source] 0 or 1 have meant.  Using for 
-[source] the value 0 (Background), is been able to "blank" the text displayed 
-on the screen.  Using for [source] the value 1, the text will be displayed in 
+[source] is the source of color for the text.  In the High Resolution mode
+and Split Screen only the values [source] 0 or 1 have meant.  Using for
+[source] the value 0 (Background), is been able to "blank" the text displayed
+on the screen.  Using for [source] the value 1, the text will be displayed in
 the actual color of Main Color.
-Parameter <column,row> is necessary. < column> can change from 0 to 39, where 
-the column 0 is locates to the extreme left side of the screen.  <row> can 
-change from 0 to 24, where row 0 is the first row of the screen.  These 
-changes of parameters coincide the measure of the screen 40x25 of the Text 
+Parameter <column,row> is necessary. < column> can change from 0 to 39, where
+the column 0 is locates to the extreme left side of the screen.  <row> can
+change from 0 to 24, where row 0 is the first row of the screen.  These
+changes of parameters coincide the measure of the screen 40x25 of the Text
 Standard mode.
-For the parameter <string>, an alphabetical string among quote ("string") can 
-be used or the name of a string variable of the program.  Exactly like for 
-the PRINT statement, if the text string of CHAR overcome the current row of 
-characters on the screen, it will continue automatically on the  following 
+For the parameter <string>, an alphabetical string among quote ("string") can
+be used or the name of a string variable of the program.  Exactly like for
+the PRINT statement, if the text string of CHAR overcome the current row of
+characters on the screen, it will continue automatically on the  following
 row, starting from the first column.
 The parameter [,inversion] can have value 0 or 1 and arouses the visualization
-of inverted characters.   The effects of the parameter inversion depends on 
-the mode that is being used.  In the Text Standard mode the parameter 
-[,inversion]  comes ignored, and the CHAR string comes displayed exactly when 
-PRINT is used.  This also affects the use not the control characters Press 
-for color selection, cursor movement, and the inverted field.  In the High 
-Resolution mode or Split Screen, if the parameter [,inversion] has the value 
-0, the text will come displayed commonly.  If [,inversion] has the value 1, 
-the complete CHAR string comes displayed in inverted video.  In these ways 
-(and in Multi-Color mode), the control characters in the  string are'nt 
-advised like "controls" and they come printed.  In the Multi-Color mode the 
-effects of the parameter [,inversion] depend on the value of the parameter 
+of inverted characters.   The effects of the parameter inversion depends on
+the mode that is being used.  In the Text Standard mode the parameter
+[,inversion]  comes ignored, and the CHAR string comes displayed exactly when
+PRINT is used.  This also affects the use not the control characters Press
+for color selection, cursor movement, and the inverted field.  In the High
+Resolution mode or Split Screen, if the parameter [,inversion] has the value
+0, the text will come displayed commonly.  If [,inversion] has the value 1,
+the complete CHAR string comes displayed in inverted video.  In these ways
+(and in Multi-Color mode), the control characters in the  string aren't
+advised like "controls" and they come printed.  In the Multi-Color mode the
+effects of the parameter [,inversion] depend on the value of the parameter
 [source].  If [source] is 1, 2 or 3 and the parameter inversion is 0, the text
-comes displayed commonly and if [,inversion] is 1, the text has displayed in 
+comes displayed commonly and if [,inversion] is 1, the text has displayed in
 inverted video.  In both cases, the source of select color comes used.  In the
-Multi-Color mode, if [source] is zero, the text comes displayed always in the 
+Multi-Color mode, if [source] is zero, the text comes displayed always in the
 Main Color, not in the color of Background, that would have been used in other
-way.  Additionally, if also [,inversion] is zero, the characters of the text 
-will come displayed with a Background of Multi-Color1; and if [,inversion] is 
+way.  Additionally, if also [,inversion] is zero, the characters of the text
+will come displayed with a Background of Multi-Color1; and if [,inversion] is
 1, the characters will come displayed with a Background of Multi-Color2.
-Follows a scheme of how the values of [source] and [,inversion] have effect 
+Follows a scheme of how the values of [source] and [,inversion] have effect
 on like CHAR will display the text in the Multi-Color mode.
 
 Source	Inversion	Description of the Obtained Text
@@ -860,8 +860,8 @@ Source	Inversion	Description of the Obtained Text
 0		1	The text is in Main Color, the Background is Multi-Color1
 0		1	The text is in Main Color, the Background is Multi-Color2
 
-To illustrate the preceding descriptions of CHAR, follows an example of 
-program that show the effects  of parameters value [source] and [,inversion] 
+To illustrate the preceding descriptions of CHAR, follows an example of
+program that show the effects  of parameters value [source] and [,inversion]
 in both the modes High Resolution and Multi-Color:
 
 10 COLOR 1,0,6,9,15: GRAPHIC 2,1
@@ -877,62 +877,62 @@ in both the modes High Resolution and Multi-Color:
 110 IF RGR (0)= 2 THEN: GRAPHIC 1,1: GOTO 20
 120 STOP
 
-The program will display different rows of text in High Resolution mode at 
-first, then will wait for a pressed key.  Then the program will pass to the 
-Multi-Color mode and will re-displayed the same text.  In this program come 
+The program will display different rows of text in High Resolution mode at
+first, then will wait for a pressed key.  Then the program will pass to the
+Multi-Color mode and will re-displayed the same text.  In this program come
 use all the possible combinations of parameters [source] and [,inversion].
-CHAR can be used with a source of color 0 (Background) for blank the normal 
-and inverted video of text with a source of color 1 (Main Color); or, to 
-insert some text in an area that was colored or filled with a BOX command (in 
-Main Color).  For more examples about CHAR command, see photos  on the rear 
+CHAR can be used with a source of color 0 (Background) for blank the normal
+and inverted video of text with a source of color 1 (Main Color); or, to
+insert some text in an area that was colored or filled with a BOX command (in
+Main Color).  For more examples about CHAR command, see photos  on the rear
 of this handbook and the III Appendix PROGRAM EXAMPLES.
-  
+
 
 2.6 - MEMORIZATION AND RECONDITIONING OF FORMS
 
-A notable characteristic of the SUPER EXPANDER 64 is the ability of transform 
-graphic forms from the video in variable BASIC string or vice versa (from 
-string to screen).  The SSHAPE comes used to transform a rectangular area of 
-a Bit Map screen (Multi-Color mode, High Resolution, or Split Screen) in a 
+A notable characteristic of the SUPER EXPANDER 64 is the ability of transform
+graphic forms from the video in variable BASIC string or vice versa (from
+string to screen).  The SSHAPE comes used to transform a rectangular area of
+a Bit Map screen (Multi-Color mode, High Resolution, or Split Screen) in a
 variable BASIC bootlace.
 The syntax for the SSHAPE command is the following:
 
 SSHAPE <string name>,<X1,Y1>[,X2,Y2]
 
-<string name> is the name of the variable BASIC string that will receive the 
-relative data to the form.  As it happens for the BOX command, the optional 
-parameter [,X2, Y2] sets the point of departure to  memorize a form.  If 
-[,X2,Y2] comes omitted, comes used the current position of the CP.  The 
-required parameter <X1,Y1> identifies the angle across opposite of the 
-rectangular area that one  wants to memorize.  The SSHAPE command doesn't 
-bias the position of the CP.  The BASIC thresholds the length of the string 
-to a maximum of 255 characters, so the dimension of the area that can be 
-memorized with SSHAPE is finite.  The dimension of the necessary string can 
-be calculated to memorize a form using one of the following formulas (these 
+<string name> is the name of the variable BASIC string that will receive the
+relative data to the form.  As it happens for the BOX command, the optional
+parameter [,X2, Y2] sets the point of departure to  memorize a form.  If
+[,X2,Y2] comes omitted, comes used the current position of the CP.  The
+required parameter <X1,Y1> identifies the angle across opposite of the
+rectangular area that one  wants to memorize.  The SSHAPE command doesn't
+bias the position of the CP.  The BASIC thresholds the length of the string
+to a maximum of 255 characters, so the dimension of the area that can be
+memorized with SSHAPE is finite.  The dimension of the necessary string can
+be calculated to memorize a form using one of the following formulas (these
 formulas presuppose that have been used a SCALE 0).
 
 For the Multi-Color mode, the measure of the string is equal to:
 
 INT (ABS (X1-X2) +1)/ 4+ .99)* (ABS (Yl-Y2) +1) +4
 
-For the High Resolution or Split Screen, the dimension of the string is 
+For the High Resolution or Split Screen, the dimension of the string is
 equal to:
 
 INT (ABS (X1-X2) +1)/ 8+ .99)* (ABS (Y1-Y2) +1) +4
 
-In the case SSHAPE on SCALE 1 is being used, must be  divided the difference 
-of "X1-X2" for 3.2 and must be divided the difference of "Y1-Y2" for 5.12. 
-After, these results must take the place of the respective operations of 
-subtraction in both preceding formulas.  To example, if SSHAPE in SCALE 1 is 
-being used, you can determine the dimension of the string for the High 
+In the case SSHAPE on SCALE 1 is being used, must be  divided the difference
+of "X1-X2" for 3.2 and must be divided the difference of "Y1-Y2" for 5.12.
+After, these results must take the place of the respective operations of
+subtraction in both preceding formulas.  To example, if SSHAPE in SCALE 1 is
+being used, you can determine the dimension of the string for the High
 Resolution mode or Split Screen with the following passages:
 
 A=INT (ABS (X1-X2)/ 3.2+1)
 B=INT (ABS (Y1-Y2)/ 5.12+1)
 DIMENSION=INT (A/ 8+ .99)* B+4
 
-The form comes transformed in a string, row to row.  The last four positions 
-of the string will contain the length of the column and of the row.  These 
+The form comes transformed in a string, row to row.  The last four positions
+of the string will contain the length of the column and of the row.  These
 last comes to use from the command GSHAPE to bring the strings on the screen.
 Follow some examples to illustrate the command SSHAPE:
 
@@ -948,22 +948,22 @@ Memorize an area located near to the center of the screen
 SSHAPE K$,480,480
 Memorize from the CP to 480,480
 
-The GSHAPE command is the opposite of SSHAPE.  It display the content of a 
+The GSHAPE command is the opposite of SSHAPE.  It display the content of a
 string variable on a  video Bit Map.  The syntax for the GSHAPE command is:
 
 GSHAPE <string name>[,[X1,Y1][,method]]
 
-<string name> is the name of a variable BASIC string that comes used like the 
-source for design the form on the screen.  The optional parameter [X1,Y1] 
-characterizes  the left upper angle of the form like it comes designed on the 
-screen.  If [X1,Y1] is omitted, comes used the actual position of the CP.  
-The optional parameter [,method] specific like the form will come designed on 
+<string name> is the name of a variable BASIC string that comes used like the
+source for design the form on the screen.  The optional parameter [X1,Y1]
+characterizes  the left upper angle of the form like it comes designed on the
+screen.  If [X1,Y1] is omitted, comes used the actual position of the CP.
+The optional parameter [,method] specific like the form will come designed on
 the  screen. The GSHAPE command doesn't change the position of the CP.
-The parameter [,method] allows to dispose the form choosing among five 
-different methods, combining the data of abstracted form from the string with 
-images you already insert on the screen.  This parameter can have a value 
-from 0 to 4. The following chart show the values and the correspondent 
-methods of positioning of them; every method will come treatise more clear 
+The parameter [,method] allows to dispose the form choosing among five
+different methods, combining the data of abstracted form from the string with
+images you already insert on the screen.  This parameter can have a value
+from 0 to 4. The following chart show the values and the correspondent
+methods of positioning of them; every method will come treatise more clear
 ahead:
 
 0 Design the form LIKE IT HAS MEMORIZED
@@ -972,31 +972,31 @@ ahead:
 3 "AND" among the form and the screen
 4 "XOR" among the form and the screen
 
-0	Design the form like it has been memorized, covering the actual image.  
+0	Design the form like it has been memorized, covering the actual image.
 	The form-string replaces all that had been formerly displayed.
 
 1	Design the form like it has been memorized, reversing the areas of color
-	of the Main Color of the string with the color Background and vice 
+	of the Main Color of the string with the color Background and vice
 	versa.
 
-2	Play a logical OR of the data of contained form in the string with the 
-	data of image on the screen.  This "adds" the form of the string to the 
-	screen.  The result is that both the forms come fused together and each 
+2	Play a logical OR of the data of contained form in the string with the
+	data of image on the screen.  This "adds" the form of the string to the
+	screen.  The result is that both the forms come fused together and each
 	part of both comes displayed.
 
-3	Play a logical AND of the data of contained form in the string with the 
-	data of image on the  screen.  This "blank" the parts of the two forms 
-	that don't coincide.  The result is that are displayed only the points 
+3	Play a logical AND of the data of contained form in the string with the
+	data of image on the  screen.  This "blank" the parts of the two forms
+	that don't coincide.  The result is that are displayed only the points
 	where the two forms coincide.
 
-4	Play a logical XOR (exclusive OR) of the data of contained form in the 
-	string with the data of  image on the screen.  The result is that only 
+4	Play a logical XOR (exclusive OR) of the data of contained form in the
+	string with the data of  image on the screen.  The result is that only
 	those portions of two forms that were different will be displayed.
 
-These descriptions of the parameter [,method] are applicabled to images of the
-High Resolution.  In the  Multi-Color mode the effects of inversion and they 
-of logical operations on the forms can instead be a change of color.  This 
-depends on the sources of color you use for the two forms, because the 
+These descriptions of the parameter [,method] are applicable to images of the
+High Resolution.  In the  Multi-Color mode the effects of inversion and they
+of logical operations on the forms can instead be a change of color.  This
+depends on the sources of color you use for the two forms, because the
 Multi-color points on the screen is wide 2 bit.
 The following is an example of GSHAPE and SSHAPE:
 
@@ -1010,32 +1010,32 @@ The following is an example of GSHAPE and SSHAPE:
 70 SCNCLR: FOR T= 0 TO 1000: NEXT T
 80 GSHAPE D$,512,512: REM RESTORES COLORED CIRCLE
 
-Beyond to memorize and restore forms of the screen and vice versa, you could 
+Beyond to memorize and restore forms of the screen and vice versa, you could
 be used GSHAPE and SSHAPE  with SPRSAV (a command that check a form of sprite)
-to change graphic forms in sprite or vice versa.  This concept will come more 
-clarified in the chapter about the graphic sprite.  To have a color example 
-of the effect of the SSHAPE commands and GSHAPE, consult the photos  on the 
-rear of this handbook.  To see the printout of the program that has been 
+to change graphic forms in sprite or vice versa.  This concept will come more
+clarified in the chapter about the graphic sprite.  To have a color example
+of the effect of the SSHAPE commands and GSHAPE, consult the photos  on the
+rear of this handbook.  To see the printout of the program that has been
 created this figure see the III Appendix PROGRAM EXAMPLES Printout 5.
 
 
 
 - 3 -  GRAPHIC SPRITE
 
-One of more interesting characteristics of the Commodore 64 is his ability of 
-display objects said "sprite".  Sprites are graphic images that can be 
-characterized and dispose in any point inside and outside the screen.  
-Sprites are particularly proper for animations to graphic purpose or of 
-entertainment.  In each moment can be displayed on the screen up to 8 sprite. 
-It is possible characterize each sprite like a figure in High Resolution or 
+One of more interesting characteristics of the Commodore 64 is his ability of
+display objects said "sprite".  Sprites are graphic images that can be
+characterized and dispose in any point inside and outside the screen.
+Sprites are particularly proper for animations to graphic purpose or of
+entertainment.  In each moment can be displayed on the screen up to 8 sprite.
+It is possible characterize each sprite like a figure in High Resolution or
 Multi-Color  and each one can be expanded in the X and/or Y direction.
-Additionally, sprites can be combined among of them to create bigger graphic 
-images and colored.  To each sprite can be assigned a "precedence of 
-visualization" that will do appear his movement like if it happens before or 
-behind to the images of the visualization graphic Bit Map.  This 
-characteristic allows to create a graphic three-dimensional effect.  
-The SUPER EXPANDER 64  is also able to note when an any sprite encounters or 
-enters in bump with an other sprite or with a form in the visualization Bit 
+Additionally, sprites can be combined among of them to create bigger graphic
+images and colored.  To each sprite can be assigned a "precedence of
+visualization" that will do appear his movement like if it happens before or
+behind to the images of the visualization graphic Bit Map.  This
+characteristic allows to create a graphic three-dimensional effect.
+The SUPER EXPANDER 64  is also able to note when an any sprite encounters or
+enters in bump with an other sprite or with a form in the visualization Bit
 Map.
 
 
@@ -1043,27 +1043,27 @@ Map.
 
 The SUPER EXPANDER 64 is gifted of a Sprite Designer Mode that makes very easy
 to chart and build sprites.  The Sprite Designer can be played from the Direct
-mode and also from a BASIC program. While the Sprite Designer is being used, 
-the execution of the BASIC program is suspended and the SUPER EXPANDER 64 
-furnishes different functional controls of keyboard for the Sprite Designer.  
-To go on the Sprite Designer mode, the SPRDEF command is used.  This command 
-doesn't have parameters.  When you enter in Sprite Designer mode, the screen 
-comes blanked and appears a wide area to design a sprite in the left part of 
-the screen.  As soon as ander to this area appears the message "SPRITE 
-NUMBER?". Insert a number from 0 to 7 that coincides to the sprite that wants 
-to be characterized  or alter.  You note that, after the sprite number, 
-RETURN must not be pressed.  To this point, the actual definition of the 
-selected sprite comes displayed in the area reserved to the sketch, and also 
-in his real dimension on the right side of the screen.  In the upper left 
-angle of the area reserved the sketch a cursor will be seen that is formed 
-from a sign + individual or double (+,++) respectively for the sprite in High 
-Resolution or Multi-color.  Keys of control could be used to move the cursor 
-inside the area reserved to the sketch. The HOME key disposes the cursor in 
-the upper left angle of the area reserved for the sketch.  The key CLR brings 
-again the area reserved to the sketch to the color of Background and disposes 
-the cursor in the upper left angle.  There are four keys that come used like 
-special "functional controls" to make more easy the planning of a sprite.  
-They are the keys:  "A, M, X and Y," each of them commute ON or OFF a 
+mode and also from a BASIC program. While the Sprite Designer is being used,
+the execution of the BASIC program is suspended and the SUPER EXPANDER 64
+furnishes different functional controls of keyboard for the Sprite Designer.
+To go on the Sprite Designer mode, the SPRDEF command is used.  This command
+doesn't have parameters.  When you enter in Sprite Designer mode, the screen
+comes blanked and appears a wide area to design a sprite in the left part of
+the screen.  As soon as ander to this area appears the message "SPRITE
+NUMBER?". Insert a number from 0 to 7 that coincides to the sprite that wants
+to be characterized  or alter.  You note that, after the sprite number,
+RETURN must not be pressed.  To this point, the actual definition of the
+selected sprite comes displayed in the area reserved to the sketch, and also
+in his real dimension on the right side of the screen.  In the upper left
+angle of the area reserved the sketch a cursor will be seen that is formed
+from a sign + individual or double (+,++) respectively for the sprite in High
+Resolution or Multi-color.  Keys of control could be used to move the cursor
+inside the area reserved to the sketch. The HOME key disposes the cursor in
+the upper left angle of the area reserved for the sketch.  The key CLR brings
+again the area reserved to the sketch to the color of Background and disposes
+the cursor in the upper left angle.  There are four keys that come used like
+special "functional controls" to make more easy the planning of a sprite.
+They are the keys:  "A, M, X and Y," each of them commute ON or OFF a
 specific function each time that the key comes pressed.  Keys function are:
 
 Key	Function
@@ -1072,31 +1072,31 @@ M	Commute the visualization mode of the sprite
 X	Commute the X expansion of the sprite
 Y	Commute the Y expansion of the sprite
 
-While is activated the function Automatism of the Cursor, coloring a point of 
-the sprite sketch, the  cursor comes automatically moved on the following 
-position.  When this function is deactivated, the keys of control of the 
-cursor must be used.  When the "M" key is pressed, the sprite in real 
-dimension on the right of the screen, withered from the High Resolution mode 
-to the Multi-Color or vice versa.  Additionally, the image that appears in 
-the area  reserved to the sketch will change of consequence.  The key "X" 
-expands or reduces the horizontal dimension of the sprite each time that the 
-key comes pressed.  To the same way, the key "Y" expands or reduces the 
-vertical dimension of the sprite each time the key comes pressed.  The Main 
+While is activated the function Automatism of the Cursor, coloring a point of
+the sprite sketch, the  cursor comes automatically moved on the following
+position.  When this function is deactivated, the keys of control of the
+cursor must be used.  When the "M" key is pressed, the sprite in real
+dimension on the right of the screen, withered from the High Resolution mode
+to the Multi-Color or vice versa.  Additionally, the image that appears in
+the area  reserved to the sketch will change of consequence.  The key "X"
+expands or reduces the horizontal dimension of the sprite each time that the
+key comes pressed.  To the same way, the key "Y" expands or reduces the
+vertical dimension of the sprite each time the key comes pressed.  The Main
 Color of the sprite could be set using the color-control keys of the Commodore
-64 in the usual way.  Pressing the CTRL key together to a digital key (1-8), 
-you select the codes of color from 0 to 7.  Pressing the Commodore key 
+64 in the usual way.  Pressing the CTRL key together to a digital key (1-8),
+you select the codes of color from 0 to 7.  Pressing the Commodore key
 together to a digital key (1-8), the codes of color are selected from 8 to 15.
-This set of the Main Color for the sprite results comfortable to display the  
-sprite while his form is being characterized.  The SPRITE command (explained 
-ahead in this chapter) is used to set "permanently" the Main Color of the 
-sprite in the programs.  The Main Color for the sprite comes decided 
-separately and independently from the Bit Map for the color of Main Color of 
-the text.  The same is for Multi-Color1 selection and Multi-Color2, they 
-could be set only out from the Sprite Designer using the SPRCOL command 
+This set of the Main Color for the sprite results comfortable to display the
+sprite while his form is being characterized.  The SPRITE command (explained
+ahead in this chapter) is used to set "permanently" the Main Color of the
+sprite in the programs.  The Main Color for the sprite comes decided
+separately and independently from the Bit Map for the color of Main Color of
+the text.  The same is for Multi-Color1 selection and Multi-Color2, they
+could be set only out from the Sprite Designer using the SPRCOL command
 (explained ahead in this chapter).  Therefore, to design a Multi-Color sprite,
 must be used the command SPRCOL before enter to the Sprite Designer.  When you
-are ready to color the area reserved to the sketch, digital keys from 1 to 4 
-come used to select a source of color for each point in the area reserved to 
+are ready to color the area reserved to the sketch, digital keys from 1 to 4
+come used to select a source of color for each point in the area reserved to
 the sketch.  The following stripes show these numbers and the sources of color
 associated to them:
 
@@ -1106,143 +1106,143 @@ Key	Source of color
 3	Multi-Color1 of the Sprite
 4	Multi-Color2 of the Sprite
 
-Finally, when the sketch of the sprite has been finished and wants to keep it 
-for a successive use, hold pressed the SHIFT key while the RETURN key is 
-pressed.  Pressing the STOP key cancel out all the changes that has been 
-effected in the area reserved to the sketch on the screen, but the actual  
-definition of the sprite stays unchanged.  If the sprite has been memorized 
-or not, the Sprite Designer returns to the prompt "SPRITE NUMBER ?". To this 
-point, you can insert a number of sprite for continue to characterize sprite, 
-or leave the Sprite Designer pressing the RETURN key.  If the command SPRDEF 
-has been used  in a BASIC program and the Sprite Designer is left, the SUPER 
+Finally, when the sketch of the sprite has been finished and wants to keep it
+for a successive use, hold pressed the SHIFT key while the RETURN key is
+pressed.  Pressing the STOP key cancel out all the changes that has been
+effected in the area reserved to the sketch on the screen, but the actual
+definition of the sprite stays unchanged.  If the sprite has been memorized
+or not, the Sprite Designer returns to the prompt "SPRITE NUMBER ?". To this
+point, you can insert a number of sprite for continue to characterize sprite,
+or leave the Sprite Designer pressing the RETURN key.  If the command SPRDEF
+has been used  in a BASIC program and the Sprite Designer is left, the SUPER
 EXPANDER 64  will take back the execution of the program.
 
 
 3.2 - DEFINITIONS OF THE CHARACTERISTICS OF THE SPRITE
 
-After have characterized some sprite images, and before use them in programs, 
-must be set their characteristics of visualization: colors, dimensions, 
-precedence of visualization and mode.  
-Command SPRCOL and SPRITE allow to choose each of these characteristics for 
+After have characterized some sprite images, and before use them in programs,
+must be set their characteristics of visualization: colors, dimensions,
+precedence of visualization and mode.
+Command SPRCOL and SPRITE allow to choose each of these characteristics for
 the sprite.
-The SPRCOL command imposes the Multi-Color1 colors and Multi-Color2 for all 
-sprites.  If will be used the Sprite Designer to create sprite in the 
-Multi-Color mode, first must be used the SPRCOL command; otherwise, the area 
-reserved to the sketch and the "sprite sample" can not be displayed  
-correctly.  These Multi-Color colors for the sprite must not be confused with 
-the colors Bit Map Multi-Color1 and Multi-Color2 decided from the COLOR 
-command.  The Multi-Color colors for the sprite come decided  separately from 
+The SPRCOL command imposes the Multi-Color1 colors and Multi-Color2 for all
+sprites.  If will be used the Sprite Designer to create sprite in the
+Multi-Color mode, first must be used the SPRCOL command; otherwise, the area
+reserved to the sketch and the "sprite sample" can not be displayed
+correctly.  These Multi-Color colors for the sprite must not be confused with
+the colors Bit Map Multi-Color1 and Multi-Color2 decided from the COLOR
+command.  The Multi-Color colors for the sprite come decided  separately from
 the SPRCOL command.  The syntax of the SPRCOL command is the following:
 
 SPRCOL [smcr-1][,smcr-2]
 
 The parameter [smcr-1] imposes the Multi-Color1 for all sprites, and [,smcr-2]
-imposes the multi-Color2 for all sprites.  Each of these parameters can be a 
-code color from 0 to 15, correspondent to the chart show for the COLOR 
-command.  If one of the parameters of color comes omitted, his current value  
-of color stays unaffected.  Only the sprite that have set on the Multi-Color 
-mode with the command SPRITE, will display one of these colors.  Follow some 
+imposes the multi-Color2 for all sprites.  Each of these parameters can be a
+code color from 0 to 15, correspondent to the chart show for the COLOR
+command.  If one of the parameters of color comes omitted, his current value
+of color stays unaffected.  Only the sprite that have set on the Multi-Color
+mode with the command SPRITE, will display one of these colors.  Follow some
 examples how to set the color Multi-Color for sprites:
 
-10 MA= 2: MB= 7: SPRCOL MA, MB: REM IMPOSED THE MULTI-COLOR1 OF SPRITE ON 
+10 MA= 2: MB= 7: SPRCOL MA, MB: REM IMPOSED THE MULTI-COLOR1 OF SPRITE ON
    RED AND THE MULTI-COLOR2 ON YELLOW
 
 150 SPRCOL, 6: REM LEAVES MULTI-COLOR1 UNAFFECTED
 
-Use the RSPCOL function to check the last value setting of the Multi-Color of 
-the sprite.  This function returns the value of the actual color-code for 
-"registers" Multi-Color of the sprite.  The syntax of the RSPCOL function is 
+Use the RSPCOL function to check the last value setting of the Multi-Color of
+the sprite.  This function returns the value of the actual color-code for
+"registers" Multi-Color of the sprite.  The syntax of the RSPCOL function is
 the following:
 
 RSPCOL (<register>)
 
 The topic <register> can have a value 0 or 1. When < register> it is 0, RSPCOL
-returns the code of Multi-Color1 color of the sprite express like a number 
-from 0 to 15.  To the same way, when <register> is 1, RSPCOL returns the 
-color-code for the Multi-Color2 of the sprite.  Here of succession comes show 
+returns the code of Multi-Color1 color of the sprite express like a number
+from 0 to 15.  To the same way, when <register> is 1, RSPCOL returns the
+color-code for the Multi-Color2 of the sprite.  Here of succession comes show
 some examples on the use of RSPCOL function:
 
 200 PRINT RSPCOL (0), RSPCOL (1): REM PRINT VALUES OF BOTH
     MULTI-COLOR OF THE SPRITE
-300 IF RSPCOL (0)= 6 THEN: SPRCOL 4: REM SET MULTI-COLOR1 OF SPRITE 
+300 IF RSPCOL (0)= 6 THEN: SPRCOL 4: REM SET MULTI-COLOR1 OF SPRITE
     ON PURPLE, IF IT WAS ON BLUE
 
-For each sprite the SPRITE command can be used to set some characteristics.  
-This include the ON/OFF commutations of the sprite, the setting of a mode, 
-the color of the Main Color and the property of visualization.  With the 
-SPRITE command you can change the horizontal dimension and/or vertical of 
-each sprite.  Any omitted parameter will maintain unaffected the 
-characteristics on their last setting. The syntax for the SPRITE command is 
+For each sprite the SPRITE command can be used to set some characteristics.
+This include the ON/OFF commutations of the sprite, the setting of a mode,
+the color of the Main Color and the property of visualization.  With the
+SPRITE command you can change the horizontal dimension and/or vertical of
+each sprite.  Any omitted parameter will maintain unaffected the
+characteristics on their last setting. The syntax for the SPRITE command is
 the following:
 
 SPRITE <number>[,[on/off][,[main color][,[precedence]
 [,[x-exp][,[y-exp][,mode]]]]]]
 
-The parameter <number> required specific which sprite the command refers and 
-his value must change from 0 to 7. The field [on/off] resolve the sprite 
-comes displayed or not.  When the value of this field is 1, the sprite comes 
-displayed (ON); if this field is 0, the sprite comes set OFF.  The parameter 
-[main color] sets the color of the sprite Main Color on a color-code from 0 
-to 15.  The field [precedence] furnishes to the sprite a "precedence of 
-visualization that "show" it like if it moves before or behind the 
-visualization Bit Map when the sprite become animated.  If the value of  
+The parameter <number> required specific which sprite the command refers and
+his value must change from 0 to 7. The field [on/off] resolve the sprite
+comes displayed or not.  When the value of this field is 1, the sprite comes
+displayed (ON); if this field is 0, the sprite comes set OFF.  The parameter
+[main color] sets the color of the sprite Main Color on a color-code from 0
+to 15.  The field [precedence] furnishes to the sprite a "precedence of
+visualization that "show" it like if it moves before or behind the
+visualization Bit Map when the sprite become animated.  If the value of
 [precedence] is 1, the sprite will appear "behind" the visualization Bit Map.
-This imposes the sprite on the precedence "Low."  If the value of precedence 
+This imposes the sprite on the precedence "Low."  If the value of precedence
 is 0, the sprite will appear "before" to the visualization, setting the sprite
-on the precedence "High".  In this way a three-dimensional effect for an 
+on the precedence "High".  In this way a three-dimensional effect for an
 animate graphics and colors is created.  The relation among the precedences of
-the sprite comes set in way that the sprite with the lower number comes 
-displayed in front of those with the higher number.  The sprite 0 has the 
-higher precedence and the sprite 7 has that lower.  Parameters of expansion 
-of the sprite, [x-exp] and [y-exp],  allow to expand in independent way a 
+the sprite comes set in way that the sprite with the lower number comes
+displayed in front of those with the higher number.  The sprite 0 has the
+higher precedence and the sprite 7 has that lower.  Parameters of expansion
+of the sprite, [x-exp] and [y-exp],  allow to expand in independent way a
 sprite to the double of his dimension in one or in both the X-Y directions, or
-of reduce the sprite to the normal dimension.  If the field is 1, the sprite 
+of reduce the sprite to the normal dimension.  If the field is 1, the sprite
 doubles his dimension in the horizontal direction (X); if the field [x-exp] is
-0, the sprite presents itself to normal width. In way analogous, when the 
-field [y-exp] is 1, the sprite doubles his dimension in vertical direction 
+0, the sprite presents itself to normal width. In way analogous, when the
+field [y-exp] is 1, the sprite doubles his dimension in vertical direction
 (Y); if the field [y-exp] is 0, the sprite presents itself to normal height.
-When you Expands a sprite, the number of points that characterizes the image 
-of the sprite doesn't change; instead, the dimension of any point comes 
+When you Expands a sprite, the number of points that characterizes the image
+of the sprite doesn't change; instead, the dimension of any point comes
 doubled in the select direction.
-The parameter [,mode] resolve if a sprite will come displayed in High 
-Resolution or in Multi-Color. If the value of [,mode] is 0, the sprite comes 
-displayed in High Resolution, 24 points of width for 21 points of height. If 
-the value of [,mode] is 1, the sprite comes displayed in Multi-Color, 12 
+The parameter [,mode] resolve if a sprite will come displayed in High
+Resolution or in Multi-Color. If the value of [,mode] is 0, the sprite comes
+displayed in High Resolution, 24 points of width for 21 points of height. If
+the value of [,mode] is 1, the sprite comes displayed in Multi-Color, 12
 points of width for 21 points of height.
-Sprite to High Resolution in 2 colors could be displayed: the color of 
-Background (set from the command COLOR) and the color of Main Color of the 
-sprite (set with the field [main color] of this command). For Multi-Color 
-sprite, two additional colors could be used: Sprite Multi-Color1 and Sprite 
-Multi-Color2 (set from the SPRCOL command).  In the programs of the SUPER 
-EXPANDER 64 cannot be displayed sprite in the Text Standard mode.  To the 
-contrary, in any BitMap graphics mode can be used sprite on High Resolution 
-or on Multi-Color, or both.  If the STOP key is pressed or if a condition of 
-error stop the program, the SUPER EXPANDER 64 will return automatically in 
+Sprite to High Resolution in 2 colors could be displayed: the color of
+Background (set from the command COLOR) and the color of Main Color of the
+sprite (set with the field [main color] of this command). For Multi-Color
+sprite, two additional colors could be used: Sprite Multi-Color1 and Sprite
+Multi-Color2 (set from the SPRCOL command).  In the programs of the SUPER
+EXPANDER 64 cannot be displayed sprite in the Text Standard mode.  To the
+contrary, in any BitMap graphics mode can be used sprite on High Resolution
+or on Multi-Color, or both.  If the STOP key is pressed or if a condition of
+error stop the program, the SUPER EXPANDER 64 will return automatically in
 the text Standard mode and will extinguish all sprites and the sound.
 Here in succession have brought some examples of the SPRITE command:
 
 10 SPRITE 1,1,1,0,0,0,1 REM ACTIVATES SPRITE 1, MAIN COLOR
    WHITE, MULTI-COLOR
-20 SPRITE 7,1,7,0,1,1,0 REM ACTIVATES SPRITE 7, MAIN COLOR YELLOW, X AND Y 
+20 SPRITE 7,1,7,0,1,1,0 REM ACTIVATES SPRITE 7, MAIN COLOR YELLOW, X AND Y
    EXPANSION IN HIGH RESOLUTION MODE
 30 SPRITE 5, 1 REM EXPANDS SPRITE 5 ON X, ALL OTHER
    CHARACTERISTICS ARE UNAFFECTED
 
-To check which last characteristics have been set for each sprite, use the  
-RSPR function.  This function has two topics: a number of sprite and a number 
-that represent a parameter position of the SPRITE command.  The syntax for 
+To check which last characteristics have been set for each sprite, use the
+RSPR function.  This function has two topics: a number of sprite and a number
+that represent a parameter position of the SPRITE command.  The syntax for
 the RSPR function is the following:
 
 RSPR (<sprite>,<field>)
 
-The topic <sprite> is a value from 0 to 7 and represent the number of the 
-sprite on which information are desired.  The topic <field> is a value from 0 
-to 5 that specific which characteristic is being checked.  Each of values of 
-the topic <field> for the RSPR function coincides directly to a 
+The topic <sprite> is a value from 0 to 7 and represent the number of the
+sprite on which information are desired.  The topic <field> is a value from 0
+to 5 that specific which characteristic is being checked.  Each of values of
+the topic <field> for the RSPR function coincides directly to a
 parameter-position on the SPRITE command.  Then, for the number of established
-sprite, the RSPR function return the last set of each parameter of the SPRITE 
-command.  Follows a chart that show values for the topic <field>, the 
-verifyed characteristics, and values that can be returned:
+sprite, the RSPR function return the last set of each parameter of the SPRITE
+command.  Follows a chart that show values for the topic <field>, the
+verified characteristics, and values that can be returned:
 
 Field	 Characteristic			Returned values
 
@@ -1256,97 +1256,97 @@ Field	 Characteristic			Returned values
 
 Here in succession come show two examples of the RSPR function:
 
-10 IF RSPR (5,5)= 1 THEN: SPRITE 5, 2 
-20 REM IF SPRITE 5 IS ON MULTI-COLOR MODE, THEN SET ITS 
-   MAIN COLOR ON RED 
-10 FOR S= 0 TO 7: FOR N= 0 TO 5 
-20 PRINT RSPR (S, N);: NEXT N 
+10 IF RSPR (5,5)= 1 THEN: SPRITE 5, 2
+20 REM IF SPRITE 5 IS ON MULTI-COLOR MODE, THEN SET ITS
+   MAIN COLOR ON RED
+10 FOR S= 0 TO 7: FOR N= 0 TO 5
+20 PRINT RSPR (S, N);: NEXT N
 30 PRINT: NEXT S
-40 REM LINES FROM 10 TO 30 WILL PRINT A LIST OF ALL ACTUAL 
+40 REM LINES FROM 10 TO 30 WILL PRINT A LIST OF ALL ACTUAL
    VALUES OF CHARACTERISTICS OF ALL SPRITES
 
-For exemplifications on the SPRDEF commands, SPRCOL and SPRITE, see the III 
+For exemplifications on the SPRDEF commands, SPRCOL and SPRITE, see the III
 Appendix PROGRAM EXAMPLES.
 
- 
+
 3.3 - MEMORIZATION OF THE SPRITE
 
-As it is possible transfer parts of the screen Bit Map into a variable BASIC 
-string (using the command SSHAPE), at the same way can be transferred sprite 
-forms in variable string using the command SPRSAV.  SPRSAV can also transfer 
-in sprite or from sprite to sprite, contained data in variable string. 
+As it is possible transfer parts of the screen Bit Map into a variable BASIC
+string (using the command SSHAPE), at the same way can be transferred sprite
+forms in variable string using the command SPRSAV.  SPRSAV can also transfer
+in sprite or from sprite to sprite, contained data in variable string.
 The syntax of the SPRSAV command is the following:
 
 SPRSAV <origin>,<destination>
 
-Each parameter of the SPRSAV command can be a name of variable string or a 
-number of sprite.  Additionally, both parameters can be numbers of sprite but 
-not strings.  To transfer an image sprite to a string, < origin> will be a 
-number of sprite and <destination> a name  string.  Vice versa, to transfer 
-the data of a string to a sprite,< origin> will be a name stringh, and 
+Each parameter of the SPRSAV command can be a name of variable string or a
+number of sprite.  Additionally, both parameters can be numbers of sprite but
+not strings.  To transfer an image sprite to a string, < origin> will be a
+number of sprite and <destination> a name  string.  Vice versa, to transfer
+the data of a string to a sprite,< origin> will be a name string, and
 <destination> a number of sprite.  When both parameters are numbers of sprite,
-the sprite <destination> engages the same definition of the sprite <origin> 
-(that it stay unaffected).  In this case the resultant appearance of the two 
-sprite can not be identical because definitions of their characteristics 
-could not be even.   This happens because only the dotted model of the sprite 
-<origin> comes copied in the sprite <destination>.  The dotted model of a 
-sprite comes memorized line for line, like with the SSHAPE command.  To the 
-same way, the last 4 groups of ciphers of the string <destination> contain 
-the lengths of the column and of the row.  Formats of the strings create from 
-the SSHAPE commands and SPRSAV is identical.  Therefore SPRSAV can be used to 
-transfer a sprite in a string, and GSHAPE to bring again the sprite like form 
+the sprite <destination> engages the same definition of the sprite <origin>
+(that it stay unaffected).  In this case the resultant appearance of the two
+sprite can not be identical because definitions of their characteristics
+could not be even.   This happens because only the dotted model of the sprite
+<origin> comes copied in the sprite <destination>.  The dotted model of a
+sprite comes memorized line for line, like with the SSHAPE command.  To the
+same way, the last 4 groups of ciphers of the string <destination> contain
+the lengths of the column and of the row.  Formats of the strings create from
+the SSHAPE commands and SPRSAV is identical.  Therefore SPRSAV can be used to
+transfer a sprite in a string, and GSHAPE to bring again the sprite like form
 on the screen Bit Map.
-To the same way is possible use SSHAPE to transfer a form from Bit Map to a 
-string, and then use SPRSAV to insert the string in a sprite.  When the 
-sprite is reformed in this way, need assure to preserve an area of the same 
-dimension of the sprite expressed in number of points (24 for 21 points for 
-High Resolution, and 12 for 21 for Multi-Color).  Here in succession come 
+To the same way is possible use SSHAPE to transfer a form from Bit Map to a
+string, and then use SPRSAV to insert the string in a sprite.  When the
+sprite is reformed in this way, need assure to preserve an area of the same
+dimension of the sprite expressed in number of points (24 for 21 points for
+High Resolution, and 12 for 21 for Multi-Color).  Here in succession come
 listed some examples of the SPRSAV command:
 
 SPRSAV 1, A$: REM TRANSFERS THE MODEL DOTTED OF SPRITE 1 TO STRING A$
 
 10 C= 1: D= 4: IF RSPCOL (0)= 2 THEN: SPRSAV C, D
-20 REM IF MULTI-COLOR1 OF SPRITE IS RED, TRANSFER THE MODEL 
+20 REM IF MULTI-COLOR1 OF SPRITE IS RED, TRANSFER THE MODEL
    DOTTED OF SPRITE 1 TO SPRITE 4
 
 
 3.4 - ANIMATION OF THE SPRITE
 
-One of most interesting and powerful characteristics of the SUPER EXPANDER 64 
-is the capability to install and animate the sprite.  For each sprite, it is 
+One of most interesting and powerful characteristics of the SUPER EXPANDER 64
+is the capability to install and animate the sprite.  For each sprite, it is
 possible use the MOVSPR command to set the position, move it, stop it.
 The syntax of the MOVSPR command is the following:
 
 MOVSPR <number><,X1,Y1>
 
-<number> is the number of the sprite (from 0 to 7) whose position one desire 
-set or change.  The coordinate <,X1,Y1> is the new location of the sprite.  
-To install a sprite, can sett <,X1, Y1> like absolute values or like relative 
-discard.  However, using a relative discard to install a sprite, need be 
-awake that the new position comes deliberate from the current position of the 
-sprite therefore that from the current location of the CP.  The sprite come 
-installed respect their upper left angle.  There is a specific position of 
-the screen said "window" in which are observable the sprites.  Coordinates 
-that characterize the limits of the screen Bit Map.  For example, the upper 
-left angle of the screen Bit Map is (0,0).  To install the upper left angle 
-of a sprite they will be (24,50).  The chart of reports (see SCALE) of the 
-X-Y coordinates will be used to calculate the absolute coordinates of 
-position and the relative distances of movement for the sprite.  To animate a 
-sprite and to stop  is been able to use a special form of the parameter 
-<,X1,Y1> of the MOVSPR command.  In this case, the parts "X1" and "Y1" of the 
-parameter are separate from a sign number (#) instead that from a comma.  
-The value "X1" specific in degrees to the direction where the sprite moves an 
-angle that go to hourly sense.  The value "Y1" is a number from 0 to 15 and 
-specific an abiding velocity of the sprite (where 0 stop the movement of the 
-sprite and 15 represent the maximum velocity of it).  The velocity of the 
-sprite is measure from the  number of points that the sprite overcomes in a 
-certain period of time (in the indicated direction).  The movement of the 
-sprite is in reality a series of relative instant discards that the eyes 
-recognize like a continual movement.  Is possible simultaneously and 
-independently animate one or more sprites to varied velocity and directions.  
-When the visualization of a sprite comes deactivated from the SPRITE command, 
+<number> is the number of the sprite (from 0 to 7) whose position one desire
+set or change.  The coordinate <,X1,Y1> is the new location of the sprite.
+To install a sprite, can sett <,X1, Y1> like absolute values or like relative
+discard.  However, using a relative discard to install a sprite, need be
+awake that the new position comes deliberate from the current position of the
+sprite therefore that from the current location of the CP.  The sprite come
+installed respect their upper left angle.  There is a specific position of
+the screen said "window" in which are observable the sprites.  Coordinates
+that characterize the limits of the screen Bit Map.  For example, the upper
+left angle of the screen Bit Map is (0,0).  To install the upper left angle
+of a sprite they will be (24,50).  The chart of reports (see SCALE) of the
+X-Y coordinates will be used to calculate the absolute coordinates of
+position and the relative distances of movement for the sprite.  To animate a
+sprite and to stop  is been able to use a special form of the parameter
+<,X1,Y1> of the MOVSPR command.  In this case, the parts "X1" and "Y1" of the
+parameter are separate from a sign number (#) instead that from a comma.
+The value "X1" specific in degrees to the direction where the sprite moves an
+angle that go to hourly sense.  The value "Y1" is a number from 0 to 15 and
+specific an abiding velocity of the sprite (where 0 stop the movement of the
+sprite and 15 represent the maximum velocity of it).  The velocity of the
+sprite is measure from the  number of points that the sprite overcomes in a
+certain period of time (in the indicated direction).  The movement of the
+sprite is in reality a series of relative instant discards that the eyes
+recognize like a continual movement.  Is possible simultaneously and
+independently animate one or more sprites to varied velocity and directions.
+When the visualization of a sprite comes deactivated from the SPRITE command,
 its  movement stops automatically.  Once reactivated the command, the movement
-will return automatically to the preceding velocity and direction. 
+will return automatically to the preceding velocity and direction.
 Here some examples of the MOVSPR command:
 
 MOVSPR 1,160,100:		REM PUTS THE UPPER ANGLE
@@ -1360,18 +1360,18 @@ MOVSPR 1, +40, 60: 	REM USE THE RELATIVE DISCARD TO
 MOVSPR 2,90#8:		REM ANIMATES SPRITE 2 TO AN ANGLE
 				OF 90 DEGREES AND TO A VELOCITY OF 8
 
-It is possible to check the position and the velocity of the sprite using the 
-RSPPOS function.  This  function has 2 topics: a number of sprite and a 
-number that requires the X position, the Y position or  the velocity of the 
+It is possible to check the position and the velocity of the sprite using the
+RSPPOS function.  This  function has 2 topics: a number of sprite and a
+number that requires the X position, the Y position or  the velocity of the
 sprite.  The syntax of the RSPPOS function is the following:
 
 RSPPOS (<sprite>,<data>)
 
-The topic <sprite> identifies which sprite is being checked. The topic <data> 
-specific which information must be returned.  When <data> is 0, it comes 
-returned the position current X of the sprite, when <data>  is 1, it comes 
-returned the position current Y of the sprite and when <data> is 2, it comes 
-returned the current velocity of the sprite expressed in a number from 0 to 
+The topic <sprite> identifies which sprite is being checked. The topic <data>
+specific which information must be returned.  When <data> is 0, it comes
+returned the position current X of the sprite, when <data>  is 1, it comes
+returned the position current Y of the sprite and when <data> is 2, it comes
+returned the current velocity of the sprite expressed in a number from 0 to
 15.
 
 PRUDENCE:	RSPPOS RETURNS ALWAYS coordinates of SCALE 0
@@ -1387,47 +1387,47 @@ OF SPRITE 7
 10 S= 3: D= 2: PRINT RSPPOS (S, D)
 20 REM STAMPS THE VALUE CURRENT OF VELOCITY
    OF SPRITE 3
- 
+
 
 3.5 - MANAGEMENT OF THE BUMPS OF THE SPRITE
 
-The program SUPER EXPANDER 64 gives the capability of map when anybody of 
-sprites in movement enters bump with another sprite or with an image of the 
-display Bit Map.  It is been able to map the bumps of the sprite using the 
-COLINT command and determine which sprite has entered bump using the RBUMP 
-function.  All that makes possible create graphic animate display in  BASIC 
-program.  The COLINT command characterizes three types of events: bumps among 
-sprites, bumps among sprites and images Bit Map and activation of the optic 
-pen.  When is verifyed one of these events, the program  finish the line of 
-current program and the SUPER EXPANDER 64 transfers the control to the first 
-line number of the routine of bumps management.  In other words, the BASIC 
-program comes "interrupted" and sells the control to the routine of bump.  
-More ahead these events will be characterized like "interrupt of bump."  Once 
-performed a RETURN statement in the routine of bump, the control comes 
+The program SUPER EXPANDER 64 gives the capability of map when anybody of
+sprites in movement enters bump with another sprite or with an image of the
+display Bit Map.  It is been able to map the bumps of the sprite using the
+COLINT command and determine which sprite has entered bump using the RBUMP
+function.  All that makes possible create graphic animate display in  BASIC
+program.  The COLINT command characterizes three types of events: bumps among
+sprites, bumps among sprites and images Bit Map and activation of the optic
+pen.  When is verified one of these events, the program  finish the line of
+current program and the SUPER EXPANDER 64 transfers the control to the first
+line number of the routine of bumps management.  In other words, the BASIC
+program comes "interrupted" and sells the control to the routine of bump.
+More ahead these events will be characterized like "interrupt of bump."  Once
+performed a RETURN statement in the routine of bump, the control comes
 refunded to the program line  following to the line that had been interrupted.
 The syntax of the COLINT command is the following:
 
-COLINT <event>[,line-num] 	can have a value from 0 to 2 and specific which 
+COLINT <event>[,line-num] 	can have a value from 0 to 2 and specific which
 					type of event should cause a interrupt of bump.
 
-If <event> is 0, come characterize bumps among sprite and sprite; if <event> 
-is 1, come characterize bumps of the sprite with the display Bit Map; and if 
+If <event> is 0, come characterize bumps among sprite and sprite; if <event>
+is 1, come characterize bumps of the sprite with the display Bit Map; and if
 <event> is 2, the activation of the  optic pen causes a "interrupt".
-The parameter [,line-num] is the first number of line of the routine in the 
-BASIC program where the  control will have transferred when will attend a 
-interrupt of bump of the type characterized from <event>.  When the optional 
-parameter [,line-num] comes itemized, the sensor of bumps comes set to ON 
-(activated) for the datum type of <event>.  When the indicator[,line-num] is 
-omitted, the sensor of bumps comes set to OFF (deactivated) for itemized type 
-of <event>.  A bump among sprite and sprite attend when a part of a sprite 
-that is not of the same color of the Background deals with the same position 
-of a part of another sprite with a different color from the Background too.  
-A sprite cannot cause a interrupt of bump when it is completely outside 
-screen (not observable). There is bump between sprite and Bit Map when a part 
-of a sprite that not be of the same of the Background cover the same position 
-of a part (also it with color diverged from the Background) of an image on 
-the screen (for example  Main Color, Multi-Color1 or Multi-Color2).  Sprites 
-that have been deactivated using the SPRITE command, don't cause interrupt of 
+The parameter [,line-num] is the first number of line of the routine in the
+BASIC program where the  control will have transferred when will attend a
+interrupt of bump of the type characterized from <event>.  When the optional
+parameter [,line-num] comes itemized, the sensor of bumps comes set to ON
+(activated) for the datum type of <event>.  When the indicator[,line-num] is
+omitted, the sensor of bumps comes set to OFF (deactivated) for itemized type
+of <event>.  A bump among sprite and sprite attend when a part of a sprite
+that is not of the same color of the Background deals with the same position
+of a part of another sprite with a different color from the Background too.
+A sprite cannot cause a interrupt of bump when it is completely outside
+screen (not observable). There is bump between sprite and Bit Map when a part
+of a sprite that not be of the same of the Background cover the same position
+of a part (also it with color diverged from the Background) of an image on
+the screen (for example  Main Color, Multi-Color1 or Multi-Color2).  Sprites
+that have been deactivated using the SPRITE command, don't cause interrupt of
 bump.
 Here some examples of the COLINT statement:
 
@@ -1435,51 +1435,51 @@ Here some examples of the COLINT statement:
 
 60 COLINT 1,600: REM BEGINS TO MAP BUMPS BETWEEN SPRITE AND BIT MAP
 
-500 COLINT: COLINT 1: REM DEACTIVATE BUMPS BETWEEN SPRITE AND SPRITE AND  
+500 COLINT: COLINT 1: REM DEACTIVATE BUMPS BETWEEN SPRITE AND SPRITE AND
     BETWEEN SPRITE AND BIT MAP
 
-In the preceding examples the line 50 causes the transfer of the control to a 
-routine to the line 500 when is verifyed a bump between sprite and sprite.  
-To the same way, the line 60 arouses a transfer of control to a routine to 
-the line 600 when come pronounced a bump between sprite and Bit Map.  In the 
-line 500, the mapping of subsequent bumps between sprite comes deactivated 
-during the management of the current bump.  You can set one/all types of 
-mapping of <event> active to the same time, but only one bump for time can be 
-managed.  Therefore would always need deactivate subsequent mappings of bump 
-like first footstep in the routines of management of the bumps.  This 
-prevents that they attend other interrupt during the management of that 
-current.  Finally, the last footstep to perform in the routine of interrupt 
-of bump, it is that to reactivate the sensor of bumps.  To characterize the 
-sprite that have entered bump, the RBUMP function can be used.  This function 
-informs on which sprite has entered bump with other sprite, or on which 
-sprite has entered bump with the display Bit Map.  It is not necessary that 
-interrupts of bump are activated to use RBUMP.  
+In the preceding examples the line 50 causes the transfer of the control to a
+routine to the line 500 when is verified a bump between sprite and sprite.
+To the same way, the line 60 arouses a transfer of control to a routine to
+the line 600 when come pronounced a bump between sprite and Bit Map.  In the
+line 500, the mapping of subsequent bumps between sprite comes deactivated
+during the management of the current bump.  You can set one/all types of
+mapping of <event> active to the same time, but only one bump for time can be
+managed.  Therefore would always need deactivate subsequent mappings of bump
+like first footstep in the routines of management of the bumps.  This
+prevents that they attend other interrupt during the management of that
+current.  Finally, the last footstep to perform in the routine of interrupt
+of bump, it is that to reactivate the sensor of bumps.  To characterize the
+sprite that have entered bump, the RBUMP function can be used.  This function
+informs on which sprite has entered bump with other sprite, or on which
+sprite has entered bump with the display Bit Map.  It is not necessary that
+interrupts of bump are activated to use RBUMP.
 The syntax of the RBUMP function is:
 
 RBUMP (<event>)
 
-The RBUMP topic coincides directly to the type of <event> of the COLINT 
-command.  If <event> is 0, the RBUMP function informs on the bumps between 
-sprite and sprite.  If <event> is 1,  RBUMP informs on which sprite has 
-entered bump with the display Bit Map.  In each of the preceding cases, RBUMP 
-returns a number from 0 to 255. The position of bit (from 0 to 7) in the 
-number returned from RBUMP coincides to the sprite number from 0 to 7. When a 
-bit comes set to ON  (value 1), the sprite in that bit position had involved 
-in a bump. When is audited contemporaneously more bumps, you will need use 
-the RSPPOS function, mentioned in precedence, to determine which sprite has 
-entered bump and with which objects.  The RBUMP function reads the registers 
-hardware of bump sprite in the control chip video of the Commodore 64.  
-These registers are reset automatically each time they come read, also when 
-you use the RBUMP function or the PEEK function for read them directly.  
-Therefore, you must become  reference to the information returned from RBUMP 
-more of a time, the value will be allotted to a name of variable.  Here an 
+The RBUMP topic coincides directly to the type of <event> of the COLINT
+command.  If <event> is 0, the RBUMP function informs on the bumps between
+sprite and sprite.  If <event> is 1,  RBUMP informs on which sprite has
+entered bump with the display Bit Map.  In each of the preceding cases, RBUMP
+returns a number from 0 to 255. The position of bit (from 0 to 7) in the
+number returned from RBUMP coincides to the sprite number from 0 to 7. When a
+bit comes set to ON  (value 1), the sprite in that bit position had involved
+in a bump. When is audited contemporaneously more bumps, you will need use
+the RSPPOS function, mentioned in precedence, to determine which sprite has
+entered bump and with which objects.  The RBUMP function reads the registers
+hardware of bump sprite in the control chip video of the Commodore 64.
+These registers are reset automatically each time they come read, also when
+you use the RBUMP function or the PEEK function for read them directly.
+Therefore, you must become  reference to the information returned from RBUMP
+more of a time, the value will be allotted to a name of variable.  Here an
 example of the RBUMP function:
 
 1000 A= RBUMP (0): B= RBUMP (1)
-1010 REM LINE 1000 READ BUMPS BETWEEN SPRITE AND SPRITE 
+1010 REM LINE 1000 READ BUMPS BETWEEN SPRITE AND SPRITE
      AND THOSE BETWEEN SPRITE AND BIT MAP
 
-In the following example, the line 530 uses the operator logical AND to 
+In the following example, the line 530 uses the operator logical AND to
 check if the sprite 1 is  entered in bump or not.
 
 500 MOVSPR 1,160,100: REM PUTS SPRITE 1 TO CENTER
@@ -1487,11 +1487,11 @@ check if the sprite 1 is  entered in bump or not.
 510 FOR X= 1 TO 50: REM PLAY A LOOP 50 TIMES
 520 MOVSPR 1, +5, +5: REM MOVES 5 POINTS TO RIGHT AND 5 POINTS TO DAWN
 530 IF RBUMP (0) AND 2 THEN GOSUB 800
-540 REM WHEN SPRITE 1 ENTERS BUMP PLAY 
+540 REM WHEN SPRITE 1 ENTERS BUMP PLAY
     THE ROUTINE AT LINE 800
 550 NEXT X: REM FINISHES THE LOOP
 
-For examples of the SPRSAV commands, MOVSPR and COLINT, see the photos on the 
+For examples of the SPRSAV commands, MOVSPR and COLINT, see the photos on the
 rear of this handbook and the III Appendix PROGRAM EXAMPLES.
 
 
@@ -1504,21 +1504,21 @@ Keys Programmable Function.
 
 4.1 - INPUT/OUTPUT OF THE GAME PORTS
 
-The SUPER EXPANDER 64 furnishes three functions that allow to read the 
-Positions easily of one or two jovsticks (cloche of command), up to four 
-paddles for games or coordinates of the optic pen from the game ports of the 
-Commodore 64, that is the RJOY function for the joystick, RPOT for paddles 
-and RPEN for the optic pen.  
+The SUPER EXPANDER 64 furnishes three functions that allow to read the
+Positions easily of one or two joysticks (cloche of command), up to four
+paddles for games or coordinates of the optic pen from the game ports of the
+Commodore 64, that is the RJOY function for the joystick, RPOT for paddles
+and RPEN for the optic pen.
 The syntax for the RJOY function is:
 
 RJOY (<joystick>)
 
-The topic <joystick> can have the value of 1 or 2 and specific which 
-joysticks in reading is connected to the Control Port 1 or to the Control 
-Port 2. A number delayed from RJOY points out toward which direction has been 
-pressed the jovstick.  When comes pressed the key "fire" in the joystick, a 
-value of 128 comes added to the directional value of the returned number.  
-The illustration  that follows shows values that coincide to each of 
+The topic <joystick> can have the value of 1 or 2 and specific which
+joysticks in reading is connected to the Control Port 1 or to the Control
+Port 2. A number delayed from RJOY points out toward which direction has been
+pressed the joystick.  When comes pressed the key "fire" in the joystick, a
+value of 128 comes added to the directional value of the returned number.
+The illustration  that follows shows values that coincide to each of
 directions of the joystick:
 
 KEY "FIRE"
@@ -1532,22 +1532,22 @@ KEY "FIRE"
 
 Here in succession, some examples of the RJOY function.
 
-Consult the III Appendix, PROGRAM EXAMPLES for a program that illustrate 
+Consult the III Appendix, PROGRAM EXAMPLES for a program that illustrate
 better the use of the RJOY function.
 
-10 D= RJOY (1): IF D< 127 THEN GOSUB 750 
-20 REM IF FIRE KEY OF THE JOYSTICK IS PRESSED, PLAY THE 
+10 D= RJOY (1): IF D< 127 THEN GOSUB 750
+20 REM IF FIRE KEY OF THE JOYSTICK IS PRESSED, PLAY THE
    SUBROUTINE AT LINE 750
 
-The topic <data> can engage the value of 0 or 1 and specific which of the 
-coordinates respectively  X or Y, of the optic pen comes returned.  The 
-returned RPEN values can change from a system to the other.  Like result the 
-X position comes returned like an equal number, and varied approximately from 
-60 to 380, and the Y position varied approximately from 50 to 250.  The value 
-0 has returned from RPEN when the optic pen is not on the screen and no 
-interrupt has been activated from the last reading.  A white background of 
-the screen (or very bright) usually is required to beseech the optic pen. 
-Note that only the Control Port 1 is able to read a optic pen. Here an 
+The topic <data> can engage the value of 0 or 1 and specific which of the
+coordinates respectively  X or Y, of the optic pen comes returned.  The
+returned RPEN values can change from a system to the other.  Like result the
+X position comes returned like an equal number, and varied approximately from
+60 to 380, and the Y position varied approximately from 50 to 250.  The value
+0 has returned from RPEN when the optic pen is not on the screen and no
+interrupt has been activated from the last reading.  A white background of
+the screen (or very bright) usually is required to beseech the optic pen.
+Note that only the Control Port 1 is able to read a optic pen. Here an
 example of the RPEN function:
 
 50 X= RPEN (0): Y= RPEN (1)
@@ -1558,39 +1558,39 @@ example of the RPEN function:
 
 
 
-50 D= RJOY (2): REM READS DIRECTION JOYSTICK 24 
+50 D= RJOY (2): REM READS DIRECTION JOYSTICK 24
 60 IF D= 6 THEN X+ X-1: Y+1: GOTO 50
-70 REM IF JOYSTICK COMES PRESSED TOWARD LEFT HAND AND TOWARD DOWN  
+70 REM IF JOYSTICK COMES PRESSED TOWARD LEFT HAND AND TOWARD DOWN
    REGULATE THE X-Y COORDINATE IN CONSEQUENCE.
 
-Using the RPOT function, the current position of a maximum of four paddles 
-can be read for games.  Paddles 0 and 1 come read from the Control Port 1 and 
-paddles 2 and 3 from the Control Port 2. The syntax for the RPOT function is 
+Using the RPOT function, the current position of a maximum of four paddles
+can be read for games.  Paddles 0 and 1 come read from the Control Port 1 and
+paddles 2 and 3 from the Control Port 2. The syntax for the RPOT function is
 the following:
 
 RPOT (<paddle>)
 
-The topic <paddle> can engage a value from 0 or 3 and specific which paddle 
-will come read.  The RPOT function delays a number from 0 to 255, that point 
-out the position of the handle of control on the paddle.  When the button 
-"fire" is pressed, a value of 256 comes added to this number.  In this way, 
-when the value delayed from RPOT is bigger than 255, the key fire results 
-pressed.  Follows an example of the RPOT function.  Consult the Appendix III 
-PROGRAM EXAMPLES for an illustration of the use of the RPOT function in a 
+The topic <paddle> can engage a value from 0 or 3 and specific which paddle
+will come read.  The RPOT function delays a number from 0 to 255, that point
+out the position of the handle of control on the paddle.  When the button
+"fire" is pressed, a value of 256 comes added to this number.  In this way,
+when the value delayed from RPOT is bigger than 255, the key fire results
+pressed.  Follows an example of the RPOT function.  Consult the Appendix III
+PROGRAM EXAMPLES for an illustration of the use of the RPOT function in a
 animation game.
 
 800 X= RPOT (0): Y= RPOT (1)
 810 REM LINE 800 READS THE PADDLE ON CONTROL PORT 1
 820 IF X> 255 OR Y> 255 THEN GOSUB 1000
-830 REM LINE 820 CHECKS IF FIRE BUTTONS ARE PRESSED AND 
+830 REM LINE 820 CHECKS IF FIRE BUTTONS ARE PRESSED AND
     PLAYS THE SUBROUTINE AT LINE 1000 IF THE RESULT IS POSITIVE
 840 MOVSPR 4, X, Y: REM ADJOURN POSITION OF THE SPRITE
 850 GOTO 800
 
-The RPEN function reveals the value of the X or Y coordinates of the optic 
-pen to it last activation.  To use the RPEN function, must not be activated 
-the function of the interrupt of bump.  Coordinates delay from RPEN always 
-use the system of coordinates standard SCALE 0. The syntax for the RPEN 
+The RPEN function reveals the value of the X or Y coordinates of the optic
+pen to it last activation.  To use the RPEN function, must not be activated
+the function of the interrupt of bump.  Coordinates delay from RPEN always
+use the system of coordinates standard SCALE 0. The syntax for the RPEN
 function is:
 
 RPEN (<data>)
@@ -1598,10 +1598,10 @@ RPEN (<data>)
 
 4.2 - KEYS PROGRAMMABLE FUNCTION
 
-The SUPER EXPANDER 64 allows to use the capabilities of the keys function 
-programs them according to the demands of the consumer for the BASIC programs 
-personnels.  Programming function keys with commands frequently used is 
-spared time and work and they are avoided the errors. The SUPER EXPANDER 64 
+The SUPER EXPANDER 64 allows to use the capabilities of the keys function
+programs them according to the demands of the consumer for the BASIC programs
+personnels.  Programming function keys with commands frequently used is
+spared time and work and they are avoided the errors. The SUPER EXPANDER 64
 at the start gives the following definitions for the eight keys function:
 
 	f1= "GRAPHIC"	f5= "RUN"
@@ -1609,56 +1609,56 @@ at the start gives the following definitions for the eight keys function:
 	f3= "SPRDEF"	f7= "LIST"
 	f4= "LOAD"		f8= "SPRITE"
 
-The KEY command can be used to program keys function or to check their 
+The KEY command can be used to program keys function or to check their
 meanings current. The syntax of the KEY command is:
 
 KEY [<[keynum,exp-string>]
 
-The KEY command used without parameters will perform a LIST of the current 
-definitions of the keys function  (output on peripheral number 3).  The CMD 
-command can be used to redirect output in other devices like for example the 
+The KEY command used without parameters will perform a LIST of the current
+definitions of the keys function  (output on peripheral number 3).  The CMD
+command can be used to redirect output in other devices like for example the
 printer or the unity disk.  When are present parameters [<keynum,exp-string>],
-the key function itemized from <keynum> will be redefined. The value of 
-<keynum> can change from 1 to 8.  <,exp-string> can be a alphabetical string 
-among quote ("string"), a variable name of BASIC string, or an expression of 
-string formed from a connection (union of strings) using the operator"+". 
-Also all the terms of the expression must be strings.  After have programmed 
-the keys function, they can be used in the Direct mode or from Program.  In 
-the direct mode, the string that has been programmed for that key will have 
-brought to Text Standard screen mode (this cannot be observable in the 
-graphic Bit Map mode).  Then, pressing the RETURN key, the string comes 
-performed like a direct command (or series of separate commands from the two 
-points":"). If the last character of the string is a RETURN (CHR$ (13)), will 
-be pressed easily the key function to perform its relative commands.  In the 
-Program mode, will be used the function key in answered the INPUT or GET 
-commands to fill the variables string in programs.  For the INPUT command, 
+the key function itemized from <keynum> will be redefined. The value of
+<keynum> can change from 1 to 8.  <,exp-string> can be a alphabetical string
+among quote ("string"), a variable name of BASIC string, or an expression of
+string formed from a connection (union of strings) using the operator"+".
+Also all the terms of the expression must be strings.  After have programmed
+the keys function, they can be used in the Direct mode or from Program.  In
+the direct mode, the string that has been programmed for that key will have
+brought to Text Standard screen mode (this cannot be observable in the
+graphic Bit Map mode).  Then, pressing the RETURN key, the string comes
+performed like a direct command (or series of separate commands from the two
+points":"). If the last character of the string is a RETURN (CHR$ (13)), will
+be pressed easily the key function to perform its relative commands.  In the
+Program mode, will be used the function key in answered the INPUT or GET
+commands to fill the variables string in programs.  For the INPUT command,
 pressing a key function, its current definition is displayed immediately after
-the prompt of the INPUT command constituted from a question mark (?).  
-When is pressed RETURN, the string comes transferred to the variable of the 
-INPUT command.  Like in precedence, if the last character of the string is a 
-RETURN (CHR$ (13)), will be sufficient press the key function to transfer the 
-string of the key function to the variable.  The maximum length of the string 
-combined for all definitions of the Keys Function is of 255 characters, 
-generally this number of characters is more sufficient for all the practical 
-purposes, in as usually long sequences of command for the Keys are not 
-programmed Function.  To deactivate one or more Keys Programmable Function, 
-will be used the function CHR$ (n) to bring again each text to his original 
-value.  These will be the values of the characters returned from the GET 
-command on the systems not fitted with the SUPER EXPANDER 64.  For example, 
+the prompt of the INPUT command constituted from a question mark (?).
+When is pressed RETURN, the string comes transferred to the variable of the
+INPUT command.  Like in precedence, if the last character of the string is a
+RETURN (CHR$ (13)), will be sufficient press the key function to transfer the
+string of the key function to the variable.  The maximum length of the string
+combined for all definitions of the Keys Function is of 255 characters,
+generally this number of characters is more sufficient for all the practical
+purposes, in as usually long sequences of command for the Keys are not
+programmed Function.  To deactivate one or more Keys Programmable Function,
+will be used the function CHR$ (n) to bring again each text to his original
+value.  These will be the values of the characters returned from the GET
+command on the systems not fitted with the SUPER EXPANDER 64.  For example,
 to deactivate the key f1, you will need itemize KEY 1, CHR$ (133).  Here there
-is a short program to use or alter the setting of definitions of Keys 
+is a short program to use or alter the setting of definitions of Keys
 Function:
 
 10 KEY l, "RUN"+ CHR$ (13)
 20 KEY 2, "SAVE"+ CHR$ (34)+ "VSPX.1"+ CHR$ (34)+," 8"+ CHR$ (13)
-30 KEY 3, "SAVE"+ CHR$ (34)+ "VSPX.1"+ CHR$ (34)+," 8"+ CHR$ (13) 
-40 KEY 4, "X= 100: Y= 80: GOTO 1000"+ CHR$ (13) 
-50 KEY 5, "COLOR 1,1l"+ CHR$ (13) 
+30 KEY 3, "SAVE"+ CHR$ (34)+ "VSPX.1"+ CHR$ (34)+," 8"+ CHR$ (13)
+40 KEY 4, "X= 100: Y= 80: GOTO 1000"+ CHR$ (13)
+50 KEY 5, "COLOR 1,1l"+ CHR$ (13)
 60 KEY 6, "CIRCLE"
-70 KEY 7, "LIST"+ CHR$ (13) 
+70 KEY 7, "LIST"+ CHR$ (13)
 80 KEY 8, "KEY"+ CHR$ (13)
 
-Additionally to as itemized in the preceding strings of Keys Function, they 
+Additionally to as itemized in the preceding strings of Keys Function, they
 will also be used characters of control to characterize as it follows:
 
  	Selection of the color
@@ -1667,7 +1667,7 @@ will also be used characters of control to characterize as it follows:
  	Musical strings
 
 
- 
+
 - 5 -  SOUND EFFECTS AND MUSIC
 
 Definition of the Sound Effects.
@@ -1676,28 +1676,28 @@ Execution of the sound effects.
 
 5.1 - DEFINITION OF THE SOUND EFFECTS
 
-The SUPER EXPANDER 64 allows to use easily the Sound lnterface Device chip 
-(SID) of the Commodore 64 to create music and sound effects for games.  The 
-musical staircase that the SUPER EXPANDER 64 use is near to a tuning from 
-concert (where the F in 4 octave has a frequency of 440 Hz).  Comes furnished 
-commands to determine the characteristics of the sounds to create.  
-Additionally, it will be played in Direct mode and also in Program mode.  
-For more greater details, consult the Manual of the Programmer of the 
-Commodore 64.  The command TIME comes used to determine the velocity to which 
-the music will come ring.  The command TUNE for the forms of wave and the 
-"envelopes" of the sounds.  The FILTER command to create effects  of 
-resonance and to increase or disband definite rubbers of frequency in the 
+The SUPER EXPANDER 64 allows to use easily the Sound Interface Device chip
+(SID) of the Commodore 64 to create music and sound effects for games.  The
+musical staircase that the SUPER EXPANDER 64 use is near to a tuning from
+concert (where the F in 4 octave has a frequency of 440 Hz).  Comes furnished
+commands to determine the characteristics of the sounds to create.
+Additionally, it will be played in Direct mode and also in Program mode.
+For more greater details, consult the Manual of the Programmer of the
+Commodore 64.  The command TIME comes used to determine the velocity to which
+the music will come ring.  The command TUNE for the forms of wave and the
+"envelopes" of the sounds.  The FILTER command to create effects  of
+resonance and to increase or disband definite rubbers of frequency in the
 sounds.
 The syntax of the command TIME is:
 
 TIME <velocity>
 
-The parameter <pace> checks the relative duration of the notes while rings 
-come.  The value of <velocity> can change from 0 to 255.  To the value 0, 
-the notes will play forever.  With the increase of the value <velocity>, the 
-duration of the notes decreases.  The beginning value of TIME comes 
-established to 8.  The real duration of the complete note across the formula 
-in seconds can be calculated (duration= 19.22/<velocity>).  Here some 
+The parameter <pace> checks the relative duration of the notes while rings
+come.  The value of <velocity> can change from 0 to 255.  To the value 0,
+the notes will play forever.  With the increase of the value <velocity>, the
+duration of the notes decreases.  The beginning value of TIME comes
+established to 8.  The real duration of the complete note across the formula
+in seconds can be calculated (duration= 19.22/<velocity>).  Here some
 examples of TIME:
 
 10 TIME 180: REM SOUNDS WITH A FAST TIME
@@ -1708,17 +1708,17 @@ The syntax for the TUNE command is:
 
 TUNE <env>,[,[att][,[dec][,[sus][,[rel][,[form][,amplitude]]]]]]
 
-The parameter <env> specifics the number of envelope of TUNE and can have a 
-value from 0 to 9. Parameters [att], [dec], [sus], and [rel] can have a value 
-from 0 to 15 and they come used to characterize the characteristics Attack, 
-Decay, Sustain, and Release (ADSR) of the envelope of the wave form.  Attack 
-is the time during which the sound pass from the minimum volume to the 
-maximum.  Decay is the time that the sound employs to pass from the maximum 
-volume to the level of sustain.  Sustain is the level of volume to which the 
-note will be liable for best part of his duration.  Release is the time that 
-the sound employs to pass from Sustain level to zero.  The parameter [ form] 
-specific the form of wave of the sound and can have a value from 0 to 4.  
-Following are showed the values of the parameter [form] and their 
+The parameter <env> specifics the number of envelope of TUNE and can have a
+value from 0 to 9. Parameters [att], [dec], [sus], and [rel] can have a value
+from 0 to 15 and they come used to characterize the characteristics Attack,
+Decay, Sustain, and Release (ADSR) of the envelope of the wave form.  Attack
+is the time during which the sound pass from the minimum volume to the
+maximum.  Decay is the time that the sound employs to pass from the maximum
+volume to the level of sustain.  Sustain is the level of volume to which the
+note will be liable for best part of his duration.  Release is the time that
+the sound employs to pass from Sustain level to zero.  The parameter [ form]
+specific the form of wave of the sound and can have a value from 0 to 4.
+Following are showed the values of the parameter [form] and their
 correspondent forms of wave:
 
 Values	Forms of wave
@@ -1728,10 +1728,10 @@ Values	Forms of wave
 3		White Noise
 4		Ring Modulation
 
-The parameter [amplitude] has a meaning only when the form of select wave is 
-"impulse".  This parameter can have a value from 0 to 4095.  An amplitude of 
-2048 causes a quadrate wave.  The SUPER EXPANDER 64 allows to characterize up 
-to 10 envelopes TUNE.  These comes set on the beginning values like listed in 
+The parameter [amplitude] has a meaning only when the form of select wave is
+"impulse".  This parameter can have a value from 0 to 4095.  An amplitude of
+2048 causes a quadrate wave.  The SUPER EXPANDER 64 allows to characterize up
+to 10 envelopes TUNE.  These comes set on the beginning values like listed in
 the following chart:
 
      Env   Att   Dec   Sus   Rel   Form  Ampli  Tool
@@ -1750,58 +1750,58 @@ Here some examples of the TUNE command:
 
 40 TUNE 0, 1280: REM CHANGES AMPLITUDE OF THE IMPULSE
    FOR THE ENVELOPE OF PIANO
-50 TUNE 4,12,6,6: REM INCREASES VALUES OF ATTACK AND DECAY TO SUPPORT 
+50 TUNE 4,12,6,6: REM INCREASES VALUES OF ATTACK AND DECAY TO SUPPORT
    THE ENVELOPE OF FLUTE
 
-The FILTER command comes used to Change dinamically other tonal quality of 
-the caused sound.  You can do it regulating a filter of wave to disband the 
-ranges of frequency choices.  Also you will be able to itemize an effect of 
-resonance that emphasizes the notes with near frequencies to those of 
+The FILTER command comes used to change dynamically other tonal quality of
+the caused sound.  You can do it regulating a filter of wave to disband the
+ranges of frequency choices.  Also you will be able to itemize an effect of
+resonance that emphasizes the notes with near frequencies to those of
 clipping of the filter.  The syntax of the FILTER command is:
 
 FILTER [[freq][,[low][,[band][,[high][,reso]]]]
 
-The parameter [[freq] is the frequency of clipping for the filter in the SID 
-chip and his value can change from 0 to 2048.  To determine the real 
-frequency of clipping in Hz, you will need multiply this value for 5.8 and 
-add 30.  Parameters [low], [band] and [high] come used together to determine 
-which parts of the audio spectrum must pass unaffected to the output of the 
-SID chip, and which parts must be express from the filter.  Each of these 
-parameters can have a value from 0 (cancel) to 1 (passage).  They will be 
-able to set one or more of these parameters on one of the two values.  The 
-parameter [reso] can change from 0 to 15 it determines the resonance (for 
-example how come emphasized the maximum effect of the sounds in proximity of 
+The parameter [[freq] is the frequency of clipping for the filter in the SID
+chip and his value can change from 0 to 2048.  To determine the real
+frequency of clipping in Hz, you will need multiply this value for 5.8 and
+add 30.  Parameters [low], [band] and [high] come used together to determine
+which parts of the audio spectrum must pass unaffected to the output of the
+SID chip, and which parts must be express from the filter.  Each of these
+parameters can have a value from 0 (cancel) to 1 (passage).  They will be
+able to set one or more of these parameters on one of the two values.  The
+parameter [reso] can change from 0 to 15 it determines the resonance (for
+example how come emphasized the maximum effect of the sounds in proximity of
 the frequency of clipping).
 Here some examples of the FILTER command:
 
-10 FILTER 2048, 1		Imposes the cut mode of the filter and pass high 
+10 FILTER 2048, 1		Imposes the cut mode of the filter and pass high
 				filter
 30 FILTER 1024, 10	Imposes the control of the resonance
-70 FILTER 700,1,0,1	Imposes the filter for a formality "notch reject" to 
-				disband sounds  more near to the frequency of 
+70 FILTER 700,1,0,1	Imposes the filter for a formality "notch reject" to
+				disband sounds  more near to the frequency of
 				clipping choice
 
 
 5.2 - EXECUTION OF THE SOUND EFFECTS
 
-With the SUPER EXPANDER 64 the music comes compost using string characters.  
-Will be performed music inserting these characters from keyboard in direct 
-mode, or includes them in PRINT string of the program.  Notes come itemize 
-with letters from A to G (from La to Sol).  The duration comes indicated from 
-letters W (whole), H (half), Q (quarter), I (eighth), and S (sixteenth).  
-Each note that follows one of the letters of duration comes play to the same 
-length until the same duration doesn't come changed. The letter R specifics 
-a break of the duration of a note.  The notes preceded with "#" sign will be 
-played like sharp and notes preceded with "$" will be played like flat.  
-The notes preceded from a "." will be played like pointed notes, one time and 
-half of the normal duration.  Here one scheme that abridges these musical 
+With the SUPER EXPANDER 64 the music comes compost using string characters.
+Will be performed music inserting these characters from keyboard in direct
+mode, or includes them in PRINT string of the program.  Notes come itemize
+with letters from A to G (from La to Sol).  The duration comes indicated from
+letters W (whole), H (half), Q (quarter), I (eighth), and S (sixteenth).
+Each note that follows one of the letters of duration comes play to the same
+length until the same duration doesn't come changed. The letter R specifics
+a break of the duration of a note.  The notes preceded with "#" sign will be
+played like sharp and notes preceded with "$" will be played like flat.
+The notes preceded from a "." will be played like pointed notes, one time and
+half of the normal duration.  Here one scheme that abridges these musical
 elements:
 
 Element			Description
 A, B, C, D, E, F, G	Notes
-#				Sharp (preced the note)
-$				Flat (preced the note)
-.				Pointed (preced the note)
+#				Sharp (precede the note)
+$				Flat (precede the note)
+.				Pointed (precede the note)
 W				Whole
 H				Half
 Q				Fourth
@@ -1809,17 +1809,17 @@ I				Eighth
 S				Sixteenth
 R				Break (of duration of a note)
 
-To the same way, letters come used to characterize some values of control of 
-the SID chip.  The control of the principal volume will be inserted using the 
-U letter follows from a number from 0 to 9.  The TUNE envelope comes select 
-from the T letter, follows from a number from 0 to 9. These values  coincide 
-to the envelope numbers as like established from the TUNE command.  One or 
-more of the three voices of the SID chip can be activate on the same time.  
-The V letter followed from a number from 0 to 2 will choose which voices will 
-perform the music.  The filter of the SID chip comes set to ON from "X1" and 
-to OFF from "X0".  There is only a filter, so its setting bias all the 
-activate voices.  A distinctive octave for a note comes choice from the 
-letter "O" followed from a number from 0 to 6. The character <CTRL-F> comes 
+To the same way, letters come used to characterize some values of control of
+the SID chip.  The control of the principal volume will be inserted using the
+U letter follows from a number from 0 to 9.  The TUNE envelope comes select
+from the T letter, follows from a number from 0 to 9. These values  coincide
+to the envelope numbers as like established from the TUNE command.  One or
+more of the three voices of the SID chip can be activate on the same time.
+The V letter followed from a number from 0 to 2 will choose which voices will
+perform the music.  The filter of the SID chip comes set to ON from "X1" and
+to OFF from "X0".  There is only a filter, so its setting bias all the
+activate voices.  A distinctive octave for a note comes choice from the
+letter "O" followed from a number from 0 to 6. The character <CTRL-F> comes
 used to activate or deactivate the sound.
 Here one scheme that abridges values of control of the SID:
 
@@ -1834,13 +1834,13 @@ O		Octave (0-6)
 < CTRL-F>	Activate/ Deactivate the musical breeding (CHR$(6))
 
 The initial default values for the musical parameters are:
-TUNE 0, Voice 0, Octave 4, Volume 9, Filter 0 (OFF) and Whole duration of the 
-notes.  Like for other expect of the SUPER EXPANDER 64, once that have been 
-established a value for an musical element, that value becomes the new 
+TUNE 0, Voice 0, Octave 4, Volume 9, Filter 0 (OFF) and Whole duration of the
+notes.  Like for other expect of the SUPER EXPANDER 64, once that have been
+established a value for an musical element, that value becomes the new
 default for following operations.
 Here an example of musical strings:
 
-10 PRINT "PLAYING HALF NOTES< CTRL-F> HCDEFGAB< CTRL-F> AND NOW 
+10 PRINT "PLAYING HALF NOTES< CTRL-F> HCDEFGAB< CTRL-F> AND NOW
    SIXTEENTH..."
 20 PRINT CHR$ (6); "SCDEFGAB"
 
@@ -1886,115 +1886,116 @@ APPENDIXES
 
 I  Appendix - NOTES FOR PROGRAMMING
 
-In this bureau will be furnished subsequent information on the use of the 
+In this bureau will be furnished subsequent information on the use of the
 SUPER EXPANDER 64.  You will find important notes on the followings topics:
 
  	How comes Used the Memory.
 
  	Graphic Bit Map Visualizations.
 
- 	Sprite and lnterrupt of Bump.
+ 	Sprite and interrupt of Bump.
 
  	I/O and Management of Errors.
 
 
 HOW COMES USED THE MEMORY
 
-The program SUPER EXPANDER 64 is a auto-playing cartridge that resides in the 
-memory to $8000-$9FFF (exadecimal) or 32768-40959 (decimal). The available 
-space for BASIC programs comes reduced of 8192 byte.  The SUPER EXPANDER 64 
-uses the RAM memory to $COOO-$CBFF and  (49152-52223).  Albeit the rest of 
-the memory up to $CFFF (53247) doesn't come for the moment used, it comes 
-preserved for possible future expansions of the systed software.  The program 
-SUPER EXPANDER 64 also uses the RAM memory that exists "under" of it and the  
-BASIC ROM language to $8000-$BFFF.  This memory comes used for visualizations 
-on the screen, sprite models, programmable definitions of character, etc. The 
-POKE command will be used to change the contents of this RAM memory, but a 
-PEEK function will return the contents of the ROM memory.  Here one scheme 
-that abridges the use, from the SUPER EXPANDER 64, of the RAM memory in these 
+The program SUPER EXPANDER 64 is a auto-playing cartridge that resides in the
+memory to $8000-$9FFF (hexadecimal) or 32768-40959 (decimal). The available
+space for BASIC programs comes reduced of 8192 byte.  The SUPER EXPANDER 64
+uses the RAM memory to $COOO-$CBFF and  (49152-52223).  Albeit the rest of
+the memory up to $CFFF (53247) doesn't come for the moment used, it comes
+preserved for possible future expansions of the system software.  The program
+SUPER EXPANDER 64 also uses the RAM memory that exists "under" of it and the
+BASIC ROM language to $8000-$BFFF.  This memory comes used for visualizations
+on the screen, sprite models, programmable definitions of character, etc. The
+POKE command will be used to change the contents of this RAM memory, but a
+PEEK function will return the contents of the ROM memory.  Here one scheme
+that abridges the use, from the SUPER EXPANDER 64, of the RAM memory in these
 areas:
 
-Addr.Exad.  Decimal 	Description
+Addr.
+Hexad.     Decimal 	Description
 $8000		32768		Stack area of coordinates for PAINT
 $8A00		35328		Memory for sprites (8 sprites)
 $8C00		35840		RAM checks of color for visualization Bit Map
 $9000		36864		ROM character generator (up to $9FFF)
 $AOOO		40960		Screen Bit Map (up to $BFFF)
 $COOO		49152		Impermanent memorization of data and areas of work
-$C400		50176		RAM for programmable characters (used from CHAR and 
+$C400		50176		RAM for programmable characters (used from CHAR and
 				from the Text Split Screen)
 $CCOO		52224		Booked to the expansion (up to $CFFF)
 
-A program of 2084 byte used to control the Commodore interface IEEE-488 comes 
-usually saved in the RAM memory beginning from $C000.  During the 
-initialization of the system, the SUPER EXPANDER 64, when map the presence of 
-this device, moves automatically the IEEE-488 program to $7800 (30720).   
+A program of 2084 byte used to control the Commodore interface IEEE-488 comes
+usually saved in the RAM memory beginning from $C000.  During the
+initialization of the system, the SUPER EXPANDER 64, when map the presence of
+this device, moves automatically the IEEE-488 program to $7800 (30720).
 This reduces  the quantity of free space for programs (-2048 bytes).
 
 
 GRAPHIC BIT MAP VISUALIZATIONS
 
-When the PRINT command in the Multi-Color GRAPHIC mode is used, is impossible 
-prevent that the Screen Editor adjourns the RAM of control color.  Of 
-consequence, if you finger to the inland of the text screen, behind to the 
-visualization Bit Map, a change of some colors will be verifyed.  The 
-resultant effect will be that images display in the Multi-Color2 will become 
+When the PRINT command in the Multi-Color GRAPHIC mode is used, is impossible
+prevent that the Screen Editor adjourns the RAM of control color.  Of
+consequence, if you finger to the inland of the text screen, behind to the
+visualization Bit Map, a change of some colors will be verified.  The
+resultant effect will be that images display in the Multi-Color2 will become
 of Main Color.  In the GRAPHIC 2 and 3 mode (High Resolution and Split Screen)
-lines come drawed wth a width of a point.  You will be passed from this to 
-the lines in black using the POKE command.  POKE 49168,0 set lines to a width 
-of a point, and POKE 49168,1 lines to a width of 2 points.  In the Split 
-Screen mode, the cursor will be observable only in the last 5 lines of the 
-screen.  Using the  HOME or CRSR key the controls will bring the cursor 
-behind the part of the screen Bit Map, where "you loses it of sight" until 
+lines come drawn with a width of a point.  You will be passed from this to
+the lines in black using the POKE command.  POKE 49168,0 set lines to a width
+of a point, and POKE 49168,1 lines to a width of 2 points.  In the Split
+Screen mode, the cursor will be observable only in the last 5 lines of the
+screen.  Using the  HOME or CRSR key the controls will bring the cursor
+behind the part of the screen Bit Map, where "you loses it of sight" until
 you move cursor toward the lower part with keys of cursor control.
-The SSHAPE commands and SPRSAV transfer forms to strings line for line. 4 
-bytes containers the length of the column (X) and of the row (Y) of the form 
-is assistants to the string.  The first two bytes constitutes the number of 
-the positions -X minus one, and the last two bytes constitute the number of 
+The SSHAPE commands and SPRSAV transfer forms to strings line for line. 4
+bytes containers the length of the column (X) and of the row (Y) of the form
+is assistants to the string.  The first two bytes constitutes the number of
+the positions -X minus one, and the last two bytes constitute the number of
 positions -Y minus one.  Both numbers come decided like "pointers of address"
 to 16-bit in formed [low-byte], [high-byte].
 
 
 SPRITE AND INTERRUPT OF BUMP
 
-When the Main Color of a sprite is even to  the color of Background of the 
-Bit Map screen, the sprite will result invisible.  However, if the sprite is 
-activated, it will cause still interrupt of bump with other sprite and with 
-the Bit Map visualizations.  Can be only eight definitions of active sprite 
+When the Main Color of a sprite is even to  the color of Background of the
+Bit Map screen, the sprite will result invisible.  However, if the sprite is
+activated, it will cause still interrupt of bump with other sprite and with
+the Bit Map visualizations.  Can be only eight definitions of active sprite
 at the same time, you can define more sprite saving definitions in strings.
-When you animate a sprite, the velocity parameter of MOVSPR comes used like 
-the real number of positions point of which the sprite stirs in each break of 
-time.  In other words, the movement is corporate from a series of "instant" 
-re-location. Therefore, a sprite that stirs to high velocity could not enter 
-bump with a line or a thin form, or with an other small sprite simply 
+When you animate a sprite, the velocity parameter of MOVSPR comes used like
+the real number of positions point of which the sprite stirs in each break of
+time.  In other words, the movement is corporate from a series of "instant"
+re-location. Therefore, a sprite that stirs to high velocity could not enter
+bump with a line or a thin form, or with an other small sprite simply
 "jumping" over of them.
 
 
 I/O AND MANAGEMENT OF ERRORS
 
-During the visualization of sprites, the SUPER EXPANDER 64 modify some 
-pointers of address employed for the treatment of systems interrupt.  Then, 
-before effect an I/O operation from a cassette, it is necessary deactivate 
-all sprites to restore the normal treatment of system interrupts.  The SUPER 
-EXPANDER 64 beeps errors of command by BASIC interpreter, and in this way 
-doesn't add own error messages.  Instead, an improper expression of syntax 
-arouses a message "SINTAX ERROR" and a value parameter external to the 
-anticipated range represents a  "ILLEGAL QUANTITY" issing parameters or 
-topics comes beeped from a message of error "OUT OF DATE".  If the command 
-"PAINT" exhausts the space of the coordinates stack, will result a message of 
-error "FORMULA TOO COMPLEX".  If a BASIC program comes halted pressing the 
-STOP key, or if the BASIC halts the program on a condition of error, the 
-SUPER EXPANDER 64 will select automatically the standard text mode and will 
-deactivate sprites.  Use the MOVSPR command to reset the velocity, or press 
-the STOP/RESTORE keys to halt the movement of sprites.  Selections of color 
-and the data of visualization Bit Map stay unchanged.  If a program finishes 
-with an END statement or STOP, the  text mode doesn't come select 
-automatically.  Pressing the STOP key, the PAINT command or the playing of a 
-musical sequence or the sketch of  a line won't come interrupted.  The 
-RUN/STOP and RESTORE keys restore the SUPER EXPANDER 64 on all his inchoate 
-values of default, to exception of the definitions of Key Function.  Typeing 
-the CONT command to resume a program formerly halted, this won't return to 
-the designated graphic mode, and will not take back the playing of music, the 
+During the visualization of sprites, the SUPER EXPANDER 64 modify some
+pointers of address employed for the treatment of systems interrupt.  Then,
+before effect an I/O operation from a cassette, it is necessary deactivate
+all sprites to restore the normal treatment of system interrupts.  The SUPER
+EXPANDER 64 beeps errors of command by BASIC interpreter, and in this way
+doesn't add own error messages.  Instead, an improper expression of syntax
+arouses a message "SINTAX ERROR" and a value parameter external to the
+anticipated range represents a  "ILLEGAL QUANTITY" missing parameters or
+topics comes beeped from a message of error "OUT OF DATE".  If the command
+"PAINT" exhausts the space of the coordinates stack, will result a message of
+error "FORMULA TOO COMPLEX".  If a BASIC program comes halted pressing the
+STOP key, or if the BASIC halts the program on a condition of error, the
+SUPER EXPANDER 64 will select automatically the standard text mode and will
+deactivate sprites.  Use the MOVSPR command to reset the velocity, or press
+the STOP/RESTORE keys to halt the movement of sprites.  Selections of color
+and the data of visualization Bit Map stay unchanged.  If a program finishes
+with an END statement or STOP, the  text mode doesn't come select
+automatically.  Pressing the STOP key, the PAINT command or the playing of a
+musical sequence or the sketch of  a line won't come interrupted.  The
+RUN/STOP and RESTORE keys restore the SUPER EXPANDER 64 on all his inchoate
+values of default, to exception of the definitions of Key Function.  Typing
+the CONT command to resume a program formerly halted, this won't return to
+the designated graphic mode, and will not take back the playing of music, the
 movement of sprites or mapping of bumps.
 
 
@@ -2022,7 +2023,7 @@ Parameter		Description
 [inversion]		Inverted field, to exception of text modes (default= 0)
 
 
-CIRCLE [source],[X1,Y1]<,X-rdius>[,[Y-radius][,[beginning]
+CIRCLE [source],[X1,Y1]<,X-radius>[,[Y-radius][,[beginning]
 [,[end][,[angle][,inc]]]]]
 
 Parameter		Description
@@ -2033,7 +2034,7 @@ Parameter		Description
 [Y-radius]		Radius in Y (default=X-radius)
 [beginning]		Beginning angle (default=0 degrees)
 [end]			End angle (default=360 degrees)
-[angle]		Rotation in hourly sense express in degrees (default=0 
+[angle]		Rotation in hourly sense express in degrees (default=0
 			degrees)
 [,inc]		Increase in degrees (approximation) (default=2)
 
@@ -2043,10 +2044,10 @@ COLINT <event>[,line-num]
 Parameter	Description
 
 <event>		Type of interrupt (0-2)
-	0- Bump between two sprites 
-	1- Bump between a sprite and a visualization Bit Map 
+	0- Bump between two sprites
+	1- Bump between a sprite and a visualization Bit Map
 	2- Activation of optic pen
-[,line-num-linea]	Line number of the routine to management of the distinctive 
+[,line-num-linea]	Line number of the routine to management of the distinctive
 			type of bump <event>
 
 
@@ -2087,7 +2088,7 @@ Argue			Description
 [freq]            Frequency of clipping of the filter (0-2048)
 [low]             Pass-low filter; 0 - OFF; 1 - ON
 [band]            Pass-band filter; 0 - OFF; 1 - ON
-[high]		Pass-high filter; 0 - OFF; 1 - ON 
+[high]		Pass-high filter; 0 - OFF; 1 - ON
 [res]			Resonance (0-15)
 
 
@@ -2100,7 +2101,7 @@ GRAPHIC <mode>[,clear]
 	2		High Resolution Graphic
 	3		Split Screen
 
-The parameter [,clear] engages a value of default 0; if is itemized different 
+The parameter [,clear] engages a value of default 0; if is itemized different
 from zero, the screen comes cleaned.
 
 
@@ -2123,10 +2124,10 @@ KEY [<keynum,stringexpr>]
 Topic			Description
 
 <keynum>		Number of Function Key (0-8)
-<,stringexpr>	An alphabetical String among Quote; a variable BASIC string 
+<,stringexpr>	An alphabetical String among Quote; a variable BASIC string
 			or an expression string
 
-(The KEY command without parameters enrolls all commands allotted to Function 
+(The KEY command without parameters enrolls all commands allotted to Function
 Keys)
 
 
@@ -2169,7 +2170,7 @@ RCL (<area>)
 
 Topic			Description
 
-<area>		One of the five areas (0-4) whose colors comes set from 
+<area>		One of the five areas (0-4) whose colors comes set from
 			the command COLOR (0-15)
 	0- Return the code color Background
 	1- Return the code Main Color
@@ -2182,7 +2183,7 @@ RDOT (<data>)
 
 Topic			Description
 
-<data>		The X or Y coordinate, or the source color for the pixel 
+<data>		The X or Y coordinate, or the source color for the pixel
 			in the actual position of the CP
 	0- Coordinate X of the CP
 	1- Coordinate Y of the CP
@@ -2201,9 +2202,9 @@ RJOY (<joystick>)
 Topic			Description
 
 <joystick>		Position joystick to read
-	1- Reading position of the connected joystick at the Control Port 1 
+	1- Reading position of the connected joystick at the Control Port 1
 	   (0-8)
-	2- Reading position of the connected joystick at the Control Port 2 
+	2- Reading position of the connected joystick at the Control Port 2
 	   (0-8)
 
 (Pressing the button "Fire" to the value of position comes added 128)
@@ -2222,8 +2223,8 @@ RPOT (<paddle>)
 
 Topic			Description
 
-<paddle>		Which of the four paddles to read (0-3); a returned value 
-			(0-255) shows the position of the command handle of the 
+<paddle>		Which of the four paddles to read (0-3); a returned value
+			(0-255) shows the position of the command handle of the
 			paddle
 	0- Position of paddle 1
 	1- Position of paddle 2
@@ -2257,7 +2258,7 @@ RSPR (<sprite>,<field>)
 Topic			Description
 
 <sprite>		Sprite number (0-7)
-<field>		A value (0-5) that shows which characteristic of <field> is 
+<field>		A value (0-5) that shows which characteristic of <field> is
 			being checked:
 	0- Visualization sprite; 0-OFF; 1-ON
 	1- Main Color of the sprite (0-15)
@@ -2272,9 +2273,9 @@ SCALE <n>
 Parameter		Description
 
 <n>			Changer of range
-	0- System coordinates standard. The delimitation lines depend of the 
+	0- System coordinates standard. The delimitation lines depend of the
 	   GRAPHIC mode employed
-	1- System coordinates of the SUPER EXPANDER 64,	the lines of 
+	1- System coordinates of the SUPER EXPANDER 64,	the lines of
 	   delimitation go from 0 until to 1023, for any graphic mode.
 
 
@@ -2290,7 +2291,7 @@ SPRCOL [smcr-1][,smcr-2]
 Parameters		Description
 
 [smcr-1]		Color Multi-Color1 of sprites (0-15)
-[, smcr2]		Color Multi-Color2 of sprites (0-15)
+[,smcr2]		Color Multi-Color2 of sprites (0-15)
 
 (Defaults don't alter the color)
 
@@ -2350,9 +2351,9 @@ SSHAPE <stringname>,<X1,Y1>)[,X2,Y2]
 Parameter		Description
 
 <stringname>	Variable to memorize the form
-<X1,Y1>		Position the angle across opposite of the rectangular area 
+<X1,Y1>		Position the angle across opposite of the rectangular area
 			that come memorized
-[,X2,Y2]		Point of beginning for memorization of the form 
+[,X2,Y2]		Point of beginning for memorization of the form
 			default=current CP
 
 
@@ -2377,19 +2378,19 @@ Topic			Description
 	2- Impulse
 	3- White Noise
 	4- Chopping to ring
-[amplitude]		Must be specified only when [,form] is 2 for the form of 
+[amplitude]		Must be specified only when [,form] is 2 for the form of
 			wave impulse (0-4095)
 
 
 
 III appendix - PROGRAM EXAMPLES
 
-The followings programs furnish an example of how to use commands of the 
-SUPER EXPANDER 64. Many of these programs coincides to the photos you see on 
+The followings programs furnish an example of how to use commands of the
+SUPER EXPANDER 64. Many of these programs coincides to the photos you see on
 the rear of this handbook.
 
 
-Listing 1: Logo of Cornmodore
+Listing 1: Logo of Commodore
 
 10 COLOR 3,6, 4: GRAPHIC 2, 1: POKE 49168,1: SCALE 0
 20 CIRCLE 1,158,102,60,52,160,19, 1
@@ -2427,8 +2428,8 @@ Listing 2: Exercise of Split Screen
 200 X= INT (RND (0)* 150: IF< 60 THEN 200
 210 RETURN
 
-Note: to make visible inverted characters that should appear among quote in 
-the line 30, press the SHIFT key and CLR/ HOME, and afterward press the 
+Note: to make visible inverted characters that should appear among quote in
+the line 30, press the SHIFT key and CLR/ HOME, and afterward press the
 CRSR down key for 20 times.
 
 
@@ -2437,7 +2438,7 @@ Listing 3: Polygons
 10 COLOR 15,14, 3: GRAPHIC 2,1: SCALE 0: POKE 49168,1
 20 BOX 1,318,158,0,0: BOX 1,316,156,2,2: BOX 1,314,154,4,4
 30 COLOR, 1l: CHAR 1,2,20, "YOU CAN USE THE COMMAND'BOX' TO DESIGN"
-40 CHAR 1,4,22, "BOXES OF EACH DIMENSION OR FORMA-" 
+40 CHAR 1,4,22, "BOXES OF EACH DIMENSION OR FORMA-"
 50 CHAR 1,3,24, "AND YOU CAN ROTATE OR COLOR THEM"
 60 POKE 49168,0: COLOR, 1: BOX 1,12,12,64,320,1
 70 COLOR, 7: BOX 1,180,48, 1
@@ -2460,10 +2461,10 @@ Listing 4: Arcs, Circumferences and ellipsis
 10 COLOR 7,9, 14: GRAPHIC 2,1: SCALE 0: POKE, 49168,1
 20 CHAR1,1,1, "THE CIRCLE COMMAND CAN DESIGN EASILY"
 30 CHAR, 1,3, "ARCS, CIRCUMFERENCES"
-40 DRAW, 20,80 TO 100,80: DRAW, 60,80 TO 60,40 
-50 R= 40: CIRCLE, 60,50, R, R, 130,230 
+40 DRAW, 20,80 TO 100,80: DRAW, 60,80 TO 60,40
+50 R= 40: CIRCLE, 60,50, R, R, 130,230
 60 CIRCLE, 40,80, R, R, 0,110
-70 CIRCLE, 80,80, R, R, 250,0 
+70 CIRCLE, 80,80, R, R, 250,0
 80 XA= 160: YA= 68: FOR R= 6 TO 30 STEP 6
 90 CIRCLE, XA, YA, R* 1.35, R: NEXT R
 100 CHAR 1,21,3, "ROTATE ELLIPSIS"
@@ -2473,7 +2474,7 @@ Listing 4: Arcs, Circumferences and ellipsis
 140 POKE 49168,1: XA= 20: YA= 140: D= 360
 150 FOR J= 3 TO 7: XA= XA+54+ J: N= J: IF J= 7 THEN N= 8
 160 IF J= 7 THEN N= 8: YA= YA-4
-170 CIRLCE, XA, YA+ (J AND 1)* 32,30,25, D/ N: NEXT J 
+170 CIRLCE, XA, YA+ (J AND 1)* 32,30,25, D/ N: NEXT J
 180 GOTO 180
 
 
@@ -2481,14 +2482,14 @@ Listing 5: Memorization and Resuming of Forms
 
 10 COLOR 1,1 l, 5: GRAPH IC 2,1: SCALE 1: POKE 49168,0
 20 CHAR 1,3,1 "THE COMMAND 'SSHAPE' PUT IN A STRING"
-30 CHAR 1,5,2 "A RECTANGULAR AREA IN THE" 
-40 CHAR 1,7,3 "BIT MAP SCREEN" 
-50 X= 96: Y= 192: W= 64: L= 248: N= 135: D= 45: G= 192: H= 128 
-60 FOR K= 0 TO 4: COLOR, K* 3 
-70 IF K= 1 THEN: COLOR, 2: POKE 49169,1 
-80 FOR J= 0 TO N STEP D 
-90 BOX 1, X, Y, X+, Y+ L, J: NEXT J 
-100 SSHAPE A$ (K), X, Y, X+ W, Y+ L 
+30 CHAR 1,5,2 "A RECTANGULAR AREA IN THE"
+40 CHAR 1,7,3 "BIT MAP SCREEN"
+50 X= 96: Y= 192: W= 64: L= 248: N= 135: D= 45: G= 192: H= 128
+60 FOR K= 0 TO 4: COLOR, K* 3
+70 IF K= 1 THEN: COLOR, 2: POKE 49169,1
+80 FOR J= 0 TO N STEP D
+90 BOX 1, X, Y, X+, Y+ L, J: NEXT J
+100 SSHAPE A$ (K), X, Y, X+ W, Y+ L
 110 X= X+ G: Y= Y: NEXT K: X= 96: Y= 124
 120 COLOR, 11: CHAR 1,13,5 "THEN THE COMMAND 'GSHAPE' LOCATE THE"
 130 CHAR 1,15,6 "STRING IN ANY POINT OF THE"
@@ -2498,54 +2499,54 @@ Listing 5: Memorization and Resuming of Forms
 170 IF K= 1 THEN: COLOR, 2: CHAR 1,3,14, "IN NEGATIVE"
 180 IF K= 2 THEN: CHAR 1,1,17, "'OR' WITH THE SCREEN"
 190 IF K= 3 THEN: CHAR 1,8,20, "'AND' WITH THE SCREEN"
-200 IF K= 4 THEN: CHAR 1,15,23, "'XOR' WITH THE SCREEN" 
+200 IF K= 4 THEN: CHAR 1,15,23, "'XOR' WITH THE SCREEN"
 210 GSHAPE A$ (K), X, Y, K: X= X+ G: Y= Y+ H: NEXT K
 220 GOTO 220
 
 
 Listing 6: Sketch and Coloration of Forms
 
-10 COLOR 13,6,2,4,10: G RAPHIC 1,1 
-20 SCALE 0: POKE 49168,0 
-30 XA= 30: YA= 60: D= 360: FOR J= 3 TO 5 
-40 CIRCLE 1, XA, YA, 20,32, D/ J 
-50 XA= XA+45: NEXT J: YA= 130: XA= 30 
-60 FOR J= 10 TO 6 STEP-2: CIRCLE 1, XA, YW, 20,32, D/ J 
-70 XA= XA+45: NEXT J 
-80 CIRCLE, 75,90,60,40: PAINT 1,75,94 
-90 PAINT 2,30,60,1: PAINT 3,75,40,1: PAINT 2,120,60,1 
-100 PAINT 3,30,130,1: PAINT 2,75,140,1: PAINT 3,120,10,1 
-110 PAINT 3,40,75,1: PAINT 2,75,60,1: PAINT 3,110,80,1 
-120 PAINT 2,40,120,1: PAINT 3,75,120,1: PAINT 2,110,120,1 
+10 COLOR 13,6,2,4,10: G RAPHIC 1,1
+20 SCALE 0: POKE 49168,0
+30 XA= 30: YA= 60: D= 360: FOR J= 3 TO 5
+40 CIRCLE 1, XA, YA, 20,32, D/ J
+50 XA= XA+45: NEXT J: YA= 130: XA= 30
+60 FOR J= 10 TO 6 STEP-2: CIRCLE 1, XA, YW, 20,32, D/ J
+70 XA= XA+45: NEXT J
+80 CIRCLE, 75,90,60,40: PAINT 1,75,94
+90 PAINT 2,30,60,1: PAINT 3,75,40,1: PAINT 2,120,60,1
+100 PAINT 3,30,130,1: PAINT 2,75,140,1: PAINT 3,120,10,1
+110 PAINT 3,40,75,1: PAINT 2,75,60,1: PAINT 3,110,80,1
+120 PAINT 2,40,120,1: PAINT 3,75,120,1: PAINT 2,110,120,1
 130 GOTO 130
 
 
 Listing 7: Animated Sprites
 
-10 COLOR 1,1, 13: GRAPHIC 2,1: POKE 49168,1: SCALE 0 
+10 COLOR 1,1, 13: GRAPHIC 2,1: POKE 49168,1: SCALE 0
 20 CHAR 1,1,17, "ARE AVAILABLE SIX COMMANDS+FOUR FUNCTIONS"
-30 CHAR, 1,10, "SPECIALLY STUDIED TO FACILITATE" 
+30 CHAR, 1,10, "SPECIALLY STUDIED TO FACILITATE"
 40 CHAR, 1,21, "THE CREATION, ANIMATION AND CONTROL OF SPRITES"
 50 CHAR 1,0,0,,"" 1
 60 CHAR 1,0,1," 1 2 3 4 5 6 7 8," 1
 70 CHAR 1,0,2,,"" 1: Q= 24
-80 X= 0: Y= 2: FOR J= 0 TO T: SPRITE J, 0 
-90 SSHAPE A$ (J), X, Y, X+23, Y+20 
-100 SPRSAV A$ (J), Y,: MOVSPR J, X+ Q, Y+50 
-110 SPRITE J, 1, J* 4,1: X= X+ Q: NEXT J 
-120 FOR Z= 1 TO 64: FOR J= 0 TO 7 
-130 MOVSPR J, 1,150: NEXT J, Z 
-140 FOR Z= 0 TO 449: NEXT Z 
-150 FOR J= 3 TO 7: To= 10* (INT (RND (0)* 36)) 
-160 SPRITE J, J AND 1: MOVSPR J, A, 4: NEXT J 
+80 X= 0: Y= 2: FOR J= 0 TO T: SPRITE J, 0
+90 SSHAPE A$ (J), X, Y, X+23, Y+20
+100 SPRSAV A$ (J), Y,: MOVSPR J, X+ Q, Y+50
+110 SPRITE J, 1, J* 4,1: X= X+ Q: NEXT J
+120 FOR Z= 1 TO 64: FOR J= 0 TO 7
+130 MOVSPR J, 1,150: NEXT J, Z
+140 FOR Z= 0 TO 449: NEXT Z
+150 FOR J= 3 TO 7: To= 10* (INT (RND (0)* 36))
+160 SPRITE J, J AND 1: MOVSPR J, A, 4: NEXT J
 170 GOTO 170
 
 
 Listing 8: Demonstrations Joystick
 
-This program allows the creation of sketches in High Resolution, employing 
-the Joystick connected to the Control Port 1. Press the button "FIRE" to 
-design or erase lines.  Hold pressed the button "FIRE" to design dotted 
+This program allows the creation of sketches in High Resolution, employing
+the Joystick connected to the Control Port 1. Press the button "FIRE" to
+design or erase lines.  Hold pressed the button "FIRE" to design dotted
 lines.
 
 10 GOTO 100
@@ -2581,27 +2582,27 @@ lines.
 330 J= J-128: DRAW C, X, Y: GOTO 290
 340 GRAPHIC 0,1: END
 
-Note:	In the lines From 110 to 210 included, insert an inverted character 
-(in the anticipated space after the quote of beginning) using the SHIFT keys 
-and CRSR down.  Insert two of these characters among the quote of the 
+Note:	In the lines From 110 to 210 included, insert an inverted character
+(in the anticipated space after the quote of beginning) using the SHIFT keys
+and CRSR down.  Insert two of these characters among the quote of the
 line 150.
 
 
 Listing 9: SUPER EXPANDER 64 Pong
 
-This shows the use of SUPER EXPANDER 64 to develope graphic for games and 
+This shows the use of SUPER EXPANDER 64 to develop graphic for games and
 animations.  In this example comes used the Paddle 1 of the Control Port 1.
 
-0 GRAPHIC 1,1: SCALE 0: COLOR 14,6,2,4,11 
-1 CIRCLE 2,100,100,4,6: PAINT 2,100,100,1 
-2 SSHAPE A$,95,90,106,110: SPRSAV A$,1: SCNCIR 
-3 BOX 2,95,90,106: PAINT 2,100,91,1 
-4 SSHAPE B$,95,90,106,110: SPRSAV B$,3: SNCNLR 
-20 SCALE 1: CIRLCE 2,300,300,50,50,: PAINT 2,300,300,1 
-30 BOX 3,750,345,650,245,45: PAINT 3,700,300,1 
-40 BOX, 345,750,245,650, 1 
+0 GRAPHIC 1,1: SCALE 0: COLOR 14,6,2,4,11
+1 CIRCLE 2,100,100,4,6: PAINT 2,100,100,1
+2 SSHAPE A$,95,90,106,110: SPRSAV A$,1: SCNCIR
+3 BOX 2,95,90,106: PAINT 2,100,91,1
+4 SSHAPE B$,95,90,106,110: SPRSAV B$,3: SNCNLR
+20 SCALE 1: CIRLCE 2,300,300,50,50,: PAINT 2,300,300,1
+30 BOX 3,750,345,650,245,45: PAINT 3,700,300,1
+40 BOX, 345,750,245,650, 1
 50 DRAW 2,650,650 TO 750,650 TO 700,750 TO 650,650: PAINT 2,700,675,1
-55 S= 8: XX= S: YY= S: X= 156: Y= 100: C= 4 
+55 S= 8: XX= S: YY= S: X= 156: Y= 100: C= 4
 60 SPRITE 1,1,13, 1: SCALE 0
 70 X= X+ XX: Y= Y+ YY: MOVSPR 1, X, Y
 73 IFC< 4 THEN 76
@@ -2625,15 +2626,15 @@ animations.  In this example comes used the Paddle 1 of the Control Port 1.
 
 Listing 10: Ripple Effect
 
-10 COLOR 0,1: GRAPHIC 2,1: SCALE 0 
-20 X= 320: Y= 200: C= X* RND (0): D= Y* RND (0) 
-30 A= 0: B= 0: J= 0: K= l: N= 2: P= 1 
-40 DRAW K, A, J TO C, D, TO A, Y 
-50 DRAW J, A+ K, J TO C, D TO A+ K, Y 
-60 A= A+ N: IF A< X THEN 40 
-70 DRAW K, J, B TO C, D TO X, B 
-80 DRAW J, J, B+ K TO C, D TO X, B+ K 
-90 B= B+ N: IF B< Y THEN 70 
+10 COLOR 0,1: GRAPHIC 2,1: SCALE 0
+20 X= 320: Y= 200: C= X* RND (0): D= Y* RND (0)
+30 A= 0: B= 0: J= 0: K= l: N= 2: P= 1
+40 DRAW K, A, J TO C, D, TO A, Y
+50 DRAW J, A+ K, J TO C, D TO A+ K, Y
+60 A= A+ N: IF A< X THEN 40
+70 DRAW K, J, B TO C, D TO X, B
+80 DRAW J, J, B+ K TO C, D TO X, B+ K
+90 B= B+ N: IF B< Y THEN 70
 100 GOTO 100
 
 
@@ -2650,8 +2651,8 @@ Listing 11: Hypnotic sketch
 90 N= N+ K: IF N< P THEN 60
 100 FOR J= 0 TO 1999: NEXT: GOTO 20
 
-Note:	To alter the Hypnotic Sketch, try to replace the divisor in the line 
-10, for the variable P. Besides, in the line 20, it is possible alter the 
+Note:	To alter the Hypnotic Sketch, try to replace the divisor in the line
+10, for the variable P. Besides, in the line 20, it is possible alter the
 range of colors that comes select from the casual function (RND).
 
 
