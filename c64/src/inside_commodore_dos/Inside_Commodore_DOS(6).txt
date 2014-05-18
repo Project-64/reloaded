@@ -965,7 +965,7 @@ If you are puzzled about why several $FF characters in a row in the data block a
 
 The header block of a sector allows the DOS to identify which track and sector is being read. It is composed of a sync mark, eight bytes of identifying information, and a header gap. The diagram below shows the layout of a header block.
 
------------------------------------------------------------------- 
+------------------------------------------------------------------
 | SYNC |  HEADER  | HEADER BLOCK | SECTOR | TRACK  | ID CHARACTER \
 | MARK | BLOCK ID |   CHECKSUM   | NUMBER | NUMBER |   NUMBER 2   / ---+
 ------------------------------------------------------------------     |
@@ -1125,9 +1125,9 @@ The BAM is where the DOS keeps track of which sectors (blocks) on the diskette c
 . 08: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  2-3
 . 10: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  4-5
 . 18: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  6-7
-. 20: 15 FF FF 1F 15 FF FF IF ........  BAM TRACKS  8-9
-. 28: 15 FF FF 1F 15 FF FF IF ........  BAM TRACKS 10-11
-. 30: 15 FF FF 1F 15 FF FF IF ........  BAM TRACKS 12-13
+. 20: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  8-9
+. 28: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS 10-11
+. 30: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS 12-13
 . 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
 . 40: 00 00 00 00 00 00 00 00 ........  BAM TRACKS 16-17
 . 48: 10 EC FF 07 00 00 00 00 ........  BAM TRACKS 18-19
@@ -1227,9 +1227,7 @@ In the BAM four bytes are used to describe the status of each track. As a result
 
 ** *# ** ♦*
 
-The first byte for track 14 (location $38 = 56) indicates the number of blocks free on
-
-this track.
+The first byte for track 14 (location $38 = 56) indicates the number of blocks free on this track.
 
 In this case there are $11 or 17 (1 * 16 + 1) blocks free.
 
@@ -1401,9 +1399,7 @@ If you are still unsure of yourself, don't be too concerned. The DOS looks after
 
 4.4 The Directory Entries
 
-Recall that bytes 0 and 1 of track 18, sector 0 point to the next track and sector of the directory. In this particular instance, the BAM points to track 18, sector 1. Let's ex¬
-
-amine this sector in detail.
+Recall that bytes 0 and 1 of track 18, sector 0 point to the next track and sector of the directory. In this particular instance, the BAM points to track 18, sector 1. Let's examine this sector in detail.
 
 1541TEST/DEMO
 
@@ -1512,8 +1508,8 @@ Eight file entries are recorded per sector. Let's examine the contents of a sing
 
 . 00: 12 04 82 11 00 48 4F 57
 
-. 08: 20 54 4F 20 55 53 45 A0 TO USE 
-. 10: A0 A0 A0 A0 A0 00 00 00 
+. 08: 20 54 4F 20 55 53 45 A0 TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00
 . 18: 00 00 00 00 00 00 0D 00
 
 Because this is the first entry in the directory, bytes 0 and 1 are significant. They point to track 18, sector 4 (converts to 18). This indicates that there are further directory entries. You will note that the sectors are not sequential in nature, i.e., sector 1 does not point to sector 2, etc. Remember that the diskette itself is rotating at 300 rpm. Staggering the use of the sectors allows quicker access and fewer rotations of the drive mechanism and the media. Typically sectors are staggered in increments of 10. The directory track is staggered in increments of 3, however. The table below indicates the sequence in which a full directory containing 144 files is stored:
@@ -1655,8 +1651,8 @@ The next two bytes in the file entry are a pointer to where the first sector of 
 
 ♦* **
 
-. 08: 20 54 4F 20 55 53 45 A0 TO USE 
-. 10: A0 A0 A0 A0 A0 00 00 00 
+. 08: 20 54 4F 20 55 53 45 A0 TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00
 . 18: 00 00 00 00 00 00 0D 00 . .'
 
 This file starts on track 17 ($11), sector 0 ($00).
@@ -1681,7 +1677,7 @@ In this case our file is named "HOW TO USE". Note that file names are padded out
 
 . 00: 12 04 82 11 00 48 4F 57
 
-. 08: 20 54 4F 20 55 53 45 A0 TO USE 
+. 08: 20 54 4F 20 55 53 45 A0 TO USE
 . 10: A0 A0 A0 A0 A0 00 00 00
 
 ** ** **
@@ -1696,8 +1692,8 @@ The next four bytes are always unused and therefore null ($00).
 
 . 00: 12 04 82 11 00 48 4F 57
 
-. 08: 20 54 4F 20 55 53 45 A0 TO USE 
-. 10: A0 A0 A0 A0 A0 00 00 00 
+. 08: 20 54 4F 20 55 53 45 A0 TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00
 . 18: 00 00 00 00 00 00 0D 00
 
 ** ** ♦* ♦*
@@ -1723,8 +1719,8 @@ The final two bytes in a file entry are the number of blocks it occupies on the 
 
 . 00: 12 04 82 11 00 48 4F 57
 
-. 08: 20 54 4F 20 55 53 45 A0 TO USE 
-. 10: A0 A0 A0 A0 A0 00 00 00 
+. 08: 20 54 4F 20 55 53 45 A0 TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00
 . 18: 00 00 00 00 00 00 0D 00
 
 ♦* **
@@ -2024,12 +2020,12 @@ IE 04 05 00 99 22 93 22
 ﻿
 . D0: 8B 20 42 24 B3 Bl C7 28 . B*
 
-. D8: 33 34 29 20 A7 20 39 30 34) . 90 
+. D8: 33 34 29 20 A7 20 39 30 34) . 90
 . E0: 00 00 05 6E 00 Al 23 31
 
 . E8: 2C 42 24 3A 8B 20 42 24 ,B*:. B*
 
-. F0: B3 Bl C7 28 33 34 29 A7 ___ 
+. F0: B3 Bl C7 28 33 34 29 A7 ___
 . F8: 20 99 42 24 3B 3A 89 31 .B*;:.l
 
 Not very recognizable is it? Remember this is C64 internal BASIC not a BASIC listing. Bytes 0 and 1 are of interest. They are the track and sector link that point to the next block in the program file. In this case, they point to track 16 ($10), sector 11 ($0B). Since this is the first data block of the file, bytes 2 and 3 are also important. They are the load address. We can see that the load address is $0401 or 1025 decimal. This file was written on a PET. (The start of BASIC memory on the C64 is at $0801. The VIC-20 begins at $1001, $1201, or $0401 depending on the amount of external memory.) DIR will require a straight relocating load, i.e., LOAD "DIR",8. If you used a LOAD "DIR", 8,1 command, the program would be loaded into the screen RAM of the C64. NOTE: If you load this program properly, you will NOT be able to get it to VERIFY correctly. The reason is that the internal BASIC links were changed when the program was relocated.
@@ -2073,8 +2069,8 @@ TRACK 16 - SECTOR 12
 . 08: 44 22 20 A7 20 31 30 00 D" . 10
 . 10: 2D 07 3C 28 8B 20 41 24 -.<(. A*
 . 18: B2 22 2E 22 20 B0 20 41 . ". " . A
-. 20: 24 B2 22 3E 22 20 B0 20 *.">" 
-. 28: 41 24 B2 22 3E 22 20 A7 A*.">" 
+. 20: 24 B2 22 3E 22 20 B0 20 *.">"
+. 28: 41 24 B2 22 3E 22 20 A7 A*.">"
 . 30: 20 34 30 30 30 00 3E 07 4000.>
 . 38: 46 28 8B 20 41 24 B2 22 F(. A*."
 . 40: 51 22 20 A7 20 80 00 52 Q" . ..R
@@ -2572,8 +2568,8 @@ AO A0 A0 A0 A0 11 0D 96 00 00 00 00 00 00 B4 01
 
 ** »* »* File type and T/S link
 
-. 68: 20 46 49 4C 45 A0 A0 A0 FILE... 
-. 70: A0 A0 A0 A0 A0 11 0D 96 
+. 68: 20 46 49 4C 45 A0 A0 A0 FILE...
+. 70: A0 A0 A0 A0 A0 11 0D 96
 . 78: 00 00 00 00 00 00 B4 01
 
 From the directory entry we can see that "MAG FILE" is a relative file. A relative file is indicated by an $84 as the file type. The track and sector pointers in the directory reveal that "MAG FILE" starts at track 17 ($11), sector 03 ($03). This is the sequential data file portion of the relative file. It is the beginning of our data.
@@ -2640,7 +2636,7 @@ OC 13 00 96 11 0D 0C 13 ........Forward pointer, SS #, 06 10 13 0F 00 00 00 00 .
 
 Of primary interest are the first 16 bytes.
 
-. 00: 0C 13 00 96 11 0D 0C 13 
+. 00: 0C 13 00 96 11 0D 0C 13
 . 08: 06 10 13 0F 00 00 00 00
 
 Bytes 0 and 1 show us that the next side sector resides at track 12 ($0C), sector 19 ($13). Byte 2 informs us that this is side sector 0. A maximum of 6 side sectors are used by any one relative file. This is determined solely by the physical storage capacity of the diskette (664 blocks free after formatting divided by 120 track and sector pointers in a side sector equals 5.53 side sectors). Side sectors are numbered from 0 to 5. Byte 3 shows us the record size again (150 bytes). Bytes 5-15 are the track and sector locations of the six possible side sectors. They can be tabled as follows:
@@ -2705,16 +2701,16 @@ Let's trace the remaining side sectors now.
 
 TRACK 12 - SECTOR 19 SIDE SECTOR #1
 
-. 00: 06 10 01 96 11 0D 0C 13 
+. 00: 06 10 01 96 11 0D 0C 13
 . 08: 06 10 13 0F 00 00 00 00
-. 10: 0C 09 0B 13 0B 07 0B 11 
-. 18: 0B 05 0B 0F 0B 03 0B 0D 
-. 20: 0B 01 0B 0B 0B 00 0B 0A 
-. 28: 0B 14 0B 08 0B 12 0B 06 
-. 30: 0B 10 0B 04 0B 0E 0B 02 
-. 38: 0B 0C 0B 09 0A 13 0A 07 
-. 40: 0A 11 0A 05 0A 0F 0A 03 
-. 48: 0A 0D 0A 01 0A 0B 0A 00 
+. 10: 0C 09 0B 13 0B 07 0B 11
+. 18: 0B 05 0B 0F 0B 03 0B 0D
+. 20: 0B 01 0B 0B 0B 00 0B 0A
+. 28: 0B 14 0B 08 0B 12 0B 06
+. 30: 0B 10 0B 04 0B 0E 0B 02
+. 38: 0B 0C 0B 09 0A 13 0A 07
+. 40: 0A 11 0A 05 0A 0F 0A 03
+. 48: 0A 0D 0A 01 0A 0B 0A 00
 . 50: 0A 0A 0A 14 0A 08 0A 12
 
 61
@@ -3208,11 +3204,11 @@ OO 08
 
 -----------------------------------------------------Page 64-----------------------------------------------------
 ﻿
-. D8: 00 00 00 00 00 00 00 00 
+. D8: 00 00 00 00 00 00 00 00
 . E0: 00 00 00 00 00 00 00 00
 
-. E8: 00 00 00 00 00 00 00 00 
-. F0: 00 00 00 00 00 00 00 00 
+. E8: 00 00 00 00 00 00 00 00
+. F0: 00 00 00 00 00 00 00 00
 . F8: 00 00 00 00 00 00 00 00
 
 The block reveals a typical sequential file. Bytes 0 and 1 are the chain. The first data block links to track 17 ($11), sector 14 ($0E). The next 150 bytes (2 - 151) constitute our first record. Note that the unused bytes within a record are written as nulls ($00) by the DOS so the record is always a fixed length. The content of individual records will vary enormously. This is program dependent so the data block in question contains whatever data was specified by the program used. This particular record is from a free form data base. It was reserved to for management information by the main program and contains the following data:
@@ -14790,7 +14786,7 @@ H=HH+1: FL=1". PRINTM$
 
 380 PRINT" *"HX$<HH)HX$(HL)j:IFFL=1THENP RINT:PRINT"{UP}";: GOTO 250 390 GET A$:IF A$="" GOTO  320
 
-400 IF A$="P"THENPRINT:PRINT"{UP}"5: GOTO 
+400 IF A$="P"THENPRINT:PRINT"{UP}"5: GOTO
 
 250
 
@@ -42200,7 +42196,7 @@ commands
 Commodore encoding scheme
 Commodore file types
 communications,
-    computer-disk drive controller, 
+    computer-disk drive controller,
     floppy disk 103
 copying a locked file 70
 copy command 23

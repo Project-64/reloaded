@@ -1296,4 +1296,309 @@ about how bytes are encoded on the surface of a diskette are provided in
 Section 7.1. The actual recording process is described in Section 9.7.
 
 ﻿
-﻿
+
+CHAPTER 4
+
+DISKETTE ORGANIZATION
+
+4.1 Information Management
+
+The information that is stored on a floppy disk is virtually useless unless it
+can be retrieved quickly. As a result, the organization and management of
+information is one of the most important tasks of the DOS. To do an efficient
+job of management, the DOS must be able to:
+
+1. Keep track of which sectors contain data and which are still empty
+(available for use).
+
+2. Assign names and storage locations to large blocks of related information
+(files).
+
+3. Keep track of the sequence of sectors that were used to store a file.
+
+The DOS stores most of this information in the directory on track 18, halfway
+between the outermost track (1) and the innermost track (35). Centering the
+directory serves to minimize head movement across the diskette and extends the
+life of both the drive and the media. The directory is subdivided into two
+areas—the map showing which sectors are in use and which are free (the Block
+Availability Map or BAM) and directory entries. The BAM resides solely on
+sector 0 of track 18. It informs the drive as to what sectors are currently in
+use and where subsequent writing to the diskette can safely take place. The
+remaining sectors (1-18) of track 18 contain directory entries (file names,
+file types, and pointers to where files are stored on the diskette).
+
+4.2 The Directory You See
+
+Let's examine the directory of the 1541TEST/DEMO diskette that came with your
+drive. Insert it in your drive and type on your keyboard:
+
+LOAD "$0",8
+
+then type
+
+LIST
+
+After a brief pause you should see the following on your screen:
+
+0 "1541TEST/DEMO   " ZX 2A
+13   "HOW TO USE"       PRG
+5    "HOW PART TWO"     PRG
+4    "VIC-20 WEDGE"     PRG
+1    "C-64 WEDGE"       PRG
+4    "DOS 5.1"          PRG
+11   "COPY/ALL"         PRG
+9    "PRINTER TEST"     PRG
+4    "DISK ADDR CHANGE" PRG
+4    "DIR"              PRG
+6    "VIEW BAM"         PRG
+4    "CHECK DISK"       PRG
+14   "DISPLAY T&S"      PRG
+9    "PERFORMANCE TEST" PRG
+5    "SEQUENTIAL FILE"  PRG
+13   "RANDOM FILE"      PRG
+558 BLOCKS FREE.
+
+The 0 refers to which drive was accessed. This is a holdover from the 4040 dual
+drive system. Next you see the diskette name — 1541TEST/DEMO. In the event that
+the diskette name is less than 16 characters in length, blank spaces are
+appended to the end of the name. This forced spacing is known as padding.
+Following the name of the diskette is the disk ID — ZX in this instance. These
+two characters are generally (but not always) the unique alphanumeric
+characters under which the diskette in question was formatted originally. The
+diskette name and ID are cosmetic in nature and appear in the directory for
+your reference purposes only. The 2A indicates the DOS version and format, 4040
+in this instance — again a holdover. Next we see the active file entries on the
+diskette itself. Each directory entry has three fields:
+
+1. The number of blocks/sectors the given file occupies.
+2. The file name.
+3. The file type.
+
+Your demo diskette came with 15 active files on it. Moreover, they are all
+program files denoted by PRG. The last entry in the directory is the remaining
+number of available blocks/sectors left on the diskette for storage. It is the
+difference between 664 blocks available at the time of original formatting and
+the sum of the blocks of the active files (664 - 106 = 558).
+
+What you see on your screen is not necessarily how the directory is stored on
+your diskette, however. Let's begin our look at the directory with the Block
+Availability Map (BAM).
+
+4.3 The Block Availability Map (BAM)
+
+The BAM is where the DOS keeps track of which sectors (blocks) on the diskette
+contain information (are in use) and which ones can be used for storing new
+information (are free). This map is stored on track 18, sector 0. Here is a hex
+dump of that sector on the 1541TEST/DEMO disk so we can examine it in detail.
+
+            1541TEST/DEMO
+
+         TRACK 18 - SECTOR 0
+
+. 00: 12 01 41 00 15 FF FF 1F ..A.....  BAM TRACK   1
+. 08: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  2-3
+. 10: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  4-5
+. 18: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  6-7
+. 20: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  8-9
+. 28: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS 10-11
+. 30: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS 12-13
+. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+. 40: 00 00 00 00 00 00 00 00 ........  BAM TRACKS 16-17
+. 48: 10 EC FF 07 00 00 00 00 ........  BAM TRACKS 18-19
+. 50: 00 00 00 00 12 BF FF 07 .....?..  BAM TRACKS 20-21
+. 58: 13 FF FF 07 13 FF FF 07 ........  BAM TRACKS 22-23
+. 60: 13 FF FF 07 12 FF FF 03 ........  BAM TRACKS 24-25
+. 68: 12 FF FF 03 12 FF FF 03 ........  BAM TRACKS 26-27
+. 70: 12 FF FF 03 12 FF FF 03 ........  BAM TRACKS 28-29
+. 78: 12 FF FF 03 11 FF FF 01 ........  BAM TRACKS 30-31
+. 80: 11 FF FF 01 11 FF FF 01 ........  BAM TRACKS 32-33
+. 88: 11 FF FF 01 11 FF FF 01 ........  BAM TRACKS 34-35
+. 90: 31 35 34 31 54 45 53 54 1541TEST  DISK NAME
+. 98: 2F 44 45 4D 4F A0 A0 A0 /DEMO
+. A0: A0 A0 5A 58 A0 32 41 A0   ZX 2A   DOS TYPE & DISK ID
+. A8: A0 A0 A0 00 00 00 00 00    .....  UNUSED
+. B0: 00 00 00 00 00 00 00 00 ........
+. B8: 00 00 00 00 00 00 00 00 ........
+. C0: 00 00 00 00 00 00 00 00 ........
+. C8: 00 00 00 00 00 00 00 00 ........
+. D0: 00 00 00 00 00 00 00 00 ........
+. D8: 00 00 00 00 00 00 00 00 ........
+. E0: 00 00 00 00 00 00 00 00 ........
+. E8: 00 00 00 00 00 00 00 00 ........
+. F0: 00 00 00 00 00 00 00 00 ........
+. F8: 00 00 00 00 00 00 00 00 ........
+
+As indicated above, the BAM does not take up all 256 bytes on this sector.
+There are several other things stored here as well. The table below identifies
+the various parts. Note that the sector dump above uses hexadecimal notation
+while the table below gives the decimal equivalents.
+
+Bytes           Contents        Purpose
+-------         ---------       -----------------------------------------------
+0/1             18/1            Pointer to first sector of directory entries
+2               65              ASCII character A indicating 1541/4040 format
+3               0               Unused
+4-143                           Block Availability Map (BAM)
+144-159                         Diskette name padded with shifted spaces
+160-161         160             Shifted spaces
+162-163                         Diskette ID
+164             160             Shifted space
+165-166         50/65           DOS version and format type (2A)
+167-170         160             Shifted spaces
+170-255         ?               Unused
+
+In the BAM four bytes are used to describe the status of each track. As a
+result, the BAM takes up a total of 4 x 35 = 140 bytes (bytes 4-143 or
+$04-$8F). Let's examine the entry for track 14 to see what these four bytes
+mean. The entry for track 14 begins at byte 14 x 4 = 56 ($38). It looks like
+this:
+
+
+. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+      ** ** ** **
+
+The first byte for track 14 (location $38 = 56) indicates the number of blocks
+free on this track.
+
+
+. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+      **
+
+In this case there are $11 or 17 (1 * 16 + 1) blocks free.
+
+When the DOS calculates the number of blocks free on a diskette, it sums this
+byte from each track's entry in the BAM. Let's do our own blocks free
+calculation to see how it is done. All we have to do is sum up the decimal
+values of every fourth byte starting with byte 4 like this:
+
+                          HEX    DECIMAL
+ ZONE    BYTE    TRACK   VALUE    VALUE
+------  ------  ------- ------- ---------
+  1        4       1      $1F       21
+           8       2      $1F       21
+          12       3      $1F       21
+          16       4      $1F       21
+          20       5      $1F       21
+          24       6      $1F       21
+          28       7      $1F       21
+          32       8      $1F       21
+          36       9      $1F       21
+          40      10      $1F       21
+          44      11      $1F       21
+          48      12      $1F       21
+          52      13      $1F       21
+          56      14      $11       17
+          60      15      $00        0
+          64      16      $00        0
+          68      17      $00        0
+
+2         72      18      $10       16
+          76      19      $13       19
+          80      20      $13       19
+          84      21      $13       19
+          88      22      $13       19
+          92      23      $13       19
+          96      24      $13       19
+
+3        100      25      $12       18
+         104      26      $12       18
+         108      27      $12       18
+         112      28      $12       18
+         116      29      $12       18
+         120      30      $12       18
+
+4        124      31      $11       17
+         128      32      $11       17
+         132      33      $11       17
+         136      34      $11       17
+         140      35      $11     + 17
+                                ---------
+                                   574          BLOCKS FREE
+
+Wait a minute! We calculated 574 blocks free but the directory shows 558. How
+do we explain this discrepancy? Easy. Remember that the DOS reserves track 18
+for its own use. Therefore the blocks free on that particular track are not
+returned to us (574 - 16 = 558). Sixteen sectors on track 18 are still free,
+but available only to the DOS.
+
+Now that you have seen how to calculate the number of blocks free on a
+diskette, let's get back to our analysis of track 14. The BAM entry looked like
+this:
+
+
+. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+      ** ** ** **
+
+The first byte was easy to interpret. The remaining three bytes are a bit
+trickier (no pun intended). They are a bit map showing the status of the
+sectors on a given track. Bit mapping is used to save space. If one byte were
+used for each of the 683 sectors, the BAM would take up three sectors (683 /
+256). This would be inefficient. By using bit mapping, each byte describes the
+status of eight sectors. This way only three bytes are needed for each track.
+Let's examine the bit map for track 14 of our 1541 TEST/DEMO.
+
+
+. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+      ** ** ** **
+
+ LOCATION       $39=57          $3A=58          $3B=59
+BYTE VALUE       $D7             $5F             $1F
+  BINARY       11010111        01011111        00011111 *
+
+  SECTOR                       111111             21111
+  NUMBER       76543210        54321098        xxx09876
+
+             * 1 = FREE
+               O = ALLOCATED
+
+Sectors 0 to 7 are represented by the byte at location 57. Sectors 8 through 15
+are stored in the byte at location 58. Finally, sectors 16 through 20 are
+depicted by the byte at location 59. When decoded, a bit that is high or a 1
+indicates that a sector is not currently in use (free) and can be written to. A
+bit that is low or a 0 is currently in use (allocated) and will be overlooked
+by the DOS when writing subsequently takes place to the diskette. The third
+byte is always incomplete since a maximum of 21 sectors are written to any
+track. This particular byte is automatically adjusted by the DOS during initial
+formatting to indicate the proper number of sectors for this track. Three bytes
+are still used irregardless of the zone, however. If you count up the 1s in the
+bit map for track 14, you will find that there are 17 free sectors on track 14.
+This agrees with the blocks free count for the track stored at byte location
+$38 (56) in the BAM, i.e., $11 or 17 decimal.
+
+To ensure that you understand how the bit mapping works, let's take a look at
+track 18. Since track 18 is used for storing the directory we would expect some
+allocation of sectors here. Byte 72 shows $10 or 16 sectors available here.
+They are bit mapped in bytes 73, 74, and 75 as follows:
+
+
+. 48: 10 EC FF 07 00 00 00 00 ........  BAM TRACKS 18-19
+      ** ** ** **
+
+ LOCATION       $49=73          $4A=74          $4B=75
+BYTE VALUE       $EC             $FF             $07
+  BINARY       11101100        11111111        00000111 *
+
+  SECTOR                       111111             21111
+  NUMBER       76543210        54321098        xxx09876
+
+             * 1 = FREE
+               O = ALLOCATED
+
+If you are still unsure of yourself, don't be too concerned. The DOS looks
+after the BAM. Let's move on and explore the actual directory entries
+themselves. Sectors 1 through 18 on track 18 are reserved specifically for them.
+
+4.4 The Directory Entries
+
+Recall that bytes 0 and 1 of track 18, sector 0 point to the next track and
+sector of the directory. In this particular instance, the BAM points to track
+18, sector 1. Let's examine this sector in detail.
+
+            1541TEST/DEMO
+
+         TRACK 18 - SECTOR 01
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW  FILE ENTRY #1
+. 08: 20 54 4F 20 55 53 45 A0  TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+
