@@ -1601,4 +1601,106 @@ sector of the directory. In this particular instance, the BAM points to track
 . 00: 12 04 82 11 00 48 4F 57 .....HOW  FILE ENTRY #1
 . 08: 20 54 4F 20 55 53 45 A0  TO USE
 . 10: A0 A0 A0 A0 A0 00 00 00      ...
+. 18: 00 00 00 00 00 00 0D 00 ........
+. 20: 00 00 82 11 03 48 4F 57 .....HOW  FILE ENTRY #2
+. 28: 20 50 41 52 54 20 54 57  PART TW
+. 30: 4F A0 A0 A0 A0 00 00 00 O    ...
+. 38: 00 00 00 00 00 00 05 00 ........
+. 40: 00 00 82 11 09 56 49 43 .....VIC  FILE ENTRY #3
+. 48: 2D 32 30 20 57 45 44 47 -20 WEDG
+. 50: 45 A0 A0 A0 A0 00 00 00 E    ...
+. 58: 00 00 00 00 00 00 04 00 ........
+. 60: 00 00 82 13 00 46 2D 36 .....C-6  FILE ENTRY #4
+. 68: 34 20 57 45 44 47 45 A0 4 WEDGE
+. 70: A0 A0 A0 A0 A0 00 00 00      ...
+. 78: 00 00 00 00 00 00 01 00 ........
+. 80: 00 00 82 13 01 44 4F 53 .....DOS  FILE ENTRY #5
+. 88: 20 35 2E 31 A0 A0 A0 A0  5.1
+. 90: A0 A0 A0 A0 A0 00 00 00      ...
+. 98: 00 00 00 00 00 00 04 00 ........
+. A0: 00 00 82 13 03 43 4F 50 .....COP  FILE ENTRY #6
+. A8: 59 2F 41 4C 4C A0 A0 A0 Y/ALL
+. B0: A0 A0 A0 A0 A0 00 00 00      ...
+. B8: 00 00 00 00 00 00 0B 00 ........
+. C0: 00 00 82 13 09 50 52 49 .....PRI  FILE ENTRY #7
+. C8: 4E 54 45 52 20 54 45 53 NTER TES
+. D0: 54 A0 A0 A0 A0 00 00 00 T    ...
+. D8: 00 00 00 00 00 00 09 00 ........
+. E0: 00 00 82 10 00 44 49 53 .....DIS  FILE ENTRY #8
+. E8: 4B 20 41 44 44 52 20 43 K ADDR C
+. F0: 48 41 4E 47 45 00 00 00 HANGE...
+. F8: 00 00 00 00 00 00 04 00 ........
+
+
+The contents of any directory sector can be tabled as follows:
+
+Byte            Contents        Purpose
+--------        --------        -------------------------------------
+     0                          Track of the next directory block
+     1                          Sector of the next directory block
+
+  2-31                          File entry #1 in the directory block
+
+ 32-33             0            Unused
+ 34-63                          File entry #2 in the directory block
+
+ 64-65             0            Unused
+ 66-95                          File entry #3 in the directory block
+
+ 96-97             0            Unused
+ 98-127                         File entry #4 in the directory block
+128-129            0            Unused
+130-159                         File entry #5 in the directory block
+
+160-161            0            Unused
+162-191                         File entry #6 in the directory block
+
+192-193            0            Unused
+194-223                         File entry #7 in the directory block
+
+224-225            0            Unused
+226-255                         File entry #8 in the directory block
+
+Eight file entries are recorded per sector. Let's examine the contents of a
+single directory file entry.
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW
+      ** **
+. 08: 20 54 4F 20 55 53 45 A0  TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+. 18: 00 00 00 00 00 00 0D 00 ........
+
+Because this is the first entry in the directory, bytes 0 and 1 are
+significant. They point to track 18, sector 4 (converts to 18). This indicates
+that there are further directory entries. You will note that the sectors are
+not sequential in nature, i.e., sector 1 does not point to sector 2, etc.
+Remember that the diskette itself is rotating at 300 rpm. Staggering the use of
+the sectors allows quicker access and fewer rotations of the drive mechanism
+and the media. Typically sectors are staggered in increments of 10. The
+directory track is staggered in increments of 3, however. The table below
+indicates the sequence in which a full directory containing 144 files is stored:
+
+        SECTOR FILLING SEQUENCE
+           FOR THE DIRECTORY
+
+             0 (BAM)
+             1, 4, 7, 10, 13, 16
+             2, 5, 8, 11, 14, 17
+             3, 6, 9, 12, 15, 18
+
+
+When a diskette is initially formatted, sector 1 is set up with 8 null entries.
+As you store files on the diskette the directory grows. It soon becomes a long
+chain of directory sectors. The first two bytes in a sector point to the next
+directory sector in the chain (this is known as a forward pointer). But, what
+about the last sector in the chain? It has nothing to point to! In the last
+sector in the chain, there is no forward pointer; byte 0 contains a 0 ($00) and
+byte 1 contains a 255 ($FF) as indicated below. This indicates to the DOS that
+there are no more sectors in the directory.
+
+. 00: 00 FF xx xx xx xx xx xx ........
+
+One final note about chaining. Commodore uses only forward pointers. A sector
+does not show where it came from, only where it is going. This makes recovery
+of corrupted files much more difficult, but more about that later.
 
