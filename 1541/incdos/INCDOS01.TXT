@@ -1704,3 +1704,357 @@ One final note about chaining. Commodore uses only forward pointers. A sector
 does not show where it came from, only where it is going. This makes recovery
 of corrupted files much more difficult, but more about that later.
 
+Back to our example:
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW
+            **
+. 08: 20 54 4F 20 55 53 45 A0  TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+. 18: 00 00 00 00 00 00 0D 00 ........
+
+The first byte in the file entry is the file-type byte. In this instance we see
+an $82. This is interpreted by the DOS to mean that the file entry is a
+program. The following table outlines Commodores file types.
+
+HEX      ASCII   FILE TYPE                      DIRECTORY SHOWS
+-----   -------  -----------------------        ----------------
+
+$00        0     Scratched                      Does not appear
+
+$80      128     Deleted                        DEL
+$81      129     Sequential                     SEQ
+$82      130     Program                        PRG
+$83      131     User                           USR
+$84      132     Relative                       REL
+
+$00        0     Unclosed deleted               Same as scratched
+$01        1     Unclosed sequential            *SEQ
+$02        2     Unclosed program               *PRG
+$03        3     Unclosed user                  *USR
+$04        4     Unclosed relative              Cannot occur
+
+$A0      160     Deleted @ replacement          DEL
+$A1      161     Sequential @ replacement       SEQ
+$A2      162     Program @ replacement          PRG
+$A3      163     User @ replacement             USR
+$A4      164     Relative @ replacement         Cannot occur
+
+$C0      192     Locked deleted                 DEL<
+$C1      193     Locked sequential              SEQ<
+$C2      194     Locked program                 PRG<
+$C3      195     Locked user                    USR<
+$C4      196     Locked relative                REL<
+
+Note: It is possible to edit the file-type byte and get very unusual file types
+appearing in the directory (SR?< is one possibility). However, these file types
+have no practical use.
+
+Enough esoterica for now. Let's get back to our example:
+
+The next two bytes in the file entry are a pointer to where the first sector of
+that particular file is stored on the diskette.
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW
+               ** **
+. 08: 20 54 4F 20 55 53 45 A0  TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+. 18: 00 00 00 00 00 00 0D 00 ........
+
+This file starts on track 17 ($11), sector 0 ($00).
+
+Next we have the file name.
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW
+                     ** ** **
+. 08: 20 54 4F 20 55 53 45 A0  TO USE
+      ** ** ** ** ** ** ** **
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+      ** ** ** ** **
+. 18: 00 00 00 00 00 00 0D 00 ........
+
+In this case our file is named "HOW TO USE". Note that file names are padded
+out to 16 characters with shifted spaces ($A0) just like the diskette name. The
+shifted spaces do not show as part of the file name, however, when the
+directory is displayed.
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW
+. 08: 20 54 4F 20 55 53 45 A0  TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+                     ** ** **
+. 18: 00 00 00 00 00 00 0D 00 ........
+
+The next three bytes are unused except for relative file entries. For a
+relative file bytes $15 (21) and $16 (22) point to the first set of side
+sectors. Byte $17 (23) gives the record size with which the relative file was
+created. This special file type will be examined in detail later.
+
+The next four bytes are always unused and therefore null ($00).
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW
+. 08: 20 54 4F 20 55 53 45 A0  TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+. 18: 00 00 00 00 00 00 0D 00 ........
+      ** ** ** **
+
+The following two bytes are reserved for use by the DOS during the save and
+replace operation (@ replacement). Their function can only be viewed by
+interrupting the drive during a SAVE "@0:file name",8 routine. This is not
+recommended for obvious reasons. (During an @ replacement the file-type byte is
+ORed with $20 first. A new copy of the file is then written to the disk. Bytes
+28 ($1C) and 29 ($1D) contain the track and sector pointer to the start of the
+new replacement file. At the end of the @ operation the sectors that held the
+old file are marked as free in the BAM. The new track and sector pointer is
+then moved from bytes 28 and 29 to bytes 3 ($03) and 4 ($04) respectively and
+bytes 28 and 29 are zeroed again. The proper file type is then restored at byte
+2. See Chapter 9 about the bug in the @ replacement command.)
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW
+. 08: 20 54 4F 20 55 53 45 A0  TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+. 18: 00 00 00 00 00 00 0D 00 ........
+                  ** **
+
+The final two bytes in a file entry are the number of blocks it occupies on the
+diskette. It is the sum of the leftmost byte (lo-byte) + the rightmost byte
+(hi-byte) * 256.
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW
+. 08: 20 54 4F 20 55 53 45 A0  TO USE
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+. 18: 00 00 00 00 00 00 0D 00 ........
+                        ** **
+                        LO HI
+
+In our example, the file is (13 + 0 * 256) = 13 blocks long.
+
+To be sure you understand the file entries work let's break out the first
+sector of the test/demo directory to show each file entry. Remember that bytes
+0 and 1 of each entry are unused with the exception of the first entry. Here
+they represent a forward track and sector chain and have nothing to do with
+that file in particular.
+
+
+            1541TEST/DEMO
+
+         TRACK 18 - SECTOR 01
+
+          DIRECTORY ENTRY 1
+
+. 00: 12 04 82 11 00 48 4F 57 .....HOW  File type = $82 = PRG
+. 08: 20 54 4F 20 55 53 45 A0  TO USE   Starts on 17/1 ($11/$00)
+. 10: A0 A0 A0 A0 A0 00 00 00      ...  Name: HOW TO USE
+. 18: 00 00 00 00 00 00 0D 00 ........  File length: 13 BLOCKS
+
+          DIRECTORY ENTRY 2
+
+. 20: 00 00 82 11 03 48 4F 57 .....HOW  File type = $82 = PRG
+. 28: 20 50 41 52 54 20 54 57  PART TW  Starts on 17/3 ($11/$03)
+. 30: 4F A0 A0 A0 A0 00 00 00 O    ...  Name: HOW PART TWO
+. 38: 00 00 00 00 00 00 05 00 ........  File length: 5 BLOCKS
+
+          DIRECTORY ENTRY 3
+
+. 40: 00 00 82 11 09 56 49 43 .....VIC  File type = $82 = PRG
+. 48: 2D 32 30 20 57 45 44 47 -20 WEDG  Starts on 17/9 ($11/09)
+. 50: 45 A0 A0 A0 A0 00 00 00 E    ...  Name: VIC-20 WEDGE
+. 58: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+
+          DIRECTORY ENTRY 4
+
+. 60: 00 00 82 13 00 46 2D 36 .....C-6  File type = $82 = PRG
+. 68: 34 20 57 45 44 47 45 A0 4 WEDGE   Starts on 19/0 ($13/$00)
+. 70: A0 A0 A0 A0 A0 00 00 00      ...  Name C-64 WEDGE
+. 78: 00 00 00 00 00 00 01 00 ........  File length: 1 BLOCK
+
+          DIRECTORY ENTRY 5
+
+. 80: 00 00 82 13 01 44 4F 53 .....DOS  File type = $82 = PRG
+. 88: 20 35 2E 31 A0 A0 A0 A0  5.1      Starts on 19/1 ($13/$01)
+. 90: A0 A0 A0 A0 A0 00 00 00      ...  Name: DOS 5.1
+. 98: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+
+          DIRECTORY ENTRY 6
+
+. A0: 00 00 82 13 03 43 4F 50 .....COP  File type = $82 = PRG
+. A8: 59 2F 41 4C 4C A0 A0 A0 Y/ALL     Starts on 19/3 ($13/03)
+. B0: A0 A0 A0 A0 A0 00 00 00      ...  Name: COPY/ALL
+. B8: 00 00 00 00 00 00 0B 00 ........  File length: 11 BLOCKS
+
+          DIRECTORY ENTRY 7
+
+. C0: 00 00 82 13 09 50 52 49 .....PRI  File type = $82 = PRG
+. C8: 4E 54 45 52 20 54 45 53 NTER TES  Starts on 19/9 ($13/09)
+. D0: 54 A0 A0 A0 A0 00 00 00 T    ...  Name: PRINTER TEST
+. D8: 00 00 00 00 00 00 09 00 ........  File length: 9 BLOCKS
+
+          DIRECTORY ENTRY 8
+
+. E0: 00 00 82 10 00 44 49 53 .....DIS  File type = $82 = PRG
+. E8: 4B 20 41 44 44 52 20 43 K ADDR C  Starts on 16/0 ($10/00)
+. F0: 48 41 4E 47 45 00 00 00 HANGE...  Name:DISK ADDR CHANGE
+. F8: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+
+
+We will end our tour of the directory by displaying the next sector (track 18,
+sector 4) which happens to end the directory chain ($00, $FF in bytes 0 and 1,
+respectively). Notice that only seven directory entries are present in this
+block. The last directory entry is a null entry. It will be converted into a
+valid entry when the directory is expanded.
+
+
+            1541TEST/DEMO
+
+         TRACK 18 - SECTOR 04
+
+. 00: 00 FF 82 10 01 44 49 52 .....DIR  File type = $82 = PRG
+. 08: A0 A0 A0 A0 A0 A0 A0 A0           Starts on 16/1 ($10/01)
+. 10: A0 A0 A0 A0 A0 00 00 00      ...  Name: DIR
+. 18: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+
+. 20: 00 00 82 10 03 56 49 45 .....VIE  File type = $82 = PRG
+. 28: 57 20 42 41 4D A0 A0 A0 W BAM     Starts on 16/3 ($10/03)
+. 30: A0 A0 A0 A0 A0 00 00 00      ...  Name:VIEW BAM
+. 38: 00 00 00 00 00 00 06 00 ........  File length: 6 BLOCKS
+
+. 40: 00 00 82 10 07 43 48 45 .....CHE  File type = $82 = PRG
+. 48: 43 4B 20 44 49 53 4B A0 CK DISK   Starts on 16/7 ($10/07)
+. 50: A0 A0 A0 A0 A0 00 00 00      ...  Name: CHECK DISK
+. 58: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+
+. 60: 00 00 82 10 0F 44 49 53 .....DIS  File type = $82 = PRG
+. 68: 50 4C 41 59 20 54 26 53 PLAY T&S  Starts on 16/15 ($10/$0F)
+. 70: A0 A0 A0 A0 A0 00 00 00      ...  Name: DISPLAY T&S
+. 78: 00 00 00 00 00 00 0E 00 ........  File length: 14 BLOCKS
+
+. 80: 00 00 82 14 02 50 45 52 .....PER  File type = $82 = PRG
+. 88: 46 4F 52 4D 41 4E 43 45 FORMANCE  Starts on 20/2 ($14/$02)
+. 90: 20 54 45 53 54 00 00 00  TEST...  Name: PERFORMANCE TEST
+. 98: 00 00 00 00 00 00 09 00 ........  File length: 9 BLOCKS
+
+. A0: 00 00 82 14 07 50 45 52 .....SEQ  File type = $82 = PRG
+. A8: 55 45 4E 54 49 41 4C 20 UENTIAL   Starts on 20/7 ($14/$07)
+. B0: 46 49 4C 45 A0 00 00 00 FILE ...  Name: SEQUENTIAL FILE
+. B8: 00 00 00 00 00 00 05 00 ........  File length: 5 BLOCKS
+
+. C0: 00 00 82 0F 01 52 41 4E .....RAN  File type = $82 = PRG
+. C8: 44 4F 4D 20 46 49 4C 45 DOM FILE  Starts on 15/1 ($0F/$01)
+. D0: A0 A0 A0 A0 A0 00 00 00      ...  Name: RANDOM FILE
+. D8: 00 00 00 00 00 00 0D 00 ........  File length: 13 BLOCKS
+
+. EO: 00 00 00 00 00 00 00 00 ........  NULL ENTRY
+. E8: 00 00 00 00 00 00 00 00 ........
+. F0: 00 00 00 00 00 00 00 00 ........
+. F8: 00 00 00 00 00 00 00 00 ........
+
+
+You will find four of the utilities listed in Appendix C particularly helpful
+in furthering your understanding of the organization of a diskette. The first
+program is DISPLAY TRACK & SECTOR. The hex dumps in this section were generated
+using this utility. A hex dump can be sent either to the screen or printer.
+When sent to the screen only half a page of the specified track and sector is
+displayed at one time to prevent scrolling. Bytes 0 - 127 ($00 - $7F) are
+displayed first followed by bytes 128 - 255 ($80 - $FF). Use this program for
+your own experimentation. The second program is DISPLAY A BLOCK AVAILABILITY
+MAP. It portrays the BAM in a two-dimensional representation. The diskette
+name, ID, DOS version, and blocks free are also displayed. The third program is
+VIRTUAL DIRECTORY. It displays a directory in its entirety including scratched
+files. Output can be directed to a printer by changing the OPEN 4,3 statement
+in line 440 to OPEN 4,4. The last program, DISPLAY A CHAIN, traces a file
+chain. The chain of sectors may be viewed on the screen or sent to the printer.
+
+The programming techniques that are used in these sample programs will be
+partially explained in later sections.
+
+Now that we've seen how the directory is kept, let's look at how the different
+types of files are actually stored on a diskette. We'll start by looking at a
+program file.
+
+
+4.5 Program File Storage
+
+The most common type of file is a program file, PRG. It is designated by an $82
+in the directory. Program file structure is quite simple. Diagrammatically, the
+first sector (block) in a program file looks like this.
+
++-------+--------+------+------+---------------------+
+| TRACK | SECTOR | LOAD | LOAD | THE FIRST 252 BYTES |
+| LINK  | LINK   |  LO  |  HI  |   OF YOUR PROGRAM   |
++-------+--------+------+------+---------------------+
+
+
+   Byte    Purpose
+---------  --------------------------------------------------------------------
+
+    0      Track of the next block in this file
+    1      Sector of the next block in this file
+    2      Lo-byte of the load address
+    3      Hi-byte of the load address
+
+  4-255    The first 252 bytes of the program
+
+The first pair of bytes are the pointer to the track and sector of the next
+block in the file. Technically, this is known as a "forward pointer." It points
+ahead to the next sector in the file. All Commodore files use this type of
+pointer.
+
+The second pair of bytes is the "load address" of the file in lo-byte/hi-byte
+form. They indicate where the program is to be loaded into memory. A BASIC
+program that was saved from a C64 will have a $01 and a $08 in these two
+locations. This indicates that the program is to be loaded into memory starting
+at memory location $0801 (remember it is in lo-byte/hi-byte form). In decimal
+notation this is memory location 2049 — the start of BASIC on a C64.
+
+Have you ever wondered about the significance of the ",1" in the command LOAD
+"name",8,1? It determines whether or not a program is "relocated" when it is
+loaded into memory. If you do not specify the ",1", the C64 will ignore the
+load address at the start of the file and load the program starting at memory
+location $0801 (2049). When the ",1" is present, the C64 (or VIC-20) will pay
+attention to the load address and load the program into memory starting at the
+location specified by bytes $02 and $03.
+
+The remaining sectors, except the last one, look like this:
+
++-------+--------+--------------------+
+| TRACK | SECTOR | THE NEXT 254 BYTES |
+| LINK  | LINK   |  OF YOUR PROGRAM   |
++-------+--------+--------------------+
+
+
+   Byte    Purpose
+---------  --------------------------------------------------------------------
+
+    0      Track of the next block in this file
+    1      Sector of the next block in this file
+
+  2-255    The next 254 bytes of the program
+
+The last block in a program file is special because:
+
+1. It is the last sector.
+2. It is usually only partially full.
+
+To signal the DOS that this is the last block, the first byte is set to $00.
+The first byte is normally the track link. Since there is no track 0, the DOS
+knows that this is the last sector in the file. The second byte indicates the
+position of the last byte that is part of the program file. Any bytes beyond
+this position are garbage.
+
+Diagrammatically, the last sector in a program file looks like this:
+
++------+------+-----------------+---------+
+| NULL | LAST | THE FINAL BYTES | GARBAGE |
+| $00  | BYTE | OF YOUR PROGRAM |         |
++------+------+-----------------+---------+
+
+
+   Byte    Purpose
+---------  --------------------------------------------------------------------
+
+    0      Null byte to indicate that this is the last sector
+    1      Number of bytes to read from this sector (N)
+
+   2-N     The last (N-2) bytes of the program
+(N+1)-255  Garbage
+
+Let's examine the program file "DIR" on your 1541TEST/DEMO disk. DIR appears in
+the directory on track 18, sector 04. The directory entry looks like this:
