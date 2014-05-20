@@ -2058,3 +2058,212 @@ Diagrammatically, the last sector in a program file looks like this:
 
 Let's examine the program file "DIR" on your 1541TEST/DEMO disk. DIR appears in
 the directory on track 18, sector 04. The directory entry looks like this:
+
+         TRACK 18 - SECTOR 04
+
+. 00: 00 FF 82 10 01 44 49 52 .....DIR
+. 08: A0 A0 A0 A0 A0 A0 A0 A0
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+. 18: 00 00 00 00 00 00 04 00 ........
+
+From the entry we see that "DIR" starts at track 16 ($10), sector 01 ($01) and
+that the file is four blocks long (4 + 0 * 256).
+
+. 00: 00 FF 82 10 01 44 49 52 .....DIR
+               ** **
+. 08: A0 A0 A0 A0 A0 A0 A0 A0
+. 10: A0 A0 A0 A0 A0 00 00 00      ...
+. 18: 00 00 00 00 00 00 04 00 ........
+                        ** **
+
+Let's look at the first block in this file.
+
+TRACK 16 - SECTOR 01
+
+. 00: 10 0B 01 04 0D 04 04 00 ........
+. 08: 9F 32 2C 38 2C 31 35 00 .2,8,15.
+. 10: 1E 04 05 00 99 22 93 22 ....."."
+. 18: 3A 89 20 31 30 30 30 30 :. 10000
+. 20: 00 2E 04 0A 00 9F 31 2C ......1,
+. 28: 38 2C 30 2C 22 24 30 22 8,0,"$0"
+. 30: 00 3C 04 14 00 A1 23 31 .<....#1
+. 38: 2C 41 24 2C 42 24 00 4A ,A$,B$.J
+. 40: 04 1E 00 A1 23 31 2C 41 ....#1,A
+. 48: 24 2C 42 24 00 58 04 28 $,B$.X.(
+. 50: 00 A1 23 31 2C 41 24 2C ..#1,A$,
+. 58: 42 24 00 60 04 32 00 43 B$...2.C
+. 60: B2 30 00 77 04 3C 00 8B .0...<..
+. 68: 20 41 24 B3 B1 22 22 20  A$..""
+. 70: A7 20 43 B2 C6 28 41 24 . C..(A$
+. 78: 29 00 94 04 46 00 8B 20 )...F..
+. 80: 42 24 B3 B1 22 22 20 A7 B$.."" .
+. 88: 20 43 B2 43 AA C6 28 42  C.C..(B
+. 90: 24 29 AC 32 35 36 00 AF $).256..
+. 98: 04 50 00 99 22 12 22 CA .P..".".
+. A0: 28 C4 28 43 29 2C 32 29 (.(C),2)
+. A8: 3B A3 33 29 3B 22 92 22 ;.3);"."
+. B0: 3B 00 C9 04 5A 00 A1 23 ;...Z..#
+. B8: 31 2C 42 24 3A 8B 20 53 1,B$:. S
+. C0: 54 B3 B1 30 20 A7 20 31 T..0 . 1
+. C8: 30 30 30 00 DE 04 64 00 000.....
+. D0: 8B 20 42 24 B3 B1 C7 28 . B$...(
+. D8: 33 34 29 20 A7 20 39 30 34) . 90
+. E0: 00 00 05 6E 00 A1 23 31 ......#1
+. E8: 2C 42 24 3A 8B 20 42 24 ,B$:. B$
+. F0: B3 B1 C7 28 33 34 29 A7 ...(34).
+. F8: 20 99 42 24 3B 3A 89 31  .B$;:.1
+
+Not very recognizable is it? Remember this is C64 internal BASIC not a BASIC
+listing. Bytes 0 and 1 are of interest. They are the track and sector link that
+point to the next block in the program file. In this case, they point to track
+16 ($10), sector 11 ($0B). Since this is the first data block of the file,
+bytes 2 and 3 are also important. They are the load address. We can see that
+the load address is $0401 or 1025 decimal. This file was written on a PET. (The
+start of BASIC memory on the C64 is at $0801. The VIC-20 begins at $1001,
+$1201, or $0401 depending on the amount of external memory.) DIR will require a
+straight relocating load, i.e., LOAD "DIR",8. If you used a LOAD "DIR", 8,1
+command, the program would be loaded into the screen RAM of the C64. NOTE: If
+you load this program properly, you will NOT be able to get it to VERIFY
+correctly. The reason is that the internal BASIC links were changed when the
+program was relocated.
+
+
+. 00: 10 0B 01 04 0D 04 04 00 ........
+      ** ** ** **
+
+Let's follow the forward chain to track 16, sector 11 and take a look at the
+start of the second block in our file.
+
+
+         TRACK 16 - SECTOR 11
+
+. 00: 10 02 31 30 00 1C 05 78 ..10....
+. 08: 00 A1 23 31 2C 42 24 3A ..#1,B$:
+. 10: 8B 20 42 24 B2 C7 28 33 . B$..(3
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Nothing much of interest here. Let's chain to track 16 ($10), sector 02 ($02)
+and take a look at the start of the next block.
+
+
+         TRACK 16 - SECTOR 02
+
+. 00: 10 0C B2 22 22 3A 99 22 ..."":."
+. 08: 3E 22 3B 00 1A 06 AB 0F >";.....
+. 10: A1 42 24 3A 8B 42 24 B2 .B$:.B$.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Again, nothing much of interest. Chain to track 16 ($10), sector 12 ($0C).
+
+
+         TRACK 16 - SECTOR 12
+
+. 00: 00 68 8B 20 41 24 B2 22 ... A$."
+. 08: 44 22 20 A7 20 31 30 00 D" . 10.
+. 10: 2D 07 3C 28 8B 20 41 24 -.<(. A$
+. 18: B2 22 2E 22 20 B0 20 41 ."." . A
+. 20: 24 B2 22 3E 22 20 B0 20 *.">" .
+. 28: 41 24 B2 22 3E 22 20 A7 A$.">" .
+. 30: 20 34 30 30 30 00 3E 07  4000.>.
+. 38: 46 28 8B 20 41 24 B2 22 F(. A$."
+. 40: 51 22 20 A7 20 80 00 52 Q" . ..R
+. 48: 07 50 28 8B 20 41 24 B2 .P(. A$.
+. 50: 22 53 22 20 A7 20 35 30 "S" . 50
+. 58: 30 30 00 5E 07 F7 2A 89 00. ..*.
+. 60: 20 31 30 31 30 30 00 00  10100..
+. 68: 00 A0 00 A1 20 54 24 3A .... T$:
+. 70: 8B 20 54 24 B3 B1 22 22 . T$..""
+. 78: 20 A7 20 8D 20 32 30 30  . . 200
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Now we're cooking. This is the last sector of the file. How can we tell? The
+track of the next block in the file is 0 ($00). But what about the sector link?
+It's a misnomer. The sector link in the last block is actually a byte count. It
+informs the DOS that only bytes 2 through 104 ($68) are important in this
+example. Recall that an end of file in BASIC is designated by three zeros in a
+row. An End-or-Identify (EOI) signal will be sent once byte 104 has been
+transferred across the serial bus. When the C64 receives this EOI signal, the
+status variable, ST, will be set to a value of 64. (Any further attempt to read
+a byte will cause the drive to time out.) Here's the tail end of our program.
+The three null bytes, ($00), at $66/7/8 are the last three bytes in our program
+file.
+
+. 00: 00 68 8B 20 41 24 B2 22 ... A$."
+. 08: 44 22 20 A7 20 31 30 00 D" . 10.
+. 10: 2D 07 3C 28 8B 20 41 24 -.<(. A$
+. 18: B2 22 2E 22 20 B0 20 41 ."." . A
+. 20: 24 B2 22 3E 22 20 B0 20 *.">" .
+. 28: 41 24 B2 22 3E 22 20 A7 A$.">" .
+. 30: 20 34 30 30 30 00 3E 07  4000.>.
+. 38: 46 28 8B 20 41 24 B2 22 F(. A$."
+. 40: 51 22 20 A7 20 80 00 52 Q" . ..R
+. 48: 07 50 28 8B 20 41 24 B2 .P(. A$.
+. 50: 22 53 22 20 A7 20 35 30 "S" . 50
+. 58: 30 30 00 5E 07 F7 2A 89 00. ..*.
+. 60: 20 31 30 31 30 30 00 00  10100..
+. 68: xx xx xx xx xx xx xx xx .
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+What about the rest of the block? Ignore it. It is garbage. The DOS does not
+zero out a buffer before it begins filling it with new information sent from
+the computer. As a result, the last block in a file, which is almost never
+filled with new information, is padded with whatever happened to be left in the
+buffer from a previous read or write operation. There are two exceptions to the
+rule, namely, the directory and relative files. A partial directory block is
+always padded with nulls ($00). Moreover, it always appears as a full block.
+Bytes 0 and 1 of the last directory block will contain a $00 and a $FF,
+respectively. Relative file structure will be explained shortly.
+
+
+4.6 Sequential File Storage
+
+The format of a sequential file is very straightforward. All the sectors,
+except the last one, look like this:
+
++-------+--------+-------------------+
+| TRACK | SECTOR | 254 BYTES OF DATA |
+| LINK  | LINK   |                   |
++-------+--------+-------------------+
+
+
+Byte      Purpose
+--------  --------------------------------------------------------------------
+
+0         Track of the next block in this file
+1         Sector of the next block in this file
+
+2-255     254 bytes of data
+
+The last block in a sequential file is special for two reasons:
+
+1. It is the last sector.
+2. It is usually only partially full.
+
+To signal the DOS that this is the last block, the first byte is set to $00.
+The first byte is normally the track link. Since there is no track 0, the DOS
+knows that this is the last sector in the file. The second byte indicates the
+position of the last byte in the file. Any bytes beyond this position are
+garbage.
+
+Diagrammatically, the last sector in the file looks like this:
+
+
++------+------+-------------------------+---------+
+| NULL | LAST | THE FINAL DATA BYTES IN | GARBAGE |
+| $00  | BYTE |   YOUR SEQUENTIAL FILE  |         |
++------+------+-------------------------+---------+
+
+
+Byte       Purpose
+---------  --------------------------------------------------------------------
+
+0          Null byte to indicate this is the last sector
+1          Position of the last byte in the file (N)
+
+2-N        The last N-2 bytes of the sequential file
+(N+1)-255  Garbage
+
