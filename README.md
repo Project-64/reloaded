@@ -16,10 +16,12 @@ Rules and Conventions
 ---------------------
 ####Contents format
 Textual representations __only__ are to be stored and revision-maintained in this repository. Textual formats mean (in order of preference):
-* text/plain
+
+* text/plain; charset=UTF-8
 * application/x-tex
-* text/html
-* text/rtf
+* text/x-markdown; charset=UTF-8
+* text/html; charset=UTF-8
+* text/rtf; charset=UTF-8
 
 Other, non-easily-editable formats are currently welcome only for inclusion in the list of documents awaiting to be processed into textual format.
 
