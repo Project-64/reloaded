@@ -76,18 +76,6 @@ etext use "tok64" by Cris Berneburg <74171.2136@compuserve.com>.
 
 *********
 
-  Windows 95 MS-DOS Edit is the ideal program for reading this
-etext.  Just check that ANSI.SYS is loaded in CONFIG.SYS and issue
-the command:
-
-  mode con lines=50
-
-Now a whole page fits nicely on the screen and you can use Page Up/Page
-Down keys to flip pages. Just be sure that the ~ characters are always
-on the last line of the screen.
-
-*********
-
 ~
 
 
@@ -1159,10 +1147,10 @@ in a smaller value give you zero as an answer and NO error message. Some
 examples of floating-point numbers in scientific notation (and their
 decimal values) are:
 
-235.988E-3	(.235988)
-      2359E6          (2359000000.)
-      -7.09E-12       (-.00000000000709)
--3.14159E+5	(-314159.)
+                235.988E-3     (.235988)
+                2359E6         (2359000000.)
+                -7.09E-12      (-.00000000000709)
+                -3.14159E+5    (-314159.)
 
   String constants are groups of alphanumeric information like letters,
 numbers and symbols. When you enter a string from the keyboard, it
