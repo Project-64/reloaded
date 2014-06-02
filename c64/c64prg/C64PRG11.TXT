@@ -34,7 +34,7 @@ use the information herein you do so at your own risk.
 first edition. Converted to etext by Ville Muikkula. Some errors in
 the original document were corrected in this etext.
 
-C64PRG11.TXT, replaces C64PRG10.TXT from June 1996, etext #46
+C64PRG11.TXT, replaces C64PRG10.TXT, etext #46 from June 1996.
 
 *********
 

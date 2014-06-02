@@ -41,7 +41,7 @@ by David Holz <white-flame@geocities.com>, formatted to 71 columns and
 somewhat proofed by Cris Berneburg <pcgeek@compuserve.com>. Corrected
 and currently maintained by Silver Dream ! <silverdr@wfmh.org.pl>
 
-MAPC6412.TXT, etext #351#. This replaces MAPC6411.TXT from June 1998.
+MAPC6412.TXT. This replaces MAPC6411.TXT, etext #351# from June 1998.
 
 Note from the tired typist:
 
