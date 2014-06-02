@@ -60,8 +60,7 @@ shall be used to distinguish and make it clear what document in what version it 
 
 * new documents will adhere to the original file naming specifications (huh - is it really me writing this?) for consistency with the original project.
 
-There is one more thing, which requires a bit more of attention, though:
-####Version numbering scheme
+###Version numbering scheme
 
 * version numbers for unaltered documents will remain as they were in the original archive
 * version numbers of the documents updated within this repository will be bumped by one minor number over the highest previously available and will remain so for its life in the repository, unless *structural* changes (like adding/removing relevant sections) are introduced later to the files
