@@ -66,7 +66,7 @@ The original Project 64 headers currently remain in the files, which were origin
 
 ###Version numbering scheme
 
-Versioning is a bit more tricky here as we need to deal with both the legacy and some limitations of the repository platform (git). After many sleepless nights, it's been elected by a one person committee that when it comes to numbering the versions and respective changing of the names of the files, Project 64 Reloaded will follow these guidelines:
+Versioning is a bit more tricky here as we need to deal with both the legacy (including potentially conflicting variants roaming around) and some limitations of the repository platform (git). After many sleepless nights, it's been elected by a one person committee that when it comes to numbering the versions and respective changing of the names of the files, Project 64 Reloaded will respect the following guidelines:
 
 * version numbers for unaltered documents will remain as they were in the original archive
 * version numbers of the documents updated within Project 64 Reloaded repository will be bumped by one minor number over the highest previously available and will remain so for its life in the repository, unless *structural* changes (like adding/removing relevant sections) are introduced later to the files
