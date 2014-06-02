@@ -8,7 +8,9 @@ Obviously maintaining the website and updating all the documents is something th
 
 With the advent of online version control services like Github (and some earlier), things can change. This repository is meant to be publicly available and everyone can clone it, send pull request, etc. I also try to make it "loosely connected" to any person, especially myself. The owner of the repository is an "organisation" (in the sense of Gihub's terminology) called "Project-64" and can have multiple maintainers or can be transferred along with its whole content to another entity with ease. I have also created a — hopefully — [more user friendly interface](http://e4aws.silverdr.com/project64/) to the project's always latest "master" branch copies. The pages there contain also the original covers' scans, allow reading or downloading the always latest versions and may be useful for all not so SCM/git/github savvy people out there. Please note however that while I expect the repository to last, the same cannot be guaranteed about the pages I maintain myself.
 
-Last and least — if you like the idea beyond reviving the project and want to help but have no resources (time, skills, equipment, ...) to be an active participant and contributor to the content, please consider a [donation](http://e4aws.silverdr.com/resources/bitcoin/QRproject64donation.png) in the form of [BTC/XBT](http://bitcoin.org/). Received donations (if any) will be distributed among active and interested contributors.
+Almost Last and least — if you like the idea beyond reviving the project and want to help but have no resources (time, skills, equipment, ...) to be an active participant and contributor to the content, please consider a [donation](http://e4aws.silverdr.com/resources/bitcoin/QRproject64donation.png) in the form of [BTC/XBT](http://bitcoin.org/). Received donations will be used to help the project by either purchasing additional books, services or related equipment, funding the development of interfaces to the content or distributed among active and interested contributors. Please mark the transaction as "Project 64 Reloaded donation".
+
+Happy reading, referencing and hacking!
 
 silverdr
 
@@ -17,7 +19,7 @@ silverdr
 
 ###Contents format
 
-Textual representations __only__ are to be stored and revision-maintained in this repository. Textual formats mean (in order of preference):
+Textual representations **only** are to be stored and revision-maintained in this repository. Textual formats mean (in order of preference):
 
 * text/plain; charset=UTF-8
 * application/x-tex
@@ -60,11 +62,16 @@ shall be used to distinguish and make it clear what document in what version it 
 
 * new documents will adhere to the original file naming specifications (huh - is it really me writing this?) for consistency with the original project.
 
+The original Project 64 headers currently remain in the files, which were originally created by the first Project 64. New documents will receive Project 64 Reloaded headers, with information on the matters covered above.
+
 ###Version numbering scheme
+
+Versioning is a bit more tricky here as we need to deal with both the legacy and some limitations of the repository platform (git). After many sleepless nights, it's been elected by a one person committee that Project 64 Reloaded will follow these guidelines when it comes to numbering the versions and respective changing of the names of the files:
 
 * version numbers for unaltered documents will remain as they were in the original archive
 * version numbers of the documents updated within this repository will be bumped by one minor number over the highest previously available and will remain so for its life in the repository, unless *structural* changes (like adding/removing relevant sections) are introduced later to the files
 * If an updated version (with a higher version number than the originally used one) is found elsewhere and the changes are merged into the version available here - the version number will be updated accordingly
+
 
 ###Language of the documents
 
