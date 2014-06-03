@@ -20,7 +20,6 @@ silverdr
 ###Contents format
 
 Textual representations **only** are to be stored and revision-maintained in this repository. Textual formats mean (in order of preference):
-
 * text/plain; charset=UTF-8
 * application/x-tex
 * text/x-markdown; charset=UTF-8
