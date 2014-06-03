@@ -1,4 +1,4 @@
-#Project 64 reloaded
+#Project 64 Reloaded
 
 ##Introduction
 
