@@ -39,7 +39,6 @@ Whenever the original content contains words, which are properly spelled in at l
 ###Project 64 headers
 
 The original Project 64 documents contain a header with several important points:
-
 * The goal of Project 64 is to preserve Commodore 64 related documents in electronic text format that might otherwise cease to exist with the rapid advancement of computer technology and declining interest in 8-bit computers on the part of the general population.
 * Extensive efforts were made to preserve the contents of the original document.  However, certain portions, such as diagrams, program listings, and indexes may have been either altered or sacrificed due to the limitations of plain vanilla text.  Diagrams may have been eliminated where ASCII-art was not feasible.  Program listings may be missing display codes where substitutions were not possible.  Tables of contents and indexes may have been changed from page number references to section number references. Please accept our apologies for these limitations, alterations, and possible omissions.
 * The author(s) of the original document and members of Project 64 make no representations about the accuracy or suitability of this material for any purpose. This etext is provided "as-is". Please refer to the warrantee of the original document, if any, that may be included in this etext. No other warranties, express or implied, are made to you as to the etext or any medium it may be on. Neither the author(s) nor the members of Project 64 will assume liability for damages either from the direct or indirect use of this etext or from the distribution of or modification to this etext. Therefore if you read this document or use the information herein you do so at your own risk.
@@ -47,7 +46,6 @@ The original Project 64 documents contain a header with several important points
 All of the above points remain valid and unaltered.
 
 Some documents contain also one more header paragraph about the file format:
-
 * Document names are limited to the 8.3 file convention of DOS. The first characters of the file name are an abbreviation of the original document name. The version number of the etext follows next. After that a letter may appear to indicate the particular source of the document. Finally, the document is given a .TXT extension.
 
 This one is much more controversial.  God only knows how much I detest msdos and its "conventions",  which held computer science and the whole industry aback for more than a decade and still keep haunting us even today. I am - however - willing to bury my personal feelings about "8.3 file convention of DOS" and "extensions" (SCNR) for the sake of continuity and consistency. This means that:
@@ -58,7 +56,6 @@ A line in the etext like
 >MAPC6412.TXT. This replaces MAPC6411.TXT, etext #351# from June 1998.
 
 shall be used to distinguish and make it clear what document in what version it is updated from.
-
 * new documents will adhere to the original file naming specifications (huh - is it really me writing this?) for consistency with the original project.
 
 The original Project 64 headers currently remain in the files, which were originally created by the first Project 64. New documents will receive Project 64 Reloaded headers, with information on the matters covered above.
@@ -66,7 +63,6 @@ The original Project 64 headers currently remain in the files, which were origin
 ###Version numbering scheme
 
 Versioning is a bit more tricky here as we need to deal with both the legacy (including potentially conflicting variants roaming around) and some limitations of the repository platform (git). After many sleepless nights, it's been elected by a one person committee that when it comes to numbering the versions and respective changing of the names of the files, Project 64 Reloaded will respect the following guidelines:
-
 * version numbers for unaltered documents will remain as they were in the original archive
 * version numbers of the documents updated within Project 64 Reloaded repository will be bumped by one minor number over the highest previously available and will remain so for its life in the repository, unless *structural* changes (like adding/removing relevant sections) are introduced later to the files
 * If an updated version (with a higher version number than the originally used one) is found elsewhere and the changes are merged into the version available here - the version number will be updated accordingly
