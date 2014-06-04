@@ -32,7 +32,7 @@ use the information herein you do so at your own risk.
 
   The Project 64 etext of Inside Commodore DOS by Richard Immers, Ph.D.
 and Gerald G. Neufeld, Ph.D. second edition. Converted to etext by
-Silver Dream !
+Silver Dream ! and Pinacolada64.
 
 INCDOS01.TXT (WIP), April 2014
 
@@ -2267,3 +2267,52 @@ Byte       Purpose
 2-N        The last N-2 bytes of the sequential file
 (N+1)-255  Garbage
 
+
+No sequential files appear on the 1541TEST/DEMO. (The file named SEQUENTIAL
+FILE is a program file demonstrating the sequential access method.) The C-64
+DISK BONUS PACK does come with one sequential file on it. The file named
+"   DIRECTORY   " appears as a SEQ when displaying the directory.
+"   DIRECTORY   " can be found at track 18, sector 01 on the C-64 DISK BONUS
+PACK. Let's take a peek at the directory entry for this file:
+
+         TRACK 18 - SECTOR 01
+
+. 20: 00 00 81 11 01 20 20 20 .....
+. 28: 44 49 52 45 43 54 4F 52 DIRECTOR
+. 30: 59 20 20 20 A0 00 00 00 Y    ...
+. 38: 00 00 00 00 00 00 02 00 ........
+
+"   DIRECTORY   " is the second file entry in the directory.
+
+. 20: 00 00 81 11 01 20 20 20 .....
+            ** ** **
+. 28: 44 49 52 45 43 54 4F 52 DIRECTOR
+. 30: 59 20 20 20 A0 00 00 00 Y    ...
+. 38: 00 00 00 00 00 00 02 00 ........
+                        **
+
+A sequential file is designated by an $81 in the directory. The first block of
+this file is stored on track 17 ($11), sector 1 ($01). We also see that
+"   DIRECTORY   " is two blocks long (2 + 0 * 256). Let's take a look at the
+first half of the starting data block.
+
+         TRACK 17 - SECTOR 01
+
+. 00: 11 OB 43 36 34 20 53 54 ..C64 ST
+. 08: 41 52 54 45 52 20 4B 49 ARTER KI
+. 10: 54 20 20 20 36 34 20 20 T   64
+. 18: 32 41 OD 31 35 34 31 20 2A.1541
+. 20: 42 41 43 4B 55 50 0D 41 BACKUP.A
+. 28: 4D 4F 52 54 20 54 41 42 MORT TAB
+. 30: 4C 45 0D 41 52 52 4F 57 LE.ARROW
+. 38: 0D 42 49 54 53 20 41 4E .BITS AN
+. 40: 44 20 42 59 54 45 53 0D D BYTES.
+. 48: 43 41 4C 45 4E 44 41 52 CALENDAR
+. 50: 0D 43 48 41 4E 47 45 20 .CHANGE
+. 58: 44 49 53 4B 0D 43 48 41 DISK.CHA
+. 60: 52 20 42 4F 4F 54 0D 43 R BOOT.C
+. 68: 4F 4C 4F 52 20 54 45 53 OLOR TES
+. 70: 54 0D 43 4F 50 59 2D 41 T.COPY-A
+. 78: 4C 4C 36 34 0D 44 45 4D LL64.DEM
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
