@@ -1,0 +1,2 @@
+- after finalising the conversion check the disassembly and description of ZP memory locations. According to Julian, the book marks them as unused, while they are in fact used.
+
