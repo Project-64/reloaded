@@ -1,2 +1,5 @@
-- after finalising the conversion check the disassembly and description of ZP memory locations. According to Julian, the book marks them as unused, while they are in fact used.
+- after finalising the conversion check the disassembly and description of ZP
+  memory locations. According to Julian, the book shows them as unused, while
+  they are in fact used.
 
+- TODO, pictures, diagrams. Those, which are not already in ASCII
