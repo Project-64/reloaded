@@ -1,34 +1,65 @@
-*********
+PROJECT HEADER
+---------------
 
-Welcome to Project 64!
+Welcome to Project 64 Reloaded!
 
-  The goal of Project 64 is to preserve Commodore 64 related documents
-in electronic text format that might otherwise cease to exist with the
-rapid advancement of computer technology and declining interest in 8-
-bit computers on the part of the general population.
+   The goal of Project 64 is to preserve Commodore 64 related documents in
+electronic text format that might otherwise cease to exist with the rapid
+advancement of computer technology and declining interest in 8- bit computers
+on the part of the general population. Project 64 Reloaded maintains a publicly
+available, revision controlled repository of all the documents it took over
+from the original Project 64. The repository is currently hosted by GitHub and
+is made available to the public under following URL:
 
-  Extensive efforts were made to preserve the contents of the original
-document.  However, certain portions, such as diagrams, program
-listings, and indexes may have been either altered or sacrificed due
-to the limitations of plain vanilla text.  Diagrams may have been
-eliminated where ASCII-art was not feasible.  Program listings may be
-missing display codes where substitutions were not possible.  Tables
-of contents and indexes may have been changed from page number
-references to section number references. Please accept our apologies
-for these limitations, alterations, and possible omissions.
+https://github.com/Project-64/etext
 
-  The author(s) of the original document and members of Project 64 make
-no representations about the accuracy or suitability of this material
-for any purpose.  This etext is provided "as-is".  Please refer to the
-warantee of the original document, if any, that may included in this
-etext.  No other warantees, express or implied, are made to you as to
-the etext or any medium it may be on.  Neither the author(s) nor the
-members of Project 64 will assume liability for damages either from
-the direct or indirect use of this etext or from the distribution of
-or modification to this etext.  Therefore if you read this document or
-use the information herein you do so at your own risk.
+a simplified interface to the documents is at the time of writing available
+under
 
-*********
+http://e4aws.silverdr.com/project64/
+
+Project accepts donations, which are meant to help keeping project members
+motivated as well as fund project related purchases:
+
+* copies of books or documents
+* processing equipment (high quality automated scanner, binding equipment)
+* processing software (Commercial OCR/extensions)
+* professional services (unbinding, restoration, rebinding)
+
+At the time of writing donations are accepted in the form of electronic
+currency:
+
+http://e4aws.silverdr.com/resources/bitcoin/QRproject64donation.png
+
+or as direct donations/sponsorship of the above listed. For direct donations,
+please contact project members through project web pages.
+
+
+DISCLAIMERS
+---------------
+   Extensive efforts were made to preserve the contents of the original
+document. However, certain portions, such as diagrams, program listings, and
+indexes may have been either altered or sacrificed due to the limitations of
+plain vanilla text. Diagrams may have been eliminated where ASCII-art was
+not feasible. Program listings may be missing display codes where
+substitutions were not possible. Tables of contents and indexes may have
+been changed from page number references to section number references.
+Please accept our apologies for these limitations, alterations, and possible
+omissions.
+
+   The author(s) of the original document and members of Project 64 make no
+representations about the accuracy or suitability of this material for any
+purpose. This etext is provided "as-is". Please refer to the warantee of the
+original document, if any, that may included in this etext. No other warantees,
+express or implied, are made to you as to the etext or any medium it may be on.
+Neither the author(s) nor the members of Project 64 will assume liability for
+damages either from the direct or indirect use of this etext or from the
+distribution of or modification to this etext. Therefore if you read this
+document or use the information herein you do so at your own risk.
+
+
+DOCUMENT HEADER
+---------------
 
   The Project 64 etext of Inside Commodore DOS by Richard Immers, Ph.D.
 and Gerald G. Neufeld, Ph.D. second edition. Converted to etext by
@@ -36,11 +67,32 @@ Silver Dream ! and Pinacolada64.
 
 INCDOS01.TXT (WIP), April 2014
 
-*********
+
+DOCUMENT NOTES
+---------------
+
+The following elements specifically and purposefully do not follow the
+formatting of the original book:
+
+* Notes - the original notes begin with "NOTE:" and are either fully or
+  partially italicised. We follow this only when they are inline with other
+  parts of the text. Whenever they are on a line of their own, we don't follow
+  this for the sake of plain text readibility.
+
+* Fixed width - lines printed in fixed width font in the original book are
+  left-flush justified. We render them four spaces to the right for Markdown
+  compatibility.
+
+* Chapter headers and titles are formatted in one line rather than two.
+
+* Chapter and section lines are prepended with "#" marks for markdown
+  compatibility
+
+---
 ﻿
-                              INSIDE
-                             COMMODORE
-                                DOS
+                               INSIDE
+                              COMMODORE
+                                 DOS
 ﻿
 ﻿
 
@@ -117,9 +169,9 @@ from use or improper or unintended use of this information.
                         ACKNOWLEDGEMENTS
 
 A manual like this one would not be possible without a great deal of technical
-assistance. Mike Todd's Disk File column in the ICPUG Newsletter proved to be
+assistance. Mike Todd's Disk File column in the *ICPUG Newsletter* proved to be
 an invaluable source of insight into the inner workings of Commodore's DOS.
-Raeto West's book, Programming the PET/CBM, was a constant companion. Jim
+Raeto West's book, *Programming the PET/CBM*, was a constant companion. Jim
 Butterfield's numerous articles also provided valuable bits and pieces of
 information. Brad Templeton's POWER™ system and PAL™ assembler made the
 development of the programs in this manual a real joy. These packages are
@@ -145,122 +197,120 @@ editing and last minute revisions much easier.
 
                         TABLE OF CONTENTS
 
-Chapter 1 - INTRODUCTION
-            A Brief Word About the Programs
-            How to Type in the Programs
+    Chapter 1 - INTRODUCTION
+                A Brief Word About the Programs
+                How to Type in the Programs
 
-Chapter 2 - USING THE 1541'S DOS
-            The Purpose of DOS
-            Communicating with the 1541
-            The Command Channel
-            Using the Command Channel
-            Diskette Housekeeping
+    Chapter 2 - USING THE 1541'S DOS
+                The Purpose of DOS
+                Communicating with the 1541
+                The Command Channel
+                Using the Command Channel
+                Diskette Housekeeping
 
-Chapter 3 - DISKETTE FORMATTING
-            Layout of Tracks and Sectors
-            Layout of a Sector
-            The Header Block
-            The Data Block
+    Chapter 3 - DISKETTE FORMATTING
+                Layout of Tracks and Sectors
+                Layout of a Sector
+                The Header Block
+                The Data Block
 
-Chapter 4 - DISKETTE ORGANIZATION
-            Information Management
-            The Directory You See
-            The Block Availability Map
-            The Directory Entries
-            Program File Storage
-            Sequential File Storage
-            Relative File Storage
-            User File Storage
-            Deleted File Storage
-            Locked Files
+    Chapter 4 - DISKETTE ORGANIZATION
+                Information Management
+                The Directory You See
+                The Block Availability Map
+                The Directory Entries
+                Program File Storage
+                Sequential File Storage
+                Relative File Storage
+                User File Storage
+                Deleted File Storage
+                Locked Files
 
-Chapter 5 - DIRECT-ACCESS PROGRAMMING
-            Introduction to Direct-Access Programming
-            Beginning Direct-Access Programming
-            Block-Read Command
-            Buffer-Pointer Command
-            Block-Write Command
-            Memory-Read Command
-            Memory-Write Command
-            Block-Allocate Command
-            Block-Free Command
-            Memory-Execute Command
-            Block Execute Command
-            Direct-Access Entomology
+    Chapter 5 - DIRECT-ACCESS PROGRAMMING
+                Introduction to Direct-Access Programming
+                Beginning Direct-Access Programming
+                Block-Read Command
+                Buffer-Pointer Command
+                Block-Write Command
+                Memory-Read Command
+                Memory-Write Command
+                Block-Allocate Command
+                Block-Free Command
+                Memory-Execute Command
+                Block Execute Command
+                Direct-Access Entomology
 
-Chapter 6 - INTERMEDIATE DIRECT-ACCESS PROGRAMMING
+    Chapter 6 - INTERMEDIATE DIRECT-ACCESS PROGRAMMING
 
-Chapter 7 - DOS PROTECTION
-            Commodore's Data Encoding Scheme
-            Checksums
-            Description of DOS Error Messages
-            Analyzing a Protected Diskette
-            Duplicating a Protection Scheme
-            How to Create 21 Errors on a Full Track
-            How to Create a 21 Error on a Single Sector
-            How to Create a 23 Error on a Single Sector
-            How to Duplicate a 23 Error on a Single Sector
-            How to Create 23 Errors on a Full Track
-            How to Create 20 Errors on a Full Track
-            How to Create 27 Errors on a Full Track
-            How to Create a 22 Error on a Single Sector
-            How to Duplicate a 22 Error on a Single Sector
-            How to Format a Diskette with Multiple IDs
-            How to Backup a DOS Protected Diskette
-            How to Copy a File
+    Chapter 7 - DOS PROTECTION
+                Commodore's Data Encoding Scheme
+                Checksums
+                Description of DOS Error Messages
+                Analyzing a Protected Diskette
+                Duplicating a Protection Scheme
+                How to Create 21 Errors on a Full Track
+                How to Create a 21 Error on a Single Sector
+                How to Create a 23 Error on a Single Sector
+                How to Duplicate a 23 Error on a Single Sector
+                How to Create 23 Errors on a Full Track
+                How to Create 20 Errors on a Full Track
+                How to Create 27 Errors on a Full Track
+                How to Create a 22 Error on a Single Sector
+                How to Duplicate a 22 Error on a Single Sector
+                How to Format a Diskette with Multiple IDs
+                How to Backup a DOS Protected Diskette
+                How to Copy a File
 
-Chapter 8 - GETTING OUT OF TROUBLE
-            Unscratching a File
-            Recovering a Soft Sector
-            Recovering a Hard Sector
-            Recovering a Relative File
-            Recovering an Entire Diskette
-            Recovering a Physically Damaged Diskette
-            Recovering an Unclosed File
-            Recovering from a Short New
-            Recovering from a Full New
+    Chapter 8 - GETTING OUT OF TROUBLE
+                Unscratching a File
+                Recovering a Soft Sector
+                Recovering a Hard Sector
+                Recovering a Relative File
+                Recovering an Entire Diskette
+                Recovering a Physically Damaged Diskette
+                Recovering an Unclosed File
+                Recovering from a Short New
+                Recovering from a Full New
 
-Chapter 9 - OVERVIEW OF THE 1541 DOS
-            Introduction to 1541 DOS
-            The Hard Working 6502
-            Major IP Routines
-            Using the IP Routines
-            Major FDC Routines
-            Using the FDC Routines
-            The Recording Process
-            Block Diagram of the 1541
-            Writing Data to a Diskette
-            Reading Data From a Diskette
-            Summary Bugs in DOS 2.6
-            Write Incompatibility with 4040
-            Late News
+    Chapter 9 - OVERVIEW OF THE 1541 DOS
+                Introduction to 1541 DOS
+                The Hard Working 6502
+                Major IP Routines
+                Using the IP Routines
+                Major FDC Routines
+                Using the FDC Routines
+                The Recording Process
+                Block Diagram of the 1541
+                Writing Data to a Diskette
+                Reading Data From a Diskette
+                Summary Bugs in DOS 2.6
+                Write Incompatibility with 4040
+                Late News
 
-Appendix A - 1541 RAM VARIABLE DEFINITIONS
+    Appendix A - 1541 RAM VARIABLE DEFINITIONS
 
-Appendix B - ANALYSIS OF THE 1541's ROM
+    Appendix B - ANALYSIS OF THE 1541's ROM
 
-Appendix C - PROGRAM LISTINGS
+    Appendix C - PROGRAM LISTINGS
 
-Appendix D - MATHEMATICAL CONVERSION ROUTINES
+    Appendix D - MATHEMATICAL CONVERSION ROUTINES
 
-Index
+    Index
 ﻿
-Ignorance is a precious thing.
-Once lost, it can never be regained.
+                    *Ignorance is a precious thing.*
+                 *Once lost, it can never be regained.*
 ﻿
-CHAPTER 1
+# CHAPTER 1 - INTRODUCTION
 
-INTRODUCTION
-
-This manual is intended to supplement the documentation provided in the 1541
-User's Manual. Although this manual is primarily designed to meet the needs of
+This manual is intended to supplement the documentation provided in the *1541
+User's Manual*. Although this manual is primarily designed to meet the needs of
 the intermediate to advanced programmer, it will also be of interest to the
 novice Commodore user who wants to know more about how his 1541 disk drive
 works. This manual is not intended to replace the documentation provided by
 Commodore Business Machines, Inc. and the reader is assumed to be relatively
-familiar with the contents of the 1541 User's Manual. For the sake of
-continuity and clarity, some of the information covered in the 1541 User's
-Manual is also presented here. However, the majority of the information
+familiar with the contents of the *1541 User's Manual*. For the sake of
+continuity and clarity, some of the information covered in the *1541 User's
+Manual* is also presented here. However, the majority of the information
 presented in this manual is original and is the result of intensive disassembly
 and annotation of the 1541's DOS by the authors. Some information is based on
 articles and notes published in a variety of publications as well as
@@ -271,9 +321,9 @@ Machines, Inc. Although we cannot guarantee the accuracy of all the information
 presented in this manual, the material has been thoroughly researched and
 tested.
 
-There were several reasons for writing Inside Commodore DOS:
+There were several reasons for writing *Inside Commodore DOS:*
 
-1. To correct errors and omissions in the 1541 User's Manual.
+1. To correct errors and omissions in the *1541 User's Manual.*
 2. To help you make more effective use of your disk drive.
 3. To provide complete information on diskette formatting.
 4. To provide complete information on the storage of files.
@@ -285,7 +335,8 @@ There were several reasons for writing Inside Commodore DOS:
 Although this manual focuses primarily on the 1541 disk drive, much of the
 information also applies to other Commodore disk drives.
 
-1.1 A Brief Word About the Programs
+
+## 1.1 A Brief Word About the Programs
 
 This book contains listings for 46 ready-to-use programs written in BASIC.
 These programs are copyrighted. They may NOT be used commercially, in whole
@@ -312,14 +363,14 @@ contain a machine language program, will produce problems.
 As a courtesy to the more advanced programmer, we have also included the source
 listings for each machine language routine A source listing immediately follows
 a related BASIC program listing and has a file name ending in ".PAL". It is for
-use with the PAL assembler. Note: If you are using a different assembler, you
-may have to make some minor changes.
+use with the PAL assembler. *Note: If you are using a different assembler, you
+may have to make some minor changes.*
 
 The programs in this book were designed to be not only useful and beneficial,
 but instructive as well. Many of them illustrate the "state of the art" in
 the use of Commodore's direct-access disk commands. Enjoy!
 
-1.2 How to Type in the Programs
+## 1.2 How to Type in the Programs
 
 Program listings in books and magazines often suffer from two problems:
 typographical errors that occur when the program is retyped into a word
@@ -362,11 +413,9 @@ determine the appropriate number of spaces.
 Happy hunting and pecking!
 ﻿
 ﻿
-                                CHAPTER 2
+# CHAPTER 2 - USING THE 1541'S DOS
 
-                          USING THE 1541'S DOS
-
-2.1 The Purpose of a DOS
+## 2.1 The Purpose of a DOS
 
 A disk operating system (DOS) is a machine language program that controls a
 disk drive. It does several different tasks:
@@ -398,7 +447,7 @@ The disadvantages of having an intelligent disk drive are:
 2. You must replace the ROMs to convert to a new version of DOS.
 
 
-2.2 Communicating with the 1541
+## 2.2 Communicating with the 1541
 
 Your Commodore 64 or VIC-20 can communicate with your 1541 disk drive in
 several ways:
@@ -434,13 +483,13 @@ channel. Although this manual provides detailed information regarding how files
 are stored and organized, no attempt is made to teach you how to develop
 programs that make extensive use of file handling. We would encourage readers
 who are interested in file handling techniques to refer to Jim Butterfield's
-series of articles in COMPUTE!. The only I/O applications discussed in this
+series of articles in *COMPUTE!.* The only I/O applications discussed in this
 manual are those relating to direct-access programming (see Chapter 5).
 
 Since the rest of this manual makes extensive use of the command channel, let's
 examine it in some detail.
 
-2.3 The Command Channel
+## 2.3 The Command Channel
 
 The command channel (channel number 15) is an important communication link
 between your computer and the 1541 disk drive. It has several important
@@ -456,7 +505,7 @@ areas on a diskette.
 This chapter focuses on the first two of these uses. Chapter 5 provides more
 detail on reading or writing to a diskette.
 
-2.4 Using the Command Channel
+## 2.4 Using the Command Channel
 
 Using the command channel is easy. Just follow these steps:
 
@@ -467,14 +516,14 @@ Using the command channel is easy. Just follow these steps:
 
 Let's go over each step to ensure that you know exactly what to do.
 
-1. Establishing communications using an OPEN statement.
+### 1. Establishing communications using an OPEN statement.
 
 In order to establish a communication channel between your computer and your
 1541 disk drive, you use an OPEN statement. An OPEN statement is a BASIC
 command which looks like this:
 
-SYNTAX:         OPEN file#, device#, channel#
-EXAMPLE:        OPEN 15, 8, 15
+    SYNTAX:         OPEN file#, device#, channel#
+    EXAMPLE:        OPEN 15, 8, 15
 
 where
 
@@ -482,9 +531,11 @@ file#           = the logical file number (1-127)
 device#         = the device number (8 for a stock 1541)
 channel#        = the channel number or secondary address (2-15)
 
-NOTE:   Channel numbers 0 & 1 are reserved for use by the DOS.
-        Channel numbers 2-14 are data communications channels.
-        Channel number 15 is the command channel.
+NOTE:
+
+* Channel numbers 0 & 1 are reserved for use by the DOS.
+* Channel numbers 2-14 are data communications channels.
+* Channel number 15 is the command channel.
 
 The OPEN statement can be used either in immediate mode (typed and executed
 directly from the keyboard) or under program control (embedded in a program).
@@ -493,22 +544,22 @@ In the example above (OPEN 15, 8, 15) we opened logical file number 15 on the
 C64 to device number 8 (the disk drive) through channel 15 (the command
 channel).
 
-2. Sending commands to the DOS using a PRINT* statement.
+### 2. Sending commands to the DOS using a PRINT* statement.
 
 In order to send commands from your computer to the 1541, you use a PRINT#
 statement. A PRINT# statement is a BASIC command which looks like this:
 
-SYNTAX:         PRINT# file#, "command"
-EXAMPLE:        PRINT#15, "N0:MY DISKETTE,MD"
+    SYNTAX:         PRINT# file#, "command"
+    EXAMPLE:        PRINT#15, "N0:MY DISKETTE,MD"
 
 where
 
-file#   = the logical file number you used when you opened the command channel
-command = the disk command to be sent to the DOS
+* file# = the logical file number you used when you opened the command channel
+* command = the disk command to be sent to the DOS
 
-NOTE: The statement is PRINT# not PRINT #. You must not put a space before the
-# sign. Spaces following the # sign are always optional. DO NOT use ?# as an
-abbreviation either. The correct abbreviation is pR (p then SHIFTED R).
+NOTE: The statement is PRINT# not PRINT #. You *must not* put a space before
+the # sign. Spaces following the # sign are always optional. DO NOT use ?# as
+an abbreviation either. The correct abbreviation is pR (p then SHIFTED R).
 
 In this example, the disk command is "N0:MY DISKETTE,MD". This command causes
 the DOS to prepare the blank diskette in the drive for first-time use.
@@ -522,26 +573,25 @@ The disk housekeeping commands are discussed in the next part of this chapter.
 The commands relating to reading or writing data are discussed in Chapter 5 on
 Direct-Access Programming.
 
-3. Reading DOS messages using a GET# or an INPUT# statement.
+### 3. Reading DOS messages using a GET# or an INPUT# statement.
 
 You may use either an INPUT# or a GET# statement to read the command channel
 and access any messages or data prepared for the computer by the DOS. Both
 INPUT# and GET# statements are BASIC commands. They look like this:
 
-SYNTAX:         INPUT# file#, variable list
-                GET# file#, variable list
+    SYNTAX:         INPUT# file#, variable list
+                    GET# file#, variable list
 
-EXAMPLE:        INPUT# 15, EN, EM$, ET, ES
-                GET# 15, A$
+    EXAMPLE:        INPUT# 15, EN, EM$, ET, ES
+                    GET# 15, A$
 
 where
 
-file#           = the logical file number you used when you opened the command
-                  channel
-variable list   = one or more variable names separated by commas
+* file# = the logical file number you used when you opened the command channel
+* variable list = one or more variable names separated by commas
 
 NOTE: As was noted for PRINT# above, the BASIC statements are INPUT# and GET#,
-not INPUT # and GET #. You must not put a space before the # sign. Spaces
+not INPUT # and GET #. You *must not* put a space before the # sign. Spaces
 following the # sign are always optional. Neither the INPUT# statement nor the
 GET# statement can be used in immediate mode (typed and executed directly from
 the keyboard). They must be included within a program.
@@ -559,31 +609,31 @@ successfully. The report consists of an error code number, an English language
 message, and the track and sector where the problem, if any, was encountered.
 Here is a subroutine that checks the error status.
 
-100 OPEN 15,8,15 : REM THE OPEN COMMAND CHANNEL
-        .       .       .
-500 INPUT#15,EN,EM$,ET,ES : REM INPUT THE ERROR STATUS
-51O IF EN < 20 THEN RETURN : REM NO ERROR ENCOUNTERED
-520 PRINT EN;EM$;ET;ES : REM PRINT THE ERROR STATUS ON SCREEN
-530 CLOSE 15 : END : REM ABORT ON BAD STATUS
+    100 OPEN 15,8,15 : REM THE OPEN COMMAND CHANNEL
+            .       .       .
+    500 INPUT#15,EN,EM$,ET,ES : REM INPUT THE ERROR STATUS
+    51O IF EN < 20 THEN RETURN : REM NO ERROR ENCOUNTERED
+    520 PRINT EN;EM$;ET;ES : REM PRINT THE ERROR STATUS ON SCREEN
+    530 CLOSE 15 : END : REM ABORT ON BAD STATUS
 
 Line 100 opens the command channel. It is a good idea to open the command
 channel at the beginning of your program and leave it open until the end. Line
 500 inputs the status report. The error code number is stored in EN, the
 message in EM$, the track in ET, and the sector in ES. Error codes less than 20
 may be ignored (line 510). A complete list of the error codes and messages is
-contained in the back of your 1541 User's Manual. A detailed explanation of the
-nature and cause of many of these errors is provided in Chapter 7 on Disk
+contained in the back of your *1541 User's Manual*. A detailed explanation of
+the nature and cause of many of these errors is provided in Chapter 7 on Disk
 Protection.
 
-4. CLOSE the command channel when you are done.
+### 4. CLOSE the command channel when you are done.
 
 After you have finished using the command channel, it should be closed. Recall
 that the OPEN command has three parameters: the logical file number, the device
 number, and the channel number. The CLOSE command has only one, the logical
 file number. It looks like this:
 
-SYNTAX:         CLOSE file#
-EXAMPLE:        CLOSE 15
+    SYNTAX:         CLOSE file#
+    EXAMPLE:        CLOSE 15
 
 where
 
@@ -601,7 +651,7 @@ leaving the command channel open, but you may lose an important data file if
 you leave a data communication channel open.
 
 
-2.5 Disk Housekeeping
+##2.5 Disk Housekeeping
 
 As your collection of programs grows, you will have to do some housekeeping to
 keep things in shape. Disk housekeeping chores include the following:
@@ -633,7 +683,7 @@ automatically for you. The DOS 5.1 syntax can be used only in immediate mode,
 however. It cannot be used in a program or a ?SYNTAX ERROR will result.
 
 
-The New Command
+### The New Command
 
 When a fresh diskette is taken from its storage envelope, the 1541 cannot
 recognize it. The diskette must be formatted or newed prior to first-time use.
@@ -643,18 +693,18 @@ a directory is set up, wherein the drive records information about all the
 files stored on the diskette. Chapter 3 provides a much more detailed account
 of this operation. The syntax for formatting a diskette is really quite simple:
 
-SYNTAX:         OPEN 15, 8, 15
-                PRINT#15, "N0:DISK NAME,ID"
-                CLOSE 15
+    SYNTAX:         OPEN 15, 8, 15
+                    PRINT#15, "N0:DISK NAME,ID"
+                    CLOSE 15
 
-ALTERNATE:      PRINT#15, "N:DISK NAME,ID"
+    ALTERNATE:      PRINT#15, "N:DISK NAME,ID"
 
-EXAMPLE:        OPEN 15, 8, 15
-                PRINT#15, "N0:MY DISKETTE,MD"
-                CLOSE 15
+    EXAMPLE:        OPEN 15, 8, 15
+                    PRINT#15, "N0:MY DISKETTE,MD"
+                    CLOSE 15
 
-DOS 5.1:        >N0:DISK NAME,ID
-                >N:DISK NAME,ID
+    DOS 5.1:        >N0:DISK NAME,ID
+                    >N:DISK NAME,ID
 
 The disk command, "N0:MY DISKETTE,MD", is sent to the drive by the PRINT#15
 statement. The command has three parameters. The first parameter within quotes
@@ -677,32 +727,34 @@ A "full" new on a diskette takes roughly 2-3 minutes. There is a quicker way to
 erase a diskette that has already been used. This is accomplished by leaving
 off the disk ID. For example:
 
-SYNTAX:         OPEN 15, 8, 15
-                PRINT#15, "N0:DISK NAME"
-                CLOSE 15
+    SYNTAX:         OPEN 15, 8, 15
+                    PRINT#15, "N0:DISK NAME"
+                    CLOSE 15
 
-ALTERNATE:      PRINT#15, "N:DISK NAME"
+    ALTERNATE:      PRINT#15, "N:DISK NAME"
 
-EXAMPLE:        OPEN 15, 8, 15
-                PRINT#15, "N0:TEST DISKETTE"
-                CLOSE 15
+    EXAMPLE:        OPEN 15, 8, 15
+                    PRINT#15, "N0:TEST DISKETTE"
+                    CLOSE 15
 
-DOS 5.1:        >NO:DISK NAME
-                >N:DISK NAME
+    DOS 5.1:        >NO:DISK NAME
+                    >N:DISK NAME
 
 Notice that no comma or ID follows the disk name. This command will work only
 on a diskette that has previously been formatted. It is referred to as a
 "short" new. A "short" new simply erases the first sector in the directory and
 writes an empty BAM (block availability map) to tell the DOS that we have a
-fresh diskette in use. NOTE: A diskette that is plagued by read or write errors
-does not have to be pitched. Copy the files to another diskette first. Then do
-a "full" new on the offending diskette. This will erase and reformat the entire
-diskette. A "short" new rewrites only sectors 0 and 1 of track 18 and will not
-eliminate any read or write errors. See Chapter 8 about how to recover from
-both a "short" new and a "full" new.
+fresh diskette in use.
+
+NOTE: A diskette that is plagued by read or write errors does not have to be
+pitched. Copy the files to another diskette first. Then do a "full" new on the
+offending diskette. This will erase and reformat the entire diskette. A "short"
+new rewrites only sectors 0 and 1 of track 18 and will not eliminate any read
+or write errors. See Chapter 8 about how to recover from both a "short" new and
+a "full" new.
 
 
-The Initialize Command
+### The Initialize Command
 
 Initialization has nothing to do with formatting. APPLE™ owners format a
 diskette by "initializing" it. This is NOT TRUE with Commodore. Initializing a
@@ -711,14 +763,14 @@ store them in the drive's internal memory. The BAM establishes where the next
 available sector is for writing. Without it files would be overwritten. To
 initialize a diskette perform the following:
 
-SYNTAX:         OPEN 15, 8, 15
-                PRINT#15, "I0"
-                CLOSE 15
+    SYNTAX:         OPEN 15, 8, 15
+                    PRINT#15, "I0"
+                    CLOSE 15
 
-ALTERNATE:      PRINT#15, "I"
+    ALTERNATE:      PRINT#15, "I"
 
-DOS 5.1:        >I0
-                >I
+    DOS 5.1:        >I0
+                    >I
 
 The I is short for INITIALIZE. The drive number can be ignored if you are using
 only one 1541. The drive motor purrs for a few seconds and then settles down.
@@ -748,24 +800,24 @@ destroys the error status the DOS prepared for you. If error checking is
 important, retrieve the error message first; then initialize the drive.
 
 
-The Rename Command
+### The Rename Command
 
 Occasionally you will want to change the name of a file stored on a diskette.
 To rename a file you first open the command channel and then send the rename
 command like this:
 
-SYNTAX:         OPEN 15, 8, 15
-                PRINT#15, "R0:NEW NAME=OLD NAME"
-                CLOSE 15
+    SYNTAX:         OPEN 15, 8, 15
+                    PRINT#15, "R0:NEW NAME=OLD NAME"
+                    CLOSE 15
 
-ALTERNATE:      PRINT#15, "R:NEW NAME=OLD NAME"
+    ALTERNATE:      PRINT#15, "R:NEW NAME=OLD NAME"
 
-EXAMPLE:        OPEN 15, 8, 15
-                PRINT#15, "R0:DISPLAY T&S=DTS"
-                CLOSE 15
+    EXAMPLE:        OPEN 15, 8, 15
+                    PRINT#15, "R0:DISPLAY T&S=DTS"
+                    CLOSE 15
 
-DOS 5.1:        >R0:NEW NAME=OLD NAME
-                >R:NEW NAME=OLD NAME
+    DOS 5.1:        >R0:NEW NAME=OLD NAME
+                    >R:NEW NAME=OLD NAME
 
 Again the syntax is exacting but simple to follow. The R0: means to rename on
 drive 0. It is short for RENAME0:. As before, the 0 is optional on the 1541.
@@ -781,7 +833,7 @@ new file name is DISPLAY T&S. It replaces the old file name DTS. One final
 point. You cannot rename a file that is currently open for a read or write.
 
 
-The Copy Command
+### The Copy Command
 
 The copy command allows you to easily backup an existing file on your diskette.
 There are three restrictions attached. First, the new file must have a
@@ -789,22 +841,22 @@ different name. Second, the copy command will not work on a relative file.
 Third, you must have enough room on the diskette. The copy command looks like
 this:
 
-SYNTAX:
-        OPEN 15, 8, 15
-        PRINT#15, "C0:BACKUP=0:ORIGINAL"
-        CLOSE 15
+    SYNTAX:
+            OPEN 15, 8, 15
+            PRINT#15, "C0:BACKUP=0:ORIGINAL"
+            CLOSE 15
 
-ALTERNATE:
-        PRINT#15, "C:BACKUP=ORIGINAL"
+    ALTERNATE:
+            PRINT#15, "C:BACKUP=ORIGINAL"
 
-EXAMPLE:
-        OPEN 15, 8, 15
-        PRINT#15, "C0:MY PROGRAM B/U=0:MY PROGRAM"
-        CLOSE 15
+    EXAMPLE:
+            OPEN 15, 8, 15
+            PRINT#15, "C0:MY PROGRAM B/U=0:MY PROGRAM"
+            CLOSE 15
 
-DOS 5.l:
-        >C0:BACKUP=0:ORIGINAL
-        >C:BACKUP=ORIGINAL
+    DOS 5.l:
+            >C0:BACKUP=0:ORIGINAL
+            >C:BACKUP=ORIGINAL
 
 The C is short for COPY. The new file above is called MY PROGRAM B/U. It is a
 backup copy of a previous program called MY PROGRAM. Note that we must specify
@@ -817,22 +869,22 @@ See the alternate syntax to save a few keystrokes.
 It is also possible to merge two or more sequential data files using the copy
 command. The syntax for this is as follows:
 
-SYNTAX:
-        OPEN 15, 8, 15
-        PRINT#15, "C0:COMBINED=0:FILE1,0:FILE2,0:FILE3"
-        CLOSE 15
+    SYNTAX:
+            OPEN 15, 8, 15
+            PRINT#15, "C0:COMBINED=0:FILE1,0:FILE2,0:FILE3"
+            CLOSE 15
 
-ALTERNATE:
-        PRINT#15, "C:COMBINED=FILE1,FILE2,FILE3"
+    ALTERNATE:
+            PRINT#15, "C:COMBINED=FILE1,FILE2,FILE3"
 
-EXAMPLE:
-        OPEN 15, 8, 15
-        PRINT#15, "C0:MAILFILE=0:NAME,O:ADDRESS,0:CITY"
-        CLOSE 15
+    EXAMPLE:
+            OPEN 15, 8, 15
+            PRINT#15, "C0:MAILFILE=0:NAME,O:ADDRESS,0:CITY"
+            CLOSE 15
 
-DOS 5.l:
-        > CO:COMBINED=0:FILE1,0:FILE2,0:FILE3
-        >C:COMBINED=FILE1,FILE2,FILE3
+    DOS 5.l:
+            > CO:COMBINED=0:FILE1,0:FILE2,0:FILE3
+            >C:COMBINED=FILE1,FILE2,FILE3
 
 Our large file now consists of several files appended together. While this
 feature of the copy command is available, it is rarely used. Few programming
@@ -842,7 +894,7 @@ cannot be merged into the main program by the disk drive. You will need to use
 a programmer's aid like POWER™, SYSRES™, or BASIC AID™ for the C64 to do this.
 
 
-The Scratch Command
+### The Scratch Command
 
 To get rid of an unwanted file, we scratch it. The only exception is an
 unclosed file. An unclosed file is one that appears in the directory as having
@@ -850,18 +902,18 @@ zero blocks and whose file type is preceded by an asterisk (*SEQ, *PRG, etc.).
 This will be explained below. To scratch a file, first remove the write protect
 tab and key in:
 
-SYNTAX:         OPEN 15, 8, 15
-                PRINT#15, "S0:FILE NAME"
-                CLOSE 15
+    SYNTAX:         OPEN 15, 8, 15
+                    PRINT#15, "S0:FILE NAME"
+                    CLOSE 15
 
-ALTERNATE:      PRINT#15, "S:FILE NAME"
+    ALTERNATE:      PRINT#15, "S:FILE NAME"
 
-EXAMPLE:        OPEN 15, 8, 15
-                PRINT#15, "S0:TESTING 123"
-                CLOSE 15
+    EXAMPLE:        OPEN 15, 8, 15
+                    PRINT#15, "S0:TESTING 123"
+                    CLOSE 15
 
-DOS 5.1:        >SO:FILE NAME
-                >S:FILE NAME
+    DOS 5.1:        >SO:FILE NAME
+                    >S:FILE NAME
 
 The scratch command requires a single parameter, the file name, preceded by S
 or SCRATCH. As before, the drive number is optional.
@@ -870,22 +922,22 @@ There are some variations that incorporate wild cards. Wild cards in a file
 name are asterisks (*) or question marks (?). They should be used with utmost
 caution since more than one file can be scratched at a time.
 
-EXAMPLE:        OPEN 15, 8, 15
-                PRINT#15, "S0:T*"
-                CLOSE 15
+    EXAMPLE:        OPEN 15, 8, 15
+                    PRINT#15, "S0:T*"
+                    CLOSE 15
 
-DOS 5.1:        >S0:T*
+    DOS 5.1:        >S0:T*
 
 In the above example all files beginning with the letter T, regardless of file
 type, will be scratched. In the event that no file starts with the letter T,
 none will be affected. Careless use of a wild card can have catastrophic
 results. For example:
 
-EXAMPLE:        OPEN 15, 8, 15
-                PRINT#15, "S0:*"
-                CLOSE 15
+    EXAMPLE:        OPEN 15, 8, 15
+                    PRINT#15, "S0:*"
+                    CLOSE 15
 
-DOS 5.1:        >S0:*
+    DOS 5.1:        >S0:*
 
 The above command will scratch every file on the diskette. It is the equivalent
 of performing a short new on a diskette. Be careful!
@@ -896,11 +948,11 @@ names are all eight characters long and end in .C64. We could not use .C64* to
 scratch them since the match falls at the end of the file name. However, we
 could use:
 
-EXAMPLE:        OPEN 15, 8, 15
-                PRINT#15, "S0:????.C64"
-                CLOSE 15
+    EXAMPLE:        OPEN 15, 8, 15
+                    PRINT#15, "S0:????.C64"
+                    CLOSE 15
 
-DOS 5.1:        >S0:????.C64
+    DOS 5.1:        >S0:????.C64
 
 Note that we used four question marks in the above example. An exact match of
 .C64 must occur on characters 5 through 8 of the file name. No match — no
@@ -909,11 +961,11 @@ by the previous command. However, BACKUP.C64 would not be affected.
 
 More than one wild card can be used within the same command. For example:
 
-EXAMPLE:        OPEN 15, 8, 15
-                PRINT#15, "S0:T?ST*"
-                CLOSE 15
+    EXAMPLE:        OPEN 15, 8, 15
+                    PRINT#15, "S0:T?ST*"
+                    CLOSE 15
 
-DOS 5.1:        >S0:T?ST*
+    DOS 5.1:        >S0:T?ST*
 
 This command would scratch files with these names: TEST, TASTY, TESTING123. The
 file TOAST would not be affected. Note that it makes no sense to send a command
@@ -937,26 +989,27 @@ closed properly. This can happen for a variety of reasons:
 
 (See Chapter 8 about how to recover an unclosed file.)
 
-Whatever the cause, an unclosed file should never be scratched! Since the write
-operation was aborted, the internal organization of the diskette (i.e., the
-BAM), has been left in disarray. It does not match the actual file contents of
-the diskette. Any further attempt to write to that diskette will probably cause
-a loss of one or more files. Files can actually overlap one another now and you
-will be left with a poisoned diskette. The DOS does have a command to decorrupt
-itself. This is the validate command. When in doubt, validate your diskette!
+Whatever the cause, *an unclosed file should never be scratched!* Since the
+write operation was aborted, the internal organization of the diskette (i.e.,
+the BAM), has been left in disarray. It does not match the actual file contents
+of the diskette. Any further attempt to write to that diskette will probably
+cause a loss of one or more files. Files can actually overlap one another now
+and you will be left with a poisoned diskette. The DOS does have a command to
+decorrupt itself. This is the validate command. When in doubt, validate your
+diskette!
 
 The scratch command does not actually erase the file on your diskette. Rather
 it traces the file across the surface of the diskette and frees any sectors the
 file occupied. The file-type byte is also changed to a zero in the directory
-which indicates to the DOS that it is no longer active. If you inadvertently
-scratch a file that you didn't mean to, stop right then and there! You can
+which indicates to the DOS that it is no longer active. *If you inadvertently
+scratch a file that you didn't mean to, stop right then and there!* You can
 recover it. Do not attempt to write to the diskette. The sectors just freed
 will be used on subsequent writes to the diskette. Once you write to the
 diskette, recovery is impossible. Chapter 8 on Getting Out of Trouble shows you
 how to recover a scratched file.
 
 
-The Validate Command
+### The Validate Command
 
 This command tells the DOS to reconstruct its map which shows where information
 is stored on the diskette, so it conforms to the files listed in the directory.
@@ -964,14 +1017,14 @@ This is a simple way to decorrupt a damaged diskette. However, it is not a
 failsafe command as will be explained shortly. A validate command looks like
 this:
 
-SYNTAX:         OPEN 15, 8, 15
-                PRINT#15, "V0"
-                CLOSE 15
+    SYNTAX:         OPEN 15, 8, 15
+                    PRINT#15, "V0"
+                    CLOSE 15
 
-ALTERNATE:      PRINT#15, "V"
+    ALTERNATE:      PRINT#15, "V"
 
-DOS 5.1:        >V0
-                >V
+    DOS 5.1:        >V0
+                    >V
 
 The V is an abbreviation for VALIDATE. As before, the 0 is optional for the
 1541 drive.
@@ -1027,9 +1080,7 @@ and other disasters.
 
 ﻿
 ﻿
-CHAPTER 3
-
-DISKETTE FORMATTING
+# CHAPTER 3 - DISKETTE FORMATTING
 
 When you take a new floppy diskette out of the package, it is blank. Before the
 drive can store data onto it, it must be formatted. This is done by inserting
@@ -1044,7 +1095,7 @@ This chapter describes the formatting process and the tracks and sectors of a
 diskette. Chapter 4 describes the directory and the block availability map
 (BAM).
 
-3.1 Layout of Tracks and Sectors
+## 3.1 Layout of Tracks and Sectors
 
 During the formatting (newing) process, the DOS divides the diskette into
 tracks and sectors. A track is a circular path on the diskette along which
@@ -1058,9 +1109,9 @@ limits the outward movement of the read/write head. The other tracks are
 identified by their distance from track 1. The diagram below indicates the
 layout of the tracks on a formatted diskette.
 
-[tracks layout diagram - omitted]
+[tracks layout diagram - currently omitted]()
 
-[sectors layout diagram - omitted]
+[sectors layout diagram - corrently omitted]()
 
 Although there are only 35 tracks, the stepper motor can position the
 read/write head to more than 70 different positions. This might seem to imply
@@ -1084,13 +1135,13 @@ organized.
 
 Organization of Tracks and Sectors on a 1541 Formatted Diskette
 
-            Track      Range of Sector     Total Sectors   Total Bytes
-   Zone    Numbers        Numbers            Per Track      Per Track
-   ----    --------    ---------------     -------------   -----------
-     1      1 to 17       0 to 20               21            5376
-     2     18 to 24       0 to 18               19            4864
-     3     25 to 30       0 to 17               18            4608
-     4     31 to 35       0 to 16               17            4352
+             Track      Range of Sector    Total Sectors    Total Bytes
+    Zone    Numbers        Numbers           Per Track       Per Track
+    ----    --------    ---------------    --------------   -----------
+     1       1 to 17       0 to 20               21            5376
+     2      18 to 24       0 to 18               19            4864
+     3      25 to 30       0 to 17               18            4608
+     4      31 to 35       0 to 16               17            4352
 
 A total of 683 sectors are written at the time of initial formatting. Since the
 disk rotates at a constant speed of 300 rpm, you may wonder how Commodore
@@ -1101,12 +1152,12 @@ using a high speed clock and dividing the clock by N, where the value of N is
 determined by the zone. The table below summarizes the clock rates for each
 zone.
 
-   Zone    Tracks    Divisor      Clock Rate      Bits/Rotation
-   ----   --------   -------   ----------------   -------------
-    1      1 to 17     13      307,692 bits/sec     61,538.4
-    2     18 to 24     14      285,714 bits/sec     57,142.8
-    3     25 to 30     15      266,667 bits/sec     53,333.4
-    4     31 to 35     16      250,000 bits/sec     50,000.0
+    Zone    Tracks    Divisor      Clock Rate      Bits/Rotation
+    ----   --------   -------   ----------------   -------------
+     1      1 to 17     13      307,692 bits/sec     61,538.4
+     2     18 to 24     14      285,714 bits/sec     57,142.8
+     3     25 to 30     15      266,667 bits/sec     53,333.4
+     4     31 to 35     16      250,000 bits/sec     50,000.0
 
 This scheme provides a recording density that varies from about 4000 bits/inch
 on the outer tracks to almost 6000 bits/inch on the inner tracks.
@@ -1119,7 +1170,7 @@ directory to keep track of the location of the files on a diskette (see Chapter
 4) further reduces us to an effective storage capacity of 169,984 bytes (256
 bytes * 664 sectors).
 
-3.2 Layout of a Sector
+## 3.2 Layout of a Sector
 
 During the formatting (newing) process, the DOS creates and records onto the
 diskette all 683 sectors/blocks that will eventually be used for storing
@@ -1131,21 +1182,21 @@ information. Each sector is comprised of two parts:
 The diagram below illustrates how these parts are arranged.
 
       SECTOR #0                             SECTOR #1
----------------------------------------------------------------------------
-| |              | |              |#| | |              | |                |
-| | HEADER BLOCK | |   DATA BLOCK |#| | | HEADER BLOCK | |   DATA BLOCK   | --+
-| |              | |              |#| | |              | |                |   |
----------------------------------------------------------------------------   |
-                                                                              |
-                             +------------------------------------------------+
-                             |
-                             |             SECTOR #2   |\
-                             |    ---------------------- \
-                             |    |#| | |                 \
-                             +--> |#| | | HEADER BLOCK     >
-                                  |#| | |                 /
-                                  ---------------------| /
-                                                       |/
+    --------------------------------------------------------
+    | |              | |              |#| | |              |
+    | | HEADER BLOCK | |   DATA BLOCK |#| | | HEADER BLOCK | --+
+    | |              | |              |#| | |              |   |
+    --------------------------------------------------------   |
+                                                               |
+              +------------------------------------------------+
+              |
+              |                               SECTOR #2   |\
+              |   ----------------------------------------- \
+              |   | |                |#| | |                 \
+              +-->| |   DATA BLOCK   |#| | | HEADER BLOCK     >
+                  | |                |#| | |                 /
+                  ----------------------------------------| /
+                                                          |/
                  ---              ---
                  | |              |#|
                  | | = sync mark  |#| = inter-sec gap
@@ -1167,126 +1218,127 @@ If you are puzzled about why several $FF characters in a row in the data block
 are not interpreted as a sync character, you may want to skip ahead to the
 section on Commodore's GCR encoding scheme in Chapter 7.
 
-3.3 The Header Block
+## 3.3 The Header Block
 
 The header block of a sector allows the DOS to identify which track and sector
 is being read. It is composed of a sync mark, eight bytes of identifying
 information, and a header gap. The diagram below shows the layout of a header
 block.
 
-------------------------------------------------------------------
-| SYNC |  HEADER  | HEADER BLOCK | SECTOR | TRACK  | ID CHARACTER \
-| MARK | BLOCK ID |   CHECKSUM   | NUMBER | NUMBER |   NUMBER 2   / ---+
-------------------------------------------------------------------\    |
-                                                                       |
-  +--------------------------------------------------------------------+
-  |
-  |    -----------------------------------------------
-  +--> \ ID CHARACTER | $0F BYTE | $0F BYTE | HEADER |
-       /   NUMBER 1   |          |          |  GAP   |
-       \----------------------------------------------
+    ------------------------------------------------------------------\
+    | SYNC |  HEADER  | HEADER BLOCK | SECTOR | TRACK  | ID CHARACTER  \
+    | MARK | BLOCK ID |   CHECKSUM   | NUMBER | NUMBER |   NUMBER 2    / ---+
+    -------------------------------------------------------------------\    |
+                                                                            |
+      +---------------------------------------------------------------------+
+      |
+      |   \-----------------------------------------------
+      +--> \ ID CHARACTER | $0F BYTE | $0F BYTE | HEADER |
+           /   NUMBER 1   |          |          |  GAP   |
+           \----------------------------------------------
 
 NOTE: The header is recorded on disk exactly as indicated above. The diagram on
-page 54 of the 1541 User's Manual is incorrect.
+page 54 of the *1541 User's Manual* is incorrect.
 
 Let's examine the bytes that make up the header block:
 
-Sync Mark: This consists of 10 or more 1 bits as described above. It warns the
-DOS that either a data block or a header block is coming.
+* **Sync Mark:** This consists of 10 or more 1 bits as described above. It
+  warns the DOS that either a data block or a header block is coming.
 
-Header Block ID: This is normally a $08 byte. It serves to indicate to the DOS
-that this is a header block and not a data block.
+* **Header Block ID:** This is normally a $08 byte. It serves to indicate to
+  the DOS that this is a header block and not a data block.
 
-Header Block Checksum: This is a checksum character used by the DOS to ensure
-that the header block was read correctly. It is found by EORing the track
-number, the sector number, and the two ID characters. If you are not sure what
-an EOR is, you may want to read through Section 7.1.
+* **Header Block Checksum:** This is a checksum character used by the DOS to
+  ensure that the header block was read correctly. It is found by EORing the
+  track number, the sector number, and the two ID characters. If you are not
+  sure what an EOR is, you may want to read through Section 7.1.
 
-Sector Number: This byte is the number of this particular sector. The sectors
-are numbered consecutively around a track.
+* **Sector Number:** This byte is the number of this particular sector. The
+  sectors are numbered consecutively around a track.
 
-Track Number: This byte is the number of this particular track. The DOS uses
-this byte to check to be sure that the record/play head is positioned to the
-correct track.
+* **Track Number:** This byte is the number of this particular track. The DOS
+  uses this byte to check to be sure that the record/play head is positioned to
+  the correct track.
 
-ID Character #2: This is the second ID character that you specified in the NEW
-command when the diskette was formatted (e.g., the 1 in "N0:GAMES,V1"). It is
-sometimes referred to as the ID HI. The DOS checks this byte against a master
-disk ID to ensure that you have not swapped diskettes.
+* **ID Character #2:** This is the second ID character that you specified in
+  the NEW command when the diskette was formatted (e.g., the 1 in
+  "N0:GAMES,V1"). It is sometimes referred to as the ID HI. The DOS checks this
+  byte against a master disk ID to ensure that you have not swapped diskettes.
 
-ID Character #1: This is the first ID character that you specified in the NEW
-command when the diskette was formatted (e.g., the V in "N0:GAMES,V1"). It is
-sometimes referred to as the ID LO. The DOS checks this byte against a master
-disk ID to ensure that you have not swapped diskettes.
+* **ID Character #1:** This is the first ID character that you specified in the
+  NEW command when the diskette was formatted (e.g., the V in "N0:GAMES,V1").
+  It is sometimes referred to as the ID LO. The DOS checks this byte against a
+  master disk ID to ensure that you have not swapped diskettes.
 
-$0F Bytes: These bytes are used as padding (spacing) by the DOS during initial
-formatting. They are called "OFF" bytes. Once formatting is complete OFF bytes
-are never referenced again.
+* **$0F Bytes:** These bytes are used as padding (spacing) by the DOS during
+  initial formatting. They are called "OFF" bytes. Once formatting is complete
+  OFF bytes are never referenced again.
 
-Header Gap: The header gap consists of eight $55 bytes. These eight bytes are
-used to provide breathing room between the header block and the data block. The
-DOS never reads these bytes. They allow the DOS time to set-up for reading the
-data block that follows. NOTE: The 4040 drive uses a nine byte header gap. This
-is one of the reasons why 1541 drives and 4040 drives are NOT WRITE COMPATIBLE!
-See Chapter 9 for more information.
+* **Header Gap:** The header gap consists of eight $55 bytes. These eight bytes
+  are used to provide breathing room between the header block and the data
+  block. The DOS never reads these bytes. They allow the DOS time to set-up for
+  reading the data block that follows. NOTE: The 4040 drive uses a nine byte
+  header gap. This is one of the reasons why 1541 drives and 4040 drives are
+  NOT WRITE COMPATIBLE! See Chapter 9 for more information.
 
-NOTE: A header block is written only during the formatting process. It is never
-rewritten again, period.
+NOTE: A header block is written *only* during the formatting process. It is
+never rewritten again, period.
 
-3.4 The Data Block
+## 3.4 The Data Block
 
 The data block of a sector stores the 256 data bytes for this sector. It is
 composed of a sync mark, a data block ID character, the 256 bytes of data, a
 data block checksum byte, two off bytes, and an inter-sector gap. The diagram
 below depicts the layout of a data block.
 
--------------------------------------------------------------------
-| SYNC | DATA  |      256       | DATA     | $00  | $00  | INTER- |
-| MARK | BLOCK |   DATA BYTES   | BLOCK    | BYTE | BYTE | SECTOR | --+
-|      | ID    |                | CHECKSUM |      |      | GAP    |   |
--------------------------------------------------------------------   |
-                                                                      |
-                           +------------------------------------------+
-                           |
-                           |                           |\
-                           |    ------------------------ \
-                           |    |  SYNC |  HEADER |       \
-                           +--> |  MARK |  BLOCK  |        >
-                                |       |  ID     |       /
-                                ------------------------ /
-                                                       |/
+    -------------------------------------------------------------------
+    | SYNC | DATA  |      256       | DATA     | $00  | $00  | INTER- |
+    | MARK | BLOCK |   DATA BYTES   | BLOCK    | BYTE | BYTE | SECTOR | --+
+    |      | ID    |                | CHECKSUM |      |      | GAP    |   |
+    -------------------------------------------------------------------   |
+                                                                          |
+                               +------------------------------------------+
+                               |
+                               |                           |\
+                               |    ------------------------ \
+                               |    |  SYNC |  HEADER |       \
+                               +--> |  MARK |  BLOCK  |        >
+                                    |       |  ID     |       /
+                                    ------------------------ /
+                                                           |/
 
 Let's examine the bytes that make up the data block:
 
-Sync mark: This consists of 10 or more 1 bits as previously described. It warns
-the DOS that either a data block or a header block is coming.
+* **Sync mark:** This consists of 10 or more 1 bits as previously described. It
+  warns the DOS that either a data block or a header block is coming.
 
-Data Block ID: This byte is normally a $07. It serves to indicate to the DOS
-that this is a data block and not a header block ($08).
+* **Data Block ID:** This byte is normally a $07. It serves to indicate to the
+  DOS that this is a data block and not a header block ($08).
 
-256 Data Bytes: This is the actual data stored in the sector. See Chapter 4
-about how Commodore uses the first two bytes as a forward track and sector
-pointer instead of actual data.
+* **256 Data Bytes:** This is the actual data stored in the sector. See Chapter
+  4 about how Commodore uses the first two bytes as a forward track and sector
+  pointer instead of actual data.
 
-Data Block Checksum: This is a checksum character used by the DOS to ensure
-that the data block was read correctly. It is found by EORing all 256 data
-bytes together.
+* **Data Block Checksum:** This is a checksum character used by the DOS to
+  ensure that the data block was read correctly. It is found by EORing all 256
+  data bytes together.
 
-$00 Bytes: These two bytes are also called OFF bytes. They are used to pad a
-data block before it is written. They are not referenced again by the DOS.
+* **$00 Bytes:** These two bytes are also called OFF bytes. They are used to
+  pad a data block before it is written. They are not referenced again by the
+  DOS.
 
-Inter-sector Gap: This is also known as the "tail gap." Its purpose is to
-provide breathing room between the end of the data block and the start of the
-next sector. The length of the gap varies from zone to zone and from one drive
-to another (see the chart in Section 7.1). Between consecutive sectors the gap
-is normally 4 to 12 bytes long. The gap between the last sector on a track and
-sector zero is often longer — up to 100 bytes in length. The gap is designed to
-be long enough so that if you write a data block on a day when your drive is
-turning slightly faster than 300 rpm, you won't overwrite the start of the next
-sector. (Your drive may not be turning at exactly 300 rpm all the time because
-of fluctuations in the power supplied to your home or office, mechanical wear,
-belt slippage, changes in temperature, etc.) Note that the DOS never reads
-these bytes.
+* **Inter-sector Gap:** This is also known as the "tail gap." Its purpose is to
+  provide breathing room between the end of the data block and the start of the
+  next sector. The length of the gap varies from zone to zone and from one
+  drive to another (see the chart in Section 7.1). Between consecutive sectors
+  the gap is normally 4 to 12 bytes long. The gap between the last sector on a
+  track and sector zero is often longer — up to 100 bytes in length. The gap is
+  designed to be long enough so that if you write a data block on a day when
+  your drive is turning slightly faster than 300 rpm, you won't overwrite the
+  start of the next sector. (Your drive may not be turning at exactly 300 rpm
+  all the time because of fluctuations in the power supplied to your home or
+  office, mechanical wear, belt slippage, changes in temperature, etc.) Note
+  that the DOS never reads these bytes.
 
 The entire data block (including the preceding sync mark) is rewritten each
 time data is recorded on a diskette.
@@ -1297,11 +1349,9 @@ Section 7.1. The actual recording process is described in Section 9.7.
 
 ﻿
 
-CHAPTER 4
+# CHAPTER 4 - DISKETTE ORGANIZATION
 
-DISKETTE ORGANIZATION
-
-4.1 Information Management
+## 4.1 Information Management
 
 The information that is stored on a floppy disk is virtually useless unless it
 can be retrieved quickly. As a result, the organization and management of
@@ -1327,36 +1377,36 @@ use and where subsequent writing to the diskette can safely take place. The
 remaining sectors (1-18) of track 18 contain directory entries (file names,
 file types, and pointers to where files are stored on the diskette).
 
-4.2 The Directory You See
+## 4.2 The Directory You See
 
 Let's examine the directory of the 1541TEST/DEMO diskette that came with your
 drive. Insert it in your drive and type on your keyboard:
 
-LOAD "$0",8
+    LOAD "$0",8
 
 then type
 
-LIST
+    LIST
 
 After a brief pause you should see the following on your screen:
 
-0 "1541TEST/DEMO   " ZX 2A
-13   "HOW TO USE"       PRG
-5    "HOW PART TWO"     PRG
-4    "VIC-20 WEDGE"     PRG
-1    "C-64 WEDGE"       PRG
-4    "DOS 5.1"          PRG
-11   "COPY/ALL"         PRG
-9    "PRINTER TEST"     PRG
-4    "DISK ADDR CHANGE" PRG
-4    "DIR"              PRG
-6    "VIEW BAM"         PRG
-4    "CHECK DISK"       PRG
-14   "DISPLAY T&S"      PRG
-9    "PERFORMANCE TEST" PRG
-5    "SEQUENTIAL FILE"  PRG
-13   "RANDOM FILE"      PRG
-558 BLOCKS FREE.
+    0 "1541TEST/DEMO   " ZX 2A
+    13   "HOW TO USE"       PRG
+    5    "HOW PART TWO"     PRG
+    4    "VIC-20 WEDGE"     PRG
+    1    "C-64 WEDGE"       PRG
+    4    "DOS 5.1"          PRG
+    11   "COPY/ALL"         PRG
+    9    "PRINTER TEST"     PRG
+    4    "DISK ADDR CHANGE" PRG
+    4    "DIR"              PRG
+    6    "VIEW BAM"         PRG
+    4    "CHECK DISK"       PRG
+    14   "DISPLAY T&S"      PRG
+    9    "PERFORMANCE TEST" PRG
+    5    "SEQUENTIAL FILE"  PRG
+    13   "RANDOM FILE"      PRG
+    558 BLOCKS FREE.
 
 The 0 refers to which drive was accessed. This is a holdover from the 4040 dual
 drive system. Next you see the diskette name — 1541TEST/DEMO. In the event that
@@ -1384,68 +1434,68 @@ What you see on your screen is not necessarily how the directory is stored on
 your diskette, however. Let's begin our look at the directory with the Block
 Availability Map (BAM).
 
-4.3 The Block Availability Map (BAM)
+## 4.3 The Block Availability Map (BAM)
 
 The BAM is where the DOS keeps track of which sectors (blocks) on the diskette
 contain information (are in use) and which ones can be used for storing new
 information (are free). This map is stored on track 18, sector 0. Here is a hex
 dump of that sector on the 1541TEST/DEMO disk so we can examine it in detail.
 
-            1541TEST/DEMO
+                1541TEST/DEMO
 
-         TRACK 18 - SECTOR 0
+             TRACK 18 - SECTOR 0
 
-. 00: 12 01 41 00 15 FF FF 1F ..A.....  BAM TRACK   1
-. 08: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  2-3
-. 10: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  4-5
-. 18: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  6-7
-. 20: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  8-9
-. 28: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS 10-11
-. 30: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS 12-13
-. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
-. 40: 00 00 00 00 00 00 00 00 ........  BAM TRACKS 16-17
-. 48: 10 EC FF 07 00 00 00 00 ........  BAM TRACKS 18-19
-. 50: 00 00 00 00 12 BF FF 07 .....?..  BAM TRACKS 20-21
-. 58: 13 FF FF 07 13 FF FF 07 ........  BAM TRACKS 22-23
-. 60: 13 FF FF 07 12 FF FF 03 ........  BAM TRACKS 24-25
-. 68: 12 FF FF 03 12 FF FF 03 ........  BAM TRACKS 26-27
-. 70: 12 FF FF 03 12 FF FF 03 ........  BAM TRACKS 28-29
-. 78: 12 FF FF 03 11 FF FF 01 ........  BAM TRACKS 30-31
-. 80: 11 FF FF 01 11 FF FF 01 ........  BAM TRACKS 32-33
-. 88: 11 FF FF 01 11 FF FF 01 ........  BAM TRACKS 34-35
-. 90: 31 35 34 31 54 45 53 54 1541TEST  DISK NAME
-. 98: 2F 44 45 4D 4F A0 A0 A0 /DEMO
-. A0: A0 A0 5A 58 A0 32 41 A0   ZX 2A   DOS TYPE & DISK ID
-. A8: A0 A0 A0 00 00 00 00 00    .....  UNUSED
-. B0: 00 00 00 00 00 00 00 00 ........
-. B8: 00 00 00 00 00 00 00 00 ........
-. C0: 00 00 00 00 00 00 00 00 ........
-. C8: 00 00 00 00 00 00 00 00 ........
-. D0: 00 00 00 00 00 00 00 00 ........
-. D8: 00 00 00 00 00 00 00 00 ........
-. E0: 00 00 00 00 00 00 00 00 ........
-. E8: 00 00 00 00 00 00 00 00 ........
-. F0: 00 00 00 00 00 00 00 00 ........
-. F8: 00 00 00 00 00 00 00 00 ........
+    . 00: 12 01 41 00 15 FF FF 1F ..A.....  BAM TRACK   1
+    . 08: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  2-3
+    . 10: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  4-5
+    . 18: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  6-7
+    . 20: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS  8-9
+    . 28: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS 10-11
+    . 30: 15 FF FF 1F 15 FF FF 1F ........  BAM TRACKS 12-13
+    . 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+    . 40: 00 00 00 00 00 00 00 00 ........  BAM TRACKS 16-17
+    . 48: 10 EC FF 07 00 00 00 00 ........  BAM TRACKS 18-19
+    . 50: 00 00 00 00 12 BF FF 07 .....?..  BAM TRACKS 20-21
+    . 58: 13 FF FF 07 13 FF FF 07 ........  BAM TRACKS 22-23
+    . 60: 13 FF FF 07 12 FF FF 03 ........  BAM TRACKS 24-25
+    . 68: 12 FF FF 03 12 FF FF 03 ........  BAM TRACKS 26-27
+    . 70: 12 FF FF 03 12 FF FF 03 ........  BAM TRACKS 28-29
+    . 78: 12 FF FF 03 11 FF FF 01 ........  BAM TRACKS 30-31
+    . 80: 11 FF FF 01 11 FF FF 01 ........  BAM TRACKS 32-33
+    . 88: 11 FF FF 01 11 FF FF 01 ........  BAM TRACKS 34-35
+    . 90: 31 35 34 31 54 45 53 54 1541TEST  DISK NAME
+    . 98: 2F 44 45 4D 4F A0 A0 A0 /DEMO
+    . A0: A0 A0 5A 58 A0 32 41 A0   ZX 2A   DOS TYPE & DISK ID
+    . A8: A0 A0 A0 00 00 00 00 00    .....  UNUSED
+    . B0: 00 00 00 00 00 00 00 00 ........
+    . B8: 00 00 00 00 00 00 00 00 ........
+    . C0: 00 00 00 00 00 00 00 00 ........
+    . C8: 00 00 00 00 00 00 00 00 ........
+    . D0: 00 00 00 00 00 00 00 00 ........
+    . D8: 00 00 00 00 00 00 00 00 ........
+    . E0: 00 00 00 00 00 00 00 00 ........
+    . E8: 00 00 00 00 00 00 00 00 ........
+    . F0: 00 00 00 00 00 00 00 00 ........
+    . F8: 00 00 00 00 00 00 00 00 ........
 
 As indicated above, the BAM does not take up all 256 bytes on this sector.
 There are several other things stored here as well. The table below identifies
 the various parts. Note that the sector dump above uses hexadecimal notation
 while the table below gives the decimal equivalents.
 
-Bytes           Contents        Purpose
--------         ---------       -----------------------------------------------
-0/1             18/1            Pointer to first sector of directory entries
-2               65              ASCII character A indicating 1541/4040 format
-3               0               Unused
-4-143                           Block Availability Map (BAM)
-144-159                         Diskette name padded with shifted spaces
-160-161         160             Shifted spaces
-162-163                         Diskette ID
-164             160             Shifted space
-165-166         50/65           DOS version and format type (2A)
-167-170         160             Shifted spaces
-170-255         ?               Unused
+  Bytes  | Contents  | Purpose
+:-------:|:---------:|:-----------------------------------------------
+   0/1   |   18/1    | Pointer to first sector of directory entries
+    2    |    65     | ASCII character A indicating 1541/4040 format
+    3    |     0     | Unused
+  4-143  |           | Block Availability Map (BAM)
+ 144-159 |           | Diskette name padded with shifted spaces
+ 160-161 |   160     | Shifted spaces
+ 162-163 |           | Diskette ID
+   164   |   160     | Shifted space
+ 165-166 |  50/65    | DOS version and format type (2A)
+ 167-170 |   160     | Shifted spaces
+ 170-255 |    ?      | Unused
 
 In the BAM four bytes are used to describe the status of each track. As a
 result, the BAM takes up a total of 4 x 35 = 140 bytes (bytes 4-143 or
@@ -1454,15 +1504,15 @@ mean. The entry for track 14 begins at byte 14 x 4 = 56 ($38). It looks like
 this:
 
 
-. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
-      ** ** ** **
+    . 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+          ** ** ** **
 
 The first byte for track 14 (location $38 = 56) indicates the number of blocks
 free on this track.
 
 
-. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
-      **
+    . 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+          **
 
 In this case there are $11 or 17 (1 * 16 + 1) blocks free.
 
@@ -1471,49 +1521,49 @@ byte from each track's entry in the BAM. Let's do our own blocks free
 calculation to see how it is done. All we have to do is sum up the decimal
 values of every fourth byte starting with byte 4 like this:
 
-                          HEX    DECIMAL
- ZONE    BYTE    TRACK   VALUE    VALUE
-------  ------  ------- ------- ---------
-  1        4       1      $1F       21
-           8       2      $1F       21
-          12       3      $1F       21
-          16       4      $1F       21
-          20       5      $1F       21
-          24       6      $1F       21
-          28       7      $1F       21
-          32       8      $1F       21
-          36       9      $1F       21
-          40      10      $1F       21
-          44      11      $1F       21
-          48      12      $1F       21
-          52      13      $1F       21
-          56      14      $11       17
-          60      15      $00        0
-          64      16      $00        0
-          68      17      $00        0
+                              HEX    DECIMAL
+     ZONE    BYTE    TRACK   VALUE    VALUE
+    ------  ------  ------- ------- ---------
+      1        4       1      $1F       21
+               8       2      $1F       21
+              12       3      $1F       21
+              16       4      $1F       21
+              20       5      $1F       21
+              24       6      $1F       21
+              28       7      $1F       21
+              32       8      $1F       21
+              36       9      $1F       21
+              40      10      $1F       21
+              44      11      $1F       21
+              48      12      $1F       21
+              52      13      $1F       21
+              56      14      $11       17
+              60      15      $00        0
+              64      16      $00        0
+              68      17      $00        0
 
-2         72      18      $10       16
-          76      19      $13       19
-          80      20      $13       19
-          84      21      $13       19
-          88      22      $13       19
-          92      23      $13       19
-          96      24      $13       19
+    2         72      18      $10       16
+              76      19      $13       19
+              80      20      $13       19
+              84      21      $13       19
+              88      22      $13       19
+              92      23      $13       19
+              96      24      $13       19
 
-3        100      25      $12       18
-         104      26      $12       18
-         108      27      $12       18
-         112      28      $12       18
-         116      29      $12       18
-         120      30      $12       18
+    3        100      25      $12       18
+             104      26      $12       18
+             108      27      $12       18
+             112      28      $12       18
+             116      29      $12       18
+             120      30      $12       18
 
-4        124      31      $11       17
-         128      32      $11       17
-         132      33      $11       17
-         136      34      $11       17
-         140      35      $11     + 17
-                                ---------
-                                   574          BLOCKS FREE
+    4        124      31      $11       17
+             128      32      $11       17
+             132      33      $11       17
+             136      34      $11       17
+             140      35      $11     + 17
+                                    ---------
+                                       574      BLOCKS FREE
 
 Wait a minute! We calculated 574 blocks free but the directory shows 558. How
 do we explain this discrepancy? Easy. Remember that the DOS reserves track 18
@@ -1526,8 +1576,8 @@ diskette, let's get back to our analysis of track 14. The BAM entry looked like
 this:
 
 
-. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
-      ** ** ** **
+    . 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+          ** ** ** **
 
 The first byte was easy to interpret. The remaining three bytes are a bit
 trickier (no pun intended). They are a bit map showing the status of the
@@ -1538,18 +1588,18 @@ status of eight sectors. This way only three bytes are needed for each track.
 Let's examine the bit map for track 14 of our 1541 TEST/DEMO.
 
 
-. 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
-      ** ** ** **
+    . 38: 11 D7 5F 1F 00 00 00 00 .W......  BAM TRACKS 14-15
+          ** ** ** **
 
- LOCATION       $39=57          $3A=58          $3B=59
-BYTE VALUE       $D7             $5F             $1F
-  BINARY       11010111        01011111        00011111 *
+     LOCATION       $39=57          $3A=58          $3B=59
+    BYTE VALUE       $D7             $5F             $1F
+      BINARY       11010111        01011111        00011111 *
 
-  SECTOR                       111111             21111
-  NUMBER       76543210        54321098        xxx09876
+      SECTOR                       111111             21111
+      NUMBER       76543210        54321098        xxx09876
 
-             * 1 = FREE
-               O = ALLOCATED
+                 * 1 = FREE
+                   O = ALLOCATED
 
 Sectors 0 to 7 are represented by the byte at location 57. Sectors 8 through 15
 are stored in the byte at location 58. Finally, sectors 16 through 20 are
@@ -1571,104 +1621,104 @@ allocation of sectors here. Byte 72 shows $10 or 16 sectors available here.
 They are bit mapped in bytes 73, 74, and 75 as follows:
 
 
-. 48: 10 EC FF 07 00 00 00 00 ........  BAM TRACKS 18-19
-      ** ** ** **
+    . 48: 10 EC FF 07 00 00 00 00 ........  BAM TRACKS 18-19
+          ** ** ** **
 
- LOCATION       $49=73          $4A=74          $4B=75
-BYTE VALUE       $EC             $FF             $07
-  BINARY       11101100        11111111        00000111 *
+     LOCATION       $49=73          $4A=74          $4B=75
+    BYTE VALUE       $EC             $FF             $07
+      BINARY       11101100        11111111        00000111 *
 
-  SECTOR                       111111             21111
-  NUMBER       76543210        54321098        xxx09876
+      SECTOR                       111111             21111
+      NUMBER       76543210        54321098        xxx09876
 
-             * 1 = FREE
-               O = ALLOCATED
+                 * 1 = FREE
+                   O = ALLOCATED
 
 If you are still unsure of yourself, don't be too concerned. The DOS looks
 after the BAM. Let's move on and explore the actual directory entries
 themselves. Sectors 1 through 18 on track 18 are reserved specifically for them.
 
-4.4 The Directory Entries
+## 4.4 The Directory Entries
 
 Recall that bytes 0 and 1 of track 18, sector 0 point to the next track and
 sector of the directory. In this particular instance, the BAM points to track
 18, sector 1. Let's examine this sector in detail.
 
-            1541TEST/DEMO
+                1541TEST/DEMO
 
-         TRACK 18 - SECTOR 01
+             TRACK 18 - SECTOR 01
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW  FILE ENTRY #1
-. 08: 20 54 4F 20 55 53 45 A0  TO USE
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-. 18: 00 00 00 00 00 00 0D 00 ........
-. 20: 00 00 82 11 03 48 4F 57 .....HOW  FILE ENTRY #2
-. 28: 20 50 41 52 54 20 54 57  PART TW
-. 30: 4F A0 A0 A0 A0 00 00 00 O    ...
-. 38: 00 00 00 00 00 00 05 00 ........
-. 40: 00 00 82 11 09 56 49 43 .....VIC  FILE ENTRY #3
-. 48: 2D 32 30 20 57 45 44 47 -20 WEDG
-. 50: 45 A0 A0 A0 A0 00 00 00 E    ...
-. 58: 00 00 00 00 00 00 04 00 ........
-. 60: 00 00 82 13 00 46 2D 36 .....C-6  FILE ENTRY #4
-. 68: 34 20 57 45 44 47 45 A0 4 WEDGE
-. 70: A0 A0 A0 A0 A0 00 00 00      ...
-. 78: 00 00 00 00 00 00 01 00 ........
-. 80: 00 00 82 13 01 44 4F 53 .....DOS  FILE ENTRY #5
-. 88: 20 35 2E 31 A0 A0 A0 A0  5.1
-. 90: A0 A0 A0 A0 A0 00 00 00      ...
-. 98: 00 00 00 00 00 00 04 00 ........
-. A0: 00 00 82 13 03 43 4F 50 .....COP  FILE ENTRY #6
-. A8: 59 2F 41 4C 4C A0 A0 A0 Y/ALL
-. B0: A0 A0 A0 A0 A0 00 00 00      ...
-. B8: 00 00 00 00 00 00 0B 00 ........
-. C0: 00 00 82 13 09 50 52 49 .....PRI  FILE ENTRY #7
-. C8: 4E 54 45 52 20 54 45 53 NTER TES
-. D0: 54 A0 A0 A0 A0 00 00 00 T    ...
-. D8: 00 00 00 00 00 00 09 00 ........
-. E0: 00 00 82 10 00 44 49 53 .....DIS  FILE ENTRY #8
-. E8: 4B 20 41 44 44 52 20 43 K ADDR C
-. F0: 48 41 4E 47 45 00 00 00 HANGE...
-. F8: 00 00 00 00 00 00 04 00 ........
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW  FILE ENTRY #1
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+    . 18: 00 00 00 00 00 00 0D 00 ........
+    . 20: 00 00 82 11 03 48 4F 57 .....HOW  FILE ENTRY #2
+    . 28: 20 50 41 52 54 20 54 57  PART TW
+    . 30: 4F A0 A0 A0 A0 00 00 00 O    ...
+    . 38: 00 00 00 00 00 00 05 00 ........
+    . 40: 00 00 82 11 09 56 49 43 .....VIC  FILE ENTRY #3
+    . 48: 2D 32 30 20 57 45 44 47 -20 WEDG
+    . 50: 45 A0 A0 A0 A0 00 00 00 E    ...
+    . 58: 00 00 00 00 00 00 04 00 ........
+    . 60: 00 00 82 13 00 46 2D 36 .....C-6  FILE ENTRY #4
+    . 68: 34 20 57 45 44 47 45 A0 4 WEDGE
+    . 70: A0 A0 A0 A0 A0 00 00 00      ...
+    . 78: 00 00 00 00 00 00 01 00 ........
+    . 80: 00 00 82 13 01 44 4F 53 .....DOS  FILE ENTRY #5
+    . 88: 20 35 2E 31 A0 A0 A0 A0  5.1
+    . 90: A0 A0 A0 A0 A0 00 00 00      ...
+    . 98: 00 00 00 00 00 00 04 00 ........
+    . A0: 00 00 82 13 03 43 4F 50 .....COP  FILE ENTRY #6
+    . A8: 59 2F 41 4C 4C A0 A0 A0 Y/ALL
+    . B0: A0 A0 A0 A0 A0 00 00 00      ...
+    . B8: 00 00 00 00 00 00 0B 00 ........
+    . C0: 00 00 82 13 09 50 52 49 .....PRI  FILE ENTRY #7
+    . C8: 4E 54 45 52 20 54 45 53 NTER TES
+    . D0: 54 A0 A0 A0 A0 00 00 00 T    ...
+    . D8: 00 00 00 00 00 00 09 00 ........
+    . E0: 00 00 82 10 00 44 49 53 .....DIS  FILE ENTRY #8
+    . E8: 4B 20 41 44 44 52 20 43 K ADDR C
+    . F0: 48 41 4E 47 45 00 00 00 HANGE...
+    . F8: 00 00 00 00 00 00 04 00 ........
 
 
 The contents of any directory sector can be tabled as follows:
 
-Byte            Contents        Purpose
---------        --------        -------------------------------------
-     0                          Track of the next directory block
-     1                          Sector of the next directory block
-
-  2-31                          File entry #1 in the directory block
-
- 32-33             0            Unused
- 34-63                          File entry #2 in the directory block
-
- 64-65             0            Unused
- 66-95                          File entry #3 in the directory block
-
- 96-97             0            Unused
- 98-127                         File entry #4 in the directory block
-128-129            0            Unused
-130-159                         File entry #5 in the directory block
-
-160-161            0            Unused
-162-191                         File entry #6 in the directory block
-
-192-193            0            Unused
-194-223                         File entry #7 in the directory block
-
-224-225            0            Unused
-226-255                         File entry #8 in the directory block
+Byte    | Contents | Purpose
+:------:|:--------:|:-------------------------------------
+     0  |          | Track of the next directory block
+     1  |          | Sector of the next directory block
+        |          |
+  2-31  |          | File entry #1 in the directory block
+        |          |
+ 32-33  |    0     | Unused
+ 34-63  |          | File entry #2 in the directory block
+        |          |
+ 64-65  |    0     | Unused
+ 66-95  |          | File entry #3 in the directory block
+        |          |
+ 96-97  |    0     | Unused
+ 98-127 |          | File entry #4 in the directory block
+128-129 |    0     | Unused
+130-159 |          | File entry #5 in the directory block
+        |          |
+160-161 |    0     | Unused
+162-191 |          | File entry #6 in the directory block
+        |          |
+192-193 |    0     | Unused
+194-223 |          | File entry #7 in the directory block
+        |          |
+224-225 |    0     | Unused
+226-255 |          | File entry #8 in the directory block
 
 Eight file entries are recorded per sector. Let's examine the contents of a
 single directory file entry.
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW
-      ** **
-. 08: 20 54 4F 20 55 53 45 A0  TO USE
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-. 18: 00 00 00 00 00 00 0D 00 ........
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW
+          ** **
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+    . 18: 00 00 00 00 00 00 0D 00 ........
 
 Because this is the first entry in the directory, bytes 0 and 1 are
 significant. They point to track 18, sector 4 (converts to 18). This indicates
@@ -1698,7 +1748,7 @@ sector in the chain, there is no forward pointer; byte 0 contains a 0 ($00) and
 byte 1 contains a 255 ($FF) as indicated below. This indicates to the DOS that
 there are no more sectors in the directory.
 
-. 00: 00 FF xx xx xx xx xx xx ........
+    . 00: 00 FF xx xx xx xx xx xx ........
 
 One final note about chaining. Commodore uses only forward pointers. A sector
 does not show where it came from, only where it is going. This makes recovery
@@ -1706,44 +1756,44 @@ of corrupted files much more difficult, but more about that later.
 
 Back to our example:
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW
-            **
-. 08: 20 54 4F 20 55 53 45 A0  TO USE
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-. 18: 00 00 00 00 00 00 0D 00 ........
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW
+                **
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+    . 18: 00 00 00 00 00 00 0D 00 ........
 
 The first byte in the file entry is the file-type byte. In this instance we see
 an $82. This is interpreted by the DOS to mean that the file entry is a
 program. The following table outlines Commodores file types.
 
-HEX      ASCII   FILE TYPE                      DIRECTORY SHOWS
------   -------  -----------------------        ----------------
-
-$00        0     Scratched                      Does not appear
-
-$80      128     Deleted                        DEL
-$81      129     Sequential                     SEQ
-$82      130     Program                        PRG
-$83      131     User                           USR
-$84      132     Relative                       REL
-
-$00        0     Unclosed deleted               Same as scratched
-$01        1     Unclosed sequential            *SEQ
-$02        2     Unclosed program               *PRG
-$03        3     Unclosed user                  *USR
-$04        4     Unclosed relative              Cannot occur
-
-$A0      160     Deleted @ replacement          DEL
-$A1      161     Sequential @ replacement       SEQ
-$A2      162     Program @ replacement          PRG
-$A3      163     User @ replacement             USR
-$A4      164     Relative @ replacement         Cannot occur
-
-$C0      192     Locked deleted                 DEL<
-$C1      193     Locked sequential              SEQ<
-$C2      194     Locked program                 PRG<
-$C3      195     Locked user                    USR<
-$C4      196     Locked relative                REL<
+HEX   |  ASCII  | FILE TYPE                | DIRECTORY SHOWS
+:----:| -------:|:------------------------ |:----------------
+      |         |                          |
+$00   |    0    | Scratched                | Does not appear
+      |         |                          |
+$80   |  128    | Deleted                  | DEL
+$81   |  129    | Sequential               | SEQ
+$82   |  130    | Program                  | PRG
+$83   |  131    | User                     | USR
+$84   |  132    | Relative                 | REL
+      |         |                          |
+$00   |    0    | Unclosed deleted         | Same as scratched
+$01   |    1    | Unclosed sequential      | *SEQ
+$02   |    2    | Unclosed program         | *PRG
+$03   |    3    | Unclosed user            | *USR
+$04   |    4    | Unclosed relative        | Cannot occur
+      |         |                          |
+$A0   |  160    | Deleted @ replacement    | DEL
+$A1   |  161    | Sequential @ replacement | SEQ
+$A2   |  162    | Program @ replacement    | PRG
+$A3   |  163    | User @ replacement       | USR
+$A4   |  164    | Relative @ replacement   | Cannot occur
+      |         |                          |
+$C0   |  192    | Locked deleted           | DEL<
+$C1   |  193    | Locked sequential        | SEQ<
+$C2   |  194    | Locked program           | PRG<
+$C3   |  195    | Locked user              | USR<
+$C4   |  196    | Locked relative          | REL<
 
 Note: It is possible to edit the file-type byte and get very unusual file types
 appearing in the directory (SR?< is one possibility). However, these file types
@@ -1754,34 +1804,34 @@ Enough esoterica for now. Let's get back to our example:
 The next two bytes in the file entry are a pointer to where the first sector of
 that particular file is stored on the diskette.
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW
-               ** **
-. 08: 20 54 4F 20 55 53 45 A0  TO USE
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-. 18: 00 00 00 00 00 00 0D 00 ........
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW
+                   ** **
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+    . 18: 00 00 00 00 00 00 0D 00 ........
 
 This file starts on track 17 ($11), sector 0 ($00).
 
 Next we have the file name.
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW
-                     ** ** **
-. 08: 20 54 4F 20 55 53 45 A0  TO USE
-      ** ** ** ** ** ** ** **
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-      ** ** ** ** **
-. 18: 00 00 00 00 00 00 0D 00 ........
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW
+                         ** ** **
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE
+          ** ** ** ** ** ** ** **
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+          ** ** ** ** **
+    . 18: 00 00 00 00 00 00 0D 00 ........
 
 In this case our file is named "HOW TO USE". Note that file names are padded
 out to 16 characters with shifted spaces ($A0) just like the diskette name. The
 shifted spaces do not show as part of the file name, however, when the
 directory is displayed.
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW
-. 08: 20 54 4F 20 55 53 45 A0  TO USE
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-                     ** ** **
-. 18: 00 00 00 00 00 00 0D 00 ........
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+                         ** ** **
+    . 18: 00 00 00 00 00 00 0D 00 ........
 
 The next three bytes are unused except for relative file entries. For a
 relative file bytes $15 (21) and $16 (22) point to the first set of side
@@ -1790,11 +1840,11 @@ created. This special file type will be examined in detail later.
 
 The next four bytes are always unused and therefore null ($00).
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW
-. 08: 20 54 4F 20 55 53 45 A0  TO USE
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-. 18: 00 00 00 00 00 00 0D 00 ........
-      ** ** ** **
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+    . 18: 00 00 00 00 00 00 0D 00 ........
+          ** ** ** **
 
 The following two bytes are reserved for use by the DOS during the save and
 replace operation (@ replacement). Their function can only be viewed by
@@ -1808,22 +1858,22 @@ then moved from bytes 28 and 29 to bytes 3 ($03) and 4 ($04) respectively and
 bytes 28 and 29 are zeroed again. The proper file type is then restored at byte
 2. See Chapter 9 about the bug in the @ replacement command.)
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW
-. 08: 20 54 4F 20 55 53 45 A0  TO USE
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-. 18: 00 00 00 00 00 00 0D 00 ........
-                  ** **
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+    . 18: 00 00 00 00 00 00 0D 00 ........
+                      ** **
 
 The final two bytes in a file entry are the number of blocks it occupies on the
 diskette. It is the sum of the leftmost byte (lo-byte) + the rightmost byte
 (hi-byte) * 256.
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW
-. 08: 20 54 4F 20 55 53 45 A0  TO USE
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-. 18: 00 00 00 00 00 00 0D 00 ........
-                        ** **
-                        LO HI
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+    . 18: 00 00 00 00 00 00 0D 00 ........
+                            ** **
+                            LO HI
 
 In our example, the file is (13 + 0 * 256) = 13 blocks long.
 
@@ -1834,65 +1884,65 @@ they represent a forward track and sector chain and have nothing to do with
 that file in particular.
 
 
-            1541TEST/DEMO
+                1541TEST/DEMO
 
-         TRACK 18 - SECTOR 01
+             TRACK 18 - SECTOR 01
 
-          DIRECTORY ENTRY 1
+              DIRECTORY ENTRY 1
 
-. 00: 12 04 82 11 00 48 4F 57 .....HOW  File type = $82 = PRG
-. 08: 20 54 4F 20 55 53 45 A0  TO USE   Starts on 17/1 ($11/$00)
-. 10: A0 A0 A0 A0 A0 00 00 00      ...  Name: HOW TO USE
-. 18: 00 00 00 00 00 00 0D 00 ........  File length: 13 BLOCKS
+    . 00: 12 04 82 11 00 48 4F 57 .....HOW  File type = $82 = PRG
+    . 08: 20 54 4F 20 55 53 45 A0  TO USE   Starts on 17/1 ($11/$00)
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...  Name: HOW TO USE
+    . 18: 00 00 00 00 00 00 0D 00 ........  File length: 13 BLOCKS
 
-          DIRECTORY ENTRY 2
+              DIRECTORY ENTRY 2
 
-. 20: 00 00 82 11 03 48 4F 57 .....HOW  File type = $82 = PRG
-. 28: 20 50 41 52 54 20 54 57  PART TW  Starts on 17/3 ($11/$03)
-. 30: 4F A0 A0 A0 A0 00 00 00 O    ...  Name: HOW PART TWO
-. 38: 00 00 00 00 00 00 05 00 ........  File length: 5 BLOCKS
+    . 20: 00 00 82 11 03 48 4F 57 .....HOW  File type = $82 = PRG
+    . 28: 20 50 41 52 54 20 54 57  PART TW  Starts on 17/3 ($11/$03)
+    . 30: 4F A0 A0 A0 A0 00 00 00 O    ...  Name: HOW PART TWO
+    . 38: 00 00 00 00 00 00 05 00 ........  File length: 5 BLOCKS
 
-          DIRECTORY ENTRY 3
+              DIRECTORY ENTRY 3
 
-. 40: 00 00 82 11 09 56 49 43 .....VIC  File type = $82 = PRG
-. 48: 2D 32 30 20 57 45 44 47 -20 WEDG  Starts on 17/9 ($11/09)
-. 50: 45 A0 A0 A0 A0 00 00 00 E    ...  Name: VIC-20 WEDGE
-. 58: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+    . 40: 00 00 82 11 09 56 49 43 .....VIC  File type = $82 = PRG
+    . 48: 2D 32 30 20 57 45 44 47 -20 WEDG  Starts on 17/9 ($11/09)
+    . 50: 45 A0 A0 A0 A0 00 00 00 E    ...  Name: VIC-20 WEDGE
+    . 58: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
 
-          DIRECTORY ENTRY 4
+              DIRECTORY ENTRY 4
 
-. 60: 00 00 82 13 00 46 2D 36 .....C-6  File type = $82 = PRG
-. 68: 34 20 57 45 44 47 45 A0 4 WEDGE   Starts on 19/0 ($13/$00)
-. 70: A0 A0 A0 A0 A0 00 00 00      ...  Name C-64 WEDGE
-. 78: 00 00 00 00 00 00 01 00 ........  File length: 1 BLOCK
+    . 60: 00 00 82 13 00 46 2D 36 .....C-6  File type = $82 = PRG
+    . 68: 34 20 57 45 44 47 45 A0 4 WEDGE   Starts on 19/0 ($13/$00)
+    . 70: A0 A0 A0 A0 A0 00 00 00      ...  Name C-64 WEDGE
+    . 78: 00 00 00 00 00 00 01 00 ........  File length: 1 BLOCK
 
-          DIRECTORY ENTRY 5
+              DIRECTORY ENTRY 5
 
-. 80: 00 00 82 13 01 44 4F 53 .....DOS  File type = $82 = PRG
-. 88: 20 35 2E 31 A0 A0 A0 A0  5.1      Starts on 19/1 ($13/$01)
-. 90: A0 A0 A0 A0 A0 00 00 00      ...  Name: DOS 5.1
-. 98: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+    . 80: 00 00 82 13 01 44 4F 53 .....DOS  File type = $82 = PRG
+    . 88: 20 35 2E 31 A0 A0 A0 A0  5.1      Starts on 19/1 ($13/$01)
+    . 90: A0 A0 A0 A0 A0 00 00 00      ...  Name: DOS 5.1
+    . 98: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
 
-          DIRECTORY ENTRY 6
+              DIRECTORY ENTRY 6
 
-. A0: 00 00 82 13 03 43 4F 50 .....COP  File type = $82 = PRG
-. A8: 59 2F 41 4C 4C A0 A0 A0 Y/ALL     Starts on 19/3 ($13/03)
-. B0: A0 A0 A0 A0 A0 00 00 00      ...  Name: COPY/ALL
-. B8: 00 00 00 00 00 00 0B 00 ........  File length: 11 BLOCKS
+    . A0: 00 00 82 13 03 43 4F 50 .....COP  File type = $82 = PRG
+    . A8: 59 2F 41 4C 4C A0 A0 A0 Y/ALL     Starts on 19/3 ($13/03)
+    . B0: A0 A0 A0 A0 A0 00 00 00      ...  Name: COPY/ALL
+    . B8: 00 00 00 00 00 00 0B 00 ........  File length: 11 BLOCKS
 
-          DIRECTORY ENTRY 7
+              DIRECTORY ENTRY 7
 
-. C0: 00 00 82 13 09 50 52 49 .....PRI  File type = $82 = PRG
-. C8: 4E 54 45 52 20 54 45 53 NTER TES  Starts on 19/9 ($13/09)
-. D0: 54 A0 A0 A0 A0 00 00 00 T    ...  Name: PRINTER TEST
-. D8: 00 00 00 00 00 00 09 00 ........  File length: 9 BLOCKS
+    . C0: 00 00 82 13 09 50 52 49 .....PRI  File type = $82 = PRG
+    . C8: 4E 54 45 52 20 54 45 53 NTER TES  Starts on 19/9 ($13/09)
+    . D0: 54 A0 A0 A0 A0 00 00 00 T    ...  Name: PRINTER TEST
+    . D8: 00 00 00 00 00 00 09 00 ........  File length: 9 BLOCKS
 
-          DIRECTORY ENTRY 8
+              DIRECTORY ENTRY 8
 
-. E0: 00 00 82 10 00 44 49 53 .....DIS  File type = $82 = PRG
-. E8: 4B 20 41 44 44 52 20 43 K ADDR C  Starts on 16/0 ($10/00)
-. F0: 48 41 4E 47 45 00 00 00 HANGE...  Name:DISK ADDR CHANGE
-. F8: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+    . E0: 00 00 82 10 00 44 49 53 .....DIS  File type = $82 = PRG
+    . E8: 4B 20 41 44 44 52 20 43 K ADDR C  Starts on 16/0 ($10/00)
+    . F0: 48 41 4E 47 45 00 00 00 HANGE...  Name:DISK ADDR CHANGE
+    . F8: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
 
 
 We will end our tour of the directory by displaying the next sector (track 18,
@@ -1902,49 +1952,49 @@ block. The last directory entry is a null entry. It will be converted into a
 valid entry when the directory is expanded.
 
 
-            1541TEST/DEMO
+                1541TEST/DEMO
 
-         TRACK 18 - SECTOR 04
+             TRACK 18 - SECTOR 04
 
-. 00: 00 FF 82 10 01 44 49 52 .....DIR  File type = $82 = PRG
-. 08: A0 A0 A0 A0 A0 A0 A0 A0           Starts on 16/1 ($10/01)
-. 10: A0 A0 A0 A0 A0 00 00 00      ...  Name: DIR
-. 18: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+    . 00: 00 FF 82 10 01 44 49 52 .....DIR  File type = $82 = PRG
+    . 08: A0 A0 A0 A0 A0 A0 A0 A0           Starts on 16/1 ($10/01)
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...  Name: DIR
+    . 18: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
 
-. 20: 00 00 82 10 03 56 49 45 .....VIE  File type = $82 = PRG
-. 28: 57 20 42 41 4D A0 A0 A0 W BAM     Starts on 16/3 ($10/03)
-. 30: A0 A0 A0 A0 A0 00 00 00      ...  Name:VIEW BAM
-. 38: 00 00 00 00 00 00 06 00 ........  File length: 6 BLOCKS
+    . 20: 00 00 82 10 03 56 49 45 .....VIE  File type = $82 = PRG
+    . 28: 57 20 42 41 4D A0 A0 A0 W BAM     Starts on 16/3 ($10/03)
+    . 30: A0 A0 A0 A0 A0 00 00 00      ...  Name:VIEW BAM
+    . 38: 00 00 00 00 00 00 06 00 ........  File length: 6 BLOCKS
 
-. 40: 00 00 82 10 07 43 48 45 .....CHE  File type = $82 = PRG
-. 48: 43 4B 20 44 49 53 4B A0 CK DISK   Starts on 16/7 ($10/07)
-. 50: A0 A0 A0 A0 A0 00 00 00      ...  Name: CHECK DISK
-. 58: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
+    . 40: 00 00 82 10 07 43 48 45 .....CHE  File type = $82 = PRG
+    . 48: 43 4B 20 44 49 53 4B A0 CK DISK   Starts on 16/7 ($10/07)
+    . 50: A0 A0 A0 A0 A0 00 00 00      ...  Name: CHECK DISK
+    . 58: 00 00 00 00 00 00 04 00 ........  File length: 4 BLOCKS
 
-. 60: 00 00 82 10 0F 44 49 53 .....DIS  File type = $82 = PRG
-. 68: 50 4C 41 59 20 54 26 53 PLAY T&S  Starts on 16/15 ($10/$0F)
-. 70: A0 A0 A0 A0 A0 00 00 00      ...  Name: DISPLAY T&S
-. 78: 00 00 00 00 00 00 0E 00 ........  File length: 14 BLOCKS
+    . 60: 00 00 82 10 0F 44 49 53 .....DIS  File type = $82 = PRG
+    . 68: 50 4C 41 59 20 54 26 53 PLAY T&S  Starts on 16/15 ($10/$0F)
+    . 70: A0 A0 A0 A0 A0 00 00 00      ...  Name: DISPLAY T&S
+    . 78: 00 00 00 00 00 00 0E 00 ........  File length: 14 BLOCKS
 
-. 80: 00 00 82 14 02 50 45 52 .....PER  File type = $82 = PRG
-. 88: 46 4F 52 4D 41 4E 43 45 FORMANCE  Starts on 20/2 ($14/$02)
-. 90: 20 54 45 53 54 00 00 00  TEST...  Name: PERFORMANCE TEST
-. 98: 00 00 00 00 00 00 09 00 ........  File length: 9 BLOCKS
+    . 80: 00 00 82 14 02 50 45 52 .....PER  File type = $82 = PRG
+    . 88: 46 4F 52 4D 41 4E 43 45 FORMANCE  Starts on 20/2 ($14/$02)
+    . 90: 20 54 45 53 54 00 00 00  TEST...  Name: PERFORMANCE TEST
+    . 98: 00 00 00 00 00 00 09 00 ........  File length: 9 BLOCKS
 
-. A0: 00 00 82 14 07 50 45 52 .....SEQ  File type = $82 = PRG
-. A8: 55 45 4E 54 49 41 4C 20 UENTIAL   Starts on 20/7 ($14/$07)
-. B0: 46 49 4C 45 A0 00 00 00 FILE ...  Name: SEQUENTIAL FILE
-. B8: 00 00 00 00 00 00 05 00 ........  File length: 5 BLOCKS
+    . A0: 00 00 82 14 07 50 45 52 .....SEQ  File type = $82 = PRG
+    . A8: 55 45 4E 54 49 41 4C 20 UENTIAL   Starts on 20/7 ($14/$07)
+    . B0: 46 49 4C 45 A0 00 00 00 FILE ...  Name: SEQUENTIAL FILE
+    . B8: 00 00 00 00 00 00 05 00 ........  File length: 5 BLOCKS
 
-. C0: 00 00 82 0F 01 52 41 4E .....RAN  File type = $82 = PRG
-. C8: 44 4F 4D 20 46 49 4C 45 DOM FILE  Starts on 15/1 ($0F/$01)
-. D0: A0 A0 A0 A0 A0 00 00 00      ...  Name: RANDOM FILE
-. D8: 00 00 00 00 00 00 0D 00 ........  File length: 13 BLOCKS
+    . C0: 00 00 82 0F 01 52 41 4E .....RAN  File type = $82 = PRG
+    . C8: 44 4F 4D 20 46 49 4C 45 DOM FILE  Starts on 15/1 ($0F/$01)
+    . D0: A0 A0 A0 A0 A0 00 00 00      ...  Name: RANDOM FILE
+    . D8: 00 00 00 00 00 00 0D 00 ........  File length: 13 BLOCKS
 
-. EO: 00 00 00 00 00 00 00 00 ........  NULL ENTRY
-. E8: 00 00 00 00 00 00 00 00 ........
-. F0: 00 00 00 00 00 00 00 00 ........
-. F8: 00 00 00 00 00 00 00 00 ........
+    . EO: 00 00 00 00 00 00 00 00 ........  NULL ENTRY
+    . E8: 00 00 00 00 00 00 00 00 ........
+    . F0: 00 00 00 00 00 00 00 00 ........
+    . F8: 00 00 00 00 00 00 00 00 ........
 
 
 You will find four of the utilities listed in Appendix C particularly helpful
@@ -1970,27 +2020,27 @@ types of files are actually stored on a diskette. We'll start by looking at a
 program file.
 
 
-4.5 Program File Storage
+## 4.5 Program File Storage
 
 The most common type of file is a program file, PRG. It is designated by an $82
 in the directory. Program file structure is quite simple. Diagrammatically, the
 first sector (block) in a program file looks like this.
 
-+-------+--------+------+------+---------------------+
-| TRACK | SECTOR | LOAD | LOAD | THE FIRST 252 BYTES |
-| LINK  | LINK   |  LO  |  HI  |   OF YOUR PROGRAM   |
-+-------+--------+------+------+---------------------+
+    +-------+--------+------+------+---------------------------------+
+    | TRACK | SECTOR | LOAD | LOAD |       THE FIRST 252 BYTES       |
+    | LINK  | LINK   |  LO  |  HI  |         OF YOUR PROGRAM         |
+    +-------+--------+------+------+---------------------------------+
 
 
-   Byte    Purpose
----------  --------------------------------------------------------------------
-
-    0      Track of the next block in this file
-    1      Sector of the next block in this file
-    2      Lo-byte of the load address
-    3      Hi-byte of the load address
-
-  4-255    The first 252 bytes of the program
+  Byte  | Purpose
+:------:|:---------------------------------------------------------------------
+        |
+   0    | Track of the next block in this file
+   1    | Sector of the next block in this file
+   2    | Lo-byte of the load address
+   3    | Hi-byte of the load address
+        |
+ 4-255  | The first 252 bytes of the program
 
 The first pair of bytes are the pointer to the track and sector of the next
 block in the file. Technically, this is known as a "forward pointer." It points
@@ -2014,19 +2064,19 @@ location specified by bytes $02 and $03.
 
 The remaining sectors, except the last one, look like this:
 
-+-------+--------+--------------------+
-| TRACK | SECTOR | THE NEXT 254 BYTES |
-| LINK  | LINK   |  OF YOUR PROGRAM   |
-+-------+--------+--------------------+
+    +-------+--------+------------------------------------+
+    | TRACK | SECTOR |         THE NEXT 254 BYTES         |
+    | LINK  | LINK   |          OF YOUR PROGRAM           |
+    +-------+--------+------------------------------------+
 
 
-   Byte    Purpose
----------  --------------------------------------------------------------------
-
-    0      Track of the next block in this file
-    1      Sector of the next block in this file
-
-  2-255    The next 254 bytes of the program
+  Byte | Purpose
+:-----:|:----------------------------------------------------------------------
+       |
+   0   | Track of the next block in this file
+   1   | Sector of the next block in this file
+       |
+ 2-255 | The next 254 bytes of the program
 
 The last block in a program file is special because:
 
@@ -2041,77 +2091,77 @@ this position are garbage.
 
 Diagrammatically, the last sector in a program file looks like this:
 
-+------+------+-----------------+---------+
-| NULL | LAST | THE FINAL BYTES | GARBAGE |
-| $00  | BYTE | OF YOUR PROGRAM |         |
-+------+------+-----------------+---------+
+    +------+------+-----------------------------+---------+
+    | NULL | LAST |       THE FINAL BYTES       | GARBAGE |
+    | $00  | BYTE |       OF YOUR PROGRAM       |         |
+    +------+------+-----------------------------+---------+
 
 
-   Byte    Purpose
----------  --------------------------------------------------------------------
-
-    0      Null byte to indicate that this is the last sector
-    1      Number of bytes to read from this sector (N)
-
-   2-N     The last (N-2) bytes of the program
-(N+1)-255  Garbage
+   Byte   | Purpose
+:--------:|:--------------------------------------------------------------------
+          |
+    0     | Null byte to indicate that this is the last sector
+    1     | Number of bytes to read from this sector (N)
+          |
+   2-N    | The last (N-2) bytes of the program
+(N+1)-255 | Garbage
 
 Let's examine the program file "DIR" on your 1541TEST/DEMO disk. DIR appears in
 the directory on track 18, sector 04. The directory entry looks like this:
 
-         TRACK 18 - SECTOR 04
+             TRACK 18 - SECTOR 04
 
-. 00: 00 FF 82 10 01 44 49 52 .....DIR
-. 08: A0 A0 A0 A0 A0 A0 A0 A0
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-. 18: 00 00 00 00 00 00 04 00 ........
+    . 00: 00 FF 82 10 01 44 49 52 .....DIR
+    . 08: A0 A0 A0 A0 A0 A0 A0 A0
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+    . 18: 00 00 00 00 00 00 04 00 ........
 
 From the entry we see that "DIR" starts at track 16 ($10), sector 01 ($01) and
 that the file is four blocks long (4 + 0 * 256).
 
-. 00: 00 FF 82 10 01 44 49 52 .....DIR
-               ** **
-. 08: A0 A0 A0 A0 A0 A0 A0 A0
-. 10: A0 A0 A0 A0 A0 00 00 00      ...
-. 18: 00 00 00 00 00 00 04 00 ........
-                        ** **
+    . 00: 00 FF 82 10 01 44 49 52 .....DIR
+                   ** **
+    . 08: A0 A0 A0 A0 A0 A0 A0 A0
+    . 10: A0 A0 A0 A0 A0 00 00 00      ...
+    . 18: 00 00 00 00 00 00 04 00 ........
+                            ** **
 
 Let's look at the first block in this file.
 
-TRACK 16 - SECTOR 01
+             TRACK 16 - SECTOR 01
 
-. 00: 10 0B 01 04 0D 04 04 00 ........
-. 08: 9F 32 2C 38 2C 31 35 00 .2,8,15.
-. 10: 1E 04 05 00 99 22 93 22 ....."."
-. 18: 3A 89 20 31 30 30 30 30 :. 10000
-. 20: 00 2E 04 0A 00 9F 31 2C ......1,
-. 28: 38 2C 30 2C 22 24 30 22 8,0,"$0"
-. 30: 00 3C 04 14 00 A1 23 31 .<....#1
-. 38: 2C 41 24 2C 42 24 00 4A ,A$,B$.J
-. 40: 04 1E 00 A1 23 31 2C 41 ....#1,A
-. 48: 24 2C 42 24 00 58 04 28 $,B$.X.(
-. 50: 00 A1 23 31 2C 41 24 2C ..#1,A$,
-. 58: 42 24 00 60 04 32 00 43 B$...2.C
-. 60: B2 30 00 77 04 3C 00 8B .0...<..
-. 68: 20 41 24 B3 B1 22 22 20  A$..""
-. 70: A7 20 43 B2 C6 28 41 24 . C..(A$
-. 78: 29 00 94 04 46 00 8B 20 )...F..
-. 80: 42 24 B3 B1 22 22 20 A7 B$.."" .
-. 88: 20 43 B2 43 AA C6 28 42  C.C..(B
-. 90: 24 29 AC 32 35 36 00 AF $).256..
-. 98: 04 50 00 99 22 12 22 CA .P..".".
-. A0: 28 C4 28 43 29 2C 32 29 (.(C),2)
-. A8: 3B A3 33 29 3B 22 92 22 ;.3);"."
-. B0: 3B 00 C9 04 5A 00 A1 23 ;...Z..#
-. B8: 31 2C 42 24 3A 8B 20 53 1,B$:. S
-. C0: 54 B3 B1 30 20 A7 20 31 T..0 . 1
-. C8: 30 30 30 00 DE 04 64 00 000.....
-. D0: 8B 20 42 24 B3 B1 C7 28 . B$...(
-. D8: 33 34 29 20 A7 20 39 30 34) . 90
-. E0: 00 00 05 6E 00 A1 23 31 ......#1
-. E8: 2C 42 24 3A 8B 20 42 24 ,B$:. B$
-. F0: B3 B1 C7 28 33 34 29 A7 ...(34).
-. F8: 20 99 42 24 3B 3A 89 31  .B$;:.1
+    . 00: 10 0B 01 04 0D 04 04 00 ........
+    . 08: 9F 32 2C 38 2C 31 35 00 .2,8,15.
+    . 10: 1E 04 05 00 99 22 93 22 ....."."
+    . 18: 3A 89 20 31 30 30 30 30 :. 10000
+    . 20: 00 2E 04 0A 00 9F 31 2C ......1,
+    . 28: 38 2C 30 2C 22 24 30 22 8,0,"$0"
+    . 30: 00 3C 04 14 00 A1 23 31 .<....#1
+    . 38: 2C 41 24 2C 42 24 00 4A ,A$,B$.J
+    . 40: 04 1E 00 A1 23 31 2C 41 ....#1,A
+    . 48: 24 2C 42 24 00 58 04 28 $,B$.X.(
+    . 50: 00 A1 23 31 2C 41 24 2C ..#1,A$,
+    . 58: 42 24 00 60 04 32 00 43 B$...2.C
+    . 60: B2 30 00 77 04 3C 00 8B .0...<..
+    . 68: 20 41 24 B3 B1 22 22 20  A$..""
+    . 70: A7 20 43 B2 C6 28 41 24 . C..(A$
+    . 78: 29 00 94 04 46 00 8B 20 )...F..
+    . 80: 42 24 B3 B1 22 22 20 A7 B$.."" .
+    . 88: 20 43 B2 43 AA C6 28 42  C.C..(B
+    . 90: 24 29 AC 32 35 36 00 AF $).256..
+    . 98: 04 50 00 99 22 12 22 CA .P..".".
+    . A0: 28 C4 28 43 29 2C 32 29 (.(C),2)
+    . A8: 3B A3 33 29 3B 22 92 22 ;.3);"."
+    . B0: 3B 00 C9 04 5A 00 A1 23 ;...Z..#
+    . B8: 31 2C 42 24 3A 8B 20 53 1,B$:. S
+    . C0: 54 B3 B1 30 20 A7 20 31 T..0 . 1
+    . C8: 30 30 30 00 DE 04 64 00 000.....
+    . D0: 8B 20 42 24 B3 B1 C7 28 . B$...(
+    . D8: 33 34 29 20 A7 20 39 30 34) . 90
+    . E0: 00 00 05 6E 00 A1 23 31 ......#1
+    . E8: 2C 42 24 3A 8B 20 42 24 ,B$:. B$
+    . F0: B3 B1 C7 28 33 34 29 A7 ...(34).
+    . F8: 20 99 42 24 3B 3A 89 31  .B$;:.1
 
 Not very recognizable is it? Remember this is C64 internal BASIC not a BASIC
 listing. Bytes 0 and 1 are of interest. They are the track and sector link that
@@ -2128,56 +2178,56 @@ correctly. The reason is that the internal BASIC links were changed when the
 program was relocated.
 
 
-. 00: 10 0B 01 04 0D 04 04 00 ........
-      ** ** ** **
+    . 00: 10 0B 01 04 0D 04 04 00 ........
+          ** ** ** **
 
 Let's follow the forward chain to track 16, sector 11 and take a look at the
 start of the second block in our file.
 
 
-         TRACK 16 - SECTOR 11
+             TRACK 16 - SECTOR 11
 
-. 00: 10 02 31 30 00 1C 05 78 ..10....
-. 08: 00 A1 23 31 2C 42 24 3A ..#1,B$:
-. 10: 8B 20 42 24 B2 C7 28 33 . B$..(3
+    . 00: 10 02 31 30 00 1C 05 78 ..10....
+    . 08: 00 A1 23 31 2C 42 24 3A ..#1,B$:
+    . 10: 8B 20 42 24 B2 C7 28 33 . B$..(3
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nothing much of interest here. Let's chain to track 16 ($10), sector 02 ($02)
 and take a look at the start of the next block.
 
 
-         TRACK 16 - SECTOR 02
+             TRACK 16 - SECTOR 02
 
-. 00: 10 0C B2 22 22 3A 99 22 ..."":."
-. 08: 3E 22 3B 00 1A 06 AB 0F >";.....
-. 10: A1 42 24 3A 8B 42 24 B2 .B$:.B$.
+    . 00: 10 0C B2 22 22 3A 99 22 ..."":."
+    . 08: 3E 22 3B 00 1A 06 AB 0F >";.....
+    . 10: A1 42 24 3A 8B 42 24 B2 .B$:.B$.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Again, nothing much of interest. Chain to track 16 ($10), sector 12 ($0C).
 
 
-         TRACK 16 - SECTOR 12
+             TRACK 16 - SECTOR 12
 
-. 00: 00 68 8B 20 41 24 B2 22 ... A$."
-. 08: 44 22 20 A7 20 31 30 00 D" . 10.
-. 10: 2D 07 3C 28 8B 20 41 24 -.<(. A$
-. 18: B2 22 2E 22 20 B0 20 41 ."." . A
-. 20: 24 B2 22 3E 22 20 B0 20 *.">" .
-. 28: 41 24 B2 22 3E 22 20 A7 A$.">" .
-. 30: 20 34 30 30 30 00 3E 07  4000.>.
-. 38: 46 28 8B 20 41 24 B2 22 F(. A$."
-. 40: 51 22 20 A7 20 80 00 52 Q" . ..R
-. 48: 07 50 28 8B 20 41 24 B2 .P(. A$.
-. 50: 22 53 22 20 A7 20 35 30 "S" . 50
-. 58: 30 30 00 5E 07 F7 2A 89 00. ..*.
-. 60: 20 31 30 31 30 30 00 00  10100..
-. 68: 00 A0 00 A1 20 54 24 3A .... T$:
-. 70: 8B 20 54 24 B3 B1 22 22 . T$..""
-. 78: 20 A7 20 8D 20 32 30 30  . . 200
+    . 00: 00 68 8B 20 41 24 B2 22 ... A$."
+    . 08: 44 22 20 A7 20 31 30 00 D" . 10.
+    . 10: 2D 07 3C 28 8B 20 41 24 -.<(. A$
+    . 18: B2 22 2E 22 20 B0 20 41 ."." . A
+    . 20: 24 B2 22 3E 22 20 B0 20 *.">" .
+    . 28: 41 24 B2 22 3E 22 20 A7 A$.">" .
+    . 30: 20 34 30 30 30 00 3E 07  4000.>.
+    . 38: 46 28 8B 20 41 24 B2 22 F(. A$."
+    . 40: 51 22 20 A7 20 80 00 52 Q" . ..R
+    . 48: 07 50 28 8B 20 41 24 B2 .P(. A$.
+    . 50: 22 53 22 20 A7 20 35 30 "S" . 50
+    . 58: 30 30 00 5E 07 F7 2A 89 00. ..*.
+    . 60: 20 31 30 31 30 30 00 00  10100..
+    . 68: 00 A0 00 A1 20 54 24 3A .... T$:
+    . 70: 8B 20 54 24 B3 B1 22 22 . T$..""
+    . 78: 20 A7 20 8D 20 32 30 30  . . 200
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now we're cooking. This is the last sector of the file. How can we tell? The
 track of the next block in the file is 0 ($00). But what about the sector link?
@@ -2191,22 +2241,22 @@ a byte will cause the drive to time out.) Here's the tail end of our program.
 The three null bytes, ($00), at $66/7/8 are the last three bytes in our program
 file.
 
-. 00: 00 68 8B 20 41 24 B2 22 ... A$."
-. 08: 44 22 20 A7 20 31 30 00 D" . 10.
-. 10: 2D 07 3C 28 8B 20 41 24 -.<(. A$
-. 18: B2 22 2E 22 20 B0 20 41 ."." . A
-. 20: 24 B2 22 3E 22 20 B0 20 *.">" .
-. 28: 41 24 B2 22 3E 22 20 A7 A$.">" .
-. 30: 20 34 30 30 30 00 3E 07  4000.>.
-. 38: 46 28 8B 20 41 24 B2 22 F(. A$."
-. 40: 51 22 20 A7 20 80 00 52 Q" . ..R
-. 48: 07 50 28 8B 20 41 24 B2 .P(. A$.
-. 50: 22 53 22 20 A7 20 35 30 "S" . 50
-. 58: 30 30 00 5E 07 F7 2A 89 00. ..*.
-. 60: 20 31 30 31 30 30 00 00  10100..
-. 68: xx xx xx xx xx xx xx xx .
+    . 00: 00 68 8B 20 41 24 B2 22 ... A$."
+    . 08: 44 22 20 A7 20 31 30 00 D" . 10.
+    . 10: 2D 07 3C 28 8B 20 41 24 -.<(. A$
+    . 18: B2 22 2E 22 20 B0 20 41 ."." . A
+    . 20: 24 B2 22 3E 22 20 B0 20 *.">" .
+    . 28: 41 24 B2 22 3E 22 20 A7 A$.">" .
+    . 30: 20 34 30 30 30 00 3E 07  4000.>.
+    . 38: 46 28 8B 20 41 24 B2 22 F(. A$."
+    . 40: 51 22 20 A7 20 80 00 52 Q" . ..R
+    . 48: 07 50 28 8B 20 41 24 B2 .P(. A$.
+    . 50: 22 53 22 20 A7 20 35 30 "S" . 50
+    . 58: 30 30 00 5E 07 F7 2A 89 00. ..*.
+    . 60: 20 31 30 31 30 30 00 00  10100..
+    . 68: xx xx xx xx xx xx xx xx .
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 What about the rest of the block? Ignore it. It is garbage. The DOS does not
 zero out a buffer before it begins filling it with new information sent from
@@ -2219,7 +2269,7 @@ Bytes 0 and 1 of the last directory block will contain a $00 and a $FF,
 respectively. Relative file structure will be explained shortly.
 
 
-4.6 Sequential File Storage
+## 4.6 Sequential File Storage
 
 The format of a sequential file is very straightforward. All the sectors,
 except the last one, look like this:
@@ -2230,13 +2280,13 @@ except the last one, look like this:
 +-------+--------+-------------------+
 
 
-Byte      Purpose
---------  --------------------------------------------------------------------
-
-0         Track of the next block in this file
-1         Sector of the next block in this file
-
-2-255     254 bytes of data
+Byte     | Purpose
+:------- |:--------------------------------------------------------------------
+         |
+0        | Track of the next block in this file
+1        | Sector of the next block in this file
+         |
+2-255    | 254 bytes of data
 
 The last block in a sequential file is special for two reasons:
 
@@ -2251,68 +2301,430 @@ garbage.
 
 Diagrammatically, the last sector in the file looks like this:
 
+    +------+------+---------------------------------+---------+
+    | NULL | LAST |     THE FINAL DATA BYTES IN     | GARBAGE |
+    | $00  | BYTE |       YOUR SEQUENTIAL FILE      |         |
+    +------+------+---------------------------------+---------+
 
-+------+------+-------------------------+---------+
-| NULL | LAST | THE FINAL DATA BYTES IN | GARBAGE |
-| $00  | BYTE |   YOUR SEQUENTIAL FILE  |         |
-+------+------+-------------------------+---------+
 
-
-Byte       Purpose
----------  --------------------------------------------------------------------
-
-0          Null byte to indicate this is the last sector
-1          Position of the last byte in the file (N)
-
-2-N        The last N-2 bytes of the sequential file
-(N+1)-255  Garbage
+Byte      | Purpose
+:-------- | :------------------------------------------------------------------
+          |
+0         | Null byte to indicate this is the last sector
+1         | Position of the last byte in the file (N)
+          |
+2-N       | The last N-2 bytes of the sequential file
+(N+1)-255 | Garbage
 
 
 No sequential files appear on the 1541TEST/DEMO. (The file named SEQUENTIAL
 FILE is a program file demonstrating the sequential access method.) The C-64
 DISK BONUS PACK does come with one sequential file on it. The file named
-"   DIRECTORY   " appears as a SEQ when displaying the directory.
-"   DIRECTORY   " can be found at track 18, sector 01 on the C-64 DISK BONUS
+`"   DIRECTORY   "` appears as a SEQ when displaying the directory.
+`"   DIRECTORY   "` can be found at track 18, sector 01 on the C-64 DISK BONUS
 PACK. Let's take a peek at the directory entry for this file:
 
-         TRACK 18 - SECTOR 01
+             TRACK 18 - SECTOR 01
 
-. 20: 00 00 81 11 01 20 20 20 .....
-. 28: 44 49 52 45 43 54 4F 52 DIRECTOR
-. 30: 59 20 20 20 A0 00 00 00 Y    ...
-. 38: 00 00 00 00 00 00 02 00 ........
+    . 20: 00 00 81 11 01 20 20 20 .....
+    . 28: 44 49 52 45 43 54 4F 52 DIRECTOR
+    . 30: 59 20 20 20 A0 00 00 00 Y    ...
+    . 38: 00 00 00 00 00 00 02 00 ........
 
-"   DIRECTORY   " is the second file entry in the directory.
+`"   DIRECTORY   "` is the second file entry in the directory.
 
-. 20: 00 00 81 11 01 20 20 20 .....
-            ** ** **
-. 28: 44 49 52 45 43 54 4F 52 DIRECTOR
-. 30: 59 20 20 20 A0 00 00 00 Y    ...
-. 38: 00 00 00 00 00 00 02 00 ........
-                        **
+    . 20: 00 00 81 11 01 20 20 20 .....
+                ** ** **
+    . 28: 44 49 52 45 43 54 4F 52 DIRECTOR
+    . 30: 59 20 20 20 A0 00 00 00 Y    ...
+    . 38: 00 00 00 00 00 00 02 00 ........
+                            **
 
 A sequential file is designated by an $81 in the directory. The first block of
 this file is stored on track 17 ($11), sector 1 ($01). We also see that
-"   DIRECTORY   " is two blocks long (2 + 0 * 256). Let's take a look at the
+`"   DIRECTORY   "` is two blocks long (2 + 0 * 256). Let's take a look at the
 first half of the starting data block.
 
-         TRACK 17 - SECTOR 01
+             TRACK 17 - SECTOR 01
 
-. 00: 11 OB 43 36 34 20 53 54 ..C64 ST
-. 08: 41 52 54 45 52 20 4B 49 ARTER KI
-. 10: 54 20 20 20 36 34 20 20 T   64
-. 18: 32 41 OD 31 35 34 31 20 2A.1541
-. 20: 42 41 43 4B 55 50 0D 41 BACKUP.A
-. 28: 4D 4F 52 54 20 54 41 42 MORT TAB
-. 30: 4C 45 0D 41 52 52 4F 57 LE.ARROW
-. 38: 0D 42 49 54 53 20 41 4E .BITS AN
-. 40: 44 20 42 59 54 45 53 0D D BYTES.
-. 48: 43 41 4C 45 4E 44 41 52 CALENDAR
-. 50: 0D 43 48 41 4E 47 45 20 .CHANGE
-. 58: 44 49 53 4B 0D 43 48 41 DISK.CHA
-. 60: 52 20 42 4F 4F 54 0D 43 R BOOT.C
-. 68: 4F 4C 4F 52 20 54 45 53 OLOR TES
-. 70: 54 0D 43 4F 50 59 2D 41 T.COPY-A
-. 78: 4C 4C 36 34 0D 44 45 4D LL64.DEM
+    . 00: 11 OB 43 36 34 20 53 54 ..C64 ST
+    . 08: 41 52 54 45 52 20 4B 49 ARTER KI
+    . 10: 54 20 20 20 36 34 20 20 T   64
+    . 18: 32 41 OD 31 35 34 31 20 2A.1541
+    . 20: 42 41 43 4B 55 50 0D 41 BACKUP.A
+    . 28: 4D 4F 52 54 20 54 41 42 MORT TAB
+    . 30: 4C 45 0D 41 52 52 4F 57 LE.ARROW
+    . 38: 0D 42 49 54 53 20 41 4E .BITS AN
+    . 40: 44 20 42 59 54 45 53 0D D BYTES.
+    . 48: 43 41 4C 45 4E 44 41 52 CALENDAR
+    . 50: 0D 43 48 41 4E 47 45 20 .CHANGE
+    . 58: 44 49 53 4B 0D 43 48 41 DISK.CHA
+    . 60: 52 20 42 4F 4F 54 0D 43 R BOOT.C
+    . 68: 4F 4C 4F 52 20 54 45 53 OLOR TES
+    . 70: 54 0D 43 4F 50 59 2D 41 T.COPY-A
+    . 78: 4C 4C 36 34 0D 44 45 4D LL64.DEM
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Bytes 0 and 1 are the track and sector link (forward pointer). They inform us
+that the next data block can be found at track 17, sector 11. The remaining 254
+bytes are data. The sequential data that appear here are in fact the disk name
+(C64 STARTER KIT), the cosmetic disk ID (64), and the file names found on the
+C-64 DISK BONUS PACK. It is interesting to note that a carriage return
+character ($0D) was used as a delimiter to separate record entries. Next we see:
+
+             TRACK 17 - SECTOR 11
+
+    . 00: 00 86 2D 20 59 41 4E 4B ..- YANK
+    . 08: 45 45 0D 53 4F 55 4E 44 EE.SOUND
+    . 10: 20 2D 20 41 4C 49 45 4E  - ALIEN
+    . 18: 0D 53 4F 55 4E 44 20 2D .SOUND -
+    . 20: 20 42 4F 4D 42 0D 53 4F  BOMB.SO
+    . 28: 55 4E 44 20 2D 20 43 4C UND - CL
+    . 30: 41 50 0D 53 4F 55 4E 44 AP.SOUND
+    . 38: 20 2D 20 47 55 4E 46 49  - GUNFI
+    . 40: 52 45 0D 53 4F 55 4E 44 RE.SOUND
+    . 48: 20 2D 20 50 4F 4E 47 0D  - PONG.
+    . 50: 53 4F 55 4E 44 20 2D 20 SOUND -
+    . 58: 52 41 59 47 55 4E 0D 53 RAYGUN.S
+    . 60: 4F 55 4E 44 20 2D 20 53 OUND - S
+    . 68: 49 52 45 4E 0D 53 50 52 IREN.SPR
+    . 70: 49 54 45 20 42 4F 4F 54 ITE BOOT
+    . 78: 0D 53 55 50 45 52 4D 4F .SUPERMO
+    . 80: 4E 36 34 2E 56 31 0D 59 N64.V1.Y
+    . 88: 54 53 50 52 49 54 45 53 TSPRITES
+    . 90: A0 A0 A0 A0 A0 00 00 00 ........
+    . 98: 00 00 00 00 00 00 05 00 ........
+    . A0: 00 00 82 07 00 53 4E 4F .....SNO
+    . A8: 4F 50 59 20 4D 41 54 48 OPY MATH
+    . B0: A0 A0 A0 A0 A0 00 00 00 ........
+    . B8: 00 00 00 00 00 00 33 00 ......3.
+    . C0: 00 00 82 1D 00 41 4D 4F .....AMO
+    . C8: 52 54 20 54 41 42 4C 45 RT TABLE
+    . D0: A0 A0 A0 A0 A0 00 00 00 ........
+    . D8: 00 00 00 00 00 00 27 00 ......'.
+    . E0: 00 00 82 05 02 4D 4F 52 .....MOR
+    . E8: 54 47 41 47 45 A0 A0 A0 TGAGE...
+    . F0: A0 A0 A0 A0 A0 00 00 00 ........
+    . F8: 00 00 00 00 00 00 2D 00 ......-.
+
+We can see from the above data block that this is the last sector in the chain.
+Byte 0 contains a zero indicating no forward track. Byte 1 then is a byte count
+($86=134). Byte 134 is the last byte in our data file. Recall that the status
+variable (ST) will be set to 64 on the C64 side after byte 134 has been read.
+
+    . 80: 4E 36 34 2E 56 31 0D xx N64.V1.
+
+The remainder of the block has been padded ($87—$FF). The padding is clearly
+recognizable this time around. It has no rhyme or reason but it is still
+interesting to say the least. A portion of the C-64 DISK BONUS PACK directory
+itself was used to pad the remainder of the data block in question.
+
+    . 80: xx xx xx xx xx xx xx 59 N64.V1.Y
+    . 88: 54 53 50 52 49 54 45 53 TSPRITES
+    . 90: A0 A0 A0 A0 A0 00 00 00 ........
+    . 98: 00 00 00 00 00 00 05 00 ........
+    . A0: 00 00 82 07 00 53 4E 4F .....SNO
+    . A8: 4F 50 59 20 4D 41 54 48 OPY MATH
+    . B0: A0 A0 A0 A0 A0 00 00 00 ........
+    . B8: 00 00 00 00 00 00 33 00 ......3.
+    . C0: 00 00 82 1D 00 41 4D 4F .....AMO
+    . C8: 52 54 20 54 41 42 4C 45 RT TABLE
+    . D0: A0 A0 A0 A0 A0 00 00 00 ........
+    . D8: 00 00 00 00 00 00 27 00 ......'.
+    . E0: 00 00 82 05 02 4D 4F 52 .....MOR
+    . E8: 54 47 41 47 45 A0 A0 A0 TGAGE...
+    . F0: A0 A0 A0 A0 A0 00 00 00 ........
+    . F8: 00 00 00 00 00 00 2D 00 ......-.
+
+
+## 4.7 Relative File Storage
+
+Relative file types have the most elaborate internal structure. Relative files
+are often referred to as random access files. A relative file is actually two
+files in one:
+
+1. A sequential data file with records of a fixed length.
+2. A file of track and sector pointers called side sectors.
+
+The sequential data file uses fixed length records so that the DOS can
+calculate where to find any given record. This makes it possible to position to
+a particular record and read or write it without disturbing the rest of the
+file. In the jargon of relative files, the length of one record in the
+sequential data file is known as the *record size*.
+
+The complete file of track and sectors pointers is called the *side sector
+file*. The size of this file depends on the length of the sequential file. In
+general it is 1/120th the length of the sequential file (minimum length = 1
+block; maximum length = 6 blocks). Each block in this file is known as a *side
+sector*. There are really two sets of track and sector pointers in this file.
+The larger set is a list of the track and sector numbers of the blocks used to
+store the sequential data file (its file chain). The other is a list of the
+track and sector numbers of the side sectors (the file chain of the side sector
+file).
+
+The purpose of the side sector file is to allow the DOS to find any given
+record with remarkable efficiency. One disk read of a side sector is all that
+is required to locate the track and sector of the block where a particular
+record is stored. Two additional reads may then be required to retrieve a
+record itself if it spans two data blocks. This will be explained shortly when
+we examine records in more detail.
+
+Remember that sequential data blocks have the following format:
+
+Byte     | Purpose
+:------- |:--------------------------------------------------------------------
+         |
+0        | Track of the next block in this file
+1        | Sector of the next block in this file
+         |
+2-255    | 254 bytes of data
+
+Diagrammatically, each block (side sector) in the side sector file looks like
+this:
+
+    +-------+--------+---------+--------+--------------+---------------+
+    | TRACK | SECTOR | SIDE    | RECORD | TRACK/SECTOR | TRACK/SECTOR  |
+    | LINK  | LINK   | SECTOR  | SIZE   | LINKS FOR 6  | LINKS FOR 120 |
+    |       |        | NUMBER  |        | SIDE SECTORS | DATA BLOCKS   |
+    +-------+--------+---------+--------+--------------+---------------+
+
+
+Byte    | Purpose
+:------ |:--------------------------------------------------------------------
+0       | Track of the next side sector
+1       | Sector of the next side sector
+        |
+2       | Side sector number
+        |
+3       | Record length
+        |
+4-15    | Track and sector list of the side sector file
+        |
+        |  4-5  Track and sector of side sector #0
+        |  6-7  Track and sector of side sector #1
+        |  8-9  Track and sector of side sector #2
+        | 10-11 Track and sector of side sector #3
+        | 12-13 Track and sector of side sector #4
+        | 14-15 Track and sector of side sector #5
+        |
+16-256  | Track and sector list of 120 data blocks
+        |
+        | 16-17 Track and sector of data block #1
+        | 18-19 Track and sector of data block #2
+        | 20-21 Track and sector of data block #3
+        |  \
+        |  /
+        |  \
+        |  \/
+        | 254-255 Track and sector of data block #120
+
+To help you make some sense out of this, let's begin with the directory entry
+for a relative file. Here's the start of the directory of a diskette that has a
+relative file stored on it.
+
+             TRACK 18 - SECTOR 01
+
+    . 00: 00 FF 81 11 00 53 43 20 .....SC
+    . 08: 31 4D 41 47 20 46 49 4C 1MAG FIL
+    . 10: 45 A0 A0 A0 A0 00 00 00 E.......
+    . 18: 00 00 00 00 00 00 01 00 ........
+    . 20: 00 00 81 11 01 53 43 20 .....SC
+    . 28: 32 4D 41 47 20 46 49 4C 2MAG FIL
+    . 30: 45 A0 A0 A0 A0 00 00 00 E.......
+    . 38: 00 00 00 00 00 00 01 00 ........
+    . 40: 00 00 81 11 02 53 43 20 .....SC
+    . 48: 33 4D 41 47 20 46 49 4C 3MAG FIL
+    . 50: 45 A0 A0 A0 A0 00 00 00 E.......
+    . 58: 00 00 00 00 00 00 01 00 ........
+    . 60: 00 00 84 11 03 4D 41 47 .....MAG      Here's the entry
+    . 68: 20 46 49 4C 45 A0 A0 A0  FILE...      for the REL file:
+    . 70: AO A0 A0 A0 A0 11 0D 96 ........
+    . 78: 00 00 00 00 00 00 B4 01 ........
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+"MAG FILE" will serve as our demo throughout this section. Let's examine its
+directory entry in detail from track 18, sector 1.
+
+
+    . 60: 00 00 84 11 03 4D 41 47 .....MAG
+                ** ** **                        File type and T/S link
+    . 68: 20 46 49 4C 45 A0 A0 A0  FILE...
+    . 70: AO A0 A0 A0 A0 11 0D 96 ........
+    . 78: 00 00 00 00 00 00 B4 01 ........
+
+From the directory entry we can see that "MAG FILE" is a relative file. A
+relative file is indicated by an $84 as the file type. The track and sector
+pointers in the directory reveal that "MAG FILE" starts at track 17 ($11),
+sector 03 ($03). This is the sequential data file portion of the relative file.
+It is the beginning of our data.
+
+    . 70: AO A0 A0 A0 A0 11 0D 96 ........
+                         ** **                  Side sector information
+
+Side sector information follows the file name. The first side sector begins at
+track 17 ($11), sector 13 ($0D).
+
+    . 70: AO A0 A0 A0 A0 11 0D 96 ........
+                               **               Record length
+
+In addition, we see our record length ($96=150). Each record in our sequential
+data file is 150 bytes long. This is fixed throughout the entire data file.
+
+    . 78: 00 00 00 00 00 00 B4 01 ........
+                            ** **               File length (lo/hi-byte)
+
+Our sample relative file consumes a total of 436 blocks on the diskette (180 +
+1 * 256). (There is still room for expansion.) We can determine the number of
+side sectors by simple division. A side sector stores track and sector pointers
+for 120 data blocks of our sequential file. To determine the number of side
+sectors, simply divide the total number of blocks that appear in the directory
+entry by 120 and round up to the next higher integer:
+
+436 / 120 = 3.6 -> 4
+
+Four side sectors are needed to keep track of this much data. To figure out how
+many records currently exist requires a little more arithmetic. First we have
+to subtract the number of side sectors from the total number of blocks.
+
+436 - 4 = 432
+
+Now we can determine the total number of data bytes currently in use by our
+sequential file.
+
+432 * 254 = 109728
+
+Why 254 as a multiplier? Remember that the first two bytes of any data block
+are forward track and sector pointers (256 - 2 = 254). We finish our set of
+calculations by dividing this total by the fixed record length.
+
+109728 / 150 = 731.52
+
+A total of 731 records exist at the current time in "MAG FILE."
+
+Let's examine the first side sector.
+
+             TRACK 17 - SECTOR 13 SIDE SECTOR #0
+
+    . 00: 0C 13 00 96 11 0D 0C 13 ........  Forward pointer, SS #, size,
+    . 08: 06 10 13 0F 00 00 00 00 ........  and 6 pairs of side sector pointers
+    . 10: 11 03 11 0E 11 04 11 0F ........  120 pairs of data block
+    . 18: 11 05 11 10 11 06 11 11 ........  pointers
+    . 20: 11 07 11 12 11 08 11 13 ........
+    . 28: 11 09 11 14 11 0A 11 0B ........
+    . 30: 11 0C 10 00 10 0A 10 14 ........
+    . 38: 10 08 10 12 10 06 10 10 ........
+    . 40: 10 04 10 0E 10 02 10 0C ........
+    . 48: 10 01 10 0B 10 03 10 0D ........
+    . 50: 10 05 10 0F 10 07 10 11 ........
+    . 58: 10 09 10 13 0F 07 0F 11 ........
+    . 60: 0F 05 0F 0F 0F 03 0F 0D ........
+    . 68: 0F 01 0F 0B 0F 00 0F 0A ........
+    . 70: 0F 14 0F 08 0F 12 0F 06 ........
+    . 78: 0F 10 0F 04 0F 0E 0F 02 ........
+    . 80: 0F 0C 0F 09 0F 13 0E 07 ........
+    . 88: 0E 11 0E 05 0E 0F 0E 03 ........
+    . 90: 0E 0D 0E 01 0E 0B 0E 00 ........
+    . 98: 0E 0A 0E 14 0E 08 0E 12 ........
+    . A0: 0E 06 0E 10 0E 04 0E 0E ........
+    . A8: 0E 02 0E 0C 0E 09 0E 13 ........
+    . B0: 0D 07 0D 11 0D 05 0D 0F ........
+    . B8: 0D 03 0D 0D 0D 01 0D 0B ........
+    . C0: 0D 00 0D 0A 0D 14 0D 08 ........
+    . C8: 0D 12 0D 06 0D 10 0D 04 ........
+    . D0: 0D 0E 0D 02 0D 0C 0D 09 ........
+    . D8: 0D 13 0C 07 0C 11 0C 05 ........
+    . E0: 0C 0F 0C 03 0C 0D 0C 01 ........
+    . E8: 0C 0B 0C 00 0C 0A 0C 14 ........
+    . F0: 0C 08 0C 12 0C 06 0C 10 ........
+    . F8: 0C 04 0C 0E 0C 02 0C 0C ........
+
+
+Of primary interest are the first 16 bytes.
+
+    . 00: 0C 13 00 96 11 0D 0C 13 ........
+    . 08: 06 10 13 0F 00 00 00 00 ........
+
+Bytes 0 and 1 show us that the next side sector resides at track 12 ($0C),
+sector 19 ($13). Byte 2 informs us that this is side sector 0. A maximum of 6
+side sectors are used by any one relative file. This is determined solely by
+the physical storage capacity of the diskette (664 blocks free after formatting
+divided by 120 track and sector pointers in a side sector equals 5.53 side
+sectors). Side sectors are numbered from 0 to 5. Byte 3 shows us the record
+size again (150 bytes). Bytes 5-15 are the track and sector locations of the
+six possible side sectors. They can be tabled as follows:
+
+ BYTE | SIDE SECTOR |   TRACK - SECTOR
+ ----:|:-----------:|:-------------------:
+ 4- 5 |      0      | 17 ($11) - 13 ($0D)
+ 6- 7 |      1      | 12 ($0C) - 19 ($13)
+ 8- 9 |      2      |  6 ($06) - 16 ($10)
+10-11 |      3      | 19 ($13) - 15 ($0F)
+12-13 |      4      |  0 ($00) - 0 ($00)
+14-15 |      5      |  0 ($00) - 0 ($00)
+
+We can see from the table above that side sectors 4 and 5 have not yet been
+allocated. Once our data file expands to encompass more than 480 and 600
+sectors, respectively, they will be allocated, provided there is room on the
+diskette.
+
+The remaining 240 bytes are track and sector pointers to the first 120 blocks
+in the sequential file. From bytes 16 and 17 of side sector 0 we see that our
+data begins at track 17 ($11), sector 03 ($03). (This is the track and sector
+recorded in the directory itself.) Track 17, sector 03 chains to track 17
+($11), sector 14 ($0E) which chains to track 17 ($11), sector 4 ($04) and so on.
+
+             TRACK 17 - SECTOR 13                   SIDE SECTOR #0
+
+    . 10: 11 03 11 0E 11 04 11 0F
+          ** **
+    . 18: 11 05 11 10 11 06 11 11 ........
+    . 20: 11 07 11 12 11 08 11 13 ........
+    . 28: 11 09 11 14 11 0A 11 0B ........
+    . 30: 11 0C 10 00 10 0A 10 14 ........
+    . 38: 10 08 10 12 10 06 10 10 ........
+    . 40: 10 04 10 0E 10 02 10 0C ........
+    . 48: 10 01 10 0B 10 03 10 0D ........
+    . 50: 10 05 10 0F 10 07 10 11 ........
+    . 58: 10 09 10 13 0F 07 0F 11 ........
+    . 60: 0F 05 0F 0F 0F 03 0F 0D ........
+    . 68: 0F 01 0F 0B 0F 00 0F 0A ........
+    . 70: 0F 14 0F 08 0F 12 0F 06 ........
+    . 78: 0F 10 0F 04 0F 0E 0F 02 ........
+    . 80: 0F 0C 0F 09 0F 13 0E 07 ........
+    . 88: 0E 11 0E 05 0E 0F 0E 03 ........
+    . 90: 0E 0D 0E 01 0E 0B 0E 00 ........
+    . 98: 0E 0A 0E 14 0E 08 0E 12 ........
+    . A0: 0E 06 0E 10 0E 04 0E 0E ........
+    . A8: 0E 02 0E 0C 0E 09 0E 13 ........
+    . B0: 0D 07 0D 11 0D 05 0D 0F ........
+    . B8: 0D 03 0D 0D 0D 01 0D 0B ........
+    . C0: 0D 00 0D 0A 0D 14 0D 08 ........
+    . C8: 0D 12 0D 06 0D 10 0D 04 ........
+    . D0: 0D 0E 0D 02 0D 0C 0D 09 ........
+    . D8: 0D 13 0C 07 0C 11 0C 05 ........
+    . E0: 0C 0F 0C 03 0C 0D 0C 01 ........
+    . E8: 0C 0B 0C 00 0C 0A 0C 14 ........
+    . F0: 0C 08 0C 12 0C 06 0C 10 ........
+    . F8: 0C 04 0C 0E 0C 02 0C 0C ........
+
+Let's trace the remaining side sectors now.
+
+         TRACK 12 - SECTOR 19                   SIDE SECTOR #1
+
+. 00: 06 10 01 96 11 0D 0C 13 ........
+. 08: 06 10 13 0F 00 00 00 00 ........
+. 10: 0C 09 0B 13 0B 07 0B 11 ........
+. 18: 0B 05 0B 0F 0B 03 0B 0D ........
+. 20: 0B 01 0B 0B 0B 00 0B 0A ........
+. 28: 0B 14 0B 08 0B 12 0B 06 ........
+. 30: 0B 10 0B 04 0B 0E 0B 02 ........
+. 38: 0B 0C 0B 09 0A 13 0A 07 ........
+. 40: 0A 11 0A 05 0A 0F 0A 03 ........
+. 48: 0A 0D 0A 01 0A 0B 0A 00 ........
+. 50: 0A 0A 0A 14 0A 08 0A 12 ........
+
+61
+
+-----------------------------------------------------Page 61-----------------------------------------------------
