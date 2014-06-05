@@ -116,18 +116,18 @@ formatting of the original book:
                                  Canada
 
 
-                       Technical Illustrations by
-                           Diane M. Corralejo
+                        Technical Illustrations by
+                            Diane M. Corralejo
 
-                             DATAMOST, Inc.
-              19821 Nordhoff Street, Northridge, CA 91324
-                            (818) 709-1202
+                               DATAMOST, Inc.
+                19821 Nordhoff Street, Northridge, CA 91324
+                              (818) 709-1202
 ﻿
 
 
 
-                       First Printing, July 1984
-                     Second Printing, February 1985
+                        First Printing, July 1984
+                      Second Printing, February 1985
 
 
 
@@ -135,14 +135,14 @@ formatting of the original book:
 
 
 
-                     RESTON PUBLISHING COMPANY, INC.
-                        A Prentice-Hall Company
-                           Reston, Virginia
+                      RESTON PUBLISHING COMPANY, INC.
+                         A Prentice-Hall Company
+                            Reston, Virginia
 
-                          ISBN 0-8359-3091-2
+                           ISBN 0-8359-3091-2
 
-                  Copyright © 1984 by DATAMOST, Inc.
-                         All Rights Reserved
+                    Copyright © 1984 by DATAMOST, Inc.
+                           All Rights Reserved
 
 This manual is published and copyrighted by DATAMOST, Inc. All rights are
 reserved by DATAMOST, Inc. Copying, duplicating, selling or otherwise
@@ -385,19 +385,19 @@ converted to {CLR}. The table below summarizes the listing conventions, the
 corresponding control characters, and the proper key/keys to press on your
 C64 or VIC-20.
 
-When You See            What It Represents      What You Type
-----------------        --------------------    --------------
-{CLR}                   Clear Screen            Hold down SHIFT and press
-                                                CLR/HOME
-{HOME}                  Home Cursor             Press CLR/HOME
-{DOWN}                  Cursor Down             Press CRSR/DOWN
-{UP}                    Cursor Up               Hold down SHIFT and press
-                                                CRSR/UP
-{RIGHT}                 Cursor Right            Press CRSR/RIGHT
-{LEFT}                  Cursor Left             Hold down SHIFT and press
-                                                CRSR/LEFT
-{RVS}                   Reverse Field ON        Hold down CTRL and press 9
-{ROFF}                  Reverse Field OFF       Hold down CTRL and press 0
+    When You See          What It Represents      What You Type
+    ----------------      --------------------    --------------
+    {CLR}                 Clear Screen            Hold down SHIFT and press
+                                                  CLR/HOME
+    {HOME}                Home Cursor             Press CLR/HOME
+    {DOWN}                Cursor Down             Press CRSR/DOWN
+    {UP}                  Cursor Up               Hold down SHIFT and press
+                                                  CRSR/UP
+    {RIGHT}               Cursor Right            Press CRSR/RIGHT
+    {LEFT}                Cursor Left             Hold down SHIFT and press
+                                                  CRSR/LEFT
+    {RVS}                 Reverse Field ON        Hold down CTRL and press 9
+    {ROFF}                Reverse Field OFF       Hold down CTRL and press 0
 
 NOTE 1: When a number appears inside the curly brackets, it means you repeat
 the control character immediately to the left of the number that many times.
