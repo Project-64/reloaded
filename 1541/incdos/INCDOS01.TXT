@@ -2062,6 +2062,7 @@ Diagrammatically, the first sector (block) in a program file looks like this.
         |
  4-255  | The first 252 bytes of the program
 
+
 The first pair of bytes are the pointer to the track and sector of the next
 block in the file. Technically, this is known as a "forward pointer." It
 points ahead to the next sector in the file. All Commodore files use this
@@ -2099,6 +2100,7 @@ The remaining sectors, except the last one, look like this:
        |
  2-255 | The next 254 bytes of the program
 
+
 The last block in a program file is special because:
 
 1. It is the last sector.
@@ -2126,6 +2128,7 @@ Diagrammatically, the last sector in a program file looks like this:
           |
    2-N    | The last (N-2) bytes of the program
 (N+1)-255 | Garbage
+
 
 Let's examine the program file "DIR" on your 1541TEST/DEMO disk. DIR appears
 in the directory on track 18, sector 04. The directory entry looks like this:
@@ -2308,6 +2311,7 @@ Byte     | Purpose
 1        | Sector of the next block in this file
          |
 2-255    | 254 bytes of data
+
 
 The last block in a sequential file is special for two reasons:
 
@@ -2503,6 +2507,7 @@ Byte     | Purpose
          |
 2-255    | 254 bytes of data
 
+
 Diagrammatically, each block (side sector) in the side sector file looks like
 this:
 
@@ -2541,6 +2546,7 @@ Byte    | Purpose
         |  \
         |  \/
         | 254-255 Track and sector of data block #120
+
 
 To help you make some sense out of this, let's begin with the directory entry
 for a relative file. Here's the start of the directory of a diskette that has
@@ -2679,6 +2685,7 @@ formatting divided by 120 track and sector pointers in a side sector equals
 the record size again (150 bytes). Bytes 5-15 are the track and sector
 locations of the six possible side sectors. They can be tabled as follows:
 
+
  BYTE | SIDE SECTOR |   TRACK - SECTOR
  ----:|:-----------:|:-------------------:
  4- 5 |      0      | 17 ($11) - 13 ($0D)
@@ -2687,6 +2694,7 @@ locations of the six possible side sectors. They can be tabled as follows:
 10-11 |      3      | 19 ($13) - 15 ($0F)
 12-13 |      4      |  0 ($00) - 0 ($00)
 14-15 |      5      |  0 ($00) - 0 ($00)
+
 
 We can see from the table above that side sectors 4 and 5 have not yet been
 allocated. Once our data file expands to encompass more than 480 and 600
@@ -3219,6 +3227,7 @@ subsequent chapters and Appendix C.
 The 1541 DOS recognizes nine direct-access commands. These direct-access
 commands and their functions are listed below.
 
+
 Direct-Access Command   | Function
 :-----------------------|:---------------------------------------------------
 Block-Read (U1)         | Read a data block into 1541 RAM.
@@ -3230,6 +3239,7 @@ Block-Allocate (B-A)    | Set bit in BAM to indicate a sector is in use.
 Block-Free (B-F)        | Set bit in BAM to indicate a sector is not in use.
 Memory-Execute (M-E)    | Execute a 6502 routine stored in 1541 RAM or ROM.
 Block-Execute (B-E)     | Load and execute a 6502 routine in 1541 RAM.
+
 
 More often than not, direct-access commands complement one another in actual
 use. For example, a sector can be read from disk using a U1 command, examined
@@ -3361,6 +3371,7 @@ BAM) into disk RAM and prints the contents to the screen.
     290 CLOSE 15
     300 END
 
+
 Line Range | Description
 :--------- |:----------------------------------------------------------------
 110        | Opens logical file number 15 (PRINT#15,) to device 8 with a
@@ -3388,6 +3399,7 @@ Line Range | Description
 280        | Suppress the error light.
 290        | Close logical file number 15.
 300        | End.
+
 
 An explanation of programming technique is in order here. Initialization
 (line 120) is done prior to opening a direct-access data channel (line 150).
@@ -3471,6 +3483,7 @@ from track 18, sector 0.
     310 INPUT#15,EN$,EM$,ET$,ES$
     320 CLOSE 15
     330 END
+
 
 Line Range | Description
 :--------- |:----------------------------------------------------------------
