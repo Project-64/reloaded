@@ -3429,6 +3429,187 @@ The buffer-pointer command allows access to any individual byte in a DOS
 buffer. Any byte from position 0 through 255 in the buffer may be read or
 overwritten. The format of a buffer-pointer command is:
 
-75
+    SYNTAX:
+        PRINT# file#, "B-P"; channel#; byte position
 
------------------------------------------------------Page 75-----------------------------------------------------
+    ALTERNATE:
+        PRINT# file#, "B-P:" channel#; byte position
+        PRINT# file#, "B-P: channel#, byte position"
+
+    EXAMPLE:
+        PRINT#15,"B-P";2;144
+
+where
+
+* file# = the logical file number of the command channel
+* channel# = the secondary address of the associated open statement
+* byte position = 0 to 255
+
+The following program displays a disk name by reading only bytes 144 to 159
+from track 18, sector 0.
+
+    100 REM BUFFER-POINTER
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO 320
+    150 OPEN 2,8,2,"#"
+    160 PRINT#15,"U1";2;0;18;0
+    170 INPUT#15,EN$,EM$,ET$,ES$
+    180 IF EN$<>"00"GOTO 300
+    190 PRINT#15,"B-P";2;144
+    200 FOR I=1 TO 16
+    210 GET#2,B$
+    220 IF B$=""THEN B$=CHR$(0)
+    230 A=ASC(B$)
+    240 IF A>127 THEN A=A-128
+    250 IF A<32 OR A>95 THEN A=63
+    260 IF A=34 THEN A=63
+    270 DN$=DN$+CHR$(A)
+    280 NEXT I
+    290 PRINT"{DOWN}DISK NAME: ";DN$
+    300 CLOSE 2
+    310 INPUT#15,EN$,EM$,ET$,ES$
+    320 CLOSE 15
+    330 END
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+190        | Sets channel 2 pointer to position 144 in the buffer area.
+200-280    | Concatenate (build) the disk name one byte at a time by jamming
+           | it within printable ASCII range.
+
+
+    PRINT#15,"B-P:"2;144
+
+    PRINT#15,"B-P:2,144"
+
+## 5.5 Block-Write Command (U2)
+
+The block-write command (U2) writes the data from a DOS buffer to any given
+track and sector on a diskette. The format of a block-write command (U2)
+parallels that of a block-read command (U1). The format of a block-write
+command (U2) is:
+
+SYNTAX:
+    PRINT# file#, "U2"; channel#; drive#; track; sector
+
+ALTERNATE:
+    PRINT# file#, "U2:" channel#; drive#; track; sector
+    PRINT# file#, "U2: channel#, drive#, track, sector"
+
+EXAMPLE:
+    PRINT#15,"U2";2;0;18;0
+
+where
+
+* file# = the logical file number of the command channel
+* channel# = the secondary address of the associated open statement
+* drive# = 0
+* track = 1 to 35
+* sector = 0 to the range for a given track
+
+The entire contents of a buffer are written to disk during the execution of a
+block-write command (U2). The position of the buffer-pointer is irrelevant.
+It is not referred to by the DOS during the execution of a block-write
+command (U2).
+
+The first program listed below allows a disk name to be changed using a
+block-write command (U2). The second example allows you to edit the cosmetic
+disk ID that appears in the BAM. NOTE: This program does not change the
+formatting ID that is embedded in the header block of every sector.
+
+    100 REM EDIT DISK NAME
+    110 FOR I=1TO16
+    120 PAD$=PAD$+CHR$(160)
+    130 NEXTI
+    140 PRINT"{CLR}EDIT DISK NAME - 1541"
+    150 PRINT"{DOWN}REMOVE {RVS}WRITE PROTECT TAB{ROFF}"
+    160 PRINT"{DOWN}INSERT DISKETTE IN DRIVE"
+    170 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+    180 GETC$:IFC$=""THEN180
+    190 IFC$<>CHR$(13)GOTO180
+    200 PRINT"OK"
+    210 OPEN15,8,15
+    220 PRINT#15,"I0"
+    230 INPUT#15,EN$,EM$,ET$,ES$
+    240 IFEN$="00"GOTO280
+    250 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    260 CLOSE15
+    270 END
+    280 OPEN 2,8,2,"#"
+    290 PRINT#15,"U1";2;0;18;0
+    300 INPUT#15,EN$,EM$,ET$,ES$
+    310 PRINT#15,"B-P";2;2
+    320 GET#2,B$
+    330 IFB$=""THENB$=CHR$(0)
+    340 DOS=ASC(B$)
+    350 IFDOS=65GOTO390
+    360 PRINT"{DOWN}73,CBM DOS V2.6 1541,00,00"
+    370 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    380 GOTO720
+    390 PRINT#15,"B-P";2;144
+    400 FORI=1TO 16
+    410 GET#2,B$
+    420 IFB$=""THENB$=CHR$(0)
+    430 A=ASC(B$)
+    440 IFA>127THENA=A-128
+    450 IFA<32ORA>95THENA=63
+    460 IFA=34THENA=63
+    470 ODN$=ODN$+CHR$(A)
+    480 NEXTI
+    490 PRINT"{DOWN}OLD DISK NAME: ";ODN$
+    500 INPUT"{DOWN}NEW DISK NAME";NDN$
+    510 IFLEN(NDN$)<>0ANDLEN(NDN$)<17GOTO530
+    520 GOTO720
+    530 INPUT"{D0WN}ARE YOU SURE (Y/N)  Y{LEFT 3}";Q$
+    540 IFQ$<>"Y"GOTO720
+    550 NDN$=LEFT$(NDN$+PAD$,16)
+    560 PRINT#15,"B-P";2;144
+    570 PRINT#2,NDN$;
+    580 PRINT#15."U2";2;0;18;0
+    590 INPUT#15,EN$,EM$,ET$,ES$
+    600 IFEN$="00"GOTO 640
+    610 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    620 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    630 GOTO720
+    640 CLOSE2
+    650 INPUT#15,EN$,EM$,ET$,ES$
+    660 PRINT#15,"I0"
+    670 INPUT#15,EN$,EM$,ET$,ES$
+    680 CLOSE15
+    690 PRINT"{DOWN}DONE!"
+    700 END
+    710 REM CLOSE
+    720 CLOSE2
+    730 INPUT#15,EN$,EM$,ET$,ES$
+    740 CLOSE15
+    750 END
+
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+280        | Opens logical file number 2 (GET#2, PRINT#2,) to device 8 with a
+           | secondary address of 2 (channel number 2) letting the 1541
+           | assign a buffer area.
+310-380    | Query DOS version.
+550        | Pad new diskette name.
+560        | Reset channel 2 pointer to position 144.
+570        | Overwrite existing disk name in channel 2 buffer area.
+580        | Write channel 2 buffer to drive 0, track 18, sector 0.
+660        | Update the BAM ($0700-$07FF) to reflect a disk name change.
+
+
+The alternate formats of the block-write command (U2) in line 580 are:
+
+    PRINT#15,"U2:"2;0;18;0
+
+    PRINT#15,"U2:2,0,18,0"
+
+100 REM EDIT DISK ID
+110 PRINT"{CLR}EDIT DISK ID - 1541"
+120 PRINT"{DOWN}REMOVE {RVS}WRITE PROTECT TAB{ROFF}"
+
+79
+
+-----------------------------------------------------Page 79-----------------------------------------------------
