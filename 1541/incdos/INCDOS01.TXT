@@ -79,14 +79,13 @@ formatting of the original book:
   partially italicised. We follow this only when they are inline with other
   parts of the text. Whenever they are on a line of their own, we don't
   follow this for the sake of plain text readibility.
-
 * Fixed width - lines printed in fixed width font in the original book are
   left-flush justified. When read as text/plain, you'll see them four spaces
   to the right for Markdown compatibility.
-
 * Chapter headers and titles are formatted in one line rather than two.
-
 * Chapter and section header lines are prepended with "#" marks
+* Program listins originally formatter for 40 columns are reformatted to full
+  lines wherever possible for better readability and easier processing
 
 ---
 ﻿
@@ -548,7 +547,7 @@ In the example above (OPEN 15, 8, 15) we opened logical file number 15 on the
 C64 to device number 8 (the disk drive) through channel 15 (the command
 channel).
 
-### 2. Sending commands to the DOS using a PRINT* statement.
+### 2. Sending commands to the DOS using a PRINT# statement.
 
 In order to send commands from your computer to the 1541, you use a PRINT#
 statement. A PRINT# statement is a BASIC command which looks like this:
@@ -680,7 +679,7 @@ disk operation. This includes closing the command channel.
 Let's take a look at the disk commands used for housekeeping. NOTE: If you
 are using the DOS SUPPORT program that came on your 1541TEST/DEMO, the syntax
 for these disk commands is remarkably shorter. The > or @ keys are used to
-send a command to the disk drive. They take the place of the PRINT*
+send a command to the disk drive. They take the place of the PRINT#
 statement. In addition, you do not have to open or close the command channel
 or embed the disk command in quotation marks. The DOS SUPPORT program will do
 this automatically for you. The DOS 5.1 syntax can be used only in immediate
