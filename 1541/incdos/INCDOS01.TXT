@@ -3,13 +3,14 @@ PROJECT HEADER
 
 Welcome to Project 64 Reloaded!
 
-   The goal of Project 64 is to preserve Commodore 64 related documents in
+The goal of Project 64 is to preserve Commodore 64 related documents in
 electronic text format that might otherwise cease to exist with the rapid
 advancement of computer technology and declining interest in 8- bit computers
 on the part of the general population. Project 64 Reloaded maintains a
 publicly available, revision controlled repository of all the documents it
-took over from the original Project 64. The repository is currently hosted by
-GitHub and is made available to the public under following URL:
+took over from the original Project 64. At the time of writing, the
+repository is hosted by GitHub and made available to the public under
+following URL:
 
 https://github.com/Project-64/etext
 
@@ -37,17 +38,17 @@ please contact project members through project web pages.
 
 DISCLAIMERS
 ---------------
-   Extensive efforts were made to preserve the contents of the original
+
+Extensive efforts were made to preserve the contents of the original
 document. However, certain portions, such as diagrams, program listings, and
 indexes may have been either altered or sacrificed due to the limitations of
-plain vanilla text. Diagrams may have been eliminated where ASCII-art was
-not feasible. Program listings may be missing display codes where
-substitutions were not possible. Tables of contents and indexes may have
-been changed from page number references to section number references.
-Please accept our apologies for these limitations, alterations, and possible
-omissions.
+plain vanilla text. Diagrams may have been eliminated where ASCII-art was not
+feasible. Program listings may be missing display codes where substitutions
+were not possible. Tables of contents and indexes may have been changed from
+page number references to section number references. Please accept our
+apologies for these limitations, alterations, and possible omissions.
 
-   The author(s) of the original document and members of Project 64 make no
+The author(s) of the original document and members of Project 64 make no
 representations about the accuracy or suitability of this material for any
 purpose. This etext is provided "as-is". Please refer to the warantee of the
 original document, if any, that may included in this etext. No other
@@ -61,9 +62,9 @@ this document or use the information herein you do so at your own risk.
 DOCUMENT HEADER
 ---------------
 
-  The Project 64 etext of Inside Commodore DOS by Richard Immers, Ph.D.
-and Gerald G. Neufeld, Ph.D. second edition. Converted to etext by
-Silver Dream ! and Pinacolada64.
+The Project 64 etext of Inside Commodore DOS by Richard Immers, Ph.D. and
+Gerald G. Neufeld, Ph.D. second edition. Converted to etext by Silver Dream !
+and Pinacolada64.
 
 INCDOS01.TXT (WIP), April 2014
 
@@ -3184,6 +3185,250 @@ The material covered in this chapter is primarily of academic interest.
 However, do not attempt to recover a blown file unless you thoroughly
 understand the structure of the directory and how files are stored.
 
-70
 
------------------------------------------------------Page 70-----------------------------------------------------
+# CHAPTER 5 - DIRECT-ACCESS PROGRAMMING
+
+## 5.1 Introduction to Direct-Access Programming
+
+In Chapter 2 you learned how to use such DOS commands as NEW, SCRATCH, and
+VALIDATE, for diskette housekeeping. This chapter describes how to use
+another set of DOS commands known as direct-access commands. These commands
+are not commonly used in typical programming applications. However, they
+allow you to step beyond simple housekeeping chores to develop more powerful
+disk utility programs that do such things as:
+
+* Change a disk name or cosmetic ID.
+* Display a block availability map (the BAM).
+* Display a directory.
+* Display a track and sector.
+* Chain through a directory entry.
+* Edit a track and sector.
+* Recover an inadvertently scratched file.
+* Recover a damaged diskette.
+* Duplicate a diskette.
+* Copy a file.
+* Catalog a disk library.
+
+As you grow with your 1541, the need for routines of this nature will become
+increasingly apparent, if it isn't already. This chapter illustrates the use
+of direct-access commands in simple programs. A basic understanding of the
+function of these commands is necessary to appreciate the routines found in
+subsequent chapters and Appendix C.
+
+## 5.2 Beginning Direct-Access Programming
+
+The 1541 DOS recognizes nine direct-access commands. These direct-access
+commands and their functions are listed below.
+
+Direct-Access Command   | Function
+:-----------------------|:---------------------------------------------------
+Block-Read (U1)         | Read a data block into 1541 RAM.
+Buffer-Pointer (B-P)    | Set pointer to any byte in a disk buffer.
+Block-Write (U2)        | Write a data block from 1541 RAM to diskette.
+Memory-Read (M-R)       | Peek bytes out of 1541 RAM or ROM.
+Memory-Write (M-W)      | Poke bytes into 1541 RAM.
+Block-Allocate (B-A)    | Set bit in BAM to indicate a sector is in use.
+Block-Free (B-F)        | Set bit in BAM to indicate a sector is not in use.
+Memory-Execute (M-E)    | Execute a 6502 routine stored in 1541 RAM or ROM.
+Block-Execute (B-E)     | Load and execute a 6502 routine in 1541 RAM.
+
+More often than not, direct-access commands complement one another in actual
+use. For example, a sector can be read from disk using a U1 command, examined
+using a B-P or M-R command, altered using a B-P or M-W command, and rewritten
+to disk using a U2 command.
+
+The block-read (U1), buffer-pointer, and block-write (U2) commands are the
+easiest to comprehend and, as a result, the most widely used. The memory-read
+and memory-write commands represent a more sophisticated level of
+direct-access programming and are sometimes used in lieu of the
+buffer-pointer command. The block-allocate and block-free commands are used
+primarily for the maintenance of random access files. Random access files
+were the forerunner of relative files and are rarely used today. The
+memory-execute command is used at the guru level of disk programming and
+requires a rudimentary knowledge of both machine language and the innards of
+the 1541 to implement. The block-execute command, while documented by
+Commodore, is almost never used.
+
+In order to use the commands mentioned above you will need to learn how to
+open a direct-access data channel. The format of a direct-access OPEN
+statement is:
+
+    SYNTAX:     OPEN file#, device#, channel#, "#"
+
+    EXAMPLE:    OPEN 2,8,2,"#"
+                OPEN 1,8,14,"#"
+
+where
+
+* file# = the logical file number (1 to 127)
+* device# = 8
+* channel# = the secondary address of the associated open statement (2 to 14)
+
+Opening a direct-access data channel establishes a communication link between
+the C64 and the 1541. In the first example, we opened logical file number 2
+on the C64 side to device number 8 with a secondary address of 2 (channel
+number 2) on the 1541 side. The only time a channel number is ever referenced
+is as part of a direct-access command, e.g., a block-read command (U1). Data
+is always read from disk (GET# file#, INPUT# file#,) or written to disk
+(PRINT# file#,) by way of the logical file number of the direct-access OPEN
+statement NOT the channel number. The logical file number and the channel
+number do not have to match as they do in our first OPEN example. They are
+two separate entities. The logical file number which resides on the C64 side
+passes read or write commands to the channel number on the 1541 side. Any
+similarity between the logical file number and the channel number is for
+mnemonic purposes only. The second example is a perfectly legal direct-access
+OPEN statement. In this instance, we opened logical file number 1 (GET#1,
+PRINT#1,) to device number 8 with a secondary address of 14 (channel number
+14) on the 1541 side. Whether or not you use mnemonic OPEN statements is
+strictly a matter of personal preference.
+
+We will begin our tutorial on direct-access programming with a quick review
+of the 1541 format explained in Chapter 3. The table below outlines the range
+of track and sector numbers found on a diskette.
+
+
+  Zone  |    Track | Sector Range | Number of Sectors
+:------:|---------:|:------------:|:-----------------:
+   1    |   1 - 17 |    0 - 20    |          21
+   2    |  18 - 24 |    0 - 18    |          19
+   3    |  25 - 30 |    0 - 17    |          18
+   4    |  31 - 35 |    0 - 16    |          17
+
+
+NOTE: If you attempt to access a track less than 1, a track greater than 35,
+or a sector out of range for a given track, you will get a DOS error message
+number 66, ILLEGAL TRACK OR SECTOR.
+
+
+## 5.3 Block-Read Command (U1)
+
+The block-read command (U1) transfers the contents of a given track and
+sector to an area of disk RAM commonly referred to as a buffer or workspace.
+The format of a block- read command (U1) is:
+
+    SYNTAX:
+        PRINT# file#, "U1"; channel#; drive#; track; sector
+
+    ALTERNATE:
+        PRINT# file#, "U1:" channel#; drive#; track; sector
+        PRINT# file#, "U1: channel#, drive#, track, sector"
+
+    EXAMPLE:
+        PRINT#15,"U1";2;0;18;0
+
+where
+
+* file# = the logical file number of the command channel
+* channel# = the secondary address of the associated open statement
+* drive# = 0
+* track = 1 to 35
+* sector = 0 to the range for a given track
+
+After a given track and sector has been transferred to a buffer with a
+block-read command (U1), the buffer pointer is automatically left in position
+255. Bytes 0-255 of the buffer are now accessible from the starting position,
+i.e., byte 0. The GET# command is normally used to retrieve one byte at a
+time from the buffer by way of the logical file number of the direct-access
+OPEN statement. The GET# command is used rather than INPUT# because the data
+may contain null bytes, carriage returns and/or line feeds, commas, colons,
+or other control characters. When using the GET# command you must remember to
+test each incoming byte for equality with the null string "".A null byte must
+be converted to CHR$(0) or an ?ILLEGAL QUANTITY ERROR will result when you
+try to find the ASCII value of the byte. (The GET# command fails to make the
+necessary conversion for you.) The ASCII value of a byte is used to check for
+control characters. These characters are misinterpreted by the INPUT#
+command. The following example reads the block from track 18, sector 0 (the
+BAM) into disk RAM and prints the contents to the screen.
+
+    100 REM BLOCK-READ (U1)
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0:"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO 290
+    150 OPEN 2,8,2,"#"
+    160 PRINT#15,"U1";2;0;18;0
+    170 INPUT#15,EN$,EM$,ET$,ES$
+    180 IF EN$<>"00"GOTO 270
+    190 FOR I=0 TO 255
+    200 GET#2,B$
+    210 IF B$=""THEN B$=CHR$(0)
+    220 A=ASC(B$)
+    230 PRINT ST,I,A,
+    240 IF A>31 AND A<96 THEN PRINT B$,
+    250 PRINT
+    260 NEXT I
+    270 CLOSE 2
+    280 INPUT#15,EN$,EM$,ET$,ES$
+    290 CLOSE 15
+    300 END
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+110        | Opens logical file number 15 (PRINT#15,) to device 8 with a
+           | secondary address of 15 (command channel).
+120        | Initializes drive 0.
+130-140    | Query the error channel.
+150        | Opens logical file number 2 (GET#2,) to device 8 with a
+           | secondary address of 2 (channel number 2) letting the 1541
+           | assign a buffer area.
+160        | Reads the block from drive 0, track 18, sector 0 into channel 2
+           | buffer area.
+170-180    | Query the error channel.
+190        | Begin loop to read 256 bytes.
+200        | Transfer a byte from channel 2 buffer area to C 64 memory by way
+           | of the GET# command (GET# logical file number not the channel
+           | number).
+210        | Test for equality with the null string "".
+220        | ASCII conversion of a byte.
+230        | Print the status variable (ST), our loop counter, and the ASCII
+           | value of the byte.
+240        | Print the byte if it's within normal ASCII range.
+250        | Terminate comma tabulation.
+260        | Increment loop counter.
+270        | Close logical file number 2.
+280        | Suppress the error light.
+290        | Close logical file number 15.
+300        | End.
+
+An explanation of programming technique is in order here. Initialization
+(line 120) is done prior to opening a direct-access data channel (line 150).
+Initialization automatically shuts down all direct-access data channels (2
+-14) that are open on the 1541 side. The command channel (15) is not
+affected. Logical files still remain open on the C64 side, however. Any
+attempt to access a data channel after initialization results in a 70, NO
+CHANNEL error. The DOS attempts to rewrite the BAM each time a direct-access
+channel is closed (line 270). If a diskette is either write protected or DOS
+protected, the BAM is not rewritten and the error light remains on until
+cleared. Fortunately, no damage has been done to the data on the diskette.
+The error light is quite distracting nevertheless. You can suppress the error
+light after closing a direct-access data channel simply by inputting the
+error number, message, track, and sector via the command channel (line 280).
+
+The alternate formats of the block-read command (U1) in line 160 are:
+
+    PRINT#15,"U1:"2;0;18;0
+
+    PRINT#15,"U1:2,0,18,0"
+
+Although the block-read command (U1) comes in three basic flavors, line 160
+uses the preferred format. It will be used in demonstration programs
+throughout the chapter for consistency. Alternate formats will appear in
+passing.
+
+Additionally, lines 210-220 are often combined into one BASIC statement for
+the sake of efficiency:
+
+    A=ASC(B$+CHR$(0))
+
+Recall that lines 210-220 are necessary because the GET# command does not
+interpret nulls correctly.
+
+## 5.4 Buffer-Pointer Command (B-P)
+
+The buffer-pointer command allows access to any individual byte in a DOS
+buffer. Any byte from position 0 through 255 in the buffer may be read or
+overwritten. The format of a buffer-pointer command is:
+
+75
+
+-----------------------------------------------------Page 75-----------------------------------------------------
