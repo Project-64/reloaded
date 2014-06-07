@@ -72,7 +72,7 @@ A "version line" line in the etext like
 
 >MAPC6412.TXT. This replaces MAPC6411.TXT, etext #351# from June 1998.
 
-shall continue to be located in the header and used to distinguish between the versions as well as make it clear what document in what version the current one is updated from.
+shall continue to be located inside the header and used to distinguish between the versions as well as make it clear what document in what version, the current one is updated from.
 
 
 ### Language of the documents
