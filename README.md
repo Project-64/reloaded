@@ -8,8 +8,6 @@ Obviously maintaining the website and updating all the documents is something th
 
 With the advent of online version control services like Github (and some earlier), things can change. This repository is meant to be publicly available and everyone can clone it, send pull request, etc. I also try to make it "loosely connected" to any person, especially myself. The owner of the repository is an "organisation" (in the sense of Gihub's terminology) called "Project-64" and can have multiple maintainers or can be transferred along with its whole content to another entity with ease. I have also created a — hopefully — [more user friendly interface](http://e4aws.silverdr.com/project64/) to the project's always latest "master" branch copies. The pages there contain also the original covers' scans, allow reading or downloading the always latest versions and may be useful for all not so SCM/git/github savvy people out there. Please note however that while I expect the repository to last, the same cannot be guaranteed about the pages I maintain myself.
 
-Last and least — if you like the idea beyond reviving the project and want to help it to succeed but have no resources (time, skills, equipment, ...) to be an active participant and contributor to the content, please consider a [donation](http://e4aws.silverdr.com/resources/bitcoin/QRproject64donation.png) in the form of [BTC/XBT](http://bitcoin.org/). Received donations will be used to help the project by either purchasing additional books, professional services or related equipment, funding the development of interfaces to the content or distributed among active and interested contributors. Please mark the transactions as "Project 64 Reloaded".
-
 Happy reading, referencing and hacking!
 
 silverdr
@@ -80,3 +78,16 @@ shall continue to be located inside the header and used to distinguish between t
 Unlike Dean I do not exclude a possibility of accepting documents, which originated in languages other than English. Very often original language versions are in fact better than the translations and I would find it rather unfair to deprive people of the possibility to enjoy the content in its original language glory. An example: "Das Große Floppybuch zur 1541", written originally by German authors and translated into English. While the English version (published by Abacus Software under the title "The Anatomy Of The 1541 Drive - A Complete Guide to Using The Commodore Disk Drive") is actually quite good, I still have this kind of feeling that German book is simply better. And no, German language is not my mother tongue.. ;-)
 
 This liberal approach to languages of maintained documents is limited to the *original* language of the position to be included in the repository! In other words: position originally written in Czech (no, not my mother tongue either) should be accepted in both Czech and English but neither in Russian, nor in German nor in any other language.
+
+
+## Donations / sponsorship
+
+Last and least — if you like the idea beyond the project and want to contribute but have no resources (time, skills, equipment, ...) to be an active participant and contributor to the content, please consider a donation in the form of [electronic currency](http://bitcoin.org/) to the [project's address](http://e4aws.silverdr.com/resources/bitcoin/QRproject64donation.png). Received donations will be used to help the project by either purchasing additional books, professional services or related equipment, funding the development of interfaces to the content or distributed among active and interested contributors. Please mark the transactions as "Project 64 Reloaded".
+
+For direct donations/sponsorship of items like:
+
+* copies of rare and valuable books and documents
+* processing equipment (high quality automated scanners, binding equipment)
+* processing software (Top quality, commercial OCR and extensions)
+
+please contact project members through project web pages.
