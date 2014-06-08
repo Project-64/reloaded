@@ -2298,10 +2298,10 @@ a $FF, respectively. Relative file structure will be explained shortly.
 The format of a sequential file is very straightforward. All the sectors,
 except the last one, look like this:
 
-+-------+--------+-------------------+
-| TRACK | SECTOR | 254 BYTES OF DATA |
-| LINK  | LINK   |                   |
-+-------+--------+-------------------+
+    +-------+--------+-------------------+
+    | TRACK | SECTOR | 254 BYTES OF DATA |
+    | LINK  | LINK   |                   |
+    +-------+--------+-------------------+
 
 
 Byte     | Purpose
@@ -3174,6 +3174,7 @@ section on Unscratching a File in Chapter 8 for instructions on how to edit
 the file-type byte. Use the values from the table below, rather than those
 listed in Chapter 8, when locking or unlocking a file.
 
+
 File Type  |  Normal |  Locked
 :--------- |:-------:|:--------:
 Deleted    | DEL $80 | DEL< $C0
@@ -3181,6 +3182,7 @@ Sequential | SEQ $81 | SEQ< $C1
 Program    | PRG $82 | PRG< $C2
 User       | USR $83 | USR< $C3
 Relative   | REL $84 | REL< $C4
+
 
 The DOS determines whether or not a file is locked by checking bit 6 of the
 file-type byte. If it is set (1), the file is locked. Even if a file has been
