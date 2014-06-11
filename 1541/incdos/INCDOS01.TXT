@@ -3866,3 +3866,88 @@ parameter memory-read command in line 190 is:
     PRINT#15,"M-R:"CHR$(144)CHR$(4)CHR$(16)
 
 ## 5.7 Memory-Write Command (M-W)
+
+The memory-write command is the opposite of the memory-read command. Data is
+written to a DOS buffer via the command channel. The format of a memory-write
+command is:
+
+    SYNTAX:
+       PRINT# file#, "M-W" CHR$(lo-byte) CHR$(hi-byte) CHR$(# of bytes) data
+
+    ALTERNATE:
+       PRINT# file#, "M-W:" CHR$(lo-byte) CHR$(hi-byte) CHR$(# of bytes) data
+
+    EXAMPLE:
+        PRINT#15,"M-W"CHR$(2)CHR$(5)CHR$(2)CHR$(1)CHR$(8)
+        PRINT#15,"M-W"CHR$(2)CHR$(5)CHR$(2)CHR$(1)D$
+
+where
+
+* file# = the logical file number of the command channel
+* lo-byte = lo-byte of the memory address
+* hi-byte = hi-byte of the memory address
+* # of bytes = 1 to 34
+* data = a string variable or a CHR$ iteration
+
+A total of 34 data bytes may be written with each issuance of a memory-write
+command. Typically only 8, 16, or 32 data bytes are sent out at one time in a
+loop as our buffer size (256 bytes) is evenly divisible by these factors. At
+the most sophisticated level of disk programming, machine language programs
+can be poked into RAM inside the 1541 with a memory-write command and then
+executed. (See Chapter 7 for actual programs of this nature.) In practice,
+however, one encounters limited use of the memory-write command.
+
+The following example demonstrates the use of the memory-write command. It
+allows you to change the load address of a program file. A routine of this
+nature would be used to aid in the disassembly of a program that normally
+loads into high memory (e.g., $8000-$BFFF) and is already occupied by a
+machine language monitor program (SUPERMON64) or ROM.
+
+100 REM EDIT LOAD ADDRESS
+110 H$="0123456789ABCDEF"
+120 PRINT"{CLR}EDIT LOAD ADDRESS - 1541"
+130 PRINT"{DOWN}REMOVE {RVS}WRITE PROTECT TAB{ROFF}"
+140 PRINT"{DOWN}INSERT DISKETTE IN DRIVE"
+150 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+160 GETC$:IFC$=""THEN160
+170 IFC$<>CHR$(13)GOTO160
+180 PRINT"OK"
+190 OPEN 15,8,15
+200 PRINT#15,"I0"
+210 INPUT#15,EN$,EM$,ET$,ES$
+220 IFEN$="00"GOTO260
+230 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+240 CLOSE15
+250 END
+260 PRINT#15,"M-R"CHR$(1)CHR$(1)
+270 GET#15,DOS$
+280 IFDOS$=""THENDOS$=CHR$(0)
+290 DOS=ASC(DOS$)
+300 IFDOS=65GOTO330
+310 PRINT"{DOWN}73,CBM DOS V2.6 1541,00,00"
+320 GOTO910
+330 INPUT"{DOWN}FILENAME";F$
+340 IFLEN(F$)<>0ANDLEN(F$)<17GOTO360
+350 GOTO920
+360 OPEN 2,8,2,"0:"+F$+",P,R"
+370 INPUT#15,EN$,EM$,ET$,ES$
+380 IFEN$="00"GOTO400
+390 GOTO940
+400 PRINT#15,"M-R"CHR$(24)CHR$(0)CHR$(2)
+410 GET#15,T$
+420 T=ASC(T$+CHR$(0))
+430 GET#15,S$
+440 S=ASC(S$+CHR$(0))
+450 CLOSE2
+460 INPUT#15,EN$,EM$,ET$,ES$
+470 IFEN$="00"GOTO490
+480 GOTO900
+490 OPEN 2,8,2,"#2"
+500 PRINT#15,"U1";2;0;T;S
+510 INPUT#15,EN$,EM$,ET$,ES$
+520 IFEN$="00"GOTO540
+530 GOTO900
+
+86
+
+-----------------------------------------------------Page 86-----------------------------------------------------
