@@ -3620,10 +3620,249 @@ The alternate formats of the block-write command (U2) in line 580 are:
 
     PRINT#15,"U2:2,0,18,0"
 
-100 REM EDIT DISK ID
-110 PRINT"{CLR}EDIT DISK ID - 1541"
-120 PRINT"{DOWN}REMOVE {RVS}WRITE PROTECT TAB{ROFF}"
 
-79
+    100 REM EDIT DISK ID
+    110 PRINT"{CLR}EDIT DISK ID - 1541"
+    120 PRINT"{DOWN}REMOVE {RVS}WRITE PROTECT TAB{ROFF}"
+    130 PRINT"{DOWN}INSERT DISKETTE IN DRIVE"
+    140 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+    150 GETC$:IFC$=""THEN150
+    160 IFC$<>CHR$(13)GOTO150
+    170 PRINT"OK"
+    180 OPEN 15,8,15
+    190 PRINT#15,"I0"
+    200 INPUT#15,EN$,EM$,ET$,ES$
+    210 IFEN$="00"GOTO250
+    220 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    230 CLOSE15
+    240 END
+    250 OPEN 2,8,2,"#"
+    260 PRINT#15,"U1";2;0;18;0
+    270 INPUT#15,EN$,EM$,ET$,ES$
+    280 PRINT#15,"B-P";2;2
+    290 GET#2,B$
+    300 IFB$=""THENB$=CHR$(0)
+    310 DOS=ASC(B$)
+    320 IFDOS=65GOTO360
+    330 PRINT"{DOWN}73,CBM DOS V2.6 1541,00,00"
+    340 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    350 GOTO690
+    360 PRINT#15,"B-P";2;162
+    370 FORI=1TO2
+    380 GET#2,B$
+    390 IFB$=""THENB$=CHR$(0)
+    400 A=ASC(B$)
+    410 IFA>127THENA=A-128
+    420 IFA<32ORA>95THENA=63
+    430 IFA=34THENA=63
+    440 ODI$=ODI$+CHR$(A)
+    450 NEXTI
+    460 PRINT"{DOWN}OLD DISK ID: ";ODI$
+    470 INPUT"{DOWN}NEW DISK ID";NDI$
+    480 IFLEN(NDI$)<>0ANDLEN(NDI$)<3GOTO500
+    490 GOTO690
+    500 INPUT"{DOWN}ARE YOU SURE (Y/N)  Y{LEFT 3}";Q$
+    510 IFQ$<>"Y"GOTO 690
+    520 NDI$=LEFT$(NDI$+CHR$(0),2)
+    530 PRINT#15,"B-P";2;162
+    540 PRINT#2,NDI$;
+    550 PRINT#15,"U2";2;0;18;0
+    560 INPUT#15,EN$.EM$,ET$,ES$
+    570 IFEN$="00"GOTO610
+    580 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    590 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    600 GOTO690
+    610 CLOSE2
+    620 INPUT#15,EN$,EM$,ET$,ES$
+    630 PRINT#15,"I0"
+    640 INPUT#15,EN$,EM$,ET$,ES$
+    650 CLOSE15
+    660 PRINT"{DOWN}DONE!"
+    670 END
+    680 REM CLOSE
+    690 CLOSE2
+    700 INPUT#15,EN$,EM$,ET$,ES$
+    710 CLOSE15
+    720 END
 
------------------------------------------------------Page 79-----------------------------------------------------
+The alternate formats of the block-write command (U2) in line 550 are:
+
+    PRINT#15,"U2:"2;0;18;0
+
+    PRINT#15,"U2:2,0,18,0"
+
+That's enough about the block-write command (U2) for now.
+
+## 5.6 Memory-Read Command (M-R)
+
+The memory-read command allows you to read the contents of any area of the
+1541's RAM or ROM. You must specify in the memory-read command the memory
+address of RAM or ROM that you want to read. The format of a memory-read
+command is:
+
+    SYNTAX:
+        PRINT# file#, "M-R" CHR$(lo-byte) CHR$(hi-byte) CHR$(# of bytes)
+
+    ALTERNATE:
+        PRINT# file#, "M-R:" CHR$(lo-byte) CHR$(hi-byte) CHR$(# of bytes)
+
+    EXAMPLE:
+        PRINT#15,"M-R"CHR$(0)CHR$(3)
+
+where
+
+* file# = the logical file number of the command channel
+* lo-byte = lo-byte of the memory address
+* hi-byte = hi-byte of the memory address
+* # of bytes = 1 to 255
+
+The third parameter of the memory-read command, CHR$(# of bytes), is
+undocumented by Commodore. The use of the third parameter is always optional.
+The default is CHR$(1), i.e., 1 byte.
+
+Typically a block-read command (U1) is issued prior to a memory-read command.
+A block-read command (U1) transfers the data that is recorded on a given
+track and sector to one of four pages (256 bytes) of RAM. A page of RAM is
+called a buffer. When you open a direct-access data channel to the 1541 with
+OPEN 2,8,2,"#", the DOS arbitrarily selects one buffer as a workspace for
+that channel. As long as you use the GET# file# command or the PRINT# file#
+command from the associated OPEN statement you do not need to know which
+buffer the DOS is using. The buffer in use is only important when you issue a
+memory-read command. You may tell the DOS which buffer area to use in the
+direct-access OPEN statement itself. The format for selecting a buffer is:
+
+    SYNTAX:
+        OPEN file#, device#, channel#, "# buffer#"
+
+    EXAMPLE:
+        OPEN 2,8,2,"#0"
+
+where
+
+* buffer# = 0 to 3
+
+The table below shows how the buffer areas are organized in the 1541.
+
+
+ Buffer Number |    Address    | Example
+:-------------:|:-------------:|:--------------------------------------------
+               | $0000 - $00FF | Not available (ZERO PAGE)
+               | $0100 - $01FF | Not available (STACK)
+               | $0200 - $02FF | Not available (COMMAND BUFFER)
+       0       | $0300 - $03FF | OPEN 2,8,2,"#0"
+       1       | $0400 - $04FF | OPEN 2,8,2,"#1"
+       2       | $0500 - $05FF | OPEN 2,8,2,"#2"
+       3       | $0600 - $06FF | OPEN 2,8,2,"#3"
+               | $0700 - $07FF | Not available (BAM)
+
+
+NOTE: Two or more direct-access data channels cannot share the same buffer
+area. If you attempt to open a direct-access data channel to a buffer already
+in use a 70, a NO CHANNEL error will result.
+
+The GET# command is used following a memory-read command to retrieve the
+contents of the buffer you selected. There is one major difference, however.
+Bytes are now fetched over the command channel not the logical file number of
+the "OPEN file#, device#, channel#, buffer#" statement. Bytes must still be
+tested for equality with the null string "" and converted to CHR$(0) if need
+be.
+
+The next program selects buffer #0 ($0300 - $03FF) as a workspace and does a
+block- read of track 18, sector 0. Bytes are returned to the C64 side from
+buffer #0 with memory-read and GET# commands, and printed to the screen.
+
+
+    100 REM TWO PARAMETER MEMORY-READ
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO 300
+    150 OPEN 2,8,2,"#0"
+    160 PRINT#15,"U1";2;0;18;0
+    170 INPUT#15,EN$,EM$,ET$,ES$
+    180 IF EN$<>"00"GOTO 280
+    190 FOR I=0 TO 255
+    200 PRINT#15,"M-R"CHR$(I)CHR$(3)
+    210 GET#15,B$
+    220 IF B$=""THEN B$=CHR$(0)
+    230 A=ASC(B$)
+    240 PRINT I,A,
+    250 IF A>31 AND A<96 THEN PRINT B$,
+    260 PRINT
+    270 NEXT I
+    280 CLOSE 2
+    290 INPUT#15,EN$,EM$,ET$,ES$
+    300 CLOSE 15
+    310 END
+
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+150        | Opens logical file number 2 to device 8 with a secondary address
+           | of 2 assigning buffer number 0 ($0300 - $03FF) as a workspace.
+160        | Reads the block from drive 0, track 18, sector 0 into channel 2
+           | buffer area ($0300 - $03FF).
+190        | Begin loop to read 256 bytes ($0300 - $03FF).
+200        | Indexed memory-read command ($0300 - $03FF).
+210        | Transfer a byte from channel 2 buffer area to C64 memory via the
+           | command channel (GET#15,).
+
+
+The alternate format of the standard memory-read command in line 200 is:
+
+    PRINT#15,"M-R:"CHR$(I)CHR$(3)
+
+Please note that we deliberately omitted the third parameter of the
+memory-read command in the preceding example. The following example
+incorporates all three parameters of the memory-read command to read a disk
+name.
+
+
+    100 REM THREE PARAMETER MEMORY-READ
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO 320
+    150 OPEN 2,8,2,"#1"
+    160 PRINT#15,"U1";2;0;18;0
+    170 INPUT#15,EN$,EM$,ET$,ES$
+    180 IF EN$<>"00"GOTO 300
+    190 PRINT#15,"M-R"CHR$(144)CHR$(4)CHR$(16)
+    200 FOR I=1 TO 16
+    210 GET#15,B$
+    220 IF B$=""THEN B$=CHR$(0)
+    230 A=ASC(B$)
+    240 IF A>127 THEN A=A-128
+    250 IF A<32 OR A>95 THEN A=63
+    260 IF A=34 THEN A=63
+    270 DN$=DN$+CHR$(A)
+    280 NEXT I
+    290 PRINT"{DOWN}DISK NAME: ";DN$
+    300 CLOSE 2
+    310 INPUT#15,EN$,EM$,ET$,ES$
+    320 CLOSE 15
+    330 END
+
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+150        | Opens logical file number 2 to device 8 with a secondary
+           | address of 2 assigning buffer number 1 ($0400 - $04FF) as a
+           | workspace.
+160        | Reads the block from drive 0, track 18, sector 0 into channel 2
+           | buffer area ($0400 - $04FF).
+190        | Memory-read command ($0490 - $049F).
+200        | Begin loop to read 16 characters.
+210        | Transfer a byte from channel 2 buffer area to C64 memory over
+           | the command channel (GET#15,).
+
+
+Inclusion of the third memory-read parameter means that we no longer have to
+issue a memory-read command to fetch each byte like we did in the first
+sample program. Instead, we establish a loop after the memory-read command to
+pull a byte in. (See lines 200-280 above.) The alternate format of the three
+parameter memory-read command in line 190 is:
+
+    PRINT#15,"M-R:"CHR$(144)CHR$(4)CHR$(16)
+
+## 5.7 Memory-Write Command (M-W)
