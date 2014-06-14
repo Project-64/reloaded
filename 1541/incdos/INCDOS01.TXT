@@ -1501,17 +1501,17 @@ hexadecimal notation while the table below gives the decimal equivalents.
 
   Bytes  | Contents  | Purpose
 :-------:|:---------:|:-----------------------------------------------
-   0/1   |   18/1    | Pointer to first sector of directory entries
-    2    |    65     | ASCII character A indicating 1541/4040 format
+   0/1   |    18/1   | Pointer to first sector of directory entries
+    2    |     65    | ASCII character A indicating 1541/4040 format
     3    |     0     | Unused
   4-143  |           | Block Availability Map (BAM)
  144-159 |           | Diskette name padded with shifted spaces
- 160-161 |   160     | Shifted spaces
+ 160-161 |    160    | Shifted spaces
  162-163 |           | Diskette ID
-   164   |   160     | Shifted space
- 165-166 |  50/65    | DOS version and format type (2A)
- 167-170 |   160     | Shifted spaces
- 170-255 |    ?      | Unused
+   164   |    160    | Shifted space
+ 165-166 |   50/65   | DOS version and format type (2A)
+ 167-170 |    160    | Shifted spaces
+ 170-255 |     ?     | Unused
 
 In the BAM four bytes are used to describe the status of each track. As a
 result, the BAM takes up a total of 4 x 35 = 140 bytes (bytes 4-143 or
@@ -3903,51 +3903,146 @@ nature would be used to aid in the disassembly of a program that normally
 loads into high memory (e.g., $8000-$BFFF) and is already occupied by a
 machine language monitor program (SUPERMON64) or ROM.
 
-100 REM EDIT LOAD ADDRESS
-110 H$="0123456789ABCDEF"
-120 PRINT"{CLR}EDIT LOAD ADDRESS - 1541"
-130 PRINT"{DOWN}REMOVE {RVS}WRITE PROTECT TAB{ROFF}"
-140 PRINT"{DOWN}INSERT DISKETTE IN DRIVE"
-150 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
-160 GETC$:IFC$=""THEN160
-170 IFC$<>CHR$(13)GOTO160
-180 PRINT"OK"
-190 OPEN 15,8,15
-200 PRINT#15,"I0"
-210 INPUT#15,EN$,EM$,ET$,ES$
-220 IFEN$="00"GOTO260
-230 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
-240 CLOSE15
-250 END
-260 PRINT#15,"M-R"CHR$(1)CHR$(1)
-270 GET#15,DOS$
-280 IFDOS$=""THENDOS$=CHR$(0)
-290 DOS=ASC(DOS$)
-300 IFDOS=65GOTO330
-310 PRINT"{DOWN}73,CBM DOS V2.6 1541,00,00"
-320 GOTO910
-330 INPUT"{DOWN}FILENAME";F$
-340 IFLEN(F$)<>0ANDLEN(F$)<17GOTO360
-350 GOTO920
-360 OPEN 2,8,2,"0:"+F$+",P,R"
-370 INPUT#15,EN$,EM$,ET$,ES$
-380 IFEN$="00"GOTO400
-390 GOTO940
-400 PRINT#15,"M-R"CHR$(24)CHR$(0)CHR$(2)
-410 GET#15,T$
-420 T=ASC(T$+CHR$(0))
-430 GET#15,S$
-440 S=ASC(S$+CHR$(0))
-450 CLOSE2
-460 INPUT#15,EN$,EM$,ET$,ES$
-470 IFEN$="00"GOTO490
-480 GOTO900
-490 OPEN 2,8,2,"#2"
-500 PRINT#15,"U1";2;0;T;S
-510 INPUT#15,EN$,EM$,ET$,ES$
-520 IFEN$="00"GOTO540
-530 GOTO900
+    100 REM EDIT LOAD ADDRESS
+    110 H$="0123456789ABCDEF"
+    120 PRINT"{CLR}EDIT LOAD ADDRESS - 1541"
+    130 PRINT"{DOWN}REMOVE {RVS}WRITE PROTECT TAB{ROFF}"
+    140 PRINT"{DOWN}INSERT DISKETTE IN DRIVE"
+    150 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+    160 GETC$:IFC$=""THEN160
+    170 IFC$<>CHR$(13)GOTO160
+    180 PRINT"OK"
+    190 OPEN 15,8,15
+    200 PRINT#15,"I0"
+    210 INPUT#15,EN$,EM$,ET$,ES$
+    220 IFEN$="00"GOTO260
+    230 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    240 CLOSE15
+    250 END
+    260 PRINT#15,"M-R"CHR$(1)CHR$(1)
+    270 GET#15,DOS$
+    280 IFDOS$=""THENDOS$=CHR$(0)
+    290 DOS=ASC(DOS$)
+    300 IFDOS=65GOTO330
+    310 PRINT"{DOWN}73,CBM DOS V2.6 1541,00,00"
+    320 GOTO910
+    330 INPUT"{DOWN}FILENAME";F$
+    340 IFLEN(F$)<>0ANDLEN(F$)<17GOTO360
+    350 GOTO920
+    360 OPEN 2,8,2,"0:"+F$+",P,R"
+    370 INPUT#15,EN$,EM$,ET$,ES$
+    380 IFEN$="00"GOTO400
+    390 GOTO940
+    400 PRINT#15,"M-R"CHR$(24)CHR$(0)CHR$(2)
+    410 GET#15,T$
+    420 T=ASC(T$+CHR$(0))
+    430 GET#15,S$
+    440 S=ASC(S$+CHR$(0))
+    450 CLOSE2
+    460 INPUT#15,EN$,EM$,ET$,ES$
+    470 IFEN$="00"GOTO490
+    480 GOTO900
+    490 OPEN 2,8,2,"#2"
+    500 PRINT#15,"U1";2;0;T;S
+    510 INPUT#15,EN$,EM$,ET$,ES$
+    520 IFEN$="00"GOTO540
+    530 GOTO900
+    540 PRINT#15,"M-R"CHR$(2)CHR$(5)CHR$(2)
+    550 GET#15,LOW$
+    560 LOW=ASC(LOW$+CHR$(0))
+    570 GET#15,HIGH$
+    580 HIGH=ASC(HIGH$+CHR$(0))
+    590 D=HIGH
+    600 GOSUB1010
+    610 OLA$=HD$
+    620 D=LOW
+    630 GOSUB1010
+    640 OLA$=OLA$+HD$
+    650 PRINT"{DOWN}OLD LOAD ADDRESS: ";OLA$
+    660 INPUT"{DOWN}NEW LOAD ADDRESS";NLA$
+    670 IFLEN(NLA$)=4GOTO690
+    680 GOTO960
+    690 INPUT"{DOWN}ARE YOU SURE (Y/N)  Y{LEFT 3}";Q$
+    700 IFQ$<>"Y"GOTO960
+    710 HD$=RIGHT$(NLA$,2)
+    720 GOSUB 1060
+    730 IFTME=1GOTO960
+    740 LOW=D
+    750 HD$=LEFT$(NLA$,2)
+    760 GOSUB 1060
+    770 IFTME=1GOTO960
+    780 HIGH=D
+    790 PRINT#15,"M-W"CHR$(2)CHR$(5)CHR$(2)CHR$(LOW)CHR$(HIGH)
+    800 PRINT#15,"U2";2;0;T;S
+    810 INPUT#15,EN$,EM$,ET$,ES$
+    820 IFEN$="00"GOTO840
+    830 GOTO940
+    840 CLOSE2
+    850 INPUT#15,EN$,EM$,ET$,ES$
+    860 CLOSE15
+    870 PRINT"{DOWN}DONE!"
+    880 END
+    890 REM CLOSE
+    900 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    910 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    920 CLOSE15
+    930 END
+    940 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    950 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    960 CLOSE2
+    970 INPUT#15,EN$,EM$,ET$,ES$
+    980 CLOSE15
+    990 END
+    1000 REM DECIMAL TO HEXADECIMAL
+    1010 H=INT(D/16)
+    1020 L=D-(H*16)
+    1030 HD$=MID$(H$,H+1,1)+MID$(H$,L+1,1)
+    1040 RETURN
+    1050 REM HEXADECIMAL TO DECIMAL
+    1060 TME=0
+    1070 H=0
+    1080 FORI=1TO16
+    1090 IFLEFT$(HD$,1)=MID$(H$,I,1)THENH=I:I = 16
+    1100 NEXTI
+    1110 IFH=0THENTME=1:GOTO1200
+    1120 H=H-1
+    1130 L=0
+    1140 FORI=1TO16
+    1150 IFRIGHT$(HD$,1)=MID$(H$,I,1)THENL=I:I=16
+    1160 NEXTI
+    1170 IFL=0THENTME=1:GOTO1200
+    1180 L=L-1
+    1190 D=H*16+L
+    1200 RETURN
 
-86
 
------------------------------------------------------Page 86-----------------------------------------------------
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+260-320    | Query DOS version ($0101).
+330-350    | Input file name.
+360-390    | Opens logical file number 2 to device 8 with a secondary address
+           | of 2 for a program read.
+400-440    | Fetch file name track ($0018) and sector ($0019).
+450        | Close logical file number 2.
+490        | Reopens logical file number 2 to device 8 with a secondary
+           | address of 2 assigning buffer number 2 ($0500 - $05FF) as a
+           | workspace.
+500        | Reads the starting block of the filename from drive 0 as
+           | specified by $0018 and $0019 into channel 2 buffer area ($0500 -
+           | $05FF).
+540        | Three parameter memory-read command to fetch two byte load
+           | address ($0502 - $0503).
+550        | Fetch lo-byte of load address ($0502).
+570        | Fetch hi-byte of load address ($0503).
+590-640    | Decimal to hexadecimal conversion of load address.
+660-700    | Input new load address.
+710-780    | Hexadecimal to decimal conversion of new load address.
+790        | Memory-write of new two byte load address ($0502 - $0503).
+800        | Write channel 2 buffer ($0500 - $05FF) to drive 0, track
+           | ($0018), sector ($0019).
+
+
+88
+
+-----------------------------------------------------Page 88-----------------------------------------------------
