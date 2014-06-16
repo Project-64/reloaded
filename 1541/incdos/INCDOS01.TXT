@@ -3336,20 +3336,21 @@ where
 * sector = 0 to the range for a given track
 
 After a given track and sector has been transferred to a buffer with a
-block-read command (U1), the buffer pointer is automatically left in position
-255. Bytes 0-255 of the buffer are now accessible from the starting position,
-i.e., byte 0. The GET# command is normally used to retrieve one byte at a
-time from the buffer by way of the logical file number of the direct-access
-OPEN statement. The GET# command is used rather than INPUT# because the data
-may contain null bytes, carriage returns and/or line feeds, commas, colons,
-or other control characters. When using the GET# command you must remember to
-test each incoming byte for equality with the null string "".A null byte must
-be converted to CHR$(0) or an ?ILLEGAL QUANTITY ERROR will result when you
-try to find the ASCII value of the byte. (The GET# command fails to make the
-necessary conversion for you.) The ASCII value of a byte is used to check for
-control characters. These characters are misinterpreted by the INPUT#
-command. The following example reads the block from track 18, sector 0 (the
-BAM) into disk RAM and prints the contents to the screen.
+block-read command (U1), the buffer pointer is automatically left in
+position 255. Bytes 0-255 of the buffer are now accessible from the starting
+position, i.e., byte 0. The GET# command is normally used to retrieve one
+byte at a time from the buffer by way of the logical file number of the
+direct-access OPEN statement. The GET# command is used rather than INPUT#
+because the data may contain null bytes, carriage returns and/or line feeds,
+commas, colons, or other control characters. When using the GET# command you
+must remember to test each incoming byte for equality with the null string
+"".A null byte must be converted to CHR$(0) or an ?ILLEGAL QUANTITY ERROR
+will result when you try to find the ASCII value of the byte. (The GET#
+command fails to make the necessary conversion for you.) The ASCII value of a
+byte is used to check for control characters. These characters are
+misinterpreted by the INPUT# command. The following example reads the block
+from track 18, sector 0 (the BAM) into disk RAM and prints the contents to
+the screen.
 
     100 REM BLOCK-READ (U1)
     110 OPEN 15,8,15
