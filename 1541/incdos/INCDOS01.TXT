@@ -4043,6 +4043,150 @@ Line Range | Description
            | ($0018), sector ($0019).
 
 
-88
+The alternate format of the memory-write command in line 790 is:
 
------------------------------------------------------Page 88-----------------------------------------------------
+    PRINT#15,"M-W:"CHR$(2)CHR$(5)CHR$(2)CHR$(LO)CHR$(HI)
+
+## 5.8 Block-Allocate Command (B-A)
+
+The block-allocate command allocates a sector in the BAM as in use. A sector
+is allocated by setting its associated bit low (0) on track 18, sector 0.
+(Review the coverage on bit mapping in Chapter 4 if necessary.) The DOS will
+not write to an allocated sector during a normal write operation such as a
+SAVE. However, an allocated sector can be overwritten with a block-write
+command (U2). Hence the origin of the term "direct-access."
+
+The format of a block-allocate command is:
+
+    SYNTAX:
+        PRINT# file#, "B-A"; drive#; track; sector
+
+    ALTERNATE:
+        PRINT# file#, "B-A:"; drive#; track; sector
+
+    EXAMPLE:
+        PRINT#15,"B-A";0;1;7
+
+where
+
+* file# = the logical file number of the command channel
+* drive# = 0
+* track = 1 to 35
+* sector = 0 to the range for a given track
+
+The following program allocates every sector on a diskette. Run this program
+on a test diskette.
+
+100 REM BLOCK-ALLOCATE
+110 OPEN 15,8,15
+120 PRINT#15,"I0"
+130 INPUT#15,EN$,EM$,ET$,ES$
+140 IF EN$<>"00"GOTO 310
+150 OPEN 2,8,2,"#"
+160 T=1
+170 S=0
+180 PRINT#15,"B-A";0;T;S
+190 INPUT#15,EN$,EM$,ET$,ES$
+200 IF EN$="00"GOTO 180
+210 IF EN$<>"65"GOTO 330
+220 BA=BA+1
+230 PRINT T,S,BA
+240 T=VAL(ET$)
+250 IF T=0 GOTO 290
+260 IF T=18 THEN T=19:S=0:GOTO 180
+270 S=VAL(ES$)
+280 GOTO 180
+290 CLOSE 2
+300 INPUT#15,EN$,EM$,ET$,ES$
+310 CLOSE 15
+320 END
+330 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+340 CLOSE 2
+350 INPUT#15,EN$,EM$,ET$,ES$
+360 CLOSE 15
+370 END
+
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+150        | Open a direct-access channel.
+160        | Initialize track to 1.
+170        | Initialize sector to 0.
+180        | Block-allocate command.
+190        | Query error channel.
+200        | The track and sector were not allocated.
+210        | Something is amiss so bail out.
+220        | Counter representing the number of sectors allocated in line
+           | 170.
+230        | Print track, sector, counter.
+240        | The sector just allocated already was but the DOS returns the
+           | next available track in the error message (65, NO BLOCK, track,
+           | sector).
+250        | If the next available track is zero then all 683 blocks on the
+           | diskette have been allocated.
+260        | Don't allocate the directory.
+270        | The DOS returns the next available sector in the error message
+           | (65, NO BLOCK, track, sector).
+280        | Allocate the next available track and sector.
+290        | Close the direct-access channel.
+330-370    | Error handler.
+
+
+The alternate format of the block-allocate command in line 180 is:
+
+    PRINT#15,"B-A:";0;T;S
+
+The opening of a direct-access channel (line 150) is standard form. Why?
+Because the BAM is rewritten to a diskette when a direct-access data channel
+is closed (line 290).
+
+In reality, though, the BAM is updated on the fly but very erratically. Thus,
+opening and closing a direct-access data channel is a good habit to get into.
+An ounce of prevention . . .
+
+By the way, what happens when you try to save to a full disk? Error 72, DISK
+FULL right? Would you believe error 67, ILLEGAL TRACK OR SECTOR,36,01? Track
+36? That's right. An error 72 only occurs during normal write mode (i.e., not
+a direct-access write) where at least 1 free block exists at the outset or
+the directory is at its physical limit, i.e., 144 active file entries.
+
+A block remains allocated until a diskette is validated. Unless a given track
+and sector somehow chains to a directory entry its bit will be freed (1)
+during validation. (See the validate command in Chapter 2.) Caution must be
+taken to ensure that the block-allocate command does not allocate an unused
+sector in the directory. See line 260 above. Once a sector has been allocated
+in the directory, it is never deallocated by the DOS, even during a validate.
+An allocated directory sector can only be freed under software control.
+
+The following program makes use of the block-allocate command to certify a
+formatted diskette. A worst-case binary pattern is written to any sector not
+currently in use. Bad sectors, if any, are allocated in the BAM. However,
+these bad sectors will be deallocated if the diskette is ever validated.
+(Sorry, but that's the nature of the beast.)
+
+100 REM CERTIFY A DISKETTE - 1541
+110 FORI=1TO32
+120 NULL$=NULL$+CHR$(0)
+130 WRITE$=WRITE$+CHR$(15)
+140 NEXTI
+150 DIMT%(681),S%(681)
+160 PRINT"{CLR}           CERTIFY A DISKETTE"
+170 PRINT"{DOWN}                {RVS}WARNING{ROFF}"
+180 PRINT"{DOWN}{RVS}RANDOM ACCESS{ROFF} AND {RVS}DEL{ROFF} FILES WILL BE LOST"
+190 PRINT"REMOVE {RVS}WRITE PROTECT TAB{ROFF}"
+200 PRINT"{DOWN}INSERT DISKETTE IN DRIVE"
+210 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+220 GETC$:IFC$=""THEN220
+230 IFC$<>CHR$(13)GOTO220
+240 PRINT"OK"
+250 OPEN 15,8,15
+260 PRINT#15,"I0"
+270 INPUT#15,EN$,EM$,ET$,ES$
+280 IFEN$="00"GOTO33O
+290 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+300 CLOSE15
+310 END
+
+91
+
+-----------------------------------------------------Page 91-----------------------------------------------------
