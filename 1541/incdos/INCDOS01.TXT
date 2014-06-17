@@ -3715,7 +3715,7 @@ where
 * file# = the logical file number of the command channel
 * lo-byte = lo-byte of the memory address
 * hi-byte = hi-byte of the memory address
-* # of bytes = 1 to 255
+* \# of bytes = 1 to 255
 
 The third parameter of the memory-read command, CHR$(# of bytes), is
 undocumented by Commodore. The use of the third parameter is always optional.
@@ -3887,7 +3887,7 @@ where
 * file# = the logical file number of the command channel
 * lo-byte = lo-byte of the memory address
 * hi-byte = hi-byte of the memory address
-* # of bytes = 1 to 34
+* \# of bytes = 1 to 34
 * data = a string variable or a CHR$ iteration
 
 A total of 34 data bytes may be written with each issuance of a memory-write
@@ -4323,6 +4323,145 @@ format of a block-free command is:
     EXAMPLE:
         PRINT#15,"B-F";0;1;7
 
-94
+where
 
------------------------------------------------------Page 94-----------------------------------------------------
+* file# = the logical file number of the command channel
+* drive# = 0
+* track = 1 to 35
+* sector = 0 to the range for a given track
+
+The following program deallocates every sector on a diskette. Run this
+program on a test diskette.
+
+    100 REM BLOCK-FREE
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO 260
+    150 OPEN 2,8,2,"#"
+    160 FOR T=1 TO 35
+    170 IF T=18 GOTO 240
+    180 NS=20+2*(T>17)+(T>24)+(T>30)
+    190 FOR S=0 TO NS
+    200 PRINT#15,"B-F";0;T;S
+    210 BF=BF+1
+    220 PRINT T,S,BF
+    230 NEXT S
+    240 NEXT T
+    250 CLOSE 2
+    260 INPUT#15,EN$,EM$,ET$,ES$
+    270 CLOSE 15
+    280 END
+
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+150        | Open a direct-access channel.
+160        | Begin loop for tracks 1 to 35.
+170        | Don't deallocate the directory.
+180        | Calculate sector range.
+190        | Begin loop for sectors 0 to sector range.
+200        | Block-free command.
+210        | Counter to indicate number of blocks freed.
+220        | Print track, sector, counter.
+250        | Close the direct-access channel.
+
+The alternate format of the block-free command in line 200 is:
+
+    PRINT#15,"B-F:";0;T;S
+
+The opening and closing of a direct-access channel is essential if the
+block-free command is to work correctly. Experimentation in freeing a full
+diskette reveals that tracks 34 and 35 still remain allocated if this
+procedure is not followed.
+
+
+## 5.10 Memory-Execute Command (M-E)
+
+The memory-execute command is used to execute any standard ROM routine or, at
+the pinnacle of disk programming, a custom machine language program that has
+been poked into 1541 RAM. The format of a memory-execute command is:
+
+    SYNTAX:
+        PRINT# file#, "M-E" CHR$(lo-byte) CHR$(hi-byte)
+
+    ALTERNATE:
+        PRINT# file#, "M-E:" CHR$(lo-byte) CHR$(hi-byte)
+
+    EXAMPLE:
+        PRINT#15,"M-E"CHR$(0)CHR$(6)
+
+where
+
+* file# = the logical file number of the command channel
+* lo-byte = lo-byte of the RAM or ROM address
+* hi-byte = hi-byte of the RAM or ROM address
+
+Machine language programs are poked into 1541 RAM with the memory-write
+command. The following primitive program pokes a single RTS instruction to
+RAM and executes it.
+
+
+100 REM MEMORY-EXECUTE
+110 OPEN 15,8,15
+120 PRINT#15,"M-W"CHR$(O)CHR$(6)CHR$(1)CHR$(96)
+130 PRINT#15,"M-E"CHR$(0)CHR$(6)
+140 CLOSE15
+150 END
+
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+120        | Write 1 byte ($60) to RAM at $0600.
+130        | Execute RTS at $0600.
+
+
+The alternate format of the memory-execute command in line 130 is:
+
+    PRINT#15,"M-E:"CHR$(0)CHR$(6)
+
+More sophisticated coding is available in Chapter 7. In addition, refer to
+Chapter 9 for pertinent information about the execution of standard ROM
+routines.
+
+
+## 5.11 Block-Execute Command (B-E)
+
+The block-execute command is used to execute a machine language program that
+resides on diskette. A sector is read into a DOS buffer and executed in a
+manner similar to a LOAD and RUN on the C64. The format of a block-execute
+command is:
+
+    SYNTAX:
+        PRINT# file#, "B-E"; channel#; drive#; track; sector
+
+    ALTERNATE:
+        PRINT# file#, "B-E:"; channel#; drive#; track; sector
+        PRINT# file#, "B-E: channel#, drive#, track, sector"
+
+    EXAMPLE:
+        PRINT#15,"B-E";2;0;1;0
+
+where
+
+* file# = the logical file number of the command channel
+* channel# = the secondary address of the associated open statement
+* drive# = 0
+* track = 1 to 35
+* sector = 0 to the range for a given track
+
+The block-execute command could be used in a diagnostic routine but it is
+difficult to visualize any other advantage that this command has over a
+normal memory-execute command. The following program demonstrates one of the
+few block-execute commands you will probably ever see. (lights, camera,
+action!) Run this program using a test diskette.
+
+100 REM BLOCK-EXECUTE
+110 OPEN 15,8,15
+120 PRINT#15,"I0"
+130 INPUT#15,EN$,EM$,ET$,ES$
+140 IF EN$<>"00"GOTO  250
+
+97
+
+-----------------------------------------------------Page 97-----------------------------------------------------
