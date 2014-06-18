@@ -336,6 +336,7 @@ Although this manual focuses primarily on the 1541 disk drive, much of the
 information also applies to other Commodore disk drives.
 
 
+
 ## 1.1 A Brief Word About the Programs
 
 This book contains listings for 46 ready-to-use programs written in BASIC.
@@ -369,6 +370,8 @@ using a different assembler, you may have to make some minor changes.*
 The programs in this book were designed to be not only useful and beneficial,
 but instructive as well. Many of them illustrate the "state of the art" in
 the use of Commodore's direct-access disk commands. Enjoy!
+
+
 
 ## 1.2 How to Type in the Programs
 
@@ -447,6 +450,7 @@ The disadvantages of having an intelligent disk drive are:
 2. You must replace the ROMs to convert to a new version of DOS.
 
 
+
 ## 2.2 Communicating with the 1541
 
 Your Commodore 64 or VIC-20 can communicate with your 1541 disk drive in
@@ -490,6 +494,8 @@ Chapter 5).
 Since the rest of this manual makes extensive use of the command channel,
 let's examine it in some detail.
 
+
+
 ## 2.3 The Command Channel
 
 The command channel (channel number 15) is an important communication link
@@ -508,6 +514,8 @@ areas on a diskette.
 This chapter focuses on the first two of these uses. Chapter 5 provides more
 detail on reading or writing to a diskette.
 
+
+
 ## 2.4 Using the Command Channel
 
 Using the command channel is easy. Just follow these steps:
@@ -518,6 +526,7 @@ Using the command channel is easy. Just follow these steps:
 4. Close the channel using a CLOSE statement when you are finished.
 
 Let's go over each step to ensure that you know exactly what to do.
+
 
 ### 1. Establishing communications using an OPEN statement.
 
@@ -547,6 +556,7 @@ In the example above (OPEN 15, 8, 15) we opened logical file number 15 on the
 C64 to device number 8 (the disk drive) through channel 15 (the command
 channel).
 
+
 ### 2. Sending commands to the DOS using a PRINT# statement.
 
 In order to send commands from your computer to the 1541, you use a PRINT#
@@ -575,6 +585,7 @@ Although there are many different disk commands, they fall into two groups:
 The disk housekeeping commands are discussed in the next part of this
 chapter. The commands relating to reading or writing data are discussed in
 Chapter 5 on Direct-Access Programming.
+
 
 ### 3. Reading DOS messages using a GET# or an INPUT# statement.
 
@@ -628,6 +639,7 @@ is contained in the back of your *1541 User's Manual*. A detailed explanation
 of the nature and cause of many of these errors is provided in Chapter 7 on
 Disk Protection.
 
+
 ### 4. CLOSE the command channel when you are done.
 
 After you have finished using the command channel, it should be closed.
@@ -652,6 +664,7 @@ you attempt to open it again. However, you should get into the habit of
 always closing a file when you are finished using it. You won't get into
 trouble leaving the command channel open, but you may lose an important data
 file if you leave a data communication channel open.
+
 
 
 ## 2.5 Disk Housekeeping
@@ -1105,6 +1118,8 @@ This chapter describes the formatting process and the tracks and sectors of a
 diskette. Chapter 4 describes the directory and the block availability map
 (BAM).
 
+
+
 ## 3.1 Layout of Tracks and Sectors
 
 During the formatting (newing) process, the DOS divides the diskette into
@@ -1180,6 +1195,8 @@ space to store a directory to keep track of the location of the files on a
 diskette (see Chapter 4) further reduces us to an effective storage capacity
 of 169,984 bytes (256 bytes * 664 sectors).
 
+
+
 ## 3.2 Layout of a Sector
 
 During the formatting (newing) process, the DOS creates and records onto the
@@ -1228,6 +1245,8 @@ coming.
 If you are puzzled about why several $FF characters in a row in the data
 block are not interpreted as a sync character, you may want to skip ahead to
 the section on Commodore's GCR encoding scheme in Chapter 7.
+
+
 
 ## 3.3 The Header Block
 
@@ -1296,6 +1315,8 @@ Let's examine the bytes that make up the header block:
 
 NOTE: A header block is written *only* during the formatting process. It is
 never rewritten again, period.
+
+
 
 ## 3.4 The Data Block
 
@@ -1391,6 +1412,8 @@ place. The remaining sectors (1-18) of track 18 contain directory entries
 (file names, file types, and pointers to where files are stored on the
 diskette).
 
+
+
 ## 4.2 The Directory You See
 
 Let's examine the directory of the 1541TEST/DEMO diskette that came with your
@@ -1448,6 +1471,8 @@ original formatting and the sum of the blocks of the active files (664 - 106
 What you see on your screen is not necessarily how the directory is stored on
 your diskette, however. Let's begin our look at the directory with the Block
 Availability Map (BAM).
+
+
 
 ## 4.3 The Block Availability Map (BAM)
 
@@ -1654,6 +1679,8 @@ If you are still unsure of yourself, don't be too concerned. The DOS looks
 after the BAM. Let's move on and explore the actual directory entries
 themselves. Sectors 1 through 18 on track 18 are reserved specifically for
 them.
+
+
 
 ## 4.4 The Directory Entries
 
@@ -2040,6 +2067,7 @@ different types of files are actually stored on a diskette. We'll start by
 looking at a program file.
 
 
+
 ## 4.5 Program File Storage
 
 The most common type of file is a program file, PRG. It is designated by an
@@ -2293,6 +2321,7 @@ full block. Bytes 0 and 1 of the last directory block will contain a $00 and
 a $FF, respectively. Relative file structure will be explained shortly.
 
 
+
 ## 4.6 Sequential File Storage
 
 The format of a sequential file is very straightforward. All the sectors,
@@ -2463,6 +2492,7 @@ itself was used to pad the remainder of the data block in question.
     . E8: 54 47 41 47 45 A0 A0 A0 TGAGE...
     . F0: A0 A0 A0 A0 A0 00 00 00 ........
     . F8: 00 00 00 00 00 00 2D 00 ......-.
+
 
 
 ## 4.7 Relative File Storage
@@ -3120,6 +3150,8 @@ Where in the actual data block is it? A piece of cake.
 Still a disbeliever? Check it out yourself in the preceding hex dumps of
 track 17, sector 13 and track 17, sector 14.
 
+
+
 ## 4.8 User File Storage
 
 A user file (USR) file is one that is designed by the user. This file type is
@@ -3134,6 +3166,8 @@ Before you do something rash, remember that the DOS will expect to find the
 track and sector links in their normal places. If they are not there, all the
 blocks that make up your file will be earmarked as free in the BAM whenever
 the disk is validated!
+
+
 
 ## 4.9 Deleted File Storage
 
@@ -3158,6 +3192,8 @@ If a DEL file is structured like a sequential file, it may be opened in read
 mode using the following command:
 
     OPEN 2,8,2,"FILE NAME,DEL,R"
+
+
 
 ## 4.10 Locked Files
 
@@ -3188,11 +3224,14 @@ The DOS determines whether or not a file is locked by checking bit 6 of the
 file-type byte. If it is set (1), the file is locked. Even if a file has been
 locked, it may be renamed or copied using normal disk commands.
 
+
+
 ## Conclusion
 
 The material covered in this chapter is primarily of academic interest.
 However, do not attempt to recover a blown file unless you thoroughly
 understand the structure of the directory and how files are stored.
+
 
 
 # CHAPTER 5 - DIRECT-ACCESS PROGRAMMING
@@ -3223,6 +3262,8 @@ increasingly apparent, if it isn't already. This chapter illustrates the use
 of direct-access commands in simple programs. A basic understanding of the
 function of these commands is necessary to appreciate the routines found in
 subsequent chapters and Appendix C.
+
+
 
 ## 5.2 Beginning Direct-Access Programming
 
@@ -3309,6 +3350,7 @@ of track and sector numbers found on a diskette.
 NOTE: If you attempt to access a track less than 1, a track greater than 35,
 or a sector out of range for a given track, you will get a DOS error message
 number 66, ILLEGAL TRACK OR SECTOR.
+
 
 
 ## 5.3 Block-Read Command (U1)
@@ -3437,6 +3479,8 @@ the sake of efficiency:
 Recall that lines 210-220 are necessary because the GET# command does not
 interpret nulls correctly.
 
+
+
 ## 5.4 Buffer-Pointer Command (B-P)
 
 The buffer-pointer command allows access to any individual byte in a DOS
@@ -3498,6 +3542,8 @@ Line Range | Description
     PRINT#15,"B-P:"2;144
 
     PRINT#15,"B-P:2,144"
+
+
 
 ## 5.5 Block-Write Command (U2)
 
@@ -3694,6 +3740,8 @@ The alternate formats of the block-write command (U2) in line 550 are:
 
 That's enough about the block-write command (U2) for now.
 
+
+
 ## 5.6 Memory-Read Command (M-R)
 
 The memory-read command allows you to read the contents of any area of the
@@ -3865,6 +3913,8 @@ pull a byte in. (See lines 200-280 above.) The alternate format of the three
 parameter memory-read command in line 190 is:
 
     PRINT#15,"M-R:"CHR$(144)CHR$(4)CHR$(16)
+
+
 
 ## 5.7 Memory-Write Command (M-W)
 
@@ -4047,6 +4097,8 @@ Line Range | Description
 The alternate format of the memory-write command in line 790 is:
 
     PRINT#15,"M-W:"CHR$(2)CHR$(5)CHR$(2)CHR$(LO)CHR$(HI)
+
+
 
 ## 5.8 Block-Allocate Command (B-A)
 
@@ -4308,6 +4360,7 @@ C64 RAM. The BAM is restored in lines 800-890. Lines 1020-1230 will be
 explained in detail in Chapter 6 on intermediate disk programming techniques.
 
 
+
 ## 5.9 Block-Free Command (B-F)
 
 The block-free command deallocates (frees) a sector in the BAM. A sector is
@@ -4376,6 +4429,7 @@ diskette reveals that tracks 34 and 35 still remain allocated if this
 procedure is not followed.
 
 
+
 ## 5.10 Memory-Execute Command (M-E)
 
 The memory-execute command is used to execute any standard ROM routine or, at
@@ -4425,6 +4479,7 @@ Chapter 9 for pertinent information about the execution of standard ROM
 routines.
 
 
+
 ## 5.11 Block-Execute Command (B-E)
 
 The block-execute command is used to execute a machine language program that
@@ -4456,12 +4511,209 @@ normal memory-execute command. The following program demonstrates one of the
 few block-execute commands you will probably ever see. (lights, camera,
 action!) Run this program using a test diskette.
 
-100 REM BLOCK-EXECUTE
+    100 REM BLOCK-EXECUTE
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO  250
+    150 OPEN 2,8,2,"#3"
+    160 PRINT#15,"U1";2;0;1;0
+    170 INPUT#15,EN$,EM$,ET$,ES$
+    180 IF EN$<>"00"GOTO 220
+    190 PRINT#15,"M-W"CHR$(0)CHR$(6)CHR$(1)CHR$(96)
+    200 PRINT#15,"U2";2;0;1;0
+    210 PRINT#15,"M-W"CHR$(0)CHR$(6)CHR$(1)CHR$(0)
+    220 PRINT#15,"B-E";2;0;1;0
+    230 CLOSE 2
+    240 INPUT#15,EN$.EM$,ET$,ES$
+    250 CLOSE 15
+    260 END
+
+Line Range | Description
+:--------- |:----------------------------------------------------------------
+150        | Open a direct-access channel specifying buffer number 1
+           | ($0600 - $06FF).
+160        | Block-read of track 1, sector 0 ($0600 - $06FF).
+190        | Write 1 byte ($60) to RAM at $0600.
+200        | Block-write to track 1, sector 0 ($0600 - $06FF).
+210        | Just to keep us honest.
+220        | Block-execute of track 1, sector 0 ($0600 - $06FF).
+
+The alternate formats of the block-execute command in line 220 are:
+
+    PRINT#15,"B-E:";2;0;1;0
+
+    PRINT#15,"B-E:2,0,1,0"
+
+
+
+## 5.12 Direct-Access Entomology
+
+We will conclude our discussion of the disk utility command set by pointing
+out just a few of the DOS V2.6 direct-access anomalies we've found to date.
+
+
+### Block-Read (B-R)
+
+Throughout the preceding section we relied solely upon the use of the U1
+command to read a sector and not the traditional block-read command (B-R).
+Why? The block-read command (B-R) is unreliable, period. When the contents of
+a buffer are accessed with the GET# command — surprise, surprise! The number
+of bytes returned is a function of the number of the track you accessed. For
+example, a block-read (B-R) of any sector
+
+on track 15 will return only 15 bytes before sending an erroneous
+End-Or-Identify (EOI). The C64 status variable (ST) is set to 64 and any
+further attempt to access the buffer merely returns the same sequence of
+bytes over and over and over again. Moreover, the byte in position 0 can only
+be accessed when the buffer-pointer is reset to position 0 in line 190. See
+for yourself.
+
+    100 REM BLOCK-READ (B-R)
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO 300
+    150 OPEN 2,8,2,"#"
+    160 PRINT#15,"B-R";2;0;18;0
+    170 INPUT#15,EN$,EM$,ET$,ES$
+    180 IF EN$<>"00"GOTO 280
+    190 PRINT#15,"B-P";2;0
+    200 FOR I=0 TO 255
+    210 GET#2,B$
+    220 IF B$=""THEN B$=CHR$(0)
+    230 A=ASC(B$)
+    240 PRINT ST,I,A,
+    250 IF A>31 AND A<96 THEN PRINT B$,
+    260 PRINT
+    270 NEXT I
+    280 CLOSE 2
+    290 INPUT#15,EN$,EM$,ET$,ES$
+    300 CLOSE 15
+    310 END
+
+What's even more problematic is the situation that occurs when you do a
+block-read (B-R) of a track and sector that was rewritten by the block-write
+command (B-W) which is discussed below. The EOI occurs in connection with the
+ASCII value of the 0th byte of the sector that was read. Byte 0 contains the
+value of the buffer-pointer position at the time the block was written with a
+block-write command (B-W). The forward track reference that was originally
+there, has been destroyed. The ASCII value of the 0th byte determines how
+many characters you can access before the EOI occurs. Run the block-read
+(B-R) program listed above against track 1, sector 0 after you've done the
+block-write (B-W) experiment listed below on a test disk. Change the track
+number in line 160 from an 18 to a 1 like this:
+
+    160 PRINT#15,"B-R";2;0;1;0
+
+After further experimentation on your own, you should have little trouble
+understanding why the U1 command replaces the block-read command (B-R). Not
+only do user manuals continue to promote the use of the block-read command
+(B-R), but they also either ignore the U1 command altogether or simply
+mention it in passing without even a hint on how to use it.
+
+
+### Block-Write (B-W)
+
+Recall that we also neglected to mention the block-write command (B-W) which
+we replaced with the U2 command. When you write a block with the block-write
+command (B-W) a different kind of dilemma occurs. Bytes 1 through 255 of the
+buffer are recorded on diskette correctly but the last position of the
+buffer-pointer is written to the 0th byte of the sector (the location of the
+forward track pointer). If it's any consolation, the data is still intact.
+Too bad the link has been destroyed. Run the following block-write program on
+a test diskette.
+
+    100 REM BLOCK-WRITE (B-W)
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO 260
+    150 OPEN 2,8,2,"#"
+    160 PRINT#15,"U1";2;0;1;0
+    170 INPUT#15,EN$,EM$,ET$,ES$
+    180 IF EN$<>"00"GOTO 240
+    190 FOR I=0 TO 255
+    200 PRINT#2,CHR$(I);
+    210 NEXT I
+    220 PRINT#15,"B-P";2;6
+    230 PRINT#15,"B-W";2;0;1;0
+    240 CLOSE 2
+    250 INPUT#15,EN$,EM$,ET$,ES$
+    260 CLOSE 15
+    270 END
+
+Now run the original block-read (U1) program that we wrote using this
+diskette. Be sure to change the track in line 160 from an 18 to a 1 as
+follows:
+
+    160 PRlNT#15,"U1";2;0;1;0
+
+If all goes according to our diabolical plan, byte 0 will contain a 5 which
+is exactly where our buffer-pointer ended up. We arbitrarily set it to
+position 6 in line 220 above and 256 bytes later it wraps around to
+position 5. (Remember that bytes are numbered from 0 to 255 in a buffer
+area.)
+
+Now change the U1 to a B-R in line 160 and run the program again. This time,
+only 5 bytes can be accessed before an EOI signal is returned.
+
+
+### UJ and UI-
+
+Commodore has traditionally had a warm reset buried somewhere in ROM on every
+piece of hardware they have manufactured to date. The UJ command is to the
+1541 what a SYS 64738 is to the C64, a warm reset. Or rather, that is what
+it's supposed to be. The issuance of a UJ command is supposed to reset the
+1541. Instead, it hangs the 1541.
+
+Press the RUN/STOP key and RESTORE key in tandem to regain control of the C64
+after typing in this one liner in immediate mode.
+
+    OPEN 15,8,15,"UJ" : CLOSE15
+
+Use U: in place of UJ.
+
+
+The same thing is true for the UI- command although Commodore can't really be
+held responsible here. The UI- command was implemented to set the 1541 to
+VIC-20 speed, not to take the C64 out to lunch.
+
+
+### U3 -U9
+
+The *VIC-1541 User's Manual* outlines 7 USER commands that perform a jump to
+a particular location in RAM. These USER commands and their respective jump
+addresses are:
+
+  User Number | Jump Address
+:------------:|:---------------------
+   U3 (UC)    | $0500
+   U4 (UD)    | $0503
+   U5 (UE)    | $0506
+   U6 (UF)    | $0509
+   U7 (UG)    | $050C
+   U8 (UH)    | $050F
+   U9 (UI)    | $FFFA
+
+
+These jump locations are not quite as mystifying as they appear at first
+glance. Let's modify our simplistic memory-execute program.
+
+100 REM U3
 110 OPEN 15,8,15
-120 PRINT#15,"I0"
-130 INPUT#15,EN$,EM$,ET$,ES$
-140 IF EN$<>"00"GOTO  250
+120 PRINT#15,"M-W"CHR$(0)CHR$(5)CHR$(1)CHR$(96)
+130 PRINT#15,"U3"
+140 CLOSE15
+150 END
 
-97
+One should be able to discern that any of the first six USER commands, U3 -
+U8, could double for a memory-execute command. It is very difficult to
+understand why Commodore included six jumps to the $0500 page (buffer number
+2). Moreover, the U9 command jumps to $FFFA which is a word table pointing to
+the NMI vector. U9 is an alternate reset that bypasses the power-on
+diagnostics.
 
------------------------------------------------------Page 97-----------------------------------------------------
+101
+
+-----------------------------------------------------Page 101-----------------------------------------------------
