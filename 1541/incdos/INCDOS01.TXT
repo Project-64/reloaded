@@ -4700,12 +4700,12 @@ addresses are:
 These jump locations are not quite as mystifying as they appear at first
 glance. Let's modify our simplistic memory-execute program.
 
-100 REM U3
-110 OPEN 15,8,15
-120 PRINT#15,"M-W"CHR$(0)CHR$(5)CHR$(1)CHR$(96)
-130 PRINT#15,"U3"
-140 CLOSE15
-150 END
+    100 REM U3
+    110 OPEN 15,8,15
+    120 PRINT#15,"M-W"CHR$(0)CHR$(5)CHR$(1)CHR$(96)
+    130 PRINT#15,"U3"
+    140 CLOSE15
+    150 END
 
 One should be able to discern that any of the first six USER commands, U3 -
 U8, could double for a memory-execute command. It is very difficult to
