@@ -84,8 +84,8 @@ formatting of the original book:
   to the right for Markdown compatibility.
 * Chapter headers and titles are formatted in one line rather than two.
 * Chapter and section header lines are prepended with "#" marks
-* Program listins originally formatter for 40 columns are reformatted to full
-  lines wherever possible for better readability and easier processing
+* Program listings originally formatted for 40 columns are reformatted to
+  full lines wherever possible for better readability and easier processing
 
 ---
 ﻿
