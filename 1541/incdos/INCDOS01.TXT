@@ -4714,6 +4714,150 @@ understand why Commodore included six jumps to the $0500 page (buffer number
 the NMI vector. U9 is an alternate reset that bypasses the power-on
 diagnostics.
 
-101
+﻿
+﻿
+# CHAPTER 6 - INTERMEDIATE DIRECT-ACCESS PROGRAMMING
 
------------------------------------------------------Page 101-----------------------------------------------------
+*NOTE: This chapter is not intended for beginners. The reader is assumed to
+be relatively familiar with the direct-access programming commands described
+in Chapter 5.*
+
+The intermediate level of direct-access programming involves passing requests
+directly to the Floppy Disk Controller (FDC) via the job queue. Normally a
+1541 command is initiated on the C64 side (e.g., SAVE, a block-read (U1),
+etc.). The command is interpreted by the 1541's 6502 Interface Processor (IP)
+as a set of simple operations called jobs. (This is analogous to the way the
+BASIC interpreter works inside the C64.) These jobs are poked into an area of
+1541 RAM called the job queue. Every 10 milliseconds the job queue is scanned
+by the Floppy Disk Controller (FDC). If a job request is found the FDC
+executes it. The complete set of jobs that the FDC can perform are as follows:
+
+1. Read a sector.
+2. Write a sector.
+3. Verify a sector.
+4. Seek a track.
+5. Bump the head to track number 1.
+6. Jump to a machine language routine in a buffer.
+7. Execute a machine language routine in a buffer.
+
+The hexadecimal and decimal equivalents for each job request as seen by the
+FDC are:
+
+ Job Code | Description
+:--------:|:-----------
+$80 (128) | READ
+$90 (144) | WRITE
+$A0 (160) | VERIFY
+$B0 (176) | SEEK
+$C0 (192) | BUMP
+$D0 (208) | JUMP
+$E0 (224) | EXECUTE
+
+If the FDC finds a job request in the job queue, it attempts to carry it out.
+Once the job is complete or aborted the FDC replaces the job code with an
+error code. The error codes returned by the FDC to the IP are listed below.
+The IP error codes and their respective error messages are what you see when
+you read the error channel.
+
+FDC Code | IP Code | Error Message
+:------- |:-------:|:--------------------------------------------------------
+$01 (1)  |   0     | OK
+$02 (2)  |   20    | READ ERROR (header block not found)
+$03 (3)  |   21    | READ ERROR (no sync character)
+$04 (4)  |   22    | READ ERROR (data block not present)
+$05 (5)  |   23    | READ ERROR (checksum error in data block)
+$07 (7)  |   25    | WRITE ERROR (write-verify error)
+$08 (8)  |   26    | WRITE PROTECT ON
+$09 (9)  |   27    | READ ERROR (checksum error in header block)
+$0B (11) |   29    | READ ERROR (disk ID mismatch)
+
+A more detailed description of each of these error messages can be found in
+Chapter 7.
+
+Suppose that we want to read the contents of a given track and sector. The
+command initiated on the C64 side is parsed by the IP. If the syntax is
+correct, it is broken down into a job code, a track, and a sector. Depending
+upon what buffer has been assigned, the job code is poked into the
+corresponding job queue table location. The track and sector for the job are
+poked into the corresponding header table locations. The buffers and their
+corresponding job queue and header table addresses are outlined below:
+
+Buffer | Address         | Job     Track     Sector
+:----- |:--------------- |:--------------------------------------------------
+ --    | $0000 - $00FF   | Not available (ZERO PAGE)
+ --    | $0100 - $01FF   | Not available (STACK)
+ --    | $0200 - $03FF   | Not available (COMMAND BUFFER)
+ #0    | $0300 - $03FF   | $0000 $0006 $0007
+ #1    | $0400 - $04FF   | $0001 $0008 $0009
+ #2    | $0500 - $05FF   | $0002 $000A $000B
+ #3    | $0600 - $06FF   | $0003 $000C $000D
+ --    | $0700 - $07FF   | Not available (BAM)
+
+For example, a block-read command (U1) issued by the C64 to read the contents
+of track 18, sector 0 into buffer number 0 ($0300-$03FF) is checked for a
+syntax error and then broken down by the IP. In time, the FDC will find an
+$80 (128) at address $0000 in the job queue table, a $12 (18) at address
+$0006 in the header table, and a $00 (0) at address $0007 in the header
+table. Armed with that information, the FDC will attempt to seek (find) the
+track and read the sector. Upon successful completion of the read, the
+contents of the sector will be transferred to buffer number 0 ($0300-$03FF)
+and a $01 (1) will be returned by the FDC to address $0000. (If the job
+request could not be completed for some reason, the job request would be
+aborted and the corresponding error code would be stored at address $0000
+instead.) Interrogation of the error channel will transfer the IP counterpart
+of the FDC error code, the English message, the track number, and the sector
+number to the C64 side. If the job request was successful (00,OK,00,00), the
+contents of the track and sector could then be retrieved from the buffer at
+$0300 - $03FF using a GET# command as described in the previous chapter.
+
+What happens, though, if we bypass the drive's parser routine and attempt to
+work the FDC directly ourselves? We thought you'd never ask. Grand and
+glorious schemes become possibilities, and that's what intermediate
+direct-access programming is all about. Armed with a lookup table of job
+codes, a map of the 1541's buffer areas, a track, a sector, and a lookup
+table of error codes, the FDC is at your beck and call. Tired of those
+horrendous grating noises when your drive errs out? Well wish no more. The
+drive does not do a bump (the root of all evil) to reinitialize when you are
+working the job queue directly. What more could you ask for? We know. The
+code, right?
+
+The following program works the job queue directly to read the block from
+track 18, sector 0 into buffer number 0 ($0300 - $03FF) and prints the
+contents to the screen. Sound vaguely familiar? It should. It's a
+modification of the first program we wrote under beginning direct-access
+programming.
+
+100 REM JOB QUEUE READ
+110 OPEN 15,8,15
+120 PRINT#15,"I0"
+130 INPUT#15,EN$,EM$,ET$,ES$
+140 IF EN$<>"00"GOTO 340
+150 REM SEEK
+160 T=18
+170 S=0
+180 JOB=176
+190 GOSUB 370
+200 IF E<>1 GOTO 340
+210 REM READ
+220 JOB=128
+230 GOSUB 370
+240 IF E<>1 GOTO 340
+250 FOR I=0 TO 255
+260 PRINT#15,"M-R"CHR$(I)CHR$(3)
+270 GET#15,B$
+280 IF B$=""THEN B$=CHR$(0)
+290 A=ASC(B$)
+300 PRINT ST,I,A,
+310 IF A>31 AND A<96 THEN PRINT B$,
+320 PRINT
+330 NEXT I
+340 CLOSE 15
+350 END
+360 REM JOB QUEUE
+370 TRY=0
+380 PRINT#15,"M-W"CHR$(6)CHR$(0)CHR$(2)CHR$(T)CHR$(S)
+390 PRINT#15, "M-WCHR$ (O) CHR$ (O) CHR$ (DC
+
+105
+
+-----------------------------------------------------Page 105-----------------------------------------------------
