@@ -4827,37 +4827,239 @@ contents to the screen. Sound vaguely familiar? It should. It's a
 modification of the first program we wrote under beginning direct-access
 programming.
 
-100 REM JOB QUEUE READ
-110 OPEN 15,8,15
-120 PRINT#15,"I0"
-130 INPUT#15,EN$,EM$,ET$,ES$
-140 IF EN$<>"00"GOTO 340
-150 REM SEEK
-160 T=18
-170 S=0
-180 JOB=176
-190 GOSUB 370
-200 IF E<>1 GOTO 340
-210 REM READ
-220 JOB=128
-230 GOSUB 370
-240 IF E<>1 GOTO 340
-250 FOR I=0 TO 255
-260 PRINT#15,"M-R"CHR$(I)CHR$(3)
-270 GET#15,B$
-280 IF B$=""THEN B$=CHR$(0)
-290 A=ASC(B$)
-300 PRINT ST,I,A,
-310 IF A>31 AND A<96 THEN PRINT B$,
-320 PRINT
-330 NEXT I
-340 CLOSE 15
-350 END
-360 REM JOB QUEUE
-370 TRY=0
-380 PRINT#15,"M-W"CHR$(6)CHR$(0)CHR$(2)CHR$(T)CHR$(S)
-390 PRINT#15,"M-W"CHR$(O)CHR$(O)CHR$(1)C
+    100 REM JOB QUEUE READ
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO 340
+    150 REM SEEK
+    160 T=18
+    170 S=0
+    180 JOB=176
+    190 GOSUB 370
+    200 IF E<>1 GOTO 340
+    210 REM READ
+    220 JOB=128
+    230 GOSUB 370
+    240 IF E<>1 GOTO 340
+    250 FOR I=0 TO 255
+    260 PRINT#15,"M-R"CHR$(I)CHR$(3)
+    270 GET#15,B$
+    280 IF B$=""THEN B$=CHR$(0)
+    290 A=ASC(B$)
+    300 PRINT ST,I,A,
+    310 IF A>31 AND A<96 THEN PRINT B$,
+    320 PRINT
+    330 NEXT I
+    340 CLOSE 15
+    350 END
+    360 REM JOB QUEUE
+    370 TRY=0
+    380 PRINT#15,"M-W"CHR$(6)CHR$(0)CHR$(2)CHR$(T)CHR$(S)
+    390 PRINT#15,"M-W"CHR$(O)CHR$(O)CHR$(1)CHR$(JOB)
+    400 TRY=TRY+1
+    410 PRINT#15,"M-R"CHR$(0)CHR$(0)
+    420 GET#15,E$
+    430 IF E$=""THEN E$=CHR$(0)
+    440 E=ASC(E$)
+    450 IF TRY=500 GOTO 470
+    460 IF E>127 GOTO 400
+    470 RETURN
 
-105
 
------------------------------------------------------Page 105-----------------------------------------------------
+** Main Program **
+
+ Line Range   | Description
+:------------ |:-------------------------------------------------------------
+110           | Open the command channel.
+120-140       | Initialize drive.
+160           | Initialize track to 18.
+170           | Initialize sector to 0.
+180-190       | SEEK track 18.
+200           | Query FDC error code.
+220-230       | READ sector 0 on track 18 into buffer number 0 ($0300-$03FF).
+240           | Query FDC error code.
+250           | Begin loop to read 256 bytes ($0300-$03FF).
+260           | Two parameter memory-read.
+270           | Transfer a byte from buffer number 0 to C64 memory by way of
+              | the command channel (GET#15,).
+280           | Test for equality with the null string "".
+290           | ASCII conversion of a byte.
+300           | Print the status variable (ST), our loop counter, and the
+              | ASCII value of the byte.
+310           | Print the byte if it's within printable ASCII range.
+320           | Terminate comma tabulation.
+330           | Increment loop counter.
+340           | Close the command channel.
+350           | End.
+
+** Subroutine **
+
+ Line Range   | Description
+:------------ |:-------------------------------------------------------------
+370           | Initialize try counter.
+380           | Stuff the track and sector numbers into buffer number 0's
+              | header table ($0006-$0007).
+390           | Stuff job code number into buffer number 0's job queue table
+              | ($0000).
+400-460       | Wait for FDC to complete the job.
+470           | Return with FDC error code in hand.
+
+
+The good news is that working the job queue is not quite as complex as it at
+first appears. The subroutine in lines 370-470 is the very heart of the
+matter. We simply stuff our track and sector into the header table, our job
+code into the job queue table, and wait until the FDC has completed the
+operation.
+
+Keep in mind that this example was using buffer number 0 ($0300-$03FF). The
+corresponding header table and job queue table addresses were $0006 for the
+track, $0007 for the sector, and $0000 for the job code. Please note that
+every job code is greater than 127. (Bit 7 is deliberately set high (1).)
+Recall that when the FDC has completed a job, the job code is replaced with
+an error code. All error codes are less than 128. (Bit 7 is deliberately set
+low (0).) Line 460 waits until bit 7 of the job code is set low (0) by the
+FDC. If bit 7 is high (1), the FDC is still working so we must continue to
+wait (line 410).
+
+Error handling is a bit out of the ordinary too but not all that hard to
+comprehend either. An FDC error code of 1 means the job was completed
+successfully. Any other number indicates an error.
+
+You will also note a simple hierarchy of jobs in the program listing. Before
+we can read a sector (line 220) we must always find the track first (line
+180). Now are you ready for this one? Initialization is not necessary at all
+when working the job queue directly. Lines 120-140 were included as a force
+of habit. Applications like reading damaged or DOS protected diskettes may
+dictate that we do not initialize. Now for the bad news.
+
+
+** WARNING **
+
+Read this passage carefully. Then read it again for good measure. Experience
+is a hard teacher — test first, lesson afterward.
+
+1. You must remember at all times when working the job queue that you
+   have directly bypassed the parser routine. This is extremely dangerous
+   because you have in effect killed all protection built into the 1541
+   itself. Let us explain. If by some poor misfortune you elect to do a read
+   on track 99, the FDC doesn't know any better and takes off in search of
+   track 99. You can physically lock the read/write head if it accidentally
+   steps beyond its normal boundaries, i.e., a track less than 1 or a track
+   greater than 35. No damage is done to the 1541 itself but if the power-on
+   sequence doesn't return the head to center you will have to disassemble
+   the drive and reposition the head manually. Exceeding the sector range
+   for a given track is no problem, however. The drive will eventually give
+   up trying to find a sector out of range and report an FDC error 2 (an IP
+   20 error). Tracks are a pain in the stepper motor, however.
+
+2. You must keep your header table locations and your job queue table
+   locations straight in relation to the buffer number you are working. If
+   they are not in agreement, the drive will go off into never-never land.
+   The FDC will either attempt to work a nonexistent job code or seek a
+   track and sector out of bounds. Remember the FDC will do exactly what you
+   tell it to do. You are at the helm at all times. At the minimum, you will
+   have to power off the drive to regain control. Again, no physical damage
+   has been done to the 1541 but you may have to reposition the read/write
+   head yourself. We know from experience.
+
+3. You should always monitor the job yourself. The try counter in line
+   450 is a stopgap measure. Five hundred wait cycles seems like an
+   exaggerated figure here. However, you must give the drive adequate time
+   to find a desired track and settle down before performing a job. If for
+   some reason it cannot complete the job, it usually aborts and returns an
+   error code on its own. If it doesn't, something is amiss and a try
+   counter may trap it. (You might have to power off the drive to restore
+   the status quo.) A try counter is a little like workman's compensation.
+   Don't work the job queue without it.
+
+* Now, read these three paragraphs a second time. *
+
+The following program works the job queue directly to read track 18, sector 0
+into buffer number 1 ($0400-$04FF). The disk name is returned with a three
+parameter memory-read of bytes 144-159 ($0490-$049F). It's another oldie but
+goodie.
+
+    100 REM JOB QUEUE READ - DISK NAME
+    110 OPEN 15,8,15
+    120 PRINT#15,"I0"
+    130 INPUT#15,EN$,EM$,ET$,ES$
+    140 IF EN$<>"00"GOTO 360
+    150 REM SEEK
+    160 T=18
+    170 S=0
+    180 JOB=176
+    190 GOSUB 390
+    200 IF E<>1 GOTO 360
+    210 REM READ
+    220 JOB=128
+    230 GOSUB 390
+    240 IF E<>1 GOTO 360
+    250 PRINT#15,"M-R"CHR$(144)CHR$(4)CHR$(16)
+    260 FOR I=1 TO 16
+    270 GET#15,B$
+    280 IF B$=""THEN B$=CHR$(0)
+    290 A=ASC(B$)
+    300 IF A>127 THEN A=A-128
+    310 IF A<32 OR A>95 THEN A=63
+    320 IF A=34 THEN A=63
+    330 DN$=DN$+CHR$(A)
+    340 NEXT I
+    350 PRINT"{DOWN}DISK NAME: ";DN$
+    360 CLOSE 15
+    370 END
+    380 REM JOB QUEUE
+    390 TRY=0
+    400 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(2)CHR$(T)CHR$(S)
+    410 PRINT#15,"M-W"CHR$(1)CHR$(0)CHR$(1)CHR$(JOB)
+    420 TRY=TRY+1
+    430 PRINT#15,"M-R"CHR$(1)CHR$(0)
+    440 GET#15,E$
+    450 IF E$=""THEN E$=CHR$(0)
+    460 E=ASC(E$)
+    470 IF TRY=500 GOTO 490
+    480 IF E>127 GOTO 420
+    490 RETURN
+
+ Line Range   | Description
+:------------ |:-------------------------------------------------------------
+120-140       | Force of habit.
+160           | Initialize track to 18.
+170           | Initialize sector to 0.
+180-190       | SEEK track 18.
+200           | Query FDC error code.
+220-230       | READ sector 0 on track 18 into buffer number 1 ($0400-$04FF).
+240           | Query FDC error code.
+250           | Three parameter memory-read ($0490-$049F).
+260-340       | Concatenate the disk name one byte at a time by jamming it
+              | within printable ASCII range.
+390           | Initialize try counter.
+400           | Stuff the track and sector number into buffer number 1's
+              | header table ($0008-$0009).
+410           | Stuff the job code number into buffer number 1's job queue
+              | table ($0001).
+420-480       | Wait for FDC to complete the job.
+490           | Return with FDC error code in hand.
+
+
+Not much new here except the buffer in use. Let's review the key memory
+addresses for working buffer number 1 ($0400-$04FF):
+
+BUFFER NUMBER 1 = $0400 - $04FF
+TRACK NUMBER    = $0008 (HEADER TABLE)
+SECTOR NUMBER   = $0009 (HEADER TABLE)
+JOB CODE        = $0001 (JOB QUEUE TABLE)
+
+While we're at it, we might as well review the order of jobs for the sake of
+posterity. First SEEK a track. Then READ a sector.
+
+The next program incorporates four FDC job codes, namely a SEEK, a READ, a
+WRITE, and indirectly a VERIFY. This routine is a modification of the edit
+disk name program found in the previous chapter. Keep in mind that we are
+working buffer number 2 here ($0500-$05FF). The header table addresses are
+$000A for the track and $000B for the sector. The job codes themselves will
+be poked into location $0002 in the job queue table.
+
+109
+
+-----------------------------------------------------Page 109-----------------------------------------------------
