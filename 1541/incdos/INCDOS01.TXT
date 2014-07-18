@@ -12,7 +12,7 @@ took over from the original Project 64. At the time of writing, the
 repository is hosted by GitHub and made available to the public under
 following URL:
 
-https://github.com/Project-64/etext
+https://github.com/Project-64/reloaded
 
 a simplified interface to the documents is at the time of writing available
 under
