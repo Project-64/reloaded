@@ -76,9 +76,8 @@ The following elements specifically and purposefully do not follow the
 formatting of the original book:
 
 * Notes - the original notes begin with "NOTE:" and are either fully or
-  partially italicised. We follow this only when they are inline with other
-  parts of the text. Whenever they are on a line of their own, we don't
-  follow this for the sake of plain text readibility.
+  partially italicised. We don't always follow this for the sake of plain
+  text readibility.
 * Fixed width - lines printed in fixed width font in the original book are
   left-flush justified. When read as text/plain, you'll see them four spaces
   to the right for Markdown compatibility.
@@ -4973,7 +4972,7 @@ is a hard teacher — test first, lesson afterward.
    the status quo.) A try counter is a little like workman's compensation.
    Don't work the job queue without it.
 
-* Now, read these three paragraphs a second time. *
+*Now, read these three paragraphs a second time.*
 
 The following program works the job queue directly to read track 18, sector 0
 into buffer number 1 ($0400-$04FF). The disk name is returned with a three
@@ -5045,10 +5044,10 @@ goodie.
 Not much new here except the buffer in use. Let's review the key memory
 addresses for working buffer number 1 ($0400-$04FF):
 
-BUFFER NUMBER 1 = $0400 - $04FF
-TRACK NUMBER    = $0008 (HEADER TABLE)
-SECTOR NUMBER   = $0009 (HEADER TABLE)
-JOB CODE        = $0001 (JOB QUEUE TABLE)
+    BUFFER NUMBER 1 = $0400 - $04FF
+    TRACK NUMBER    = $0008 (HEADER TABLE)
+    SECTOR NUMBER   = $0009 (HEADER TABLE)
+    JOB CODE        = $0001 (JOB QUEUE TABLE)
 
 While we're at it, we might as well review the order of jobs for the sake of
 posterity. First SEEK a track. Then READ a sector.
@@ -5060,6 +5059,147 @@ working buffer number 2 here ($0500-$05FF). The header table addresses are
 $000A for the track and $000B for the sector. The job codes themselves will
 be poked into location $0002 in the job queue table.
 
-109
+    100 REM JOB QUEUE READ/WRITE - EDIT DISK NAME
+    110 FOR I=1 TO 16
+    120 PAD$=PAD$+CHR$(160)
+    130 NEXT I
+    140 PRINT"{CLR}EDIT DISK NAME - 1541"
+    150 PRINT"{DOWN}REMOVE {RVS}WRITE PROTECT TAB{ROFF}"
+    160 PRINT"{DOWN}INSERT DISKETTE IN DRIVE"
+    170 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+    180 GET C$:IF C$=""THEN 180
+    190 IF C$<>CHR$(13)GOTO 180
+    200 PRINT"OK"
+    210 OPEN 15,8,15
+    220 PRINT#15,"I0"
+    230 INPUT#15,EN$,EM$,ET$,ES$
+    240 IF EN$="00"GOTO 290
+    250 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    260 CLOSE 15
+    270 END
+    280 REM SEEK
+    290 T=18
+    300 S=0
+    310 JOB=176
+    320 GOSUB 660
+    330 REM READ
+    340 JOB=128
+    350 GOSUB 660
+    360 PRINT#15,"M-R"CHR$(144)CHR$(5)CHR$(16)
+    370 FOR I=1 TO 16
+    380 GET#15,B$
+    390 IF B$=""THEN B$=CHR$(0)
+    400 A=ASC(B$)
+    410 IF A>127 THEN A=A-128
+    420 IF A<32 OR A>95 THEN A=63
+    430 IF A=34 THEN A=63
+    440 ODN$=ODN$+CHR$(A)
+    450 NEXT I
+    460 PRINT"{DOWN}OLD DISK NAME: ";ODN$
+    470 INPUT"{DOWN}NEW DISK NAME";NDN$
+    480 IF LEN(NDN$)<>O AND LEN(NDN$)<17 GOTO 500
+    490 GOTO 630
+    500 INPUT"{DOWN}ARE YOU SURE (Y/N) Y{LEFT 3}";Q$
+    510 IF Q$<>"Y"GOTO 630
+    520 NDN$=LEFT$(NDN$+PAD$,16)
+    530 PRINT#15,"M-W"CHR$(144)CHR$(5)CHR$(16)NDN$
+    540 REM WRITE
+    550 JOB=144
+    560 GOSUB 660
+    570 PRINT#15,"I0"
+    580 INPUT#15,EN$,EM$,ET$,ES$
+    590 CLOSE 15
+    600 PRINT"{DOWN}DONE!"
+    610 END
+    620 REM CLOSE
+    630 CLOSE 15
+    640 END
+    650 REM JOB QUEUE
+    660 TRY=0
+    670 PRINT#15,"M-W"CHR$(10)CHR$(0)CHR$(2)CHR$(T)CHR$(S)
+    680 PRINT#15,"M-W"CHR$(2)CHR$(0)CHR$(1)CHR$(JOB)
+    690 TRY=TRY+1
+    700 PRINT#15,"M-R"CHR$(2)CHR$(0)
+    710 GET#15,E$
+    720 IF E$=""THEN E$=CHR$(0)
+    730 E=ASC(E$)
+    740 IF TRY=500 GOTO 780
+    750 IF E>127 GOTO 690
+    760 IF E=1 THEN RETURN
+    770 REM ERROR HANDLER
+    780 ET$=RIGHT$(STR$(T),LEN(STR$(T))-1)
+    790 IF T<10 THEN ET$="0"+ET$
+    800 ES$=RIGHT$(STR$(S),LEN(STR$(S))-1)
+    810 IF S<10 THEN ES$="0"+ES$
+    820 IF E>1 AND E<12 THEN EN$=RIGHT$(STR$(E+18),2):GOTO 840
+    830 EN$="02":EM$="?TIME OUT":GOTO 860
+    840 IF E=7 OR E=8 THEN EM$="WRITE ERROR":GOTO 860
+    850 EM$="READ ERROR"
+    860 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    870 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    880 CLOSE 15
+    890 END
 
------------------------------------------------------Page 109-----------------------------------------------------
+ Line Range   | Description
+:------------ |:-------------------------------------------------------------
+290-320       | SEEK track 18.
+340-350       | READ contents of sector 0 from track 18 into buffer number 2
+              | ($0500-$05FF).
+550-560       | WRITE buffer number 2 ($0500-$05FF) to track 18, sector 0.
+770-890       | Error handler.
+
+Lines 100 to 530 should be self explanatory by now. Lines 540-560 are
+equivalent to a block-write command (U2). To write a sector via the job queue
+we stuff the track and sector in the header table and a $90 (144) into the
+job queue table and let her rip.
+
+The error handler, however, is of interest. The conversion from FDC code to
+IP code is quite easy. We simply add 18 to the FDC error code (line 820).
+Note that we try to restrict all errors within a range of 20 to 29. An FDC
+error code of 0 or greater than 11 is indicative that something went
+radically wrong. Line 820 arbitrarily reports a ?TIME OUT in this situation.
+Speaking from experience, the job just plainly didn't get done. A time out
+occurs very rarely, unless of course, one is inspecting a damaged or
+DOS-protected diskette.
+
+Line 840 is another highlight. An FDC WRITE ($90) automatically flips to an
+FDC VERIFY ($A0) to compare the contents of the buffer against the sector
+just written. Kind of neat, isn't it? If the buffer and the sector do not
+match, we see an FDC error 7, i.e., an IP error number 25, WRITE ERROR. Since
+a VERIFY is done automatically by the FDC, we will not elaborate any further
+on this particular job code.
+
+The job code for a BUMP is a $C0 (192). Why anybody would ever want to
+implement this job request is beyond us.
+
+A subtle difference exists between the remaining two job codes, a JUMP ($D0)
+and an EXECUTE ($E0). A JUMP executes a machine language routine poked into
+RAM. No more, no less. Like a BUMP job, it is seldom used. The program that
+moves the read/write head in Chapter 9 is the only place where we have ever
+found a practical use for it.
+
+An EXECUTE ($E0) is the Rolls Royce of job codes, however. Before a machine
+language routine is executed, the FDC makes sure that:
+
+1. The drive is up to speed.
+2. The read/write head is on the right track.
+3. The read/write head has settled.
+
+The FDC cannot be interrupted when performing an EXECUTE job. Once the FDC
+starts to EXECUTE the machine language routine, control is not returned to
+the IP until the routine is completed. A runaway routine cannot be debugged
+even with BRK instructions. You must power down the 1541 and try to second
+guess the side effects of the routine to determine what went wrong.
+
+NOTE: The FDC does not automatically return an error code when the routine is
+completed. It is the programmer's responsibility to change the job code in
+the job queue table from an EXECUTE ($E0) to an $01 at the end of the
+routine. If this is not done, the FDC will find the same EXECUTE request on
+its next scan of the job queue and re-run the routine. Infinite regression!
+
+Most of the programs in Chapter 7 make use of the EXECUTE job code in one
+form or another. Therefore, example programs will be given there.
+
+112
+
+-----------------------------------------------------Page 112-----------------------------------------------------
