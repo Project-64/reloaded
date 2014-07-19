@@ -13,7 +13,7 @@ opts = GetoptLong.new(
 )
 
 infile = nil
-outfile = "font.svg"
+outfile = "fontpreview.svg"
 scale = 4
 charwidth = 8
 lineheight = 8
