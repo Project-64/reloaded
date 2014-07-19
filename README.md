@@ -45,7 +45,7 @@ The original Project 64 documents contain a header with several important points
 * Extensive efforts were made to preserve the contents of the original document.  However, certain portions, such as diagrams, program listings, and indexes may have been either altered or sacrificed due to the limitations of plain vanilla text.  Diagrams may have been eliminated where ASCII-art was not feasible.  Program listings may be missing display codes where substitutions were not possible.  Tables of contents and indexes may have been changed from page number references to section number references. Please accept our apologies for these limitations, alterations, and possible omissions.
 * The author(s) of the original document and members of Project 64 make no representations about the accuracy or suitability of this material for any purpose. This etext is provided "as-is". Please refer to the warrantee of the original document, if any, that may be included in this etext. No other warranties, express or implied, are made to you as to the etext or any medium it may be on. Neither the author(s) nor the members of Project 64 will assume liability for damages either from the direct or indirect use of this etext or from the distribution of or modification to this etext. Therefore if you read this document or use the information herein you do so at your own risk.
 
-All of the above points remain valid.
+The above points remain valid.
 
 Some documents contain also one more header paragraph about the file format:
 
