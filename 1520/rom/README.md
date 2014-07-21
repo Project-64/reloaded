@@ -5,6 +5,7 @@ Preservation of this contents is a result of joined effort of the community. Ful
 * Jim Brain
 * Soci/Singularcrew
 * Greg King
+* Marko Mäkelä
 * Gerrit Heitsch
 * [...]
 
