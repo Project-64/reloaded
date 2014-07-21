@@ -28,15 +28,15 @@
     code holds RESET low for a suitable time, puts the CPU into TEST mode, and
     tries to synchronize the opcode stream using a set of opcodes provided by
     Gerrit Heitsch, modified based on empirical testing.  Once synchronization
-    happens, it loads one memory location into the .A register, sends the
-    opcodes to store it to PORTA, and then drops out of TEST mode during the
-    cycle when the store will actually happen.  It then JAMs the CPU, reads the
-    data from PORTA, sends it to the UART, and repeats the process, using a new
-    memory location.  The code does not always synchronize, so a few resets of
-    the AVR MEGA32 are sometimes required.  Also, though I tried setting up the
-    code to read multiple pages of memory in one run, that pushed the code out
-    of synchronization, so you must recompile and re-download the code into the
-    AVR for each page.
+    happens, it instructs the internal CPU to load one memory location into the
+    .A register, dropping out of TEST during the cycle when the load from ROM
+    occurs. It then stores the data to PORTA, JAMS the CPU, and the AVR reads
+    the data from PORTA, sends it out via the AVR UART, and then repeats the
+    process for the next memory location. The code does not always synchronize,
+    so a few resets of the AVR MEGA32 are sometimes required.  Also, though I
+    tried setting up the code to read multiple pages of memory in one run, that
+    pushed the code out of synchronization, so you must recompile and
+    re-download the code into the AVR for each page.
 
     Truly, this is truly a hack of a codebase.  It was a
     quick (and evidently successful) attempt to dump ROM contents.  The code is
@@ -176,7 +176,7 @@ int main(void) {
     TEST_OFF();
     PORTC = 0;
     DDRC = 0;
-    while(PINC);
+    //while(PINC);
     while(1) {
       while(!PINC);
       UDR = PINA;  // uart output
