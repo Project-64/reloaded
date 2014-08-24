@@ -51,7 +51,7 @@ apologies for these limitations, alterations, and possible omissions.
 The author(s) of the original document and members of Project 64 make no
 representations about the accuracy or suitability of this material for any
 purpose. This etext is provided "as-is". Please refer to the warantee of the
-original document, if any, that may included in this etext. No other
+original document, if any, that may be included in this etext. No other
 warantees, express or implied, are made to you as to the etext or any medium
 it may be on. Neither the author(s) nor the members of Project 64 will assume
 liability for damages either from the direct or indirect use of this etext or
@@ -62,9 +62,9 @@ this document or use the information herein you do so at your own risk.
 DOCUMENT HEADER
 ---------------
 
-The Project 64 etext of Inside Commodore DOS by Richard Immers, Ph.D. and
-Gerald G. Neufeld, Ph.D. second edition. Converted to etext by Silver Dream !
-and Pinacolada64.
+The Project 64 Reloaded etext of Inside Commodore DOS by Richard Immers,
+Ph.D. and Gerald G. Neufeld, Ph.D. second edition. Converted to etext by
+Silver Dream ! and Pinacolada64.
 
 INCDOS01.TXT (WIP), April 2014
 
@@ -5200,6 +5200,153 @@ its next scan of the job queue and re-run the routine. Infinite regression!
 Most of the programs in Chapter 7 make use of the EXECUTE job code in one
 form or another. Therefore, example programs will be given there.
 
-112
+﻿
+# CHAPTER 7 - DOS PROTECTION
 
------------------------------------------------------Page 112-----------------------------------------------------
+## 7.1 Commodore's Data Encoding Scheme
+
+Before we can enter the netherworld of DOS protection you have to possess a
+thorough understanding of how the 1541 records a sector on a diskette. Any
+given sector is divided into two contiguous parts, a header block and a data
+block. For clarity sake let's review the parts of a sector discussed in
+Chapter 3.
+
+Header Block (16 8-bit bytes)
+
+          Number of Bytes         | Description
+:--------------------------------:|:-----------------------------------------
+                -                 | Sync Character
+                1                 | Header Block Identifier ($08)
+                1                 | Header Block Checksum
+                1                 | Sector Number
+                1                 | Track Number
+                1                 | ID LO
+                1                 | ID HI
+                2                 | Off Bytes ($0F)
+                8                 | Header Gap ($55)
+
+
+Data Block (260 8-bit bytes)
+
+          Number of Bytes         | Description
+:--------------------------------:|:-----------------------------------------
+                -                 | Sync Character
+                1                 | Data Block Identifier ($07)
+               256                | Data Bytes
+                1                 | Data Block Checksum
+                2                 | Off Bytes ($00)
+            Variable              | Tail Gap ($55)
+
+
+The 1541 writes a track on the surface of a diskette as one continuous bit
+stream. There are no demagnetized zones between sectors on a track to
+delineate where one sector ends and another one begins. Instead, Commodore
+relies upon synchronization characters for reference marks. A DOS 2.6 sync
+mark can be defined as five 8-bit $FF's written in succession to disk. Note
+that a sync mark is recorded at the front end of each header block and each
+data block. To differentiate a sync mark from a normal data byte, the 1541
+writes to diskette in two modes, a sync mode and a normal write mode.
+
+To appreciate the uniqueness of a sync mark we must first look at how a
+normal data byte is recorded. During normal write mode each 8-bit byte is
+encoded into 10 bits before it is written to disk. Commodore calls this
+encoding scheme *binary to GCR (Group Code Recording) conversion*. The
+conversion technique itself is quite straightforward. Each 8-bit byte is
+separated into two 4-bit nybbles, a high nybble and a low nybble. For
+example, the binary representation of $12 (18) is %00010010. The breakdown of
+this 8-bit byte into its two 4-bit nybbles is depicted below:
+
+Hexadecimal |  Binary  | High Nybble | Low Nybble
+:----------:|:--------:|:-----------:|:----------:
+  $12 (18)  | 00010010 |  0001xxxx   |  xxxx0010
+
+Mathematically speaking, a 4-bit nybble can be decoded into any one of 16
+different decimal values ranging from 0 (all bits turned off) to 15 (all bits
+turned on) as follows:
+
+    Bit Number  3   2   1   0
+    Power of 2  3   2   1   0
+    Weight      8   4   2   1
+
+Hence, the 1541's GCR lookup table contains just sixteen 4-bit nybble
+equivalencies:
+
+ Hexadecimal |  Binary  |   GCR
+:-----------:|:--------:|:-------:
+   $0 (0)    |   0000   |  01010
+   $1 (1)    |   0001   |  01011
+   $2 (2)    |   0010   |  10010
+   $3 (3)    |   0011   |  10011
+   $4 (4)    |   0100   |  01110
+   $5 (5)    |   0101   |  01111
+   $6 (6)    |   0110   |  10110
+   $7 (7)    |   0111   |  10111
+   $8 (8)    |   1000   |  01001
+   $9 (9)    |   1001   |  11001
+   $A (10)   |   1010   |  11010
+   $B (11)   |   1011   |  11011
+   $C (12)   |   1100   |  01101
+   $D (13)   |   1101   |  11101
+   $E (14)   |   1110   |  11110
+   $F (15)   |   1111   |  10101
+
+Using the binary to GCR lookup table above, let's walk through the necessary
+steps to convert a $12 (18) to GCR form.
+
+STEP 1. Hexadecimal to Binary Conversion
+
+        $12 (18) = 00010010
+
+STEP 2. High Nybble to GCR Conversion
+
+        0001xxxx = $1 (1) = 01011
+
+STEP 3. Low Nybble to GCR Conversion
+
+        xxxx0010 = $2 (2) = 10010
+
+STEP 4. GCR Concatenation
+
+        01011 + 10010 = 0101110010
+
+Two things should stand out when scrutinizing the 1541's binary to GCR lookup
+table.
+
+1. No combination of any two 5-bit GCR bytes will ever yield 10 consecutive
+   on bits (1s) which is used as the sync mark. Binary to GCR conversion
+   eliminates all likelihood that a permutation of normal data bytes can ever
+   be mistaken by the read/write electronics for a sync mark.
+
+2. No more than two consecutive off bits (0s) appear in any given 10-bit GCR
+   byte or combination of GCR bytes. This latter constraint was imposed for
+   accuracy when clocking bits back into the 1541 during a read. (See Chapter
+   9 for additional information.)
+
+This brings us full circle to what actually differentiates a sync mark from a
+normal data byte. Simply put, a sync mark is 10 or more on bits (1s) recorded
+in succession. Only one normal data byte, an $FF (%11111111), can even begin
+to fill the shoes of a sync mark. During normal write mode, however, an $FF
+would take the following GCR form, 1010110101. Enter sync mode. When the 1541
+writes an $FF in sync mode no binary to GCR conversion is done. A single $FF
+is only eight consecutive on bits and falls short of the ten consecutive on
+bits needed to create a sync character. To remedy this, Commodore writes five
+consecutive 8-bit $FFs to disk. This records 40 on bits (1s) in succession.
+The overkill is intentional on the DOS's part. Commodore is trying to
+guarantee that the 1541 will never have any trouble finding a sync mark
+during subsequent reads/writes to a diskette.
+
+Four 8-bit data bytes are converted to four 10-bit GCR bytes at a time by the
+1541 DOS. RAM is only an 8-bit storage device though. This hardware
+limitation prevents a 10-bit GCR byte from being stored in a single memory
+location. Four 10-bit GCR bytes total 40 bits — a number evenly divisible by
+our overriding 8-bit constraint. Commodore subdivides the 40 GCR bits into
+five 8-bit bytes to solve this dilemma. This explains why four 8-bit data
+bytes are converted to GCR form at a time. The following step by step example
+demonstrates how this bit manipulation is performed by the DOS.
+
+STEP 1. Four 8-bit Data Bytes
+        $08     $10     $00     $12
+
+115
+
+-----------------------------------------------------Page 115-----------------------------------------------------
