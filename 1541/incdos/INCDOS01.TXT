@@ -5213,6 +5213,7 @@ Chapter 3.
 
 Header Block (16 8-bit bytes)
 
+
           Number of Bytes         | Description
 :--------------------------------:|:-----------------------------------------
                 -                 | Sync Character
@@ -5227,6 +5228,7 @@ Header Block (16 8-bit bytes)
 
 
 Data Block (260 8-bit bytes)
+
 
           Number of Bytes         | Description
 :--------------------------------:|:-----------------------------------------
