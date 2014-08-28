@@ -5213,31 +5213,29 @@ Chapter 3.
 
 Header Block (16 8-bit bytes)
 
-
-          Number of Bytes         | Description
-:--------------------------------:|:-----------------------------------------
-                -                 | Sync Character
-                1                 | Header Block Identifier ($08)
-                1                 | Header Block Checksum
-                1                 | Sector Number
-                1                 | Track Number
-                1                 | ID LO
-                1                 | ID HI
-                2                 | Off Bytes ($0F)
-                8                 | Header Gap ($55)
+Number of Bytes | Description
+:--------------:|:-----------------------------------------
+       -        | Sync Character
+       1        | Header Block Identifier ($08)
+       1        | Header Block Checksum
+       1        | Sector Number
+       1        | Track Number
+       1        | ID LO
+       1        | ID HI
+       2        | Off Bytes ($0F)
+       8        | Header Gap ($55)
 
 
 Data Block (260 8-bit bytes)
 
-
-          Number of Bytes         | Description
-:--------------------------------:|:-----------------------------------------
-                -                 | Sync Character
-                1                 | Data Block Identifier ($07)
-               256                | Data Bytes
-                1                 | Data Block Checksum
-                2                 | Off Bytes ($00)
-            Variable              | Tail Gap ($55)
+Number of Bytes | Description
+:--------------:|:-----------------------------------------
+      -         | Sync Character
+      1         | Data Block Identifier ($07)
+     256        | Data Bytes
+      1         | Data Block Checksum
+      2         | Off Bytes ($00)
+   Variable     | Tail Gap ($55)
 
 
 The 1541 writes a track on the surface of a diskette as one continuous bit
@@ -5349,6 +5347,104 @@ demonstrates how this bit manipulation is performed by the DOS.
 STEP 1. Four 8-bit Data Bytes
         $08     $10     $00     $12
 
-115
+STEP 2. Hexadecimal to Binary Conversion
+        1. Binary Equivalents
+            $08      $10      $00      $12
+            00001000 00010000 00000000 00010010
 
------------------------------------------------------Page 115-----------------------------------------------------
+STEP 3. Binary to GCR Conversion
+        1. Four 8-bit Data Bytes
+           00001000 00010000 00000000 00010010
+        2. High and Low Nybbles
+           0000 1000 0001 0000 0000 0000 0001 0010
+        3. High and Low Nybble GCR Equivalents
+           01010 01001 01011 01010 01010 01010 01011 10010
+        4. Four 10-bit GCR Bytes
+           0101001001 0101101010 0101001010 0101110010
+
+STEP 4. 10-bit GCR to 8-bit GCR Conversion
+        1. Concatenate Four 10-bit GCR Bytes
+           0101001001010110101001010010100101110010
+        2. Five 8-bit Subdivisions
+           01010010 01010110 10100101 00101001 01110010
+
+STEP 5. Binary to Hexadecimal Conversion
+        1. Hexadecimal Equivalents
+           01010010 01010110 10100101 00101001 01110010
+           $52      $56      $A5      $29      $72
+
+STEP 6. Four 8-bit Data Bytes are Recorded as Five 8-bit GCR Bytes
+
+$08 $10 $00 $12 are recorded as $52 $56 $A5 $29 $72
+
+Four normal 8-bit bytes are always written to diskette as five 8-bit GCR
+bytes by the DOS. The 1541 converts these same five 8-bit GCR bytes back to
+four normal 8-bit bytes during a read. The steps outlined above still apply
+but they are performed in the reverse order. (The appendix contains various
+mathematical conversion routines for your use.) In light of the above
+discussion, we need to recalculate the number of bytes that are actually
+recorded in a sector. We stated in Chapter 3 that a header block was
+comprised of eight 8-bit bytes excluding the header gap. This is recorded on
+the diskette as ten 8-bit GCR bytes. The formula for determining the actual
+number of bytes that are recorded is:
+
+Number of 8-bit GCR Bytes Recorded = (Number of 8-bit Data Bytes/4) * 5
+
+Similarly, a data block consisting of 260 8-bit bytes is written to disk as
+325 8-bit GCR bytes. Lest we forget, each sync mark is five 8-bit bytes. We
+must also remember to add in the header gap which is held constant at eight
+bytes. (Header gap bytes ($55) are not converted to GCR form and serve only
+to separate the header block from the data block.) An entire sector is
+recorded as 353 bytes not 256 data bytes.
+
+|                     | Data Bytes | GCR Bytes |
+|:--------------------|:----------:|:---------:|
+|Sync Character ($FF) |    5 *     |     5     |
+|Header Block         |    8       |    10     |
+|Header Gap ($55)     |    8 *     |     8     |
+|Sync Character ($FF) |    5 *     |     5     |
+|Data Block           |    260     |    325    |
+
+\* No binary to GCR conversion.
+
+We deliberately excluded the inter-sector (tail) gap in calculating the
+number of bytes in a given sector. Why? Because the tail gap is never
+referenced again by the DOS once formatting is complete. During formatting
+the Floppy Disk Controller (FDC) erases a track by writing 10240 overlapping
+8-bit $FFs. Once a track has been erased the FDC writes 2400 8-bit $FFs
+(%11111111) followed by 2400 8-bit $55s (%01010101). The intent is to wrap
+around the circumference of the track with a clearly discernable on/off
+pattern of bytes. The FDC then counts to see how many sync ($FF) and nonsync
+($55) bytes were actually written to the track. From this count the FDC
+subtracts the total number of bytes that the entire range of sectors in a
+given zone will use. The remainder is then divided by the number of sectors
+in that zone to determine the size of the tail gap. The algorithm is
+analogous to cutting a pie. The tail gap varies not only between tracks due
+to a decrease in both circumference and the sector range but between disk
+drives as well, due to varying motor speeds. A stopgap measure is
+incorporated into the algorithm for the latter reason. If a tail gap is not
+computed to be at least four bytes in length, formatting will fail and an
+error will be reported. In general, the length of the tail gaps fall into the
+ranges tabled below:
+
+Zone |  Tracks  | Number of Sectors | Variable Tail Gap
+:---:|:--------:|:-----------------:|:-----------------:
+  1  |  1 - 17  |        21         |      4 -7
+  2  | 18 - 24  |        19         |      9 - 12
+  3  | 25 - 30  |        18         |      5 - 8
+  4  | 31 - 35  |        17         |      4 - 8
+
+
+Note that the values given above do not apply to the highest numbered sector
+on a track. The gap between this sector and sector 0 is usually much longer.
+We have seen tail gaps in excess of 100 bytes here.
+
+Also note that a header block is never rewritten after formatting is
+complete. The data block of a sector, including the sync character, is
+completely rewritten every time data is written to that sector. The eight
+byte header gap is counted off by the DOS to determine where to start writing
+the data block.
+
+117
+
+-----------------------------------------------------Page 117-----------------------------------------------------
