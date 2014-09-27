@@ -5445,6 +5445,208 @@ completely rewritten every time data is written to that sector. The eight
 byte header gap is counted off by the DOS to determine where to start writing
 the data block.
 
-117
 
------------------------------------------------------Page 117-----------------------------------------------------
+## 7.2 Checksums
+
+The only remaining concern we have at this time is how we compute a checksum.
+Unlike tape storage where a program file is recorded twice in succession,
+data is recorded on diskette only once. In other words, there is no cyclic
+redundancy. Checksum comes to the rescue. A single byte checksum or hashtotal
+is used by the DOS to determine whether or not an error occurred during a
+read of a header block or a data block. A checksum is derived by
+Exclusive-ORing (EOR) bytes together. Two bytes are EORed together at one
+time by comparing their respective bits. The four possible EOR bit
+combinations are shown in the following truth table.
+
+
+| EOR Truth Table |
+|:---------------:|
+|   0 EOR 0 = 0   |
+|   0 EOR 1 = 1   |
+|   1 EOR 0 = 1   |
+|   1 EOR 1 = 0   |
+
+
+A header block checksum is the EOR of: the sector number, the track number,
+the ID LO, and the ID HI. (These four bytes serve to differentiate sectors
+from one another on a diskette.) A data block checksum is the EOR of all 256
+8-bit data bytes in a sector. Recall that a data block normally consists of a
+forward track and sector pointer plus 254 data bytes. Please note that bytes
+are EORed by the DOS prior to their GCR conversion.
+
+The following example demonstrates how a header block checksum is calculated.
+The algorithm for calculating a data block checksum is identical, only longer.
+
+
+|                | Hexadecimal |  Binary   |
+|:---------------|:-----------:|:---------:|
+| Sector Number  |  $00 (0)    | 00000000  |
+| Track Number   |  $12 (18)   | 00010010  |
+| ID LO          |  $58 (88)   | 01011000  |
+| ID HI          |  $5A (90)   | 01011010  |
+
+
+STEP 1. Initialization
+EOR $00 (0) With Sector Number
+
+                                                            $00 = 00000000
+                                            Sector Number ($00) = 00000000
+                                                                 ---------
+                                                                  00000000
+
+STEP 2. EOR With Track Number
+
+                                                                  00000000
+                                             Track Number ($12) = 00010010
+                                                                 ---------
+                                                                  00010010
+
+STEP 3. EOR With ID LO
+
+                                                                  00010010
+                                                    ID LO ($58) = 01011000
+                                                                 ---------
+                                                                  01001010
+
+STEP 4. EOR With ID HI
+
+                                                                  01001010
+                                                    ID HI ($5A) = 01011010
+                                                                 ---------
+                                                                  00010000
+
+STEP 5. Binary to Hexadecimal Conversion
+
+        00010000
+
+        $10 (16)
+
+The checksum for $00, $12, $58, and $5A is thus $10 (16). This checksum just
+happens to be the header block checksum for track 18, sector 0 on the
+1541TEST/DEMO. In addition, the binary to GCR conversion tour presented
+earlier was for the first four bytes ($08 $10 $00 $12) of the same header
+block.
+
+
+## 7.3 Description of DOS Error Messages
+
+In Chapter 6 we presented a table of FDC and IP error codes. The following
+table outlines the order in which errors are evaluated by the DOS during a
+read and a write, respectively.
+
+### READ ERRORS
+
+FDC Job Request|FDC Error Code|IP Error Code| Error Message
+:--------------|:------------:|:-----------:|:------------------------------
+SEEK           |   $03 (3)    |      21     | No Sync Character
+SEEK           |   $02 (2)    |      20     | Header Block Not Found
+SEEK           |   $09 (9)    |      27     | Checksum Error in Header Block
+SEEK           |   $0B (11)   |      29     | Disk ID Mismatch
+READ           |   $02 (2)    |      20     | Header Block Not Found
+READ           |   $04 (4)    |      22     | Data Block Not Present
+READ           |   $05 (5)    |      23     | Checksum Error in Data Block
+READ           |   $01 (1)    |      0      | OK
+
+### WRITE ERRORS
+
+FDC Job Request|FDC Error Code|IP Error Code| Error Message
+:--------------|:------------:|:-----------:|:------------------------------
+WRITE          |    --  --    |     73      | DOS Mismatch
+WRITE          |   $0B (11)   |     29      | Disk ID Mismatch
+WRITE          |   $08 (8)    |     26      | Write Protect On
+WRITE          |   $07(7)     |     25      | Write-Verify Error
+VERIFY         |   $01 (1)    |      0      | OK
+
+Each error is described in greater detail below.
+
+### 21 READ ERROR (NO SYNC CHARACTER)
+
+The FDC could not find a sync mark (10 or more consecutive on bits) on a
+given track within a prescribed 20 millisecond time limit. A time out has
+occurred.
+
+### 20 READ ERROR (HEADER BLOCK NOT FOUND)
+
+The FDC could not find a GCR header block identifier ($52) after 90 attempts.
+The FDC did a seek to a track and found a sync character. The FDC then read
+the first GCR byte immediately following it. This GCR byte was compared
+against a GCR $52 ($08). The comparison failed and the try counter was
+decremented. The FDC waited for another sync character and tried again.
+Ninety attempts were made.
+
+### 27 READ ERROR (CHECKSUM ERROR IN HEADER BLOCK)
+
+The FDC found a header block on that track. This header block was read into
+RAM and the GCR bytes were converted back to their original binary form. The
+FDC then EORed the sector number, the track number, the ID LO, and the ID HI
+together. This independent checksum was EORed against the actual checksum
+found in the header block itself. If the result of the EOR was not equal
+zero, the checksums were not equal. The comparison failed and the FDC
+returned a $09 to the error handler.
+
+### 29 READ ERROR (DISK ID MISMATCH)
+
+The IDs recorded in the header block found above did not match the master
+copy of the disk id's stored in $0012 and $0013. These zero page memory
+addresses are normally updated from track 18 during initialization of a
+diskette. Note that they also can be updated by a seek to a track from the
+job queue.
+
+### 20 READ ERROR (HEADER BLOCK NOT FOUND)
+
+A GCR image of the header was created using the sector number, the track
+number, and the master disk IDs. The FDC attempted to find a header on this
+track that matched the GCR image in RAM for that sector. Ninety attempts were
+made before this error was reported.
+
+### 22 READ ERROR (DATA BLOCK NOT PRESENT)
+
+The header block for a given track and sector passed the previous five tests
+with flying colors. The FDC found the data block sync mark and read the next
+325 GCR bytes into RAM. These GCR bytes were converted back into 260 8-bit
+binary bytes. The first decoded 8-bit byte was compared against a preset data
+block identifier at $0047 and failed to match. Note this zero page memory
+address normally contains a $07.
+
+### 23 READ ERROR (CHECKSUM ERROR IN DATA BLOCK)
+
+An independent checksum was calculated for the 256 byte data block converted
+above. This checksum did not match the actual checksum read from the diskette.
+
+### 00, OK,00,00
+
+Nothing wrong here.
+
+### 73 DOS MISMATCH (CBM DOS V2.6 1541)
+
+An attempt was made to write to a diskette with a non-compatible format. The
+DOS version stored at location $0101 was not a $41. This memory address is
+normally updated during initialization by reading byte 2 from track 18,
+sector 0.
+
+### 29 READ ERROR (DISK ID MISMATCH)
+
+Same as 29 READ ERROR above but conflicting id's were found during a write
+attempt rather than a read. Repeated occurrance of this error on a standard
+diskette is indicative of a seating problem or a slow-burning alignment
+problem.
+
+### 26 WRITE PROTECT ON
+
+An attempt was made to write to a diskette while the write protect switch is
+depressed. Remove the write protect tab from the write protect notch.
+
+### 25 WRITE-VERIFY ERROR
+
+The contents of the data just written to a sector did not match the data in
+RAM when they were read back. This was probably caused by a flaw on the
+surface of the diskette. The end result was an unclosed file. Validate the
+diskette to decorrupt the BAM. (See Chapter 2.)
+
+### 00, OK,00,00
+
+Looking good.
+
+121
+
+-----------------------------------------------------Page 121-----------------------------------------------------
