@@ -5647,6 +5647,113 @@ diskette to decorrupt the BAM. (See Chapter 2.)
 
 Looking good.
 
-121
 
------------------------------------------------------Page 121-----------------------------------------------------
+## 7.4 Analyzing a Protected Diskette
+
+Bad sectoring is central to any disk protection scheme. In a nutshell, disk
+protection involves the deliberate corruption of a given track or sector. The
+authenticity of a diskette is often determined by a short loader program that
+reads the corrupted track or sector. In essence the FDC or IP error code is a
+password allowing access to the run time module. As a result the loader is
+extremely protected. If it can be cracked the program is generally freed from
+its bonds. This is easier said than done though. A loader is usually rendered
+indecipherable (Coda Obscura) through an autostart feature, the use of
+unimplemented 6502 op codes, encryption, or compilation. Frankly speaking,
+it's much easier to go after the whole disk. The following passages will
+introduce you to the black art of bit copying.
+
+The appendix contains four routines written specifically to assist in the
+interrogation of a diskette. They are:
+
+1. Interrogate Formatting IDs
+2. Interrogate a Track
+3. Shake, Rattle, and Roll
+4. Interrogate a Diskette
+
+These four programs tend to complement one another quite well in actual use.
+Their uses and limitations are discussed below.
+
+INTERROGATE FORMATTING ID'S returns the embedded disk ID for each track using
+a SEEK. Recall that working the job queue prevents the dreaded BUMP. A seek
+to a track is deemed successful by the FDC if at least one intact sector can
+be found. The header of said sector is stored in zero page from $0016-$001A.
+The ASCII equivalents of the ID HI ($0016) and ID LO ($0017) are read and
+printed to the CRT if the SEEK was good. At a glance one can determine if a
+protected diskette has a blown track or if it has been formatted with
+multiple ID's. This latter scheme is less commonly used to date. This program
+will not report the integrity of each individual sector. We have other
+routines for that task.
+
+There is one severe drawback to this program as it stands. Occasionally the
+FDC gets hung up on a track. The SEEK may continue to attempt to find a sync
+mark without timing out. (You must power off the 1541 to recover from this
+situation.) Experimentation in interrogating unformatted diskettes has
+produced the same effect. We surmise that the track in question was passed
+over during high-speed duplication. The FDC may in fact be homing in on a
+residual bit pattern left over from the manufacturer's certification process.
+The program has a built-in fail-safe mechanism for this very reason. Please
+take note: Lines 110-140 establish an active track array. All tracks are
+presumed active at the onset (line 130). Line 240 tests the integrity of the
+track prior to a seek. If a track is inactive (its flag equals 0) the track
+is bypassed and the program will work from start to finish. Should the need
+arise simply patch in a line that reads:
+
+    145 T(track number)=0
+
+    145 T(17)=0, for example.
+
+If it's any comfort at all, a loader cannot check the integrity of said track
+either. The sole function of such a track is to discourage prying eyes.
+
+INTERROGATE A TRACK scans a single track using the job queue. The track is
+found with a SEEK and then the integrity of each sector is verified with a
+READ. IP error codes are returned to the screen. No BUMP occurs. The routine
+may occasionally provide erroneous information. This is a major shortcoming
+of a READ from the queue. Certain errors are returned clean as a whistle (22,
+23, 27). A partially formatted track (mid-track 21 error) or a smattering of
+20 errors tend to throw the FDC into an absolute tizzy. Make note of this.
+Repeated runs of the same track often return a different error pattern.
+Errors tend to accumulate when a BUMP is overridden. Solution? See the
+following paragraph.
+
+SHAKE, RATTLE, AND ROLL also scans a single track by using a U1 command
+rather than a direct READ from the job queue. The track is still found by a
+SEEK, however, to prevent 29 errors in the event that multiple formatting
+played a part in the protection scheme. A 29 error is not an error _per se_.
+It is merely a stumbling block. A U1 without a SEEK to a multiple-formatted
+diskette will report a DISK ID MISMATCH. Information can be stored on a track
+with a different ID. A loader will retrieve it by the same method we're using
+here. Errors will force a BUMP so use discretion. Please note that a full
+track of 21 errors, 23 errors, or 27 errors does not need to be read with
+this routine. After you analyze a track, write the errors down and file your
+notes away for archival needs. Your 1541 will love you for it.
+
+INTERROGATE A DISKETTE is the lazy man's routine. It scans an entire diskette
+reporting only bad sectors to the screen. The program is essentially
+INTERROGATE A TRACK in a loop. Note that you may have to patch around a track
+to map the entire diskette. See the example patch above.
+
+
+## 7.5 Duplicating a Protection Scheme
+
+The following table represents the state of the error. The rank order in
+which errors tend to crop up on copy protected diskettes are as follows:
+
+1. 21 ERROR (FULL TRACK)
+2. 23 ERROR (SINGLE SECTOR)
+3. 23 ERROR (FULL TRACK)
+4. 20 ERROR (SINGLE SECTOR)
+5. 27 ERROR (FULL TRACK)
+6. 29 ERROR (MULTIPLE FORMATTING)
+7. 22 ERROR (SINGLE SECTOR)
+8. 21 ERROR (PARTIAL TRACK)
+
+Historically speaking, the 21 error (full track) and the 29 error appeared on
+the scene concurrently. At the present time, a full track 21 error and a
+single sector 23 error are the predominant errors used to corrupt a diskette.
+These same two errors are also the easiest to duplicate. The last entry,
+partial formatting of a track, is the new kid on the block.
+
+123
+
+-----------------------------------------------------Page 123-----------------------------------------------------
