@@ -6,7 +6,7 @@
 ; bit of the Commodore 64's firmware content. We want this to remain available to
 ; the public and allow other members to benefit from Lee's original, excellent job.
 ;************************************************************************************
-; $VER:C64LD11.ASM, included on 2014-11-12
+; $VER:C64LD11.S, included on 2014-11-12
 ;************************************************************************************
 ;
 ; The almost completely commented C64 ROM disassembly. V1.01 Lee Davison 2012
