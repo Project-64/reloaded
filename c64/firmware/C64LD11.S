@@ -1076,7 +1076,7 @@ LAB_DC01	= $DC01		; VIA 1 DRB, keyboard row port
 					; r3|	2	[Home]-	0	8	6	4	[F7]
 					; r2|	[CTL]	;	L	J	G	D	A	[RGT]
 					; r1|	[LFT]	*	P	I	Y	R	W	[RET]
-					; r0|	1	£	+	9	7	5	3	[DEL]
+					; r0|	1	Â£	+	9	7	5	3	[DEL]
 LAB_DC02	= $DC02		; VIA 1 DDRA, keyboard column
 LAB_DC03	= $DC03		; VIA 1 DDRB, keyboard row
 LAB_DC04	= $DC04		; VIA 1 timer A low byte
