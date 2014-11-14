@@ -17,7 +17,7 @@ silverdr
 
 ### Contents format
 
-Textual representations **only** are to be stored and revision-maintained in this repository. Textual formats mean (in order of preference):
+Textual representations **only**[^1] are to be stored and revision-maintained in this repository. Textual formats mean (in order of preference[^2]):
 
 * text/x-markdown; charset=UTF-8
 * text/plain; charset=UTF-8
@@ -30,7 +30,7 @@ Other, non-plain-text based formats are currently welcome only for inclusion in 
 
 ### Spelling conflicts resolutions
 
-Whenever the original book or document contains an undeniable spelling mistake, it should be corrected. Spelling variant for such correction should be chosen according to the original language of the content. This includes also UK vs. US spelling differences. In other words: if for example the original book was written by British author(s) using British spelling variant, misspelled words should be corrected to the proper, British spelling.
+Whenever the original book, document or source code comment contains an undeniable spelling mistake, it should be corrected. Spelling variant for such correction should be chosen according to the original language of the content. This includes also UK vs. US spelling differences. In other words: if for example the original book was written by British author(s) using British spelling variant, misspelled words should be corrected to the proper, British spelling.
 
 Whenever the original content contains words, which are properly spelled in at least one of the language variants but would be considered misspelled in another one - the original spelling must be preserved. In other words: if for example the original book was written by British author(s) but they spelled some words correctly according only to the US spelling variant, such words must not be changed.
 
@@ -43,7 +43,7 @@ The original Project 64 documents contain a header with several important points
 * Extensive efforts were made to preserve the contents of the original document.  However, certain portions, such as diagrams, program listings, and indexes may have been either altered or sacrificed due to the limitations of plain vanilla text.  Diagrams may have been eliminated where ASCII-art was not feasible.  Program listings may be missing display codes where substitutions were not possible.  Tables of contents and indexes may have been changed from page number references to section number references. Please accept our apologies for these limitations, alterations, and possible omissions.
 * The author(s) of the original document and members of Project 64 make no representations about the accuracy or suitability of this material for any purpose. This etext is provided "as-is". Please refer to the warrantee of the original document, if any, that may be included in this etext. No other warranties, express or implied, are made to you as to the etext or any medium it may be on. Neither the author(s) nor the members of Project 64 will assume liability for damages either from the direct or indirect use of this etext or from the distribution of or modification to this etext. Therefore if you read this document or use the information herein you do so at your own risk.
 
-The above points remain valid.
+The above points remain valid with one, important change: Project 64 Reloaded is not about Commodore 64 only. We shall try to preserve valuable content pertaining to popular computing of the previous eras in general.
 
 Some documents contain also one more header paragraph about the file format:
 
@@ -52,7 +52,7 @@ Some documents contain also one more header paragraph about the file format:
 This one is much more controversial.  God only knows how much I detest msdos and its "conventions",  which held computer science and the whole industry aback for well over a decade and still keep haunting us even today. I am - however - willing to bury my personal feelings about "8.3 convention of DOS" and its "extensions" (SCNR) for the sake of continuity and consistency. This means that:
 
 * documents file names will remain limited to 8.3 uppercase characters
-* new documents will adhere to the original file naming specifications (huh - is it really me writing this?) for consistency with the original project.
+* new documents will adhere to the original file naming specifications (huh - is it really me writing this?) for consistency with the original project. Obviously the letters after the last dot will vary according to the actual, textual format being used. Source code files will be named appropriately too.
 
 The original Project 64 headers currently remain in the files, which were originally created by the first Project 64. New documents will receive "Project 64 Reloaded" headers, with information on the matters covered above.
 
@@ -91,3 +91,6 @@ For direct donations/sponsorship of items like:
 * processing software (Top quality, commercial OCR and extensions)
 
 please contact project members through project web pages.
+
+[^1]:Exceptions are: non-changing, historical binary files, documentation for which is maintained by the project, and small preview files, which depict the main ones in a miniature form
+[^2]:Source code files - obviously - have to be stored in text/plain format only!
