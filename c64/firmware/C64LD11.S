@@ -1,7 +1,7 @@
 ;************************************************************************************
 ;************************************************************************************
 ; This file was included in the Project 64 Repository after the efforts to contact
-; Lee Davison, the original author ware proven unsuccessful. The inclusion is meant
+; Lee Davison, the original author were proven unsuccessful. The inclusion is meant
 ; to honour his sterling work on providing us with the very best document on every
 ; bit of the Commodore 64's firmware content. We want this to remain available to
 ; the public and allow other members to benefit from Lee's original, excellent job.
