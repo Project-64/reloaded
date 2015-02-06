@@ -5754,6 +5754,142 @@ single sector 23 error are the predominant errors used to corrupt a diskette.
 These same two errors are also the easiest to duplicate. The last entry,
 partial formatting of a track, is the new kid on the block.
 
-123
+The following 13 programs can be used to duplicate a multitude of errors on a
+diskette. They are:
 
------------------------------------------------------Page 123-----------------------------------------------------
+File Name          | Error Number | Error Range
+:------------------|:------------:|:-----------------------------------------
+21 ERROR           |      21      | FULL TRACK
+DESTROY A SECTOR   |    20,21     | SINGLE SECTOR
+23A ERROR          |      23      | SINGLE SECTOR
+23B ERROR          |      23      |*SINGLE SECTOR
+23M ERROR          |      23      | FULL TRACK
+20 ERROR           |      20      | SINGLE SECTOR
+20M ERROR          |      20      | FULL TRACK
+27M ERROR          |      27      | FULL TRACK
+22A ERROR          |      22      | SINGLE SECTOR
+22B ERROR          |      22      |*SINGLE SECTOR
+FORMAT A DISKETTE  |      29      | MULTIPLE FORMATTING ID'S
+BACKUP             |      ——      | SINGLE DRIVE BACKUP
+COPY               |      ——      | SINGLE FILE COPY
+
+\* Creates an exact duplicate of a bad sector.
+
+Source listings for the machine language routines in these programs are
+included as a courtesy to the more advanced reader. The BASIC drivers
+themselves are nondescript and will not be explained in depth. It is assummed
+that the reader has digested the sections on beginning and intermediate
+direct-access programming in Chapters 5 and 6. Algorithms will be briefly
+mentioned along with any new techniques and/or limitations that apply.
+
+
+## 7.6 How to Create 21 Errors on a Full Track
+
+Limitations: None.
+
+Parameters: Track number.
+
+FULL TRACK 21 ERROR
+
+    100 REM 21 ERROR - 1541
+    110 PRINT"{CLR}21 ERROR - 1541"
+    120 PRINT"{DOWN}INSERT CLONE IN DRIVE"
+    130 INPUT"{DOWN}DESTROY TRACK";T
+    140 IFT<1ORT>35THENEND
+    150 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
+    160 IFQ$<>"Y"THENEND
+    170 OPEN 15,8,15
+    180 PRINT#15,"I0"
+    190 INPUT#15,EN$,EM$,ET$,ES$
+    200 IFEN$="00"GOTO250
+    210 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    220 CLOSE15
+    230 END
+    240 REM SEEK
+    250 JOB=176
+    260 GOSUB400
+    270 FORI=0TO23
+    280 READD
+    290 D$=D$+CHR$(D)
+    300 NEXTI
+    310 PRINT#15,"M-W"CHR$(0)CHR$(4)CHR$(24)D$
+    320 REM EXECUTE
+    330 PRINT"{DOWN}{RVS}DESTROYING{ROFF} TRACK";T
+    340 JOB=224
+    350 GOSUB400
+    360 PRINT"{DOWN}DONE!"
+    370 CLOSE15
+    380 END
+    390 REM JOB QUEUE
+    400 TRY=0
+    410 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(2)CHR$(T)CHR$(0)
+    420 PRINT#15,"M-W"CHR$(1)CHR$(0)CHR$(1)CHR$(JOB)
+    430 TRY=TRY+1
+    440 PRINT#15,"M-R"CHR$(1)CHR$(0)
+    450 GET#15,E$
+    460 IFE$=""THENE$=CHR$(0)
+    470 E=ASC(E$)
+    480 IFTRY=500GOTO510
+    490 IFE>127GOTO430
+    500 RETURN
+    510 CLOSE15
+    520 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    530 END
+    540 REM 21 ERROR
+    550 DATA  32,163,253.169, 85,141,  1, 28
+    560 DATA 162,255,160, 48, 32,201,253, 32
+    570 DATA   0,254,169,  1, 76,105,249,234
+
+FULL TRACK 21 ERROR SOURCE LISTING
+
+    100 REM 21.PAL
+    110 REM
+    120 OPEN 2,8,2,"@0:21.B,P,W"
+    130 REM
+    140 SYS40960
+    150 ;
+    160 .OPT P,02
+    170 ;
+    180 *= $0500
+    190 ;
+    200 JSR $FDA3 ; ENABLE WRITE
+    210 LDA #$55  ; NON SYNC BYTE
+    220 STA $1C01
+    230 LDX #$FF
+    240 LDY #$48
+    250 JSR $FDC9 ; WRITE 18432 NON SYNC BYTES
+    260 JSR $FEOO ; ENABLE READ
+    270 LDA #$01
+    280 JMP $F969
+
+Full Track 21 Error Source Annotation
+
+This routine borrows from FORMT ($FAC7). Prior to formatting a track, the FDC
+erases it with sync marks ($FDA3). Experimentation has shown that an RTS from
+this ROM entry point would create a track of all 20 errors. Thus we are
+forced to trace the FORMT routine a little farther. The subroutine WRTNUM
+($FDC3) writes either sync or non-sync bytes. By entering six bytes into
+this routine we can establish the number of bytes it writes. A JSR to $FE00
+is necessary to re-enable read mode. Otherwise the write head is left on and
+it will erase everything in its path. Note that we LDA #$01, the FDC error
+code for OK, and JMP to the error handler at $F969 to exit.
+
+
+## 7.7 How to Create a 21 Error on a Single Sector
+
+Limitations: Preceding sector must be intact (See the annotation below).
+
+Parameters: Track and sector number.
+
+DESTROY A SECTOR
+
+    100 REM DESTROY A SECTOR - 1541
+    110 DIMD$(7)
+    120 PRINT"{CLR}DESTROY A SECTOR - 1541"
+    130 PRINT"{DOWN}INSERT CLONE IN DRIVE"
+    140 INPUT"{DOWN}DESTROY TRACK AND SECTOR (T,S)";T,S
+    150 IFT<1ORT>35THENEND
+
+126
+
+-----------------------------------------------------Page 126-----------------------------------------------------
