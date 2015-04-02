@@ -5889,7 +5889,149 @@ DESTROY A SECTOR
     130 PRINT"{DOWN}INSERT CLONE IN DRIVE"
     140 INPUT"{DOWN}DESTROY TRACK AND SECTOR (T,S)";T,S
     150 IFT<1ORT>35THENEND
+    160 NS=20+2*(T>17)+(T>24)+(T>30)
+    170 IFS<0ORS>NSTHENEND
+    180 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
+    190 IFQ$<>"Y"THENEND
+    200 OPEN15,8,15
+    210 PRINT#15,"I0"
+    220 INPUT#15,EN$,EM$,ET$,ES$
+    230 IFEN$="00"GOTO280
+    240 PRINT"{DOWN}"EN$","EM$","ET$","ES$
+    250 CLOSE15
+    260 END
+    270 REM SEEK
+    280 IFS=0THENS=NS:GOTO300
+    290 S=S-1
+    300 JOB=176
+    310 GOSUB570
+    320 REM READ
+    330 JOB=128
+    340 GOSUB570
+    350 FORJ=0TO7
+    360 FORI=0TO7
+    370 READD
+    380 D$(J)=D$(J)+CHR$(D)
+    390 NEXTI
+    400 NEXTJ
+    410 I=0
+    420 FORJ=0TO7
+    430 PRINT#15,"M-W"CHR$(I)CHR$(5)CHR$(8)D$(J)
+    440 I=I+8
+    450 NEXTJ
+    460 REM EXECUTE
+    470 PRINT#15,"M-W"CHR$(2)CHR$(0)CHR$(1)CHR$(224)
+    480 PRINT#15,"M-R"CHR$(2)CHR$(0)
+    490 GET#15,E$
+    500 IFE$=""THENE$=CHR$(0)
+    510 E=ASC(E$)
+    520 IFE>127GOTO480
+    530 CLOSE15
+    540 PRINT"{DOWN}DONE!"
+    550 END
+    560 REM JOB QUEUE
+    570 TRY=0
+    580 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(4)CHR$(T)CHR$(S)CHR$(T)CHR$(S)
+    590 PRINT#15,"M-W"CHR$(1)CHR$(0)CHR$(1)CHR$(JOB)
+    600 TRY=TRY+1
+    610 PRINT#15,"M-R"CHR$(1)CHR$(0)
+    620 GET#15,E$
+    630 IFE$=""THENE$=CHR$(0)
+    640 E=ASC(E$)
+    650 IFTRY=500GOTO680
+    660 IFE>127GOTO600
+    670 IFE=1THENRETURN
+    680 CLOSE15
+    690 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    700 END
+    710 REM DESTROY A SECTOR
+    720 DATA 32, 16,245, 32, 86,245,162,  0
+    730 DATA 80,254,184,202,208,250,162, 69
+    740 DATA 80,254,184,202,208,250,169,255
+    750 DATA141,  3, 28,173, 12, 28, 41, 31
+    760 DATA  9,192,141, 12, 28,162,  0,169
+    770 DATA 85, 80,254,184,141,  1, 28,202
+    780 DATA208,247, 80,254, 32,  0,254,169
+    790 DATA  1, 76,105,249,234,234,234,234
 
-126
+SINGLE SECTOR 21 ERROR SOURCE LISTING
 
------------------------------------------------------Page 126-----------------------------------------------------
+    100 REM DAS.PAL
+    110 REM
+    120 OPEN 2,8,2,"@0:DAS.B,P,W"
+    130 REM
+    140 SYS40960
+    150 ;
+    160 .OPT P,O2
+    170 ;
+    180 *= $0500
+    190 ;
+    200 JSR $F510 ; FIND HEADER
+    210 JSR $F556 ; FIND SYNC
+    220 ;
+    230 ;* WAIT OUT DATA *
+    240 ;
+    250 LDX #$00
+    260 READ1 BVC READ1
+    270 CLV
+    280 DEX
+    290 BNE READ1
+    300 ;
+    310 LDX #$45
+    320 READ2 BVC READ2
+    330 CLV
+    340 DEX
+    350 BNE READ2
+    360 ;
+    370 LDA #$FF ; DATA DIRECTION OUT
+    380 STA $1C03
+    390 LDA $1C0C; ENABLE WRITE MODE
+    400 AND #$1F
+    410 ORA #$C0
+    420 STA $1C0C
+    430 ;
+    440 LDX #$00
+    450 LDA #$55
+    460 WRITE1 BVC WRITE1
+    470 CLV
+    480 STA $1C01
+    490 DEX
+    500 BNE WRITE1
+    510 ;
+    520 WRITE2 BVC WRITE2
+    530 ;
+    540 JSR $FEOO ; ENABLE READ MODE
+    550 ;
+    560 LDA #$01
+    570 JMP $F969
+
+Single Sector 21 Error Source Annotation
+
+This routine finds the preceding sector and syncs up to its data block (lines
+200-210). Lines 250-350 wait out 325 GCR bytes. We flip to write in lines
+370-420 and write out 256 non-sync bytes. This overwrites both sync marks of
+the sector that was input. This routine will create a 20 error on a single
+sector as it stands. By serendipity, it has a unique side effect. If two
+consecutive sectors are destroyed we get a 21 error on both of them. The FDC
+times out trying to find one or the other or both. Caution must be used when
+spanning a sector range. To duplicate the following scheme we must destroy
+sector 0 first followed by sectors 20, 19, and 18 respectively.
+
+|  Sector | Error Number |
+|--------:|:------------:|
+|       0 |      21      |
+|  1 - 17 |      OK      |
+| 18 - 20 |      21      |
+
+Repeat. This routine will not create a 21 error on a single sector per se.
+Two consecutive sectors must be destroyed.
+
+## 7.8 How to Create a 23 Error on a Single Sector
+
+Limitations: None.
+
+Parameters: Track and sector number.
+
+129
+
+-----------------------------------------------------Page 129-----------------------------------------------------
