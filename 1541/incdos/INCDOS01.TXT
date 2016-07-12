@@ -6032,6 +6032,180 @@ Limitations: None.
 
 Parameters: Track and sector number.
 
-129
+SINGLE SECTOR 23 ERROR
 
------------------------------------------------------Page 129-----------------------------------------------------
+    100 REM 23A ERROR - 1541
+    110 DIMD$(11)
+    120 PRINT"{CLR}23 ERROR - 1541"
+    130 PRINT"{DOWN}INSERT CLONE IN DRIVE"
+    140 INPUT"{DOWN}DESTROY TRACK AND SECTOR (T,S)";T,S
+    150 IFT<1ORT>35THENEND
+    160 NS=20+2*(T>17)+(T>24)+(T>30)
+    170 IFS<0ORS>NSTHENEND
+    180 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3};Q$
+    190 IFQ$<>"Y"THENEND
+    200 OPEN 15,8,15
+    210 PRINT#15,"I0"
+    220 INPUT#15,EN$,EM$,ET$,ES$
+    230 IFEN$="00"GOTO280
+    240 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    250 CLOSE15
+    260 END
+    270 REM SEEK
+    280 JOB=176
+    290 GOSUB550
+    300 REM READ
+    310 JOB=128
+    320 GOSUB550
+    330 FORJ=0TO11
+    340 FORI=0TO7
+    350 READD
+    360 D$(J)=D$(J)+CHR$(D)
+    370 NEXTI
+    380 NEXTJ
+    390 I=0
+    400 FORJ=0TO11
+    410 PRINT#15,"M-W"CHR$(I)CHR$(5)CHR$(8)D$(J)
+    420 I=I+8
+    430 NEXTJ
+    440 REM EXECUTE
+    450 PRINT#15,"M-W"CHR$(2)CHR$(0)CHR$(1)CHR$(224)
+    460 PRINT#15,"M-R"CHR$(2)CHR$(0)
+    470 GET#15,E$
+    480 IFE$=""THENE$=CHR$(0)
+    490 E=ASC(E$)
+    500 IFE>127GOTO460
+    510 CLOSE15
+    520 PRINT"{DOWN}DONE!"
+    530 END
+    540 REM JOB QUEUE
+    550 TRY=0
+    560 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(4)CHR$(T)CHR$(S)CHR$(T)CHR$(S)
+    570 PRINT#15,"M-W"CHR$(1)CHR$(0)CHR$(1)CHR$(JOB)
+    580 TRY=TRY+1
+    590 PRINT#15,"M-R"CHR$(1)CHR$(0)
+    600 GET#15,E$
+    610 IFE$=""THENE$=CHR$(0)
+    620 E=ASC(E$)
+    630 IFTRY=500GOTO660
+    640 IFE>127GOTO580
+    650 RETURN
+    660 CLOSE15
+    670 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    680 END
+    690 REM 23 ERROR
+    700 DATA 169,  4,133, 49,165, 58,170,232
+    710 DATA 138,133, 58, 32,143,247, 32, 16
+    720 DATA 245,162,  8, 80,254,184,202,208
+    730 DATA 250,169,255,141,  3, 28,173, 12
+    740 DATA  28, 41, 31,  9,192,141, 12, 28
+    750 DATA 169,255,162,  5,141,  1, 28,184
+    760 DATA  80,254,184,202,208,250,160,187
+    770 DATA 185,  0,  1, 80,254,184,141,  1
+    780 DATA  28,200,208,244,185,  0,  4, 80
+    790 DATA 254,184,141,  1, 28,200,208,244
+    800 DATA  80,254, 32,  0,254,169,  5,133
+    810 DATA  49,169,  1, 76,105,249,234,234
+
+SINGLE SECTOR 23 ERROR SOURCE LISTING
+
+    100 REM 23A.PAL
+    110 REM
+    120 0PEN2,8,2,"@0:23A.B,P,W"
+    130 REM
+    140 SYS40960
+    150 ;
+    160 .OPT P,02
+    170 ;
+    180 *= $0500
+    190 ;
+    200 LDA #$04
+    210 STA $31
+    220 ;
+    230 LDA $3A
+    240 TAX
+    250 INX                             ; INCREMENT CHECKSUM
+    260 TXA
+    270 STA $3A
+    280 ;
+    290 JSR $F78F                       ; CONVERT TO GCR
+    300 JSR $F510                       ; FIND HEADER #
+    310 ;
+    320 LDX #$08
+    330 WAITGAP BVC WAITGAP             ; WAIT OUT GAP
+    340 CLV
+    350 DEX
+    360 BNE WAITGAP
+    370 ;
+    380 LDA #$FF                        ; ENABLE WRITE
+    390 STA $1C03
+    400 LDA $1C0C
+    410 AND #$1F
+    420 ORA #$C0
+    430 STA $1C0C
+    440 LDA #$FF
+    450 LDX #$05
+    460 STA $1C01
+    470 CLV
+    480 WRITESYNC BVC WRITESYNC
+    490 CLV
+    500 DEX
+    510 BNE WRITESYNC
+    520 ;
+    530 LDY #$BB
+    540 OVERFLOW LDA $0100,Y            ; WRITE OUT OVERFLOW BUFFER
+    550 WAIT1 BVC WAIT1
+    560 CLV
+    570 STA $1C01
+    580 INY
+    590 BNE OVERFLOW
+    600 BUFFER LDA $0400,Y              ; WRITE OUT BUFFER
+    610 WAIT2 BVC WAIT2
+    620 CLV
+    630 STA $1C01
+    640 INY
+    650 BNE BUFFER
+    660 WAIT3 BVC WAIT3
+    670 ;
+    680 JSR $FEOO                       ; ENABLE READ
+    690 ;
+    700 LDA #$05
+    710 STA $31
+    720 LDA #$01
+    730 JMP $F969
+
+Single Sector 23 Error Source Annotation
+
+This routine borrows from WRIGHT ($F56E). Our entry point is 12 bytes into the
+routine. This bypasses the write protect test and the computation of the
+checksum. The driver routine reads the sector into $0400-$04FF. Lines 200-210
+of the source listing set the indirect buffer pointer to this workspace. The
+checksum is next incremented at $003A. Buffer number 1 is converted to GCR
+form. Recall that 260 data bytes are converted into 325 8-bit GCR bytes. More
+than one buffer is used to store the GCR image. The first 69 GCR bytes are
+stored in an overflow buffer at $01BB-$01FF. The remaining 256 bytes are found
+at $0400-$04FF. We sync up to the appropriate sector in line 300, count off the
+eight byte header gap, and flip to write mode. Five $FFs are then written to
+disk (the sync mark) followed first by the overflow buffer and then the regular
+buffer. We restore the indirect buffer pointer at $0031 to a $05 and jump to
+the error handler with a $01 in hand.
+
+## 7.9 How to Duplicate a 23 Error on a Single Sector
+
+Limitations: None (Requires disk swapping).
+
+Parameters: Track and sector number.
+
+DUPLICATE A SINGLE SECTOR 23 ERROR
+
+    100 REM DUPLICATE A 23 ERROR - 1541
+    110 DIMD$(10)
+    120 PRINT"{CLR}DUPLICATE A 23 ERROR - 1541"
+    130 PRINT"{DOWN}INSERT MASTER DISKETTE IN DRIVE"
+    140 INPUT"{DOWN}READ TRACK AND SECTOR (T,S)";T,S
+    150 IFT<1ORT>35THENEND
+
+
+
+
+-----------------------------------------------------Page 133-----------------------------------------------------
