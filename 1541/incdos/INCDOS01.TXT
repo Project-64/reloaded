@@ -6204,8 +6204,52 @@ DUPLICATE A SINGLE SECTOR 23 ERROR
     130 PRINT"{DOWN}INSERT MASTER DISKETTE IN DRIVE"
     140 INPUT"{DOWN}READ TRACK AND SECTOR (T,S)";T,S
     150 IFT<1ORT>35THENEND
+    160 NS=20+2*(T>17)+(T>24)+(T>30)
+    170 IFS<0ORS>NSTHENEND
+    180 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
+    190 IFQ$<>"Y"THENEND
+    200 OPEN15,8,15
+    210 PRINT#15,"I0"
+    220 INPUT#15,EN$,EM$,ET$,ES$
+    230 IFEN$="00"GOTO280
+    240 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    250 CLOSE15
+    260 END
+    270 REM SEEK
+    280 JOB=176
+    290 GOSUB650
+    300 REM READ
+    310 JOB=128
+    320 GOSUB650
+    330 CLOSE15
+    340 PRINT"{DOWN}INSERT CLONE IN DRIVE"
+    350 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+    360 GETC$:IFC$=""THEN360
+    370 IFC$<>CHR$(13)GOTO360
+    380 PRINT"OK"
+    390 OPEN15,8,15
+    400 REM SEEK
+    410 JOB=176
+    420 GOSUB650
+    430 FORJ=0TO10
+    440 FORI=0TO7
+    450 READD
+    460 D$(J)=D$(J)+CHR$(D)
+    470 NEXTI
+    480 NEXTJ
+    490 I=0
+    500 FORJ=0TO10
+    510 PRINT#15,"M—W"CHR$(I)CHR$(5)CHR$(8)D$(J)
+    520 I=I+8
+    530 NEXTJ
+    540 REM EXECUTE
+    550 PRINT#15,"M-W"CHR$(2)CHR$(0)CHR$(1)CHR$(224)
+    560 PRINT#15,"M—R"CHR$(2)CHR$(0)
+    570 GET#15,E$
+    580 IFE$=""THENE$=CHR$(0)
+    590 E=ASC(E$)
+    600 IFE>127GOTO560
+    610 CLOSE15
 
 
-
-
------------------------------------------------------Page 133-----------------------------------------------------
+-----------------------------------------------------Page 134-----------------------------------------------------
