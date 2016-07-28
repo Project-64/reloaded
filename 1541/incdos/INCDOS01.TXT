@@ -6250,6 +6250,130 @@ DUPLICATE A SINGLE SECTOR 23 ERROR
     590 E=ASC(E$)
     600 IFE>127GOTO560
     610 CLOSE15
+    620 PRINT"{DOWN}DONE!"
+    630 END
+    640 REM JOB QUEUE
+    650 TRY=0
+    660 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(4)CHR$(T)CHR$(S)CHR$(T)CHR$(S)
+    670 PRINT#15,"M-W"CHR$(1)CHR$(0)CHR$(1)CHR$(JOB)
+    680 TRY=TRY+1
+    690 PRINT#15,"M-R"CHR$(1)CHR$(0)
+    700 GET#15,E$
+    710 IFE$=""THENE$=CHR$(0)
+    720 E=ASC(E$)
+    730 IFTRY=500GOTO760
+    740 IFE>127GOTO680
+    750 RETURN
+    760 PRINT"{DOWN}FAILED"
+    770 CLOSE15
+    780 END
+    790 REM DUPLICATE A SECTOR
+    800 DATA 169,  4,133, 49, 32,143,247, 32
+    810 DATA  16,245,162,  8, 80,254,184,202
+    820 DATA 208,250,169,255,141,  3, 28,173
+    830 DATA  12, 28, 41, 31,  9,192,141, 12
+    840 DATA  28,169,255,162,  5,141,  1, 28
+    850 DATA 184, 80,254,184,202,208,250,160
+    860 DATA 187,185,  0,  1, 80,254,184,141
+    870 DATA   1, 28,200,208,244,185,  0,  4
+    880 DATA  80,254,184,141,  1, 28,200,208
+    890 DATA 244, 80,254, 32,  0,254,169,  5
+    900 DATA 133, 49,169,  1, 76,105,249,234
 
+DUPLICATE A SINGLE SECTOR 23 ERROR SOURCE LISTING
 
------------------------------------------------------Page 134-----------------------------------------------------
+    100 REM 23B.PAL
+    110 REM
+    120 0PEN2,8,2,"@0:23B.B,P,W"
+    130 REM
+    140 SYS40960
+    150 ;
+    160 .OPT P,02
+    170 ;
+    180 *= $0500
+    190 ;
+    200 LDA #$04
+    210 STA $31
+    220 ;
+    230 JSR $F78F                      ; CONVERT TO GCR
+    240 JSR $F510                      ; FIND HEADER #
+    250 ;
+    260 LDX #$08
+    270 WAITGAP BVC WAITGAP            ; WAIT OUT GAP
+    280 CLV
+    290 DEX
+    300 BNE WAITGAP
+    310 ;
+    320 LDA #$FF                       ; ENABLE WRITE
+    330 STA $1C03
+    340 LDA $1C0C
+    350 AND #$1F
+    360 ORA #$C0
+    370 STA $1C0C
+    380 LDA #$FF
+    390 LDX #$05
+    400 STA $1C01
+    410 CLV
+    420 WRITESYNC BVC WRITESYNC
+    430 CLV
+    440 DEX
+    450 BNE WRITESYNC
+    460 ;
+    470 LDY #$BB
+    480 OVERFLOW LDA $0100,Y           ; WRITE OUT OVERFLOW BUFFER
+    490 WAIT1 BVC WAIT1
+    500 CLV
+    510 STA $1C01
+    520 INY
+    530 BNE OVERFLOW
+    540 BUFFER LDA $0400,Y             ; WRITE OUT BUFFER
+    550 WAIT2 BVC WAIT2
+    560 CLV
+    570 STA $1C01
+    580 INY
+    590 BNE BUFFER
+    600 WAIT3 BVC WAIT3
+    610 ;
+    620 JSR $FE00                      ; ENABLE READ
+    630 ;
+    640 LDA #$05
+    650 STA $31
+    660 LDA #$01
+    670 JMP $F969
+
+Duplicate a Single Sector 23 Error Source Annotation
+
+Identical to the 23A.PAL file with one exception. The checksum is left intact after a corrupted data block is read from the master using the job queue. The sector is stored at $0400-$04FF and the checksum at $003A. The checksum is not recalculated or incremented. The entire sector and its checksum are rewritten to the clone.
+
+##7.10 How to Create 23 Errors on a Full Track
+
+Limitations: None.
+
+Parameters: Track number.
+
+FULL TRACK 23 ERROR
+
+    100 REM 23M ERROR - 1541
+    110 DIMD$(11)
+    120 PRINT"{CLR}MULTIPLE 23 ERROR - 1541"
+    130 PRINT"{DOWN}INSERT CLONE IN DRIVE"
+    140 INPUT"{DOWN}DESTROY TRACK";T
+    150 IFT<1ORT>35THENEND
+    160 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
+    170 IFQ$<>"Y"THENEND
+    180 OPEN15,8,15
+    190 PRINT#15,"I0"
+    200 INPUT#15,EN$,EM$,ET$,ES$
+    210 IFEN$="00"GOTO260
+    220 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    230 CLOSE15
+    240 END
+    250 REM SEEK
+    260 JOB=176
+    270 GOSUB580
+    280 NS=20+2*(T>17)+(T>24)+(T>30)
+    290 FORS=0TONS
+    300 REM READ
+    310 JOB=128
+
+-----------------------------------------------------Page 137-----------------------------------------------------
