@@ -6375,5 +6375,130 @@ FULL TRACK 23 ERROR
     290 FORS=0TONS
     300 REM READ
     310 JOB=128
+    320 GOSUB580
+    330 IFS>0GOTO460
+    340 FORJ=0TO11
+    350 FORI=0TO7
+    360 READD
+    370 D$(J)=D$(J)+CHR$(D)
+    380 NEXTI
+    390 NEXTJ
+    400 I=0
+    410 FORJ=0TO11
+    420 PRINT#15,"M-W"CHR$(I)CHR$(5)CHR$(8)D$(J)
+    430 I=I+8
+    440 NEXTJ
+    450 REM EXECUTE
+    460 PRINT"{HOME}{DOWN 8}{RVS}DESTROYING{ROFF} TRACK"T"- SECTOR"S
+    470 PRINT#15,"M-W"CHR$(2)CHR$(0)CHR$(1)CHR$(224)
+    480 PRINT#15,"M-R"CHR$(2)CHR$(0)
+    490 GET#15,E$
+    500 IFE$=""THENE$=CHR$(0)
+    510 E=ASC(E$)
+    520 IFE>127GOTO480
+    530 NEXTS
+    540 CLOSE15
+    550 PRINT"{HOME}{DOWN 8}DONE!                         "
+    560 END
+    570 REM JOB QUEUE
+    580 TRY=0
+    590 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(4)CHR$(T)CHR$(S)CHR$(T)CHR$(S)
+    600 PRINT#15,"M-W"CHR$(1)CHR$(0)CHR$(1)CHR$(JOB)
+    610 TRY=TRY+1
+    620 PRINT#15,"M-R"CHR$(1)CHR$(0)
+    630 GET#15,E$
+    640 IFE$=""THENE$=CHR$(0)
+    650 E=ASC(E$)
+    660 IFTRY=500GOTO690
+    670 IFE>127GOTO610
+    680 RETURN
+    690 CLOSE15
+    700 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    710 END
+    720 REM 23 ERROR
+    730 DATA 169,  4,133, 49,165, 58,170,232
+    740 DATA 138,133, 58, 32,143,247, 32, 16
+    750 DATA 245,162,  8, 80,254,184,202,208
+    760 DATA 250,169,255,141,  3, 28,173, 12
+    770 DATA  28, 41, 31,  9,192,141, 12, 28
+    780 DATA 169,255,162,  5,141,  1, 28,184
+    790 DATA  80,254,184,202,208,250,160,187
+    800 DATA 185,  O,  1, 80,254,184,141,  1
+    810 DATA  28,200,208,244,185,  O,  4, 80
+    820 DATA 254,184,141,  1, 28,200,208,244
+    830 DATA  80,254, 32,  0,254,169,  5,133
+    840 DATA  49,169,  1,133,  2, 76,117,249
 
------------------------------------------------------Page 137-----------------------------------------------------
+FULL TRACK 23 ERROR SOURCE LISTING
+
+    100 REM 23M.PAL
+    110 REM
+    120 OPEN2,8,2,"@0:23M.B,P,W"
+    130 REM
+    140 SYS40960
+    150 ;
+    160 .OPT P,02
+    170 ;
+    180 *= $0500
+    190 ;
+    200 LDA #$04
+    210 STA $31
+    220 ;
+    230 LDA $3A
+    240 TAX
+    250 INX                  ; INCREMENT CHECKSUM
+    260 TXA
+    270 STA $3A
+    280 ;
+    290 JSR $F78F            ; CONVERT TO GCR
+    300 JSR $F510            ; FIND HEADER
+    310 ;
+    320 LDX #$08
+    330 WAITGAP BVC WAITGAP  ; WAIT OUT GAP
+    340 CLV
+    350 DEX
+    360 BNE WAITGAP
+    370 ;
+    380 LDA #$FF             ; ENABLE WRITE
+    390 STA $1C03
+    400 LDA $1C0C
+    410 AND #$1F
+    420 ORA #$C0
+    430 STA $1C0C
+    440 LDA #$FF
+    450 LDX #$05
+    460 STA $1C01
+    470 CLV
+    480 WRITESYNC BVC WRITESYNC
+    490 CLV
+    500 DEX
+    510 BNE WRITESYNC
+    520 ;
+    530 LDY #$BB
+    540 OVERFLOW LDA $0100,Y ; WRITE OUT OVERFLOW BUFFER
+    550 WAIT1 BVC WAIT1
+    560 CLV
+    570 STA $1C01
+    580 INY
+    590 BNE OVERFLOW
+    600 BUFFER LDA $0400,Y   ; WRITE OUT BUFFER
+    610 WAIT2 BVC WAIT2
+    620 CLV
+    630 STA $1C01
+    640 INY
+    650 BNE BUFFER
+    660 WAIT3 BVC WAIT3
+    670 ;
+    680 JSR $FE00            ; ENABLE READ
+    690 ;
+    700 LDA #$05
+    710 STA $31
+    720 LDA #$01
+    730 STA $02
+    740 JMP $F975
+
+Full Track 23 Error Source Annotation
+
+See the annotation for 23A.PAL. The BASIC driver loops to do all sectors on a given track.
+
+-----------------------------------------------------Page 140-----------------------------------------------------
