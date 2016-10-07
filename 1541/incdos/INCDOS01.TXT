@@ -6499,6 +6499,7 @@ FULL TRACK 23 ERROR SOURCE LISTING
 
 Full Track 23 Error Source Annotation
 
-See the annotation for 23A.PAL. The BASIC driver loops to do all sectors on a given track.
+See the annotation for 23A.PAL. The BASIC driver loops to do all sectors on a
+given track.
 
 -----------------------------------------------------Page 140-----------------------------------------------------
