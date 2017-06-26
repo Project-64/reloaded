@@ -17,15 +17,15 @@ silverdr
 
 ### Contents format
 
-Textual representations **only**[^1] are to be stored and revision-maintained in this repository. Textual formats mean (in order of preference[^2]):
+Textual representations **only**<sup>[1](#fn1)</sup> are to be stored and revision-maintained in this repository. Textual formats mean (in order of preference<sup>[2](#fn2)</sup>):
 
 * text/x-markdown; charset=UTF-8
 * text/plain; charset=UTF-8
 * application/x-tex
 * text/html; charset=UTF-8
-* text/rtf; charset=UTF-8
 
-Other, non-plain-text based formats are currently welcome only for inclusion in the list of documents awaiting to be processed into textual format.
+
+Other, non-plain-text based formats or `text/rtf; charset=UTF-8` format are currently welcome only for inclusion in the list of documents awaiting to be processed into one of the above listed textual format.
 
 
 ### Spelling conflicts resolutions
@@ -64,7 +64,7 @@ Versioning is tricky here as we need to deal with both the legacy (including pot
 * version numbers for unaltered documents will remain as they were in the original archive.
 * version numbers of the documents updated within Project 64 Reloaded repository will be bumped by one minor number over the highest previously available and will remain so for its life in the repository, unless *structural* changes (like adding/removing *content relevant* sections) are introduced to the files.
 * If an updated version (with a higher version number than the originally used one) is found elsewhere and the changes are merged into the version available here - the version number will be updated accordingly.
-* New documents are given "0.1" version number and "WIP" mark in the version line until all original content is converted. At this point both digits swap their positions and the document drops its "WIP" mark. 
+* New documents are given "0.1" version number and "WIP" mark in the version line until all original content is converted. At this point both digits swap their positions and the document drops its "WIP" mark.
 
 A "version line" line in the etext like
 
@@ -92,5 +92,6 @@ For direct donations/sponsorship of items like:
 
 please contact project members through project web pages.
 
-[^1]:Exceptions are: non-changing, historical binary files, documentation for which is maintained by the project, and small preview files, which depict the main ones in a miniature form
-[^2]:Source code files - obviously - have to be stored in text/plain format only!
+<a id="fn1">1 - </a>Exceptions are: non-changing, historical binary files, documentation for which is maintained by the project, and small preview files, which depict the main ones in a miniature form.
+
+<a id="fn1">2 - </a>Source code files - obviously - have to be stored in text/plain format only.
