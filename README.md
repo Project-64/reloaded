@@ -94,4 +94,4 @@ please contact project members through project web pages.
 
 <a id="fn1">1 - </a>Exceptions are: non-changing, historical binary files, documentation for which is maintained by the project, and small preview files, which depict the main ones in a miniature form.
 
-<a id="fn1">2 - </a>Source code files - obviously - have to be stored in text/plain format only.
+<a id="fn2">2 - </a>Source code files - obviously - have to be stored in text/plain format only.
