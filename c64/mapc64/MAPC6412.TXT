@@ -7047,7 +7047,7 @@ close (pressing the joystick fire button can have the same effect).
 When one of these conditions is met, the corresponding bit in this
 status register is set to 1 and latched.  That means that as long as
 the corresponding enable bit in the VIC IRQ Mask register is set to 1,
-and IRQ requested will be generated, and any subsequent fulfillment of
+and IRQ requested will be generated, and any subsequent fulfilment of
 the same condition will be ignored until the latch is cleared.
 
 This allows you to preserve multiple interrupt requests if more than
@@ -8011,6 +8011,7 @@ allows you to peak the volume of the frequency elements nearest the
 cutoff frequency.
 
 54293         $D415          CUTLO
+Filter Cutoff Frequency (low byte)
 
 Bits 0-2:  Low portion of filter cutoff frequency
 Bits 5-7:  Unused
@@ -8048,7 +8049,7 @@ Bits 0-3:  Select output volume (0-15)
 Bit 4:  Select low-pass filter, 1=low-pass on
 Bit 5:  Select band-pass filter, 1=band-pass on
 Bit 6:  Select high-pass filter, 1=high-pass on
-Bit 7:  Disconnect output of voice 4, 1=voice 3 off
+Bit 7:  Disconnect output of voice 3, 1=voice 3 off
 
 Bits 0-3 control the volume of all outputs.  The possible volume
 levels range from 0 (no volume) to 15 (maximum volume).  Some level of
