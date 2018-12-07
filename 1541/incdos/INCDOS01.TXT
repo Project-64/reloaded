@@ -7242,22 +7242,94 @@ Limitations: None (requires disk swapping).
 Parameters: Track and sector number.
 
 DUPLICATE A SINGLE SECTOR 22 ERROR
+        
+    100 REM DUPLICATE A 22 ERROR - 1541
+    110 PRINT"{CLR}DUPLICATE A 22 ERROR - 1541"
+    120 PRINT"{DOWN}INSERT MASTER IN DRIVE"
+    130 INPUT"{DOWN}TRACK AND SECTOR (T,S)";T,S
+    140 IFT<1ORT>35THENEND
+    150 NS=20+2*(T>17)+(T>24)+(T>30)
+    160 IFS<0ORS>NSTHENEND
+    170 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
+    180 IFQ$<>"Y"THENEND
+    190 OPEN15,8,15
+    200 PRINT#15,"I0"
+    210 INPUT#15,EN$,EM$,ET$,ES$
+    220 IFEN$="00"GOTO270
+    230 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    240 CLOSE15
+    250 END
+    260 REM SEEK
+    270 JOB=176
+    280 GOSUB 550
+    290 REM READ
+    300 JOB=128
+    310 GOSUB 550
+    320 PRINT#15,"M-R"CHR$(56)CHR$(0)
+    330 GET#15,D$
+    340 IFD$=""THEND$=CHR$(0)
+    350 CLOSE15
+    360 PRINT"{DOWN}REMOVE MASTER FROM DRIVE"
+    370 PRINT"INSERT CLONE IN DRIVE"
+    380 PRINT"PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+    390 GETC$:IFC$=""THEN390
+    400 IFC$<>CHR$(13)GOTO390
+    410 PRINT"OK"
+    420 OPEN15,8,15
+    430 REM SEEK
+    440 JOB=176
+    450 GOSUB550
+    460 PRINT#15,"M-W"CHR$(71)CHR$(0)CHR$(1)D$
+    470 REM WRITE
+    480 JOB=144
+    490 GOSUB 550
+    500 PRINT#15,"M-W'CHR$(71)CHR$(0)CHR$(1)CHR$(7)
+    510 CLOSE15
+    520 PRINT"{DOWN}DONE!"
+    530 END
+    540 REM JOB QUEUE
+    550 TRY=0
+    560 PRINF#15,"M-W"CHR$(8)CHR$(0)CHR$(2)CHR$(T)CHR$(S)
+    570 PRINT#15,"M-W"CHR$(1)CHR$(0)CHR$(1)CHR$(JOB)
+    580 TRY=TRY+1
+    590 PRINT#15,"M-R"CHR$(1)CHR$(0)
+    600 GET#15,E$
+    610 IFE$=""THENE$=CHR$(0) 
+    620 E=ASC(E$)
+    630 IFTRY=500GOTO660
+    640 IFE>127GOTO580
+    650 RETURN
+    660 PRINT#15,"M-W"CHR$(71)CHR$(0)CHR$(1)CHR$(7)
+    670 CLOSE15
+    680 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    690 END
+
+DUPLICATE A SINGLE SECTOR 22 ERROR SOURCE LISTING
+
+None. Line 320 in the program reads the data block identifier from the
+master. Lines 460-490 duplicate the error on the clone. Line 500 puts our house back in order.
+
+## 7.16 How to Format a Diskette with Multiple IDs
+
+Limitations: None (requires disk swapping).
+
+Parameters: None.
+
+MULTIPLE ID FORMATTING
+        
     
     
+    
+    
+    
+
+
 
 
     
     
     
     
-
-
-
-
-    
-    
-    
-    
     
     
     
@@ -7271,4 +7343,4 @@ DUPLICATE A SINGLE SECTOR 22 ERROR
     
 
 
------------------------------------------------------Page 156-----------------------------------------------------
+-----------------------------------------------------Page 158-----------------------------------------------------
