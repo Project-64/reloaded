@@ -6526,7 +6526,7 @@ SINGLE SECTOR 20 ERROR
     180 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
     190 IFQ$<>"Y"THENEND
     200 OPEN15,8,15
-    210 PRINT#15,"10"
+    210 PRINT#15,"I0"
     220 INPUT#15,EN$,EM$,ET$,ES$
     230 IFEN$="00"GOTO280
     240 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
@@ -6674,9 +6674,280 @@ Rest assured, though. It still gets the job done.
 
 ## 7.12 How to Create 20 Errors on a Full Track
 
+Limitations: None.
+
+Parameters: Track number.
+
+FULL TRACK 20 ERROR
+
+    100 REM 20M ERROR - 1541
+    110 DIMD$(24)
+    120 PRINT"{CLR}MULTIPLE 20 ERROR - 1541"
+    130 PRINT"{DOWN}INSERT CLONE IN DRIVE"
+    140 INPUT"{DOWN}DESTROY TRACK";T
+    150 IFT<1ORT>35THENEND
+    160 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
+    170 IFQ$<>"Y"THENEND
+    180 OPEN15,8,15
+    190 PRINT#15,"I0"
+    200 INPUT#15,EN$,EM$,ET$,ES$
+    210 IFEN$="00"GOTO260
+    220 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    230 CLOSE15
+    240 END
+    250 REM SEEK
+    260 NS=20+2*(T>17)+(T>24)+(T>30)
+    270 S=NS
+    280 J0B=176
+    290 GOSUB580
+    300 FORI=0TO23
+    310 READD
+    320 D$=D$+CHR$(D)
+    330 I$=I$+CHR$(0)
+    340 NEXTI
+    350 PRINT#15,"M-W"CHR$(0)CHR$(6)CHR$(24)D$
+    360 REM EXECUTE
+    370 PRINT"{DOWN}{RVS}DESTROYING{ROFF} TRACK";T
+    380 JOB=224
+    390 GOSUB580
+    400 PRINT#15,"M-W"CHR$(0)CHR$(6)CHR$(24)I$
+    410 FORJ=0TO24
+    420 FORI=0TO7
+    430 READD
+    440 D$(J)=D$(J)+CHR$(D)
+    450 NEXTI
+    460 NEXTJ
+    470 I=0
+    480 FORJ=0TO24
+    490 PRINT#15,"M-W"CHR$(I)CHR$(4)CHR$(8)D$(J)
+    500 I=I+8
+    510 NEXTJ
+    520 REM EXECUTE
+    530 PRINT#15,"M-E"CHR$(0)CHR$(4)
+    540 CLOSE15
+    550 PRINT"{DOWN}DONE!"
+    560 END
+    570 REM JOB QUEUE
+    580 TRY=0
+    590 PRINT#15,"M-W"CHR$(12)CHR$(0)CHR$(2)CHR$(T)CHR$(S)
+    600 PRINT#15,"M-W"CHR$(3)CHR$(0)CHR$(1)CHR$(JOB
+    610 TRY=TRY+1
+    620 PRINT#15,"M-R"CHR$(3)CHR$(0)
+    630 GET#15,E$
+    640 IFE$=""THENE$=CHR$(0)
+    650 E=ASC(E$)
+    660 IFTRY=500GOTO690
+    670 IFE>127GOTO610
+    680 RETURN
+    690 CLOSE15
+    700 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    710 END
+    720 REM 21 ERROR
+    730 DATA  32,163,253,169, 85,141,  1, 28
+    740 DATA 162,255,160, 48, 32,201,253, 32
+    750 DATA   0,254,169,  1, 76,105,249,234
+    760 REM 20M ERROR
+    770 DATA169,  0,133,127,166, 12,134, 81
+    780 DATA134,128,166, 13,232,134, 67,169
+    790 DATA  1,141, 32,  6,169,  8,141, 38
+    800 DATA  6,169,  0,141, 40,  6, 32,  0
+    810 DATA193,162,  0,169,  9,157,  0,  3
+    820 DATA232,232,173, 40,  6,157,  0,  3
+    830 DATA232,165, 81,157,  0,  3,232,169
+    840 DATA  0,157,  0,  3,232,157,  0,  3
+    850 DATA232,169, 15,157,  0,  3,232,157
+    860 DATA  0,  3,232,169,  0, 93,250,  2
+    870 DATA 93,251,  2, 93,252,  2, 93,253
+    880 DATA  2,157,249,  2,238, 40,  6,173
+    890 DATA 40,  6,197, 67,208,189,138, 72
+    900 DATA169, 75,141,  0,  5,162,  1,138
+    910 DATA157,  0,  5,232,208,250,169,  0
+    920 DATA133, 48,169,  3,133, 49, 32, 48 
+    930 DATA254,104,168,136, 32,229,253, 32 
+    940 DATA245,253,169,  5,133, 49, 32,233 
+    950 DATA245,133, 58, 32,143,247,169, 35
+    960 DATA133, 81,169,169,141,  0,  6,169
+    970 DATA  5,141,  1,  6,169,133,141,  2
+    980 DATA  6,169, 49,141,  3,  6,169, 76
+    990 DATA141,  4,  6,169,170,141,  5,  6
+    1000 DATA169,252,141,  6,  6,169,224,133
+    1010 DATA  3,165,  3, 48,252, 76,148,193
+
+FULL TRACK 20 ERROR SOURCE LISTING
+
+    100 REM 20M.PAL
+    110 REM
+    120 OPE2,8,2,"@0:20M.B,P,W"
+    130 REM
+    140 SYS40960
+    150 ;
+    160 .OP P,02
+    170 ;
+    180 *= $0400
+    190 ;
+    200 ;* INITIALIZATION *
+    210 ;
+    220 LDA #$00
+    230 STA $7F
+    240 LDX $0C
+    250 STX $51
+    260 STX $80
+    270 LDX $0D
+    280 INX
+    290 STX $43
+    300 LDA #$01
+    310 STA $0620
+    320 LDA #$08             ; TAIL GAP
+    330 STA $0626
+    340 LDA #$00
+    350 STA $0628            ; SECTOR COUNTER
+    360 ;
+    370 JSR $C100
+    380 ;
+    390 ;* CREATE HEADERS *
+    400 ;
+    410 LDX #$00
+    420 HEADER LDA #$09      ; HBID
+    430 STA $0300,X
+    440 INX
+    450 INX
+    460 LDA $0628
+    470 STA $0300,X          ; CHECKSUM
+    480 INX
+    490 LDA $51
+    500 STA $0300,X          ; TRACK
+    510 INX
+    520 LDA #$00
+    530 STA $0300,X          ; IDL
+    540 INX
+    550 STA $0300,X          ; IDH
+    560 INX
+    570 LDA #$0F
+    580 STA $0300,X          ; GAP
+    590 INX
+    600 STA $0300,X          ; GAP
+    610 INX
+    620 ;
+    630 LDA #$00
+    640 EOR $02FA,X
+    650 EOR $02FB,X
+    660 EOR $02FC,X
+    670 EOR $02FD,X
+    680 EOR $02F9,X
+    690 ;
+    700 INC $0628
+    710 LDA $0628
+    720 CMP $43
+    730 BNE HEADER
+    740 ;
+    750 TXA
+    760 PHA
+    770 ;
+    780 ;* CREATE DATA *
+    790 ;
+    800 LDA #$4B            ; 1541 FORMAT
+    810 STA $0500
+    820 LDX #$01            ; 1541 FORMAT
+    830 TXA
+    840 DATA STA $0500,X
+    850 INX
+    860 BNE DATA
+    870 ;
+    880 ;* CONVERT TO GCR *
+    890 ;
+    900 LDA #$00
+    910 STA $30
+    920 LDA #$03
+    930 STA $31
+    940 JSR $FE30
+    950 PLA
+    960 TAY
+    970 DEY
+    980 JSR $FDE5
+    990 JSR $FDE5
+    1000 LDA #$05
+    1010 STA $31
+    1020 JSR $F5E9
+    1030 STA $3A
+    1040 JSR $F78F
+    1050 ;
+    1060 ;* JUMP INSTRUCTION 8
+    1070 ;
+    1080 LDA #$23
+    1090 STA $51
+    1100 ;
+    1110 LDA #$A9
+    1120 STA $0600
+    1130 LDA #$05
+    1140 STA $0601
+    1150 LDA #$85
+    1160 STA $0602
+    1170 LDA #$31
+    1180 STA $0603
+    1190 LDA #$4C
+    1200 STA $0604
+    1210 LDA #$AA
+    1220 STA $0605
+    1230 LDA #$FC
+    1240 STA $0606
+    1250 ;
+    1260 LDA #$E0
+    1270 STA $03
+    1280 ;
+    1290 WAIT LDA $03
+    1300 BMI WAIT
+    1310 ;
+    1320 JMP $C194
+    
+Full Track 20 Error Source Annotation    
+    
+This routine has a real surprise in store. Initialization in lines 220-290
+sets the drive number to 0 ($007F) rather than rely on a default. The track
+is read from the header table location $000C and stored at $0051. (Recall
+that the driver set up the header table.) This memory location normally
+contains an $FF at powerup to let the drive know that formatting has not yet
+begun. We must reset it to the active track, or the drive will do a BUMP to
+track one to start the format. Similarly, we read the sector range from
+$000D, incremented this number to obtain a sector total for the track, and
+stored it at $0043. Line 300 is our try counter. Normally the drive makes 10
+attempts to format a single track. We either get it right the first time or
+give up. (The driver erases the track as a safeguard.) We cannot allow the
+FDC to reattempt to format the track because it will bypass our machine
+language routine and re-enter the standard ROM routine. Lines 310-330
+arbitrarily sets the tail gap to eight bytes in length. This avoids
+duplicating 245 bytes of code from $FB1D to $FC12. RAM is at a dire premium
+and we have neither the overhead nor the desire. 
+    
+Next we turn on the LED for cosmetic purposes (line 370) and build our header
+table and a dummy data block (lines 410-860). We incremented the data block
+identifier in line 420. Binary to GCR conversion is done in lines 900-1040.
+Now for the jump instruction. First we reset the track number to 35 (lines
+1080-1090) to let the FDC think that this is the last track of a normal
+format. Why? We will be passing control to a standard ROM routine in a minute
+and will let the FDC execute it. In other words, we are going to work the
+6502 in both IP and FDC modes. Formatting is done as a single job; one track
+at a time. When a track is formatted the FDC looks at $0051 to see if 35
+tracks have been done. If not, it increments $0051 and does the next track as
+another discrete job. The IP is going to wait for the FDC to reformat the
+track and then retake control. We store the indirect buffer pointer to our
+data block buffer and a jump to $FCAA at $0600. This ensures that the data
+block will not be lost in the ensuing shuffle. We then set up the job queue
+for an execute of buffer number 3 ($0600) and away we go. The IP monitors the
+FDC while it is reformatting the track. (Not only that, but the FDC will
+verify the track to ensure that it was reformatted incorrectly!) When bit
+seven of the job code ($E0) goes low, the IP wrestles control away from the
+FDC and jumps to ENDCMD ($C194) to terminate the routine. DOS ist gut!
+
+## 7.13 How to Create 27 Errors on a Full Track
+
+Limitations: None.
+
+Parameters: Track number.
+
+FULL TRACK 27 ERROR
+    
 
 
 
 
-
------------------------------------------------------Page 144-----------------------------------------------------
+-----------------------------------------------------Page 150-----------------------------------------------------
