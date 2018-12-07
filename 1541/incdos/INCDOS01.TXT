@@ -6345,7 +6345,7 @@ Duplicate a Single Sector 23 Error Source Annotation
 
 Identical to the 23A.PAL file with one exception. The checksum is left intact after a corrupted data block is read from the master using the job queue. The sector is stored at $0400-$04FF and the checksum at $003A. The checksum is not recalculated or incremented. The entire sector and its checksum are rewritten to the clone.
 
-##7.10 How to Create 23 Errors on a Full Track
+## 7.10 How to Create 23 Errors on a Full Track
 
 Limitations: None.
 
@@ -6501,5 +6501,29 @@ Full Track 23 Error Source Annotation
 
 See the annotation for 23A.PAL. The BASIC driver loops to do all sectors on a
 given track.
+
+## 7.11 How to Create a 20 Error on a Single Sector
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -----------------------------------------------------Page 140-----------------------------------------------------
