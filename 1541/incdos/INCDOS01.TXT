@@ -7181,8 +7181,71 @@ Parameters: Track and sector number.
 
 SINGLE SECTOR 22 ERROR
     
+    100 REM 22A ERROR - 1541
+    110 PRINT"{CLR}22A ERROR - 1541"
+    120 PRINT"{DOWN}INSERT CLONE IN DRIVE"
+    130 INPUT"{DOWN}DESTROY TRACK AND SECTOR(T,S)";T,S
+    140 IFT<1ORT>35THENEND
+    150 NS=20+2*(T>17)+(T>24)+(T>30)
+    160 IFS<0ORS>NSTHENEND
+    170 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
+    180 IFQ$<>"Y"THENEND
+    190 OPEN15,8,15
+    200 PRINT#15,"I0"
+    210 INPUT#15,EN$,EM$,ET$,ES$
+    220 IFEN$="00"GOTO270
+    230 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    240 CLOSE15
+    250 END
+    260 REM SEEK
+    270 JOB=176
+    280 GOSUB 440
+    290 IFE<>1GOTO550
+    300 REM READ
+    310 JOB=128
+    320 GOSUB44O
+    330 IFE<>1ANDE<>4ANDE<>5GOTO550
+    340 PRINT#15,"M-W"CHR$(71)CHR$(0)CHR$(1)CHR$(6)
+    350 REM WRITE
+    360 JOB=144
+    370 GOSUB440
+    380 PRINT#15,"M-W"CHR$(71)CHR$(0)CHR$(1)CHR$(7)
+    390 IFE<>1GOTO550
+    400 CLOSE15
+    410 PRINT"{DOWN}DONE!"
+    420 END
+    430 REM JOB QUEUE
+    440 TRY=0
+    450 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(2)CHR$(T)CHR$(S)
+    460 PRINT#15,"M-W"CHR$(1)CHR$(0)CHR$(1)CHR$(JOB)
+    470 TRY=TRY+1
+    480 PRINT#15,"M-R"CHR$(1)CHR$(0)
+    490 GET#15,E$
+    500 IFE$=""THENE$=CHR$(0)
+    510 E=ASC(E$)
+    520 IFTRY=500GOTO540
+    530 IFE>127GOTO470
+    540 RETURN
+    550 CLOSE15
+    560 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    570 END
+
+SINGLE SECTOR 22 ERROR SOURCE LISTING
+
+None. Line 340 in the program creates a single sector 22 error by
+decrementing the data block identifier. Line 380 restores the status quo.
+
+## 7.15 How Duplicate a 22 Error on a Single Sector
+
+Limitations: None (requires disk swapping).
+
+Parameters: Track and sector number.
+
+DUPLICATE A SINGLE SECTOR 22 ERROR
     
     
+
+
     
     
     
@@ -7208,4 +7271,4 @@ SINGLE SECTOR 22 ERROR
     
 
 
------------------------------------------------------Page 155-----------------------------------------------------
+-----------------------------------------------------Page 156-----------------------------------------------------
