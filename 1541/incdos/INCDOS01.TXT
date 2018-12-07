@@ -6698,7 +6698,7 @@ FULL TRACK 20 ERROR
     250 REM SEEK
     260 NS=20+2*(T>17)+(T>24)+(T>30)
     270 S=NS
-    280 J0B=176
+    280 JOB=176
     290 GOSUB580
     300 FORI=0TO23
     310 READD
@@ -7534,7 +7534,7 @@ Parameters: A formatted diskette.
     510 GOSUB1190
     520 IFE=1GOTO550
     530 R=R+1
-    540 IFE<>4ANDE<>5GOTO5S0          ;error in a book
+    540 IFE<>4ANDE<>5GOTO580
     550 SYS49165
     560 C=1
     570 POKERW,1
@@ -7783,7 +7783,175 @@ Parameters: File name and file type.
 
 1541 COPY
 
-    
+    100 REM 1541 COPY
+    110 POKE 56,16
+    120 CLR
+    130 POKE251,0
+    140 POKE252,16
+    150 POKE253,0
+    160 POKE254,16
+    170 FORI=1TO72
+    180 READD
+    190 POKE49151+I,D
+    200 NEXTI
+    210 PRINT"{CLR}1541 COPY"
+    220 PRINT"{DOWN}INSERT MASTER IN DRIVE"
+    230 GOSUB750
+    240 GOSUB810
+    250 INPUT"{DOWN}FILENAME";F$
+    260 IFLEN(F$X<>0ANDLEN(F$)<17GOTO280
+    270 GOTO1000
+    280 INPUT"{DOWN}FILE TYPE (DSPU)  P{LEFT3}";T$
+    290 IFT$="D"ORT$="S"ORT$="P"ORT$="U"GOTO310
+    300 GOTO1000
+    310 RW$="R"
+    320 GOSUB890
+    330 SYS49152
+    340 CLOSE2
+    350 INPUT#15,EN$,EM$,ET$,ES$
+    360 IFEN$="00"GOTO380
+    370 GOTO850
+    380 CLOSE15
+    390 PRINT"{DOWN}INSERT CLONE IN DRIVE"
+    400 GOSUB750
+    410 GOSUB810
+    420 PRINT#15,"M-R"CHR$(1)CHR$(1)
+    430 GET#15,D$
+    440 D=ASC(D$+CHR$(0))
+    450 IFD=65GOTO490
+    460 PRINT"{DOWN}73,CBM DOS V2.6 1541,00,00"
+    470 GOTO710
+    480 PRINT#15,"M-R"CHR$(250)CHR$(2)CHR$(3)
+    490 GET#15,L$
+    500 L=ASC(L$+CHR$(0))
+    510 GET#15,B$
+    520 GET#15,H$
+    530 H=ASC(H$+CHR$(0))
+    540 C=L+(H*256)
+    550 S=PEEK(252)+((PEEK(253)-16)*256)
+    560 B=INT((S/254)+.5)
+    570 IFC-B>=0GOTO600
+    580 PRINT"{DOWN}72,DISK FULL,00,00"
+    590 GOTO710
+    600 RW$="W"
+    610 GOSUB890
+    620 SYS49182
+    630 CLOSE2
+    640 INPUT#15,EN$,EM$,ET$,ES$
+    650 PRINT"{DOWN}DONE!"
+    660 CLOSE15
+    670 POKE56,160
+    680 CLR
+    690 END
+    700 REM CLOSE
+    710 CLOSE15
+    720 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    730 GOTO670
+    740 REM DELAY
+    750 PRINT"{DOWN}PRESS {RVS}RETURN{ROFF} TO CONTINUE"
+    760 GETC$:IFC$=""THEN760
+    770 IFC$<>CHR$(13)GOTO760
+    780 PRINT"OK"
+    790 RETURN
+    800 REM INITIALIZATION
+    810 OPEN15,8,15
+    820 PRINT#15,"I0"
+    830 INPUT#15,EN$,EM$,ET$,ES$
+    840 IFEN$="00"THENRETURN
+    850 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    860 CLOSE15
+    870 GOTO670
+    880 REM FILE NOT FOUND - FILE EXISTS
+    890 OPEN2,8,2,"0:"+F$+","+T$+","+RW$
+    900 INPUT#15,EN$,EM$,ET$,ES$
+    910 IFEN$="00"THENRETURN
+    920 CLOSE2
+    930 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    940 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    950 INPUT#15,EN$,EM$,ET$,ES$
+    960 CLOSE15
+    970 GOTO670
+    980 REM LOAD - SAVE
+    990 DATA162,  2, 32,198,255.160,  O, 32
+    1000 DATA228,255,145,251, 32,183,255, 41
+    1010 DATA 64,208,  8,200,208,241,230,252
+    1020 DATA 76,  5,192,132,251, 32,204,255
+    1030 DATA 96,162,  2, 32,201,255,160,  0
+    1040 DATA177,253, 32,210,255,196,251,240
+    1050 DATA  8,200,208,244,230,254, 76, 38
+    1060 DATA192,165,254,197,252,208,242,132
+    1070 DATA253, 32,204,255, 96,234,234,234
+
+COPY A FILE SOURCE LISTING
+
+    100 REM COPY.PAL
+    110 REM
+    120 PEN2,8,2,"@0:COPY.B,P,W"
+    130 REM
+    140 SYS40960
+    150 ;
+    160 .OPT P,02
+    170 ;
+    180 *= $C000
+    190 ;
+    200 ; LOAD
+    210 ;
+    220 LDX #$02
+    230 JSR $FFC6            ; OPEN2,8,2
+    240 ;
+    250 LOAD LDY #$00
+    260 READ JSR $FFE4       ; IN
+    270 STA ($FB),Y
+    280 JSR $FFB7            ; READST
+    290 AND #64
+    300 BNE READY
+    310 INY
+    320 BNE READ
+    330 INC $FC
+    340 JMP LOAD
+    350 ;
+    360 READY STY $FB
+    370 JSR $FFCC            ; CLOSE2
+    380 RTS
+    390 ;
+    400 ; SAVE
+    410 ;
+    420 LDX #$02
+    430 JSR $FFC9            ; OPEN2,8,2
+    440 ;
+    450 SAVE LDY #$00
+    460 WRITE LDA ($FD),Y
+    470 JSR $FFD2            ; OUT
+    480 CPY $FB
+    490 BEQ BREAK
+    500 CONT INY
+    510 BNE WRITE
+    520 INC $FE
+    530 JMP SAVE
+    540 ;
+    550 BREAK LDA $FE
+    560 CMP $FC
+    570 BNE CONT
+    580 ;
+    590 STY $FD
+    600 JSR $FFCC            ; CLOSE2
+    610 RTS
+
+Copy a File Source Annotation
+
+This routine emulates a LOAD and SAVE from machine language.
+
+Conclusion
+
+In conclusion, we hope that this chapter has taken some of the mystery out of
+DOS protection schemes. We encourage serious readers to study the program
+listings carefully. The programming techniques employed are perhaps the most
+sophisticated applications of Commodore's direct-access commands that you
+will ever see.
+
+
+# CHAPTER 8 - GETTING OUT OF TROUBLE
+
     
     
     
@@ -7794,4 +7962,4 @@ Parameters: File name and file type.
     
 
 
------------------------------------------------------Page 169-----------------------------------------------------
+-----------------------------------------------------Page 172-----------------------------------------------------
