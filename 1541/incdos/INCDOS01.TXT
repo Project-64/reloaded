@@ -6343,7 +6343,11 @@ DUPLICATE A SINGLE SECTOR 23 ERROR SOURCE LISTING
 
 Duplicate a Single Sector 23 Error Source Annotation
 
-Identical to the 23A.PAL file with one exception. The checksum is left intact after a corrupted data block is read from the master using the job queue. The sector is stored at $0400-$04FF and the checksum at $003A. The checksum is not recalculated or incremented. The entire sector and its checksum are rewritten to the clone.
+Identical to the 23A.PAL file with one exception. The checksum is left intact
+after a corrupted data block is read from the master using the job queue. The
+sector is stored at $0400-$04FF and the checksum at $003A. The checksum is
+not recalculated or incremented. The entire sector and its checksum are
+rewritten to the clone.
 
 ## 7.10 How to Create 23 Errors on a Full Track
 
@@ -6504,26 +6508,175 @@ given track.
 
 ## 7.11 How to Create a 20 Error on a Single Sector
 
+Limitations: Preceding sector must be intact (See the annotation for a single
+sector 21 error).
+
+Parameters: Track and sector number.
+
+SINGLE SECTOR 20 ERROR
+
+    100 REM 20 ERROR - 1541
+    110 DIMD$(11)
+    120 PRINT"{CLR}20 ERROR - 1541"
+    130 PRINT"{DOWN}INSERT CLONE IN DRIVE"
+    140 INPUT"{DOWN}DESTROY TRACK AND SECTOR (T,S)";T,S
+    150 IFT<1ORT>35THENEND
+    160 NS=20+2*(TM7)+(T>24)+(T>30)
+    170 IFS<0ORS>NSTHENEND
+    180 INPUT"{DOWN}ARE YOU SURE  Y{LEFT 3}";Q$
+    190 IFQ$<>"Y"THENEND
+    200 OPEN15,8,15
+    210 PRINT#15,"10"
+    220 INPUT#15,EN$,EM$,ET$,ES$
+    230 IFEN$="00"GOTO280
+    240 PRINT"{DOWN}"EN$", "EM$","ET$","ES$
+    250 CLOSE15
+    260 END
+    270 REM SEEK
+    280 IFS=0THENS=NS:GOTO300
+    290 S=S-1
+    300 JOB=176
+    310 GOSUB570
+    320 REM READ
+    330 JOB=128
+    340 GOSUB570
+    350 FORJ=0TO11
+    360 FORI=0TO7
+    370 READD
+    380 D$(J)=D$(J)+CHR$(D)
+    390 NEXTI
+    400 NEXTJ
+    410 I=0
+    420 FORJ=0TO11
+    430 PRINT#15,"M-W"CHR$(I)CHR$(5)CHR$(8)D$(J)
+    440 I=I+8
+    450 NEXTJ
+    460 REM EXECUTE
+    470 PRINT#15,"M-W"CHR$(2)CHR$(0)CHR$(1)CHR$(224)
+    480 PRINT#15,"M-R"CHR$(2)CHR$(0)
+    490 GET#15,E$
+    500 IFE$=""THENE$=CHR$(0)
+    510 E=ASC(E$)
+    520 IFE>127GOTO480
+    530 CLOSE15
+    540 PRINT"{DOWN}DONE!"
+    550 END
+    560 REM JOB QUEUE
+    570 TRY=0
+    580 PRINT#15,"M-W"CHR$(8)CHR$(0)CHR$(4)CHR$(T)CHR$(S)CHR$(T)CHR$(S)
+    590 PRINT#15,"M-W"CHR$(1)CHR$(0)CHR$(1)CHR$(JOB)
+    600 TRY=TRY+1
+    610 PRINT#15,"M-R"CHR$(1)CHR$(0)
+    620 GET#15,E$
+    630 IFE$=""THENE$=CHR$(0)
+    640 E=ASC(E$)
+    650 IFTRY=500GOTO680
+    660 IFE>127GOTO600
+    670 IFE=1THENRETURN
+    680 CLOSE15
+    690 PRINT"{DOWN}{RVS}FAILED{ROFF}"
+    700 END
+    710 REM 20 ERROR
+    720 DATA  32, 16,245, 32, 86,245,160, 20
+    730 DATA 165, 25,201, 18,144, 12,136,136
+    740 DATA 201, 25,144,  6,136,201, 31,144
+    750 DATA   1,136,230, 24,197, 24,144,  6
+    760 DATA 240,  4,169,  0,133, 25,169,  O
+    770 DATA  69, 22, 69, 23, 69, 24, 69, 25
+    780 DATA 133, 26, 32, 52,249, 32, 86,245
+    790 DATA 169,255,141,  3, 28,173, 12, 28
+    800 DATA  41, 31,  9,192,141, 12, 28,162
+    810 DATA   0,181, 36, 80,254,184,141,  1
+    820 DATA  28,232,224,  8,208,243, 80,254
+    830 DATA  32,  0,254,169,  1, 76,105,249
+    
+SINGLE SECTOR 20 ERROR SOURCE LISTING
+
+    100 REM 20.PAL
+    110 REM
+    120 OPEN2,8,2,"@0:20.B,P,W"
+    130 REM
+    140 SYS40960
+    150 ;
+    160 .OPT P,02
+    170 ;
+    180 *= $0500
+    190 ;
+    200 JSR $F510            ; FIND HEADER BLOCK
+    210 JSR $F556            ; FIND DATA BLOCK
+    220 ;
+    230 LDY #$14
+    240 LDA $19
+    250 CMP #$12
+    260 BCC ZONE
+    270 DEY
+    280 DEY
+    290 CMP #$19
+    300 BCC ZONE
+    310 DEY
+    320 CMP #$1F
+    330 BCC ZONE
+    340 DEY
+    350 ZONE INC $18
+    360 CMP $18
+    370 BCC HEADER
+    380 BEQ HEADER
+    390 LDA #$00
+    400 STA $19
+    410 ;
+    420 HEADER LDA #$00
+    430 EOR $16
+    440 EOR $17
+    450 EOR $18
+    460 EOR $19
+    470 STA $1A
+    480 ;
+    490 JSR $F934            ; CREATE NEW HEADER# IMAGE
+    500 JSR $F556            ; FIND HEADER BLOCK
+    510 LDA #$FF
+    520 STA $1C03
+    530 LDA $1C0C
+    540 AND #$1f
+    550 ORA #$C0
+    560 STA $1C0C
+    570 LDX #$00
+    580 WRITE LDA $0024,X
+    590 WAIT1 BVC WAIT1
+    600 CLV
+    610 STA $1C01
+    620 INX
+    630 CPX #$08
+    640 BNE WRITE
+    650 WAIT2 BVC WAIT2
+    660 ;
+    670 JSR $FE00            ; READ MODE
+    680 ;
+    690 LDA #$01
+    700 JMP $F969
+
+Single Sector 20 Error Source Annotation
+
+This routine represents a halfhearted attempt to rewrite a header. It is
+dependent upon the preceding sector being intact. Lines 200-210 sync up to
+the preceding header and data block. Lines 230-400 calculate the next sector
+in the zone. A header image for the sector is created in RAM at $0024-$002C.
+We sync up one more time which positions us to the start of the header block
+we want to destroy. We flip to write mode and rewrite the header. We are
+coming in just a shade too slow and create enough noise at the end of the
+sync mark to destroy the actual header block identifier. (Tweaking the
+internal clock reveals that the header was completely rewritten.) If the tail
+gap was a constant length our task would be analogous to rewriting a sector
+where the FDC syncs up to a header block, reads the header, and counts off
+eight bytes. We would similarly sync up to a data block, count off 325 GCR
+bytes, then count off the tail gap, and flip to write mode. However, it is
+virtually impossible to gauge the length of the tail gap, so we're stuck.
+Rest assured, though. It still gets the job done.
+
+## 7.12 How to Create 20 Errors on a Full Track
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
------------------------------------------------------Page 140-----------------------------------------------------
+-----------------------------------------------------Page 144-----------------------------------------------------
