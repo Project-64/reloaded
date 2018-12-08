@@ -6601,9 +6601,275 @@ NOTE: It is a good idea to practice these steps on a test diskette before you
 attempt to recover your lost Accounts Receivable! To do this: SAVE a file to
 disk, SCRATCH it, and follow the steps outlined above.
 
+## 8.2 Recovering a Soft Error
+
+In Chapter 7 we described in detail the read/write DOS errors. We did not,
+however, categorize these errors by type. Read/write errors fall into two
+categories: "hard" errors and "soft" errors. A hard error is one that cannot
+be recovered, period. Hard errors are errors that occur in a header block.
+Recall that a header block is never rewritten after initial formatting. Since
+a header block cannot be rewritten, the data in a sector containing a hard
+error is unrecoverable. (Unfortunately, this also means that the forward
+pointer has been lost and, for all intents and purposes, the remainder of the
+file as well.) Soft errors are errors that occur in a data block. Since data
+blocks can be rewritten, soft errors can sometimes be recovered if the
+diskette itself is not flawed or physically damaged. The table below
+indicates whether a read/write error is a hard or soft error.
+
+       Soft Errors         Hard Errors 
+    -----------------   -----------------
+      22 Read Error       20 Read Error
+      23 Read Error       21 Read Error
+                          27 Read Error
+                          29 Read Error
+
+Appendix C contains two programs that are useful in trying to recover a
+sector that has a soft error. However, recovery cannot be guaranteed in all
+cases. These two programs are RECOVER TRACK & SECTOR and LAZARUS. The first
+program attempts to rewrite a damaged sector. LAZARUS will attempt to
+resurrect an entire diskette. The latter program returns a status report of
+the number of read errors encountered. It also reports the number of write
+errors that occurred. A write error indicates that a soft error encountered
+along the way was actually a hard error in disguise. Sorry about that.
+
+## 8.3 Recovering a Hard Error
+
+A hard error does not necessarily mean that an entire file is unrecoverable.
+In all honesty, though, the technique that we are about to describe is a shot
+in the dark. Before you attempt the steps outlined below ask yourself the
+following question. Are you experiencing errors on other diskettes in your
+library? If you answered yes to this question, the cause of these errors may
+be in the disk drive itself. Your 1541 may be out of alignment and a trip to
+your nearest Commodore dealer is in order. If the problem occurs on only one
+diskette read on.
+
+NOTE: This section does not apply to relative files. Refer to section 8.4
+instead.
+
+WARNING: The technique we are about to describe here is not for the faint
+hearted. Consult with your physician before attempting this exercise.
+
+STEP 1. Load and run the VALIDATE A DISKETTE program contained in Appendix C.
+        This program emulates the VALIDATE command from BASIC. It will chain
+        through each active file entry in the directory and highlight a bad
+        file without aborting.
+
+STEP 2. Load and run FIND A FILE. This program will return the track and
+        sector locations of where the file resides in the directory as well
+        as where it starts on the diskette. The directory track and sector is
+        extraneous information for our present purpose. Note only the
+        starting track and sector.
+
+STEP 3. Load and run DISPLAY A CHAIN. This program requires you to input a
+        track and sector. Input the starting track and sector obtained in
+        step 2. The program will chain through all forward track and sectors
+        on the diskette from this entry point until an error is encountered.
+        (If the error is a soft error, STOP! Do not pass GO. Go directly to
+        section 8.2.) Ignore the sector where the error was encountered. The
+        file is virtually lost from that point on. (Recall that the link has
+        been destroyed.) Make note of the last successful track and sector
+        displayed.
+
+STEP 4. Load and run EDIT TRACK & SECTOR. You will want to input the track
+        and sector obtained in step 3. The starting byte is always 00. Change
+        the first two bytes to 00 and FF, respectively. Rewrite the sector
+        when prompted to do so. You have in effect severed the forward track
+        and sector link described in Chapter 4. This allows you to manipulate
+        the front end of the file. It is the only portion of the file that is
+        clearly intact.
+
+If it is a BASIC PRG file, the internal BASIC links have been destroyed. You
+can restore the links on the C64 with a machine language monitor or on the
+diskette with the EDIT TRACK & SECTOR program. If you do not restore the
+BASIC links, the C64 will crash as soon as you attempt to edit the last line
+of the program. Using EDIT TRACK & SECTOR, call up the sector that was just
+rewritten. You will have to inspect both half- pages of the block. Look for
+the last 00 byte in the page. Change the two bytes that immediately follow it
+to a 00 00 also. Note the position of the last 00 byte edited in hexadecimal.
+If you are in the second-half of the block, rewrite the sector and then
+recall the first-half. Change the forward sector pointer to the hexadecimal
+position of the last 00 byte you changed. Rewrite the sector a final time.
+You will now be able to load, list, and edit the program. Hopefully, you will
+remember to save it to a different diskette this time.
+
+If it was a SEQ file, the recovered data is intact. You will have to read it
+into C64 RAM and rewrite it to another file. If you do not know how to
+manipulate a sequential file contact someone who does.
+
+## 8.4 Recovering a Relative File
+
+The only realistic way to recover a REL file is to open it for a read and
+copy it record by record into a sequential file. The program to do this
+should not abort when an error is encountered. Simply skip over the record
+and go on. This way only the records that reside, in whole or in part, on the
+damaged sector are not recovered. If you do not know how to do this, take
+your diskette to an experienced programmer and see if he/she can assist you.
+
+## 8.5 Recovering an Entire Diskette
+
+NOTE: This section applies only to a diskette that cannot be initialized.
+
+Chapter 7 contains a program called 1541 BACKUP (section 7.15). Run this
+program to make a backup of your blown diskette. After you have made a
+backup, load and list the directory. If the directory appears normal, you
+will want to validate the backup. If the validate command fails, inspect and
+copy each intact file to a new diskette. Some files may be lost in the
+process.
+
+If the directory cannot be displayed in its entirety, a hard error was
+encountered on track 18 during the backup operation. The sector containing
+the hard error could not be copied. As a result, the directory on the backup
+is corrupt. Load and run DISPLAY A CHAIN on the backup. Attempt to follow the
+chain starting at track 18, sector 1. The display will indicate the location
+of the uncopyable sector by aborting. Run EDIT TRACK & SECTOR on the backup
+to relink the directory around this sector. Refer to the table in section 8.1
+to determine which sector normally follows the one in question. Keep in mind
+that eight files will be lost by this action. If all goes well you should be
+able to list the directory now. Inspect and copy all remaining files to a new
+diskette.
+
+## 8.6 Recovering a Physically Damaged Diskette
+
+If your diskette has sustained physical damage all is not lost. The most
+common forms of physical damage are a warped jacket or environmental
+contamination. In either case, the solution is to don a pair of plastic
+gloves, carefully slit open the protective jacket, remove the plastic disk,
+wash it if necessary, and insert it into another jacket. Obtaining a new
+jacket may mean destroying a perfectly good diskette, though. NOTE: Some
+brands of head cleaners come with a reusable jacket that is just right for this job.
+
+Be sure to keep your fingers off the recording surface at all times! Handle
+the plastic disk only by the edges or the central hub ring. Also make a
+mental note as to which side faces up. (The reinforcing ring is usually
+affixed to this side.)
+
+If the plastic disk is gummy, you will want to wash it carefully. Use a small
+amount of photographer's wetting agent to keep the water from leaving a
+residue. Allow the plastic disk to air dry.
+
+Once you have inserted the plastic disk inside a new jacket, attempt to
+initialize it. If you cannot initialize it, try turning the diskette over.
+You may have the wrong side up.
+
+If the diskette can be initialized, make a backup NOW!
+
+## 8.7 Recovering an Unclosed File
+
+An unclosed file is one whose file Suchtype is preceded by an asterisk in a
+directory listing (e.g., *SEQ, *PRG). Such files cannot be read normally.
+However, there is an undocumented read mode that will allow you to read an
+unclosed file. This is the M mode. The M stands for MODIFY. The way to open a
+file for a read normally looks like this:
+
+    SYNTAX:         OPEN 2, 8, 2, "file name,S,R"        (SEQ file)
+                    OPEN 2, 8, 2, "file name,P,R"        (PRG file)
+                    
+To read an unclosed file substitute, an M for the R in the OPEN statement like this:
+
+    SYNTAX:         OPEN 2, 8, 2, "file name,S,M"        (SEQ file)
+                    OPEN 2, 8, 2, "file name,P,M"        (PRG file)
+
+The file can now be read into the C64 and stored in RAM. There is one
+problem, though. You will have to display the incoming data bytes because an
+EOI will not be returned by the disk drive. Note that the last sector written
+to the diskette will contain an erroneous forward track and sector pointer.
+As a result, there is no realistic way to determine when you have read beyond
+the actual contents of the unclosed file itself. Watch the incoming data
+bytes carefully. Your read program should have an embedded breakpoint. When
+you think you've captured all of the data bytes, rewrite them to another
+diskette.
+
+Once you have the data safely stored on another diskette, use the techniques
+described at the end of Section 8.3 to restore the internal BASIC links if it
+was a PRG file.
+
+Don't forget to VALIDATE the diskette which has the unclosed file in the
+directory while you're at it. Recall that scratching an unclosed file poisons
+the BAM.
+
+## 8.8 Recovering from a Short New
+
+If you have inadvertently performed a short NEW on a diskette, there is more
+hope than you think. Recall that a short NEW only zeros out the BAM and
+sector 1 from track 18. Run the EDIT TRACK & SECTOR program on the diskette
+in question. Call up track 18, sector 1 and change the forward track and
+sector pointer from a 00, FF to a 12, 04.
+
+Next, load and list the directory. If your diskette contained more than eight
+active files, all but the first eight files will be displayed on the screen.
+(The first eight files have been lost for now.) Do not attempt to VALIDATE
+the diskette because the directory sectors will not be reallocated. Copy all
+of the remaining files onto a new diskette.
+
+If the first eight files are very important, you can attempt to recover them
+as well. However, it will not be easy! You must find the starting track and
+sector locations of these files yourself through a process of elimination.
+Begin by making a grid with a space for each sector on the diskette like this:
+
+                               TRACK
+                   1    2    3    4    5    6    7
+                +----+----+----+----+----+----+----+
+              0 |    |    |    |    |    |    |    |
+                +----+----+----+----+----+----+----+   |\
+              1 |    |    |    |    |    |    |    |---- \
+    SECTOR      +----+----+----+----+----+----+----+      >
+              2 |    |    |    |    |    |    |    |---- /
+                +----+----+----+----+----+----+----+   |/   
+              3 |    |    |    |    |    |    |    |
+                +----+----+----+----+----+----+----+
+                                |  |      
+                                |  |
+                              ---  ---
+                               \    /
+                                \  /
+                                 \/
+
+Next, VALIDATE the original diskette and then load and run the program DISPLAY A BLOCK AVAILABILITY MAP listed in Appendix C. Working from the display on the CRT, indicate on your chart which sectors are in use by other files. Once you have done this, you should see a blank area centered around
+track 18. This is where you lost files reside.
+
+Now, load and run the DISPLAY A CHAIN program. The first file probably starts
+on track 17, sector 0. Record the chain displayed to the screen on your
+chart. Once you have recorded the first chain, begin looking for the next one. It probably begins on an open space on track 17 or, if the first chain
+was a long one, on track 19, sector 0. Work outward from track 18 until you
+have located all eight missing files.
+
+Once you have the starting track and sector locations for the files, use the
+EDIT TRACK & SECTOR program to reconstruct track 18, sector 1. The tables and
+hex dumps from Chapter 4 can be used as a guide. Be sure to substitute the
+starting track and sector locations that you found and not the ones in this
+manual.
+
+Now copy the eight files onto another disk. Once this is done, take a break
+and meditate on the virtues of archival backups!
+                              
+## 8.9 Recovering from a Full New                           
+
+If you are reading this section in desperation, relax. It is already too
+late. However, if it dawns on you in the future that you are holding a blank
+diskette in your hand while the master that you were going to backup is being
+reformatted, don't PANIC! Attempt to regain your composure and pop the drive
+door open. At this point you don't care what the 1541 User's Manual says
+about opening the drive door when the red activity indicator is on. You are 
+losing one full track every time you hear the stepper motor click.
+
+Next attempt to make a backup copy of the diskette using the 1541 BACKUP
+program listed on page 162. (Please, try to remember which diskette you want
+to format this time.) Recall that formatting works from the outermost track
+(track 1) to the innermost track (track 35). If you threw the door in time
+track 18 will still be intact and so will most of your files. The DOS works
+outwards from track 18 when writing to a diskette. The outermost tracks were
+probably never in use.
+
+Now load and run the VALIDATE A DISKETTE program to assess the damage. Oftentimes all files are recovered.
+
+## Conclusion
+
+In short, recovering a damaged diskette is more art than science. The
+utilities that we have presented here can prove invaluable in time of need.
+When all is said and done, however, it is much easier to create errors than
+to pick up the pieces afterward.
 
 
 
-
-
------------------------------------------------------Page 174-----------------------------------------------------
+      
+-----------------------------------------------------Page 181-----------------------------------------------------
