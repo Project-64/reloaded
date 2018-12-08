@@ -6502,4 +6502,108 @@ Full Track 23 Error Source Annotation
 See the annotation for 23A.PAL. The BASIC driver loops to do all sectors on a
 given track.
 
------------------------------------------------------Page 140-----------------------------------------------------
+# CHAPTER 8 - GETTING OUT OF TROUBLE
+
+The best way to get out of trouble is to stay out of trouble in the first
+place! It is much easier to recover a lost file by digging out an archival
+copy than trying to recover it from a blown diskette. Need we remind you?
+BACKUP! BACKUP! BACKUP!
+
+However, since we feel that Murphy was a rash optimist, the likelihood of you
+always finding that backup copy is minimal, unless of course, you manage to
+recover that file on the diskette. Then, and only then, will the archival
+copy magically appear right where you thought you left it.
+
+Since you are reading this chapter, you probably have a problem and are in
+desperate need of help. Please read on.
+
+## 8.1 Unscratching a File
+
+Inadvertently scratching a file is by far the most common problem. As long as
+you have not written any new information to the diskette since you scratched
+that file, it can be recovered. Recall that when a file is scratched, it is
+not erased from the diskette. Only two things have happened:
+
+1. The file-type byte in the directory entry is set to $00.
+2. The sectors associated with that file are freed in the BAM.
+
+To unscratch a file, all you have to do is change the file-type byte back to
+its original value and VALIDATE the diskette to re-allocate the sectors.
+
+The programs VIRTUAL DIRECTORY and EDIT TRACK & SECTOR, which are listed in
+Appendix C, help you to do this. Here's how you should use these programs to
+recover a scratched file.
+
+STEP 1. Load and run the VIRTUAL DIRECTORY program on the diskette. The
+        directory will be displayed in groups of eight entries. Scratched
+        files are highlighted in reverse video. Each group constitutes a
+        different sector on track 18. Count the groups to determine which
+        group the scratched entry is in. Note not only which group the
+        scratched entry is in, but also whether it is in the first half or
+        the last half of the group. (One of the first four file entries or
+        one of the last four.)
+
+Consult the table below to determine the number of the sector containing the
+entry.
+
+      Group - Sector       Group - Sector       Group - Sector 
+    ------------------   ------------------   ------------------ 
+           1 - 18,1             7 - 18,2            13 - 18,3  
+           2 - 18,4             8 - 18,5            14 - 18,6  
+           3 - 18,7             9 - 18,8            15 - 18,9  
+           4 - 18,10           10 - 18,11           16 - 18,12 
+           5 - 18,13           11 - 18,14           17 - 18,15 
+           6 - 18,16           12 - 18,17           18 - 18,18 
+
+STEP 2. Load and run the EDIT TRACK & SECTOR program on the diskette with the
+        scratched file. When asked for the track and sector, enter track 18
+        and the sector number you read from the table. When prompted for the
+        starting byte, enter 00 if the scratched file entry was one of the
+        first four files in the group. Enter an 80 if the scratched file was
+        displayed among the last four in the group.
+
+STEP 3. When the hex dump of the half-sector is displayed, cursor over to the 
+        third column of hexadecimal numbers on the display. Next locate the 
+        name of the file in the ASCII display on the right-hand side of the
+        screen. Move the cursor down until it is on the same line as the
+        start of the file name. If you have done things correctly you should
+        be on a row labeled with a $00, $20, $40, $60, $80, $A0, $C0, or $E0.
+        The byte under the cursor should be a 00. This is the file-type byte.
+        The 00 indicates a scratched file. Type over the 00 value with the
+        value that corresponds to the correct file type as indicated below.
+
+       File Type            Value  
+    ----------------   ----------------
+          PRG                82
+          SEQ                81
+          REL                84
+          USR                83
+          DEL                80
+
+STEP 4. Hold down the SHIFT key and press the CLR/HOME key. This will 
+        terminate the edit mode. When asked whether to rewrite this track and
+        sector, press Y and the modified sector will be written to the
+        diskette in a few seconds.
+
+STEP 5. Load and list the directory to see if the file name now appears. If
+        it does not, you made a mistake and things may have gone from bad to
+        worse. Hopefully, the file will be listed.
+
+STEP 6. VALIDATE the diskette by entering in direct mode:
+
+    OPEN 15,8,15,"V0":CLOSE15
+
+If the drive stops and the error light is not flashing, everything has gone
+according to plan and the file has been recovered successfully. (If the
+VALIDATE command failed, see sections 8.2 and 8.3.)
+
+NOTE: It is a good idea to practice these steps on a test diskette before you
+attempt to recover your lost Accounts Receivable! To do this: SAVE a file to
+disk, SCRATCH it, and follow the steps outlined above.
+
+
+
+
+
+
+-----------------------------------------------------Page 174-----------------------------------------------------
