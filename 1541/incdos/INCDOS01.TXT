@@ -7967,9 +7967,134 @@ saving programs on a single diskette.
 
 ## 9.13 TOOLS FOR EXPLORATION
 
+To make your exploration of the 1541 easier we have developed two programs to
+assist you.
+
+a) Disk peek program
+
+This program allows you to look at a hex dump of any area of the 1541's RAM
+or ROM. This is a very useful tool for examining the contents of the 1541's
+RAM.
+
+b) Create a file program
+
+This program allows you to read out any area of the 1541's RAM or ROM and
+store the contents into a program file with any load address you choose. You
+can then load the file into your 64's memory and examine it using an extended
+machine language monitor such as SUPERMON.
+
+NOTE: Line 160 contains a special character #184 repeated 21 times. This
+character can be typed by holding down the Commodore logo key in the lower
+left corner and pressing the U key.
+
+1541 DISK PEEK
+
+    100 REM 1541 DISK PEEK
+    110 REM BY GERALD NEUFELD
+    120 C0=0:C2=2:C7=7:CA=10:F=15:CG=16:H0=48:HX=127
+    130 Z$=CHR$(0):N$=""
+    140 M$=" {RVS}    PRESS:  P TO PAUSE   Q TO QUIT {ROFF}"
+    150 PRINT"{CLR}"TAB(9)"PEEK OF 1541'S MEMORY"
+    160 PRINTTAB(9)"{#184 21}"
+    170 PRINTTAB(4)"  COPYRIGHT: G. NEUFELD,1983"
+    180 PRINT"{DOWN} ONE MOMENT PLEASE ...."
+    190 DIM HX$(255),H$(15)
+    191 FOR K=0 TO 9:H$(K)=CHR$(48+K):NEXT:FORK=10TO15:H$(K)=CHR$(55+K):NEXT
+    200 FORJ=0TOF:FORK=0TOF:HX$(J*16+K)=H$(J)+H$(K):NEXT:NEXT
+    210 PRINT"{HOME}{DOWN 2}"M$
+    220 PRINT"{DOWN} INPUT START ADDRESS IN HEXADECIMAL"
+    230 OPEN 15,8,15
+    240 PRINT"{DOWN} $0000":PRINT"{UP}";
+    250 INPUT H$
+    260 HL=C0:HH=C0:FORK=1TO2:C=ASC(MID$(H$,K))-H0:IFC>CATHENC=C-C7
+    270 IF C<C0 OR C>F THENPRINT"{UP 2}";:GOTO240
+    280 D=ASC(MID$(H$,K+2))-H0:IFD>CATHEND=D-C7
+    290 IF D<C0 OR D>F THENPRINT"{UP 2}";:GOTO240
+    300 HH=HH+C*CG^(C2-K):HL=HL+D*CG^(C2-K):NEXTK
+    310 PRINT"{UP}"TAB(6);
+    320 PRINT#15,"M-R"CHR$(HL)CHR$(HH)CHR$(8)
+    330 O$="":FOR K=C0TOC7:GET#15,A$:IF A$=N$THENA$=Z$
+    340 A=ASC(A$):E=AANDHX:E$=".":IFE>31ANDE<97THENE$=CHR$(E)
+    350 O$=O$+E$:PRINT" "HX$(ASC(A$));:NEXT:PRINT" {RVS}"O$
+    360 FL=0:HL=HL+8:IFHL>255THENHL=HL-256:HH=HH+1:FL=1:PRINTM$
+    370 IF HL=128 THEN FL=1:PRINTM$
+    380 PRINT" $"HX$(HH)HX$(HL);:IFFL=1THENPRINT:PRINT"{UP}";:GOTO250
+    390 GET A$:IF A$=""GOTO  320
+    400 IF A$="P"THENPRINT:PRINT"{UP}";:GOTO250
+    410 CLOSE15
+
+CREATE A FILE
+
+    10 PRINT"{CLR}{DOWN}"TAB(6)"DISK ROM TO FILE"
+    20 INPUT"{DOWN}START AT LOCATION (HEX) C100{LEFT 6}";A$
+    30 Z$=A$:GOSUB280:S=Z:IF ZF=1 GOTO 20
+    40 PRINT"{UP}"TAB(31)Z
+    50 INPUT"{DOWN}QUIT AT LOCATION (HEX)  FFFF{LEFT 6}";A$
+    60 Z$=A$:GOSUB280:Q=Z:IF ZF=1 GOTO 50
+    70 PRINT"{UP}"TAB(31)Z
+    80 INPUT"{DOWN}SAVE IN FILE NAMED  ROM 1541{LEFT 10}";F$
+    90 INPUT"{DOWN}WITH LOAD ADDRESS OF (HEX)  1100{LEFT 6}";A$
+    100 Z$=A$:GOSUB280:L=Z:IF ZF=1 GOTO 90
+    110 PRINT"{UP}"TAB(31)Z
+    120 OPEN 15,8,15,"I0"
+    130 OPEN 1,8,5,"@0:"+F$+",P,W"
+    140 INPUT#15,EN,EM$,ET,ES
+    150 IF EN>19 THEN PRINT"{DOWN}DISK ERROR"EN;EM$;ET;ES:CLOSE1:CLOSE15:STOP
+    160 PRINT"{DOWN 2}"
+    170 LH=INT(L/256):LL=L-256*LH
+    180 PRINT#1,CHR$(LL);CHR$(LH);
+    190 FOR K=S TO Q
+    200 KH=INT(K/256):KL=K-256*KH
+    210 PRINT#15,"M-R"CHR$(KL)CHR$(KH)
+    220 GET#15,A$:IF A$="" THEN A$=CHR$(0)
+    230 PRINT#1,A$;
+    240 PRINT"{UP}WORKING ON"K
+    250 NEXT
+    260 CLOSE1:CLOSE15:END
+    270 :
+    280 Z=0:ZF=0
+    290 IF LEN(Z$)>4 THEN ZF=1:PRINT"{DOWN}{RVS}HEX STRING TOO LONG":RETURN
+    300 IF LEN(Z$)<4 THEN ZF=1:PRINT"{DOWN}{RVS}HEX STRING TOO SHORT":RETURN
+    310 FOR K=1 TO 4
+    320 ZN=ASC(MID$(Z$,K))-48:IF ZN>9 THEN ZN=ZN-7
+    330 IF ZN<0 OR ZN>15 THEN ZF=1:PRINT"{DOWN}{RVS}BAD HEX CHARACTER":RETURN
+    340 Z = Z + ZN * 16^(4-K)
+    350 NEXT
+    360 RETURN
+
+HAVE FUN!
+
+### Late News
+
+In early 1984 Commodore began shipping the 1541 disk drives that contained a
+new $EOOO-$FFFF ROM. The part numbers of these ROMs are: original 901229-03
+revised 901229-05. The changes in the new ROM are:
+
+$E683           Eliminate JSR TO ITTERR($EA4E) to solve stack overflow
+$E68B           problems.
+
+$E780 to        Eliminate power-on boot of the utility loader to solve
+$E7A1           possible problems during initialization.
+
+$E9DC           Insert JMP to patch at $FF20.
+
+$EAA4           Insert JMP to patch at $EF10.
+
+$EBDB/DD/E0/E2  Change initialization of the serial bus.
+
+$FEE6           New ROM checksum.
+
+$FF10           New patch to change the initialization of the serial bus
+                during the power-up routine DSKINT.
+
+$FF20           New patch to the serial bus listen routine ACPTR.
+
+The ROM in the SX-64 has an additional change. The header block gap at $F58D
+has been changed from $08 to $09 to eliminate the difference in header gap
+size between the 4040 and SX-64.
 
 
 
 
 
------------------------------------------------------Page 199-----------------------------------------------------
+-----------------------------------------------------Page 216-----------------------------------------------------
