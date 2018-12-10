@@ -6559,7 +6559,7 @@ One of the difficulties in using the detailed ROM maps in Appendix B is
 locating the routine you want. This section summarizes the major IP routines
 and their entry points to help you find your way around.
 
-a) Initialization
+### a) Initialization
 
 When the disk drive is first switched on, the RESET line is held low. This
 causes the 6502 to do an indirect JMP via the vector at $FFFC to the
@@ -6587,7 +6587,7 @@ OVERVIEW OF INITIALIZATION
     $EBD2 |          Initialize serial bus         |
           +----------------------------------------+
 
-b) Main IP Idle Loop
+### b) Main IP Idle Loop
 
 Whenever the drive is inactive and the 6502 is in IP mode, the 6502 executes
 the code from $EBE7 to $EC9D looking for something to do.
@@ -6618,7 +6618,7 @@ OVERVIEW OF IP MODE IDLE LOOP ($EBE7-$EC9D)
     |    JMP to start of loop    |
     +--------------+-------------+
 
-c) Computer—Disk Drive Communications
+### c) Computer—Disk Drive Communications
 
 The routines that handle communication on the serial bus are localized in one
 small areaof ROM, from $E853 to $EA6E. The entry points for the major
@@ -6634,7 +6634,7 @@ $E909       |TALK       |Send data out on the serial bus
 $E9C9       |ACPTR      |Accept one byte of data from the serial bus
 $EA2E       |LISTEN     |Accept incoming data bytes from the serial bus
 
-d) Execution of Disk Commands
+### d) Execution of Disk Commands
 
 When the computer sends the 1541 a disk command, such as NEW, VERIFY, or
 SCRATCH, the command is stored temporarily in the command buffer ($0200
@@ -6669,7 +6669,7 @@ If no errors are encountered during the execution of a command, the routine
 is terminated with a JMP to the ENDCMD ($C194). If errors are encountered, .A
 is loaded with an error code, and the routine is aborted with a JMP to the command level error processing routine at $E645.
 
-e) File Management
+### e) File Management
 
 File management is a major function of the interface processor. As a result,
 there are many ROM routines that deal directly or indirectly with the
@@ -6883,7 +6883,7 @@ the buffer with the command you want there. Happy sleuthing!
 
 One of the difficulties in finding an FDC routine to do the job you want is finding your way through the detailed ROM maps in Appendix B. This section summarizes the major FDC routines and their entry points.
 
-a) Initialization
+### a) Initialization
 
 When the disk drive is first switched on, the reset line is pulsed lo. This
 causes the 6502 to RESET and it does an indirect JMP via the vector at $FFFC
@@ -6891,7 +6891,7 @@ to the initialization procedure at $EAA0. As part of the set up procedure,
 the variables and I/O chips for the FDC are initialized by the CNTINT routine
 ($F259-AF).
 
-b) Main FDC Idle Loop
+### b) Main FDC Idle Loop
 
 Every 10 milliseconds the 6522 timer generates an interrupt (IRQ) and the
 6502 begins to execute the main FDC loop looking for something to do. The
@@ -6955,7 +6955,7 @@ OVERVIEW OF MAIN FDC LOOP ($F2B0)
 At the end of this loop, or when the job has been completed, the timer
 interrupt is reenabled and the 6502 leaves FDC mode.
 
-c) Major FDC Entry Points
+### c) Major FDC Entry Points
 
 When in FDC mode the 6502 executes routines that directly control the
 operation of the disk drive. These include: turning the drive motor ON or
@@ -6989,7 +6989,7 @@ $FAC7       |FORMT      |Format blank diskette.
 Since the read, write and format routines are of particular interest, let's
 look at them in more detail.
 
-d) Read Data Block of Specified Sector
+### d) Read Data Block of Specified Sector
 
 Before the read job code ($80) is placed in the job queue, the IP puts the
 desired track and sector numbers into the header table as indicated below.
@@ -7030,7 +7030,7 @@ OVERVIEW OF THE FDC READ ROUTINE
     $F505  |    Exit, read was OK                |
            +-------------------------------------+
 
-e) Write Data Block of Specified Sector
+### e) Write Data Block of Specified Sector
 
 Before the write job code ($90) is placed in the job queue, the IP puts the
 desired track and sector numbers into the header table as indicated below.
@@ -7082,7 +7082,7 @@ OVERVIEW OF THE FDC WRITE ROUTINE
     $F5E6  |    Go back to verify it.            |
            +-------------------------------------+
 
-f) Format a Blank Diskette
+### f) Format a Blank Diskette
 
 The IP format routine at $C8C6 sets up a JMP $FAC7 instruction at $0600 and
 then puts an EXECUTE job code ($E0) into the job queue ($0003). On its next
@@ -7409,7 +7409,7 @@ diskette. Magnified many times, the head looks something like this:
 
 [record/play head diagram - currently omitted]()
 
-Write Mode:
+### Write Mode:
 
 In write mode an electric current passes through the coil. The current causes
 the head to become an electromagnet whose strength and polarity depends on
@@ -7434,7 +7434,7 @@ floppy diskette, the track becomes a series of bar magnets laid end to end.
 
 [writing data diagram - currently omitted]()
 
-Read mode:
+### Read mode:
 
 In read mode the moving magnetic areas on the surface of a diskette induce an
 electrical voltage in the head. Because of the nature of electromagnetic
@@ -7443,7 +7443,7 @@ the magnetic field is greatest. The maximum signal occurs where the magnetic
 fields change most rapidly. The signal from the head must, of course, be
 amplified and shaped before it is usable.
 
-Writing data to a diskette:
+### Writing data to a diskette:
 
 When data is being recorded onto a floppy diskette, the data is "clocked out"
 at a fixed rate. This permits an interesting recording scheme. The direction
@@ -7477,7 +7477,7 @@ of only 4300 bits/inch while the inner tracks are recorded at 6000 bits/inch.
 If the clock were not increased for the outer tracks, the bit density on the
 outermost track would fall to about 3500 bits/inch.
 
-Reading data from a diskette:
+### Reading data from a diskette:
 
 When data is being read from a floppy diskette, the data is "clocked in" at a
 fixed rate. A magnetic transition is interpreted as a "1" bit. The lack of a
@@ -7558,7 +7558,414 @@ STEP 12. Once all the data bytes have been written, switch to read mode by
 
 ## 9.10 Reading Data From a Diskette
 
+The diagrams below highlight the important components and waveforms involved
+in reading a GCR encoded byte of data.
 
+[read mode diagram - currently omitted]()
+
+To help clarify the reading process let's follow a byte of data as it is read
+from a diskette.
+
+STEP 1. The head is positioned to the appropriate track and the clock divisor
+        is set to the correct value for this track.
+
+STEP 2. The track is read until the correct sector header block is found.
+
+STEP 3. Wait for the sync mark at the start of the data block.
+
+STEP 4. As the track passes over the record/play head a stream of weak
+        electrical pulses is induced in the head. A pulse is induced whenever
+        the magnetic field changes its orientation. The pulse is amplified
+        and shaped (1).
+
+STEP 5. The stream of pulses from the shaper circuitry (1) is fed to the
+        CLEAR input of the 74LS193 hexadecimal counter (UF4) and to the
+        74LS02 (UE5) NOR gate. Whenever a pulse occurs, the hexadecimal
+        counter (UF4) and the divide by N counter (UE7) are cleared to a
+        count of zero. This ensures that the clock is always synchronized
+        with the incoming stream of pulses.
+
+STEP 6. Once the hexadecimal counter has been cleared, it begins to count up
+        the clock pulses it receives from the divide by 16 counter. QA (not
+        shown) is the 1's bit of the counter. QB (2) is the 2's bit of the
+        counter. QC (3) and QD (4) are the 4's and 8's bits, respectively.
+
+STEP 7. On each ground to +5 volt transition of QB (2), a bit is shifted into
+        the 74LS164 serial to parallel shift register (UD2). The bit that is
+        shifted in (5) is found by NORing the QC (3) and QD (4) lines of the
+        counter. Note that whenever a pulse clears the divide by 16 counter,
+        the next bit is read as a "1." If the counter has not been cleared
+        before the next ground to +5 volt transition of QB (2), the next bit
+        is read as a "0."
+
+STEP 8. Once 8 bits have been clocked into the shift register, the byte ready
+        line goes high. This sets the overflow flag in the 6502 to indicate
+        that it is time to read the data byte from the 6522.
+
+STEP 9. The 6502 reads the data byte from the 6522 and stores it in RAM.
+
+## 9.11 Summary of Bugs in DOS 2.6
+
+Over the years, various bugs have been reported in Commodore's disk operating
+systems. In some cases, the bugs have been real; in other cases, imaginary.
+This section summarizes our findings regarding the bugs in DOS 2.6. Please
+note that this information applies only to the 1541.
+
+1. Incorrect dummy data block produced during formatting:
+
+   During formatting, all the Commodore disk drives (except the old 2040's)
+   write out a dummy data block for each track and sector. On all the drives,
+   except the 1541, this dummy data block consists of 256 null bytes ($00).
+   On the 1541 the dummy data block consists of one $4B character followed by
+   255 $01 bytes. This is caused by an unnecessary INX instruction at $FC86.
+   If this byte were replaced by a NOP ($EA), the normal dummy data block
+   would be produced.
+
+   The difference in the dummy data blocks does not cause any real problems
+   and provides an easy way to identify a diskette formatted on the 1541.
+
+2. The save and replace command "@0":
+
+   Over the years numerous writers have advised Commodore owners not to use
+   the save and replace command because it contained a bug. Our study of the
+   ROM routines and a lot of testing has convinced us that the bug in the
+   replace command is a myth. There are, however, two situations in which the
+   use of the @ replacement command can cause problems:
+
+* a) Replacing an unclosed file, *SEQ, *PRG, etc:
+
+   When you replace a file, the new file is written to diskette first. Then
+   the DOS proceeds to trace through the file chain of the old file and marks
+   the sectors it finds as available-for-use in the BAM. If the old file was
+   unclosed, the track and sector links may be incorrect and some of the
+   blocks in a different active file on the diskette may be freed (see a more
+   detailed description of what happens in Section 2.5 on scratching a file).
+   If this happens, subsequent writing to the diskette will overwrite the
+   data in this file. This is the most likely cause of user complaints about
+   a bug in the save and replace command on the 2040 and 4040 drives. The
+   code at $C835 prevents this from happening on the 1541 drive.
+
+* b) Not enough space on disk:
+
+   When a file is replaced, the new file is written to diskette before the
+   old file is scratched. If there is not enough space on the disk for the
+   new copy of the file, the process aborts. When this occurs, the error
+   light will come on (72, DISK FULL). Usually, this makes people wonder if
+   something went wrong; so they VERIFY to be sure the file has been saved
+   correctly. The file verifies as OK. A check of the directory indicates no
+   unclosed files. However, the file may appear somewhat shorter than before.
+   This did not occur because your program has been compacted. Rather, it was
+   truncated by the DOS. It isn't all there! We hope you have a backup handy.
+   If not, you may still be able to recover your file. A printout of the BAM
+   and some quick work on editing the directory entry's starting track and
+   sector are in order. (See Chapter 8.) The sectors shown as unallocated
+   (free) in the BAM hold the only complete copy of your program, the
+   original version that is. The latter portions of the @ replacement version
+   of your program have been stored in disk WOM (Write Only Memory) by the
+   DOS. Bye, bye.
+
+3. The Block-Read (B-R) command:
+
+   This command has been replaced by the U1 command and with good reason. The
+   B-R command has two serious bugs that make it unusable on the 1541. The
+   use of this command is NOT RECOMMENDED! See Chapter 5 for the gory
+   details.
+
+4. The Block-Write (B-W) command:
+
+   This command has been replaced by the U2 command and with good reason
+   too.The B-W command is also unusable on the 1541. The use of this command
+   is NOT RECOMMENDED either. Chapter 5 again gives the scoop.
+
+5. The Block-Allocate (B-A) command:
+
+   Although this command seems to work correctly on other Commodore drives,
+   it does not work properly on the 1541. This command really has two
+   functions:
+
+* a) To allocate a free sector in the BAM:
+
+   When the track and sector specified in the block-allocate command is
+   free(not in use) in the BAM, the block allocate command should allocate
+   the block in the BAM. The B-A command appears to do this correctly on the
+   1541.
+
+* b) Find the next available track & sector:
+
+   If the track and sector specified in the block-allocate command is already
+   allocated (in use) in the BAM, the block allocate command should not
+   change the BAM in any way. It should return a 65, NO BLOCK error and
+   report the track and sector of the next available block in the BAM. This
+   feature of the B-A command was included to allow the programmer who is
+   creating his own random access files to determine the next free block that
+   he/she can use.
+
+   This feature of the B-A command does not work correctly on the 1541! The
+   command does return the track and sector of a free block all right, but
+   with a difference!
+
+1. It occasionally returns a sector on track 18. This should not happen
+   because track 18 is reserved for the directory.
+
+2. It ALLOCATES ALL THE BLOCKS on the track that it returns in the error
+   message in the BAM.
+
+   Because of these bugs, the use of the B-A command on the 1541 is NOT
+   RECOMMENDED. However, the CERTIFY A DISKETTE program listed in Chapter 5
+   does work. The reason for this is that this program stores a duplicate
+   copy of the BAM in C64 RAM which is later rewritten to the diskette. This
+   technique repairs the damage done by the B-A command.
+
+6. UJ: or U: command:
+
+   Commodore disk drives have traditionally used one or both of these
+   commands to enable the user to reset the drive (just as though the drive
+   were turned OFF and then ON again). Neither command works correctly on the
+   1541 drive. The drive goes on a trip to never-never land and must be
+   turned OFF and then ON again to recover from one of these commands. The
+   command "U:" is the one to use to reset the 1541.
+
+7. UI- command:
+
+   The 1541 manual indicates that this command is used to set the disk drive
+   to operate correctly with the VIC-20. Current 1541's work with a VIC-20,
+   period.
+
+### Summary
+
+Despite its flaws, the DOS in the 1541 is a remarkably efficient peripheral.
+The DOS programs for most other microcomputers are vastly inferior to DOS
+2.6; a little faster maybe, but not as smart. The support of relative file
+structures, read ahead buffering, and the underlying principles of
+asynchronous I/O make the 1541 an outstanding bargain in the world of
+microcomputing. These features are normally found only in multiuser or
+multiprocess operating systems.
+
+## 9.12 Write Incompatability with 4040
+
+Programs or data stored on a diskette formatted on a 1541 disk drive can be
+READ using a 2040 or 4040 disk drive. Conversely, a 1541 disk drive can READ
+a diskette formatted on either a 2040 or 4040 disk drive. However, these
+drives are not completely write compatible.
+
+This write-incompatibility problem appears to be caused by two things:
+
+1. Differences in the header gap length.
+2. Alignment problems (particularly with the 1541).
+
+Let's consider the differences in the header gap length first.
+
+### Differences in Header Gap Length
+
+The 2040 and 4040 drives use a header gap that is nine GCR bytes long while
+the 1541 uses a header gap that is only eight non-GCR bytes long. On this
+basis we would expect the header gaps to be 90 and 64 bits long respectively.
+However, when we use a bit-grabber to view the gap we find that the actual
+header gaps as recorded on disk are 100 bits for the 4040 and 92 bits for 
+the 1541. In read mode, this makes no difference. After reading the header
+bytes to check that this is the correct sector, all the drives simply wait
+for the next sync mark. The number of bytes in the header gap does not
+matter. Once the sync mark is over, the first character in the data block is
+read. This is the data block ID character. If it is not a $07, the DOS
+reports a 22 READ ERROR (data block not found).
+
+In write mode, however, the length of the header gap is important. After
+reading the header bytes to check that this is the correct sector, all the
+drives count off the bytes that make up the header gap. Once the correct
+number of bytes have been read, the drive flips to write mode and begins
+writing out the data block sync character. Since this is reputed to be an
+important aspect of the write incompatibility problem, let's examine what
+happens in some detail.
+
+The last part of the header gap and the start of the data block sync mark in
+a sector of a diskette that has just been formatted on a 1541 disk drive
+looks something like this:
+
+                     Sync mark
+    1541   xxxxxxxxxx111111111111111111111111111111111111--> 92 bits
+
+The last part of the header gap and the start of the data block sync mark in
+a sector of a diskette that has just been formatted on a 4040 disk drive
+looks something like this:
+
+                                           Sync mark
+    4040   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx111111111111--> 100 bits
+
+When a sector of a diskette that was ORIGINALLY FORMATTED ON A 4040/2040 disk
+drive is REWRITTEN ON A 1541, the result is as follows:
+
+    Original                                   Sync mark
+    4040   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx111111111111-->
+    Rewrite             Sync mark
+    1541     xxxxxxxxxx-11111111111111111111111111111111111-->
+                        Sync mark
+    Result   xxxxxxxxxx-111111111111111111111111111111111111-->
+
+NOTE: The "-" marks when the drive switches into write mode. A transient
+current appears to flow through the record/play head during this time
+interval.
+
+The original sync mark on the diskette has been completely overwritten by the
+new one. This sector can be read cleanly on any drive. It appears that a 1541
+drive should be able to write data onto a diskette that was originally
+formatted on a 4040 drive without causing any problems.
+
+When a sector of a diskette that was originally formatted on a 1541 disk
+drive is rewritten on a 4040/2040, the result is as follows:
+
+    Original       Sync mark
+    1541   xxxxxxxxxx-111111111111111111111111111111111111-->
+    Rewrite                  Sync mark
+    4040   xxxxxxxxxxxxxxxxx-111111111111111111111111111111-->
+                     Pseudo-sync     Sync mark
+    Result xxxxxxxxxx1111111-11111111111111111111111111111-->
+
+NOTE: The "-" marks when the drive switches into write mode. A transient
+current appears to flow through the record/play head during this time
+interval.
+
+In this case, the original sync mark on the diskette has NOT been completely
+overwritten by the new one. The start of the old sync mark is still there.
+What actually gets recorded at the start of the "new" sync mark depends on
+the speed of the drives, the polarity of the magnetic field used to record
+the original "1" at that spot on the diskette, and any transients that flow
+through the head as it switches into write mode.
+
+Before you read this next section, be sure that you understand Section 9.7 on
+the Recording Process.
+
+Let's take a look at an "exploded" view of that spot just before the new sync
+character is written. Remember, a "1" is not recorded as magnetization in a
+particular direction. It is simply a change in the direction. Now that you've
+got that straight, here is what that spot might look like.
+
+                +----+----+----+----+----+----+----+----+----+
+    Original    |N  S|S  N|N  S|S  N|N  S|S  N|N  S|S  N|N  S|
+                +----+----+----+----+----+----+----+----+----+
+                1    1    1    1    1    1    1    1    1
+
+Everything appears normal. Now let's write that sync mark.
+
+                +----+----+----+----+----+----+----+----+----+
+    Original    |N  S|S  N|N  S|S  N|N  S|S  N|N  S|S  N|N  S|
+    by a 1541   +----+----+----+----+----+----+----+----+----+
+
+
+    Replacement sync mark written   +----+----+----+----+----+
+    by a 4040                     ??|N  S|S  N|N  S|S  N|N  S|
+                                    +----+----+----+----+----+
+                                  ?? = effects of tansient currents
+
+                +----+----+----+----+----+----+----+----+----+
+    Result      |N  S|S  N|N  S|S ??|N  S|S  N|N  S|S  N|N  S|
+                +----+----+----+----+----+----+----+----+----+
+                1    1    1    1    1    1    1    1    1
+
+Everything worked out just fine. We have a clean sync mark and the sector can
+be read cleanly by either drive. However, suppose our 74LS74 flip-flop (UF6)
+had been in the opposite state or the speed of this drive did not exactly
+match this new one. What would happen? Take a look.
+
+                +----+----+----+----+----+----+----+----+----+
+    Original    |N  S|S  N|N  S|S  N|N  S|S  N|N  S|S  N|N  S|
+    by a 1541   +----+----+----+----+----+----+----+----+----+
+
+    Replacement sync mark written   +----+----+----+----+----+
+    by a 4040                     ??|S  N|N  S|S  N|N  S|S  N|
+                                    +----+----+----+----+----+
+                                  ?? = effects of tansient currents
+
+                +----+----+----+----+----+----+----+----+----+
+    Result      |N  S|S  N|N  S|S   ??  N|N  S|S  N|N  S|S  N|
+                +----+----+----+----+----+----+----+----+----+
+                1    1    1    1    ?0   1    1    1    1
+
+Argh! Potential problems. Because the magnetic polarity of the new "1"
+happened to match the polarity of the existing zone, we appear to have just
+created a double-length magnetic zone. If we have, this will be interpreted
+as a "0" bit. From a study of the bits actually recorded on disk, this
+appears to happen every time! If there are more than 10 preceeding "1" bits,
+this single "0" will be interpreted as the end of the sync mark and the drive
+will interpret the rest of the sync bits as data. Since this will definitely
+NOT be decoded as a $07 byte, the drive errs out with a 22 READ ERROR.
+
+Since the header gaps only differ in length by 8 bits, we should always have
+only seven 1's in the pseudo-sync. An examination of the bits recorded on the
+disk seems to support this conclusion. As a further test we did some testing
+using recently aligned drives. We found surprisingly few errors when we use a
+4040 disk drive to rewrite all non-directory sectors on a 1541 formatted
+disk. On a freshly formatted diskette, we found no errors at all after
+rewriting over 2400 sectors. If the sectors of the 1541 diskette had been
+rewritten several times using a 1541 before they were rewritten on a 4040, we
+did start to find a few errors. However, the error count was low. Usually
+less than two errors when rewriting all 640 sectors and these tended to occur
+in two specific areas: on tracks 25 or 26 or on tracks 31 or 32. These
+findings lead us to conclude that the differences in header gap length is NOT
+the cause of write compatibility problems between the 1541 and 4040 disk
+drives.
+
+If for some reason you want to reduce the difference in header gap further
+when writing onto a 1541 formatted diskette using a 4040 drive, enter the
+following magic incantation in either program or immediate mode.
+
+    OPEN 15,8,15
+    PRINT#15, "M-W"CHR$(157)CHR$(16)CHR$(1)CHR$(8)
+    CLOSE 15
+
+This will change the header gap length of the 4040 drive from 9 to 8 GCR
+bytes (actual length = 90 bits). You can now write to the 1541 diskette with
+little fear of damage. However, you must remember to reset your 4040 drive
+(turn it off or issue a UJ command) before you insert one of your 4040
+formatted diskettes. Otherwise, a magnetic plague will develop among your
+4040 formatted diskettes. Don't say you weren't warned!
+
+### Head Positioning Problems
+
+Since we encountered so few errors using properly aligned drives, we feel
+that most of the reported problems of incompatibilities are the result of
+head positioning errors.
+
+If a sector is rewritten on a different drive and the position of the
+read/write head is different, the new data will not completely replace the
+old as indicated below.
+
+                +-----------+---------------------------------+
+    Original    |N         S|S                               S|
+    on one      |N    1    S|S    1                     0    S|
+    drive       |N         S|S                               S|
+                +-----------+---------------------------------+
+
+                +---------------------------------+-----------+
+    Rewritten   |S                               N|N         S|
+    on another  |S    1           0              N|N    1    S|
+    drive       |S                               N|N         S|
+                +---------------------------------+-----------+
+
+                +-----------+---------------------------------+
+    Original    |N         S|S    1                     0    S|
+                +-----------+---------------------+-----------+
+    Rewritten   |S                               N|N         S|
+    on another  |S    1           0              N|N    1    S|
+    drive       |S                               N|N         S|
+                +---------------------------------+-----------+
+
+When this sector is read on the original drive, the head will pick up both
+the new signal and the old signal. The relative strengths of these two
+signals depend on the amount of the original signal remaining. If the two
+drives are sufficiently different, the read signal will be garbled and
+produce an abundance of 22 and 23 READ ERROR'S.
+
+### Summary
+
+In conclusion, although there is a difference in header gap size between the
+1541 and the 4040 drives, this does NOT appear to be the cause of write
+incompatibility problems. Most complaints about the write incompatibilities
+of various disk drives are probably due to problems in head positioning.
+Further evidence for this is the fact that some schools are experiencing
+similar difficulties when students use several different 1541 drives for
+saving programs on a single diskette.
+
+## 9.13 TOOLS FOR EXPLORATION
 
 
 
