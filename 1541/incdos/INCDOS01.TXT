@@ -1135,7 +1135,7 @@ indicates the layout of the tracks on a formatted diskette.
 
 [tracks layout diagram - currently omitted]()
 
-[sectors layout diagram - corrently omitted]()
+[sectors layout diagram - currently omitted]()
 
 Although there are only 35 tracks, the stepper motor can position the
 read/write head to more than 70 different positions. This might seem to imply
@@ -7395,6 +7395,171 @@ However, it may be possible to devise a protection scheme in which the
 unreadable except by a specialized routine like this.
 
 ## 9.7 The Recording Process
+
+A floppy diskette consists of a circular piece of plastic. It is coated on
+both sides with a thin layer of magnetic particles, usually particles of iron
+oxide. Each particle is made up of a large number of extremely small atomic
+magnets called "magnetic domains." When a floppy diskette is new, these
+magnetic domains are oriented randomly and the surface is unmagnetized.
+
+The record/play head consists of a coil of wire wrapped around a ring of iron
+or other magnetic material. A small segment of the ring is missing. This is
+the "gap." The gap is the part that comes in contact with the surface of the
+diskette. Magnified many times, the head looks something like this:
+
+[record/play head diagram - currently omitted]()
+
+Write Mode:
+
+In write mode an electric current passes through the coil. The current causes
+the head to become an electromagnet whose strength and polarity depends on
+the amount and direction of the electric current. The gap in the ring
+interrupts the magnetic field and causes it to flare outwards. If the gap is
+in contact with the surface of the floppy diskette, some of the magnetic
+domains on the surface shift position and line up with the magnetic field of
+the head. Some of these magnetic domains retain their new orientation even
+after leaving the vicinity of the gap, i.e., the surface of the diskette has
+become magnetized.
+
+[write mode diagram - currently omitted]()
+
+The amount and direction of the current flowing through the coil determines
+the strength and polarity of the electromagnet. The more current, the
+stronger the electromagnet, and the greater the magnetization of the surface
+of the diskette. In audio recording, the amount of current flowing through
+the coil fluctuates to match the changing audio signal. In digital recording,
+there are only two possible currents, full current in one direction or full
+current in the other direction. When data is recorded onto the surface of a
+floppy diskette, the track becomes a series of bar magnets laid end to end.
+
+[writing data diagram - currently omitted]()
+
+Read mode:
+
+In read mode the moving magnetic areas on the surface of a diskette induce an
+electrical voltage in the head. Because of the nature of electromagnetic
+induction, the maximum induced voltage is NOT produced by the regions where
+the magnetic field is greatest. The maximum signal occurs where the magnetic
+fields change most rapidly. The signal from the head must, of course, be
+amplified and shaped before it is usable.
+
+Writing data to a diskette:
+
+When data is being recorded onto a floppy diskette, the data is "clocked out"
+at a fixed rate. This permits an interesting recording scheme. The direction
+of the current flowing through the head changes only when a "1" bit is to be
+recorded. Zeros are represented by the absence of a transition at a
+particular location. The diagram below represents what is actually recorded
+on a diskette.
+
+    --+----+---------+--------------+---------+----+--
+     N|N  S|S       N|N            S|S       N|N  S|S
+    --+----+---------+--------------+---------+----+--
+      1    1    0    1    0    0    1    0    1    1
+
+Note that the data recorded onto a diskette is not divided into bytes. There
+is just one continuous stream of bits. In order to know where to begin to
+read or write bits, we need some special identifying mark. This is the
+function of the SYNC mark, a string of 10 or more 1's in a row. The GCR code
+(see Chapter 7) is designed so that no combination of bytes can produce more
+than eight "1" bits in a row. This guarantees the uniqueness of the sync
+mark.
+
+The 1541 records between 4000 and 6000 magnetic zones (bits) per inch. Since
+the diskette rotates at a constant angular velocity (300 rpm), you may wonder
+how Commodore manages to get more bits on the outer tracks than the inner
+ones. The 1541 manages this bit of magic by clocking out the data at
+different rates depending on the track. On the longer outer tracks, the data
+is clocked out faster than for an inner track (see table in Chapter 3).
+However, the increase in clock rate is not really proportional to the
+increase in track length. This means that the outer tracks have a bit density
+of only 4300 bits/inch while the inner tracks are recorded at 6000 bits/inch.
+If the clock were not increased for the outer tracks, the bit density on the
+outermost track would fall to about 3500 bits/inch.
+
+Reading data from a diskette:
+
+When data is being read from a floppy diskette, the data is "clocked in" at a
+fixed rate. A magnetic transition is interpreted as a "1" bit. The lack of a
+signal when data is expected is interpreted as a "0" bit. Since the speed of
+the drive is not absolutely constant, we can run into problems if there are
+too many "0" (no signal) bits in a row. Commodore's GCR code is designed so
+that no GCR byte, or combination of GCR bytes, ever contains more than two
+consecutive "0" bits. As a further precaution, the clock is zeroed (cleared)
+every time a "1" bit is read. This re-synchronizes the clock to the bit
+stream and prevents small fluctuations in the speed of the drive from causing
+read errors.
+
+## 9.8 Block Diagram of the 1541
+
+This block diagram of the 1541 electronics emphasizes the components involved
+in reading and writing data.
+
+[1541 block diagram - currently omitted]()
+
+The divide-by-N counter determines the actual rate at which bits are read or
+written. For tracks 1-17 the clock divisor is 13, for tracks 18-24 it is 14,
+for tracks 25-30 it is 15, and for tracks 31-35 it is 16.
+
+## 9.9 Writing Data to a Diskette
+
+The diagrams below highlight the important components and waveforms involved
+in the writing of a GCR encoded data byte to disk.
+
+[write mode diagram - currently omitted]()
+
+To help clarify the recording process let's follow a byte of data (10100110)
+as it is written to a diskette.
+
+STEP 1. The 6502 converts the header block ID ($07), the 256 data bytes, the
+        data block checksum, and two null bytes into 325 GCR encoded bytes.
+        
+STEP 2. The head is positioned to the appropriate track and the clock divisor 
+        is set to the correct value for this track.
+
+STEP 3. The track is read until the correct sector header block is found.
+        Wait out the header gap.
+
+STEP 4. Switch to write mode by ANDing the contents of the 6522's peripheral
+        control register (PCR) with $1F, ORing the result with $C0, and
+        storing the final result back in the PCR.
+
+STEP 5. Write out five $FF characters as the data block sync mark.
+
+STEP 6. Transfer the first 8-bit byte of the GCR encoded data to the data
+        lines (D0-D7) of the 6522 PIA.
+
+STEP 7. Since Port A of the 6522 is configured as an output port, the data
+        appears on the Port A lines PA0 to PA7. This transfers the byte to
+        the 74LS165 (UD3) parallel to serial shift register.
+
+STEP 8. The bits are clocked out of the shift register (2) whenever the QB
+        line (1) of the 74LS193 hexadecimal counter (UF4) makes a transition
+        from ground to +5 volts.
+
+STEP 9. The bit stream from the shift register (2) is presented to the clock
+        input of the 74LS74 flip flop (UF6). The output of this flip flop (3)
+        changes state whenever the bit stream (2) makes a transition from
+        ground to +5 volts.
+
+STEP 10. The output of the flip flop (3) is amplified and sent to the
+         record/play head of the drive. This causes the magnetic zones to be
+         written onto the surface of a diskette. Note that the direction of
+         the electric current, and hence the direction of magnetization,
+         changes only when a "1" is to be written.
+
+STEP 11. Once all 8 bits have been clocked out of the shift register, the
+         byte ready line goes high. This sets the overflow flag in the 6502
+         to indicate that it is time to send the next data byte to the 6522.
+
+STEP 12. Once all the data bytes have been written, switch to read mode by
+         ORing the contents of the 6522's peripheral control register (PCR)
+         with $E0 and storing the result back in the PCR.
+
+## 9.10 Reading Data From a Diskette
+
+
+
 
 
 
