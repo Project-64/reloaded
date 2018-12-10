@@ -6566,26 +6566,18 @@ causes the 6502 to do an indirect JMP via the vector at $FFFC to the
 initialization procedure at $EAA0. The main features of the initialization
 process are shown below.
 
-OVERVIEW OF INITIALIZATION
-:----------------------------------------------------------------------------
+#### OVERVIEW OF INITIALIZATION
 
-          +----------------------------------------+
-    $EAA0 |          Test zero page RAM            |
-          +----------------------------------------+
-    $EAC9 |          Do checksum test of ROM's     |
-          +----------------------------------------+
-    $EAF0 |          Test remainder of RAM         |
-          +----------------------------------------+
-    $EB22 |          Initialize I/O chips          |
-          +----------------------------------------+
-    $EB4B |          Set up buffer tables          |
-          +----------------------------------------+
-    $EB87 |          Set up buffer pointers        |
-          +----------------------------------------+
-    $EBC2 |          JSR to initialize FDC         |
-          +----------------------------------------+
-    $EBD2 |          Initialize serial bus         |
-          +----------------------------------------+
+Address  | Function
+:------- |:----------------------------------------------------------------
+$EAA0    |Test zero page RAM    
+$EAC9    |Do checksum test of ROM's
+$EAF0    |Test remainder of RAM 
+$EB22    |Initialize I/O chips  
+$EB4B    |Set up buffer tables  
+$EB87    |Set up buffer pointers
+$EBC2    |JSR to initialize FDC 
+$EBD2    |Initialize serial bus 
 
 ### b) Main IP Idle Loop
 
@@ -6593,8 +6585,7 @@ Whenever the drive is inactive and the 6502 is in IP mode, the 6502 executes
 the code from $EBE7 to $EC9D looking for something to do.
 
 
-OVERVIEW OF IP MODE IDLE LOOP ($EBE7-$EC9D)
-:----------------------------------------------------------------------------
+#### OVERVIEW OF IP MODE IDLE LOOP ($EBE7-$EC9D)
 
     +----------------------------+  YES             Parse and execute
     |   Is the command-waiting   |<----->          the waiting command
@@ -6616,7 +6607,7 @@ OVERVIEW OF IP MODE IDLE LOOP ($EBE7-$EC9D)
                    | No
     +--------------+-------------+
     |    JMP to start of loop    |
-    +--------------+-------------+
+    +----------------------------+
 
 ### c) Computer—Disk Drive Communications
 
@@ -6626,9 +6617,7 @@ routines are summarized below.
 
 Entry       | Routine   | Function
 :----------:|:---------:|:-----------------------------------------
-$E853       |ATNIRQ     |An IRQ is generated when the computer sets the ATN
-            |           |line of the serial bus low. Branch to here from IRQ
-            |           |handler to set attetion pending flag.
+$E853       |ATNIRQ     |An IRQ is generated when the computer sets the ATN line of the serial bus low. Branch to here from IRQ handler to set attetion pending flag.
 $E85B       |ATNSRV     |Service an ATN signal on the serial bus
 $E909       |TALK       |Send data out on the serial bus
 $E9C9       |ACPTR      |Accept one byte of data from the serial bus
@@ -6647,21 +6636,20 @@ the command. If the command is correct, a JMP is made to the appropriate ROM
 routine. The table below summarizes the various disk commands and their entry
 points.
 
-Entry       | Command         | Effect
-:----------:|:---------------:|:-----------------------------------------
-$ED84       |V  VALIDATE      |Create a new BAM based on the directory.
-$D005       |I  INITIALIZE    |Initialize BAM by reading from disk.
-$C8C1       |D  DUPLICATE     |Make a backup of a disk (not on 1541).
-$CAF8       |M  MEMORY-OP     |Perform a memory operation (M-R, M-W, M-E).
-$CC1B       |B  BLOCK-OP      |Perform a block operation (B-P, B-A, B-F,
-            |                 |etc.).
-$CB5C       |U  USER JMP      |Execute user routines (U0, U1, U2, etc.).
-$E207       |P  POSITION      |Position to record in relative file.
-$E7A3       |&  UTIL LDR      |Load routine in disk RAM and execute it.
-$C8F0       |C  COPY          |Copy a file (single disk only on 1541).
-$CA88       |R  RENAME        |Rename a file in the disk directory.
-$C823       |S  SCRATCH       |Scratch a file in the directory.
-$EE0D       |N  NEW           |Format a diskette (short and full).
+Entry      | Command        | Effect
+:---------:|:--------------:|:-----------------------------------------
+$ED84      |V  VALIDATE     |Create a new BAM based on the directory.
+$D005      |I  INITIALIZE   |Initialize BAM by reading from disk.
+$C8C1      |D  DUPLICATE    |Make a backup of a disk (not on 1541).
+$CAF8      |M  MEMORY-OP    |Perform a memory operation (M-R, M-W, M-E).
+$CC1B      |B  BLOCK-OP     |Perform a block operation (B-P, B-A, B-F, etc.).
+$CB5C      |U  USER JMP     |Execute user routines (U0, U1, U2, etc.).
+$E207      |P  POSITION     |Position to record in relative file.
+$E7A3      |&  UTIL LDR     |Load routine in disk RAM and execute it.
+$C8F0      |C  COPY         |Copy a file (single disk only on 1541).
+$CA88      |R  RENAME       |Rename a file in the disk directory.
+$C823      |S  SCRATCH      |Scratch a file in the directory.
+$EE0D      |N  NEW          |Format a diskette (short and full).
 
 For more details on these routines see Appendix B.
 
@@ -6731,19 +6719,19 @@ normally have three parts:
 
 1. A Setup Section
 
-   This section normally consists of one or more memory-write (M-W) commands
-   to poke any required setup values into the 1541's RAM memory.
+This section normally consists of one or more memory-write (M-W) commands
+to poke any required setup values into the 1541's RAM memory.
 
 2. A Section to Execute the Routine
 
-   This section normally consists of one memory-execute (M-E) command to
-   force the 1541's microprocessor to execute the ROM routine.
+This section normally consists of one memory-execute (M-E) command to
+force the 1541's microprocessor to execute the ROM routine.
 
 3. An Information Retrieval Section
 
-   This section normally consists of one or more memory-read (M-R) commands
-   to peek the results of the routine out of the 1541's RAM for use by your
-   program.
+This section normally consists of one or more memory-read (M-R) commands
+to peek the results of the routine out of the 1541's RAM for use by your
+program.
 
 Let's take a look at a typical application of this technique.
 
@@ -6767,7 +6755,8 @@ we find that this routine starts at $D005. Back to Appendix B. Eureka! At
 $D075 we find the routine NFCALC. A bit of disassembly indicates that this
 routine probably needs very little setup to calculate the number of blocks
 free and that it stores the lo-byte of the count in NDBL ($02FA) and the hi
-byte in NDBH ($02FC). Before we set up an elaborate program, let's check out these RAM locations using a test program like this:
+byte in NDBH ($02FC). Before we set up an elaborate program, let's check out
+these RAM locations using a test program like this:
 
     10 OPEN 15,8,15,"I"
     20 GOSUB 120:REM CHECK DISK STATUS
@@ -6811,13 +6800,10 @@ execute technique.
 After a bit of disassembly we know what set-up is required:
 
 1. The routine expects to find four normal bytes stored in RAM from $52-$55.
-
 2. The pointer at $30/31 should point to the start of where the five GCR
    bytes that result from the conversion are to be stored. We'll use $0300-
    $0304.
-   
 3. The GCR pointer at $34 should be $00.
-
 4. The entry point for the routine is definitely $F6D0.
 
 Now that we know what we have to do, let's set up the program.
@@ -6881,7 +6867,9 @@ the buffer with the command you want there. Happy sleuthing!
 
 ## 9.5 Major FDC Routines
 
-One of the difficulties in finding an FDC routine to do the job you want is finding your way through the detailed ROM maps in Appendix B. This section summarizes the major FDC routines and their entry points.
+One of the difficulties in finding an FDC routine to do the job you want is
+finding your way through the detailed ROM maps in Appendix B. This section
+summarizes the major FDC routines and their entry points.
 
 ### a) Initialization
 
@@ -6897,8 +6885,7 @@ Every 10 milliseconds the 6522 timer generates an interrupt (IRQ) and the
 6502 begins to execute the main FDC loop looking for something to do. The
 main features of this loop are summarized below.
 
-OVERVIEW OF MAIN FDC LOOP ($F2B0)
-:--------------------------------
+#### OVERVIEW OF MAIN FDC LOOP ($F2B0)
 
     +-------------------------------+   No               +-----+
     |    Any jobs in job queue?     |-------->   JMP to  | END |
@@ -6979,11 +6966,9 @@ $F56E       |WRIGHT     |Write out data block of specified sector.
 $F691       |VRFY       |Read back data bytes into five GCR bytes.
 $F6D0       |PUT4GB     |Convert four data bytes into five GCR bytes.
 $F78F       |BINGCR     |Convert entire data buffer into GCR write image.
-$F7E6       |GET4GB     |Convert five GCR bytes into four data bytes. Convert
-            |           |GCR image of data block into normal data.
+$F7E6       |GET4GB     |Convert five GCR bytes into four data bytes. Convert GCR image of data block into normal data.
 $F8E0       |GCRNIN     |Convert GCR image of data block into normal data.
-$F934       |CONHDR     |Convert header into a GCR search image. End of idle
-            |           |loop to control drive & stepper motor.
+$F934       |CONHDR     |Convert header into a GCR search image. End of idle loop to control drive & stepper motor.
 $FAC7       |FORMT      |Format blank diskette.
 
 Since the read, write and format routines are of particular interest, let's
@@ -7011,24 +6996,16 @@ job request. If necessary, it turns on the drive motor, waits for it to get
 up to speed, and moves the head to the proper track. It then executes the
 read routine outlined below:
 
-OVERVIEW OF THE FDC READ ROUTINE
-:----------------------------------------------------------------------------
+#### OVERVIEW OF THE FDC READ ROUTINE
 
-           +-------------------------------------+
-    $F4D1  |    Find correct sector              |
-           +-------------------------------------+
-           |    Read data: first 256 into the    |
-    $F4D4  |    data buffer and the rest into    |
-           |    the overflow buffer              |
-           +-------------------------------------+
-    $F4ED  |    Convert GCR to normal            |
-           +-------------------------------------+
-    $F4F0  |    Check data block ID              |
-           +-------------------------------------+
-    $F4FB  |    Check data checksum              |
-           +-------------------------------------+
-    $F505  |    Exit, read was OK                |
-           +-------------------------------------+
+Address  | Function
+:------- |:----------------------------------------------------------------
+$F4D1    |Find correct sector
+$F4D4    |Read data: first 256 into the data buffer and the rest into the overflow buffer
+$F4ED    |Convert GCR to normal
+$F4F0    |Check data block ID
+$F4FB    |Check data checksum
+$F505    |Exit, read was OK
 
 ### e) Write Data Block of Specified Sector
 
@@ -7052,35 +7029,22 @@ finds the job request. If necessary, it turns on the drive motor, waits for
 it to get up to speed, and moves the head to the proper track. It then
 executes the write routine outlined below:
 
-OVERVIEW OF THE FDC WRITE ROUTINE
-:----------------------------------------------------------------------------
+#### OVERVIEW OF THE FDC WRITE ROUTINE
 
-           +-------------------------------------+
-    $F575  |    Calculate checksum.              |
-           +-------------------------------------+
-    $F57A  |    Test if write protect on.        |
-           +-------------------------------------+
-    $F586  |    Convert buffer to GCR.           |
-           +-------------------------------------+
-    $F589  |    Find correct sector.             |
-           +-------------------------------------+
-    $F58C  |    Wait out header gap.             |
-           +-------------------------------------+
-           |    Switch to write mode and         |
-    $F594  |    write out five $FF's as sync.    |
-           +-------------------------------------+
-    $F5B1  |    Write out overflow buffer.       |
-           +-------------------------------------+
-    $F5BF  |    Write out data buffer.           |
-           +-------------------------------------+
-    $F5CC  |    Switch to read mode.             |
-           +-------------------------------------+
-    $F5D9  |    Convert GCR back to 8-bit.       |
-           +-------------------------------------+
-    $F5DC  |    Change job code to VERIFY.       |
-           +-------------------------------------+
-    $F5E6  |    Go back to verify it.            |
-           +-------------------------------------+
+Address  | Function
+:------- |:----------------------------------------------------------------
+$F575    |Calculate checksum.
+$F57A    |Test if write protect on.
+$F586    |Convert buffer to GCR.
+$F589    |Find correct sector.
+$F58C    |Wait out header gap.
+$F594    |Switch to write mode and write out five $FF's as sync.
+$F5B1    |Write out overflow buffer.
+$F5BF    |Write out data buffer.
+$F5CC    |Switch to read mode.
+$F5D9    |Convert GCR back to 8-bit.
+$F5DC    |Change job code to VERIFY.
+$F5E6    |Go back to verify it.
 
 ### f) Format a Blank Diskette
 
@@ -7090,48 +7054,28 @@ pass through the idle loop the FDC finds the execute job code, executes the
 code at $0600, and jumps to the formatting routine outlined below.
 
 
-OVERVIEW OF THE FDC FORMATTING ROUTINE
-:----------------------------------------------------------------------------
+#### OVERVIEW OF THE FDC FORMATTING ROUTINE
 
-           +-------------------------------------+
-    $FAC7  |    Check if this is first entry.    |
-           |    If not, branch to $FAF5.         |
-           +-------------------------------------+
-    $FACB  |    Do bump to track #1 (CLUNK!)     |
-           +-------------------------------------+
-    $FAE3  |    Initialize error count and       |
-           |    bytes around track. Exit.        |
-           +-------------------------------------+
-    $FAF5  |    Check if on right track.         |
-           +-------------------------------------+
-    $FB00  |    Check for write protect tab.     |
-           +-------------------------------------+
-    $FB0C  |    Erase track with sync.           |
-           +-------------------------------------+
-    $FB0F  |    Write half of track with sync    |
-           |    and other half with non-sync.    |
-           +-------------------------------------+
-    $FB35  |    Time sync & non-sync parts.      |
-           +-------------------------------------+
-    $FB7D  |    Compare times and calculate      |
-           |    how long tail gaps should be.    |
-           +-------------------------------------+
-    $FC36  |    Create images of headers.        |
-           +-------------------------------------+
-    $FC86  |    Create dummy data block.         |
-           +-------------------------------------+
-    $FC8E  |    Convert headers to GCR.          |
-           +-------------------------------------+
-    $FC9E  |    Convert data block to GCR.       |
-           +-------------------------------------+
-    $FCAA  |    Write out sectors in sequence.   |
-           +-------------------------------------+
-    $FD24  |    Go to read mode and verify.      |
-           +-------------------------------------+
-    $FD8B  |    All sectors OK; do next track.   |
-           +-------------------------------------+
-    $FD96  |    All tracks done; exit.           |
-           +-------------------------------------+
+Address  | Function
+:------- |:----------------------------------------------------------------
+$FAC7    |Check if this is first entry. If not, branch to $FAF5.
+$FACB    |Do bump to track #1 (CLUNK!)
+$FAE3    |Initialize error count and bytes around track. Exit.
+$FAF5    |Check if on right track.
+$FB00    |Check for write protect tab.
+$FB0C    |Erase track with sync.
+$FB0F    |Write half of track with sync and other half with non-sync.
+$FB35    |Time sync & non-sync parts.
+$FB7D    |Compare times and calculate how long tail gaps should be.
+$FC36    |Create images of headers.
+$FC86    |Create dummy data block.
+$FC8E    |Convert headers to GCR.
+$FC9E    |Convert data block to GCR. 
+$FCAA    |Write out sectors in sequence.
+$FD24    |Go to read mode and verify.
+$FD8B    |All sectors OK; do next track.
+$FD96    |All tracks done; exit.
+
 
 ## 9.6 Using the FDC Routines
 
@@ -7258,7 +7202,6 @@ We have to use a two step process:
 1. Use a memory-write command to store a machine language routine (it does
    the setup and then a JMP to $F969) into the start of one of the buffers
    (we'll use buffer -0 at $0300).
-
 2. Force the 6502, while in FDC mode, to execute our routine by putting a
    JUMP or EXECUTE job code in the appropriate spot in the job queue (we'll
    put a JUMP code into $0000).
@@ -7511,50 +7454,20 @@ in the writing of a GCR encoded data byte to disk.
 To help clarify the recording process let's follow a byte of data (10100110)
 as it is written to a diskette.
 
-STEP 1. The 6502 converts the header block ID ($07), the 256 data bytes, the
-        data block checksum, and two null bytes into 325 GCR encoded bytes.
-        
-STEP 2. The head is positioned to the appropriate track and the clock divisor 
-        is set to the correct value for this track.
-
-STEP 3. The track is read until the correct sector header block is found.
-        Wait out the header gap.
-
-STEP 4. Switch to write mode by ANDing the contents of the 6522's peripheral
-        control register (PCR) with $1F, ORing the result with $C0, and
-        storing the final result back in the PCR.
-
-STEP 5. Write out five $FF characters as the data block sync mark.
-
-STEP 6. Transfer the first 8-bit byte of the GCR encoded data to the data
-        lines (D0-D7) of the 6522 PIA.
-
-STEP 7. Since Port A of the 6522 is configured as an output port, the data
-        appears on the Port A lines PA0 to PA7. This transfers the byte to
-        the 74LS165 (UD3) parallel to serial shift register.
-
-STEP 8. The bits are clocked out of the shift register (2) whenever the QB
-        line (1) of the 74LS193 hexadecimal counter (UF4) makes a transition
-        from ground to +5 volts.
-
-STEP 9. The bit stream from the shift register (2) is presented to the clock
-        input of the 74LS74 flip flop (UF6). The output of this flip flop (3)
-        changes state whenever the bit stream (2) makes a transition from
-        ground to +5 volts.
-
-STEP 10. The output of the flip flop (3) is amplified and sent to the
-         record/play head of the drive. This causes the magnetic zones to be
-         written onto the surface of a diskette. Note that the direction of
-         the electric current, and hence the direction of magnetization,
-         changes only when a "1" is to be written.
-
-STEP 11. Once all 8 bits have been clocked out of the shift register, the
-         byte ready line goes high. This sets the overflow flag in the 6502
-         to indicate that it is time to send the next data byte to the 6522.
-
-STEP 12. Once all the data bytes have been written, switch to read mode by
-         ORing the contents of the 6522's peripheral control register (PCR)
-         with $E0 and storing the result back in the PCR.
+STEP   |  PROCESS
+:----: |:----------------------------------------------------------------
+1.     |The 6502 converts the header block ID ($07), the 256 data bytes, the data block checksum, and two null bytes into 325 GCR encoded bytes.
+2.     |The head is positioned to the appropriate track and the clock divisor  is set to the correct value for this track.
+3.     |The track is read until the correct sector header block is found. Wait out the header gap.
+4.     |Switch to write mode by ANDing the contents of the 6522's peripheral control register (PCR) with $1F, ORing the result with $C0, and storing the final result back in the PCR.
+5.     | Write out five $FF characters as the data block sync mark.
+6.     |Transfer the first 8-bit byte of the GCR encoded data to the data lines (D0-D7) of the 6522 PIA.
+7.     |Since Port A of the 6522 is configured as an output port, the data appears on the Port A lines PA0 to PA7. This transfers the byte to the 74LS165 (UD3) parallel to serial shift register.
+8.     |The bits are clocked out of the shift register (2) whenever the QB line (1) of the 74LS193 hexadecimal counter (UF4) makes a transition from ground to +5 volts.
+9.     |The bit stream from the shift register (2) is presented to the clock input of the 74LS74 flip flop (UF6). The output of this flip flop (3) changes state whenever the bit stream (2) makes a transition from  ground to +5 volts.
+10.    |The output of the flip flop (3) is amplified and sent to the record/play head of the drive. This causes the magnetic zones to be  written onto the surface of a diskette. Note that the direction of the electric current, and hence the direction of magnetization, changes only when a "1" is to be written.
+11.    |Once all 8 bits have been clocked out of the shift register, the byte ready line goes high. This sets the overflow flag in the 6502 to indicate that it is time to send the next data byte to the 6522.
+12.    |Once all the data bytes have been written, switch to read mode by ORing the contents of the 6522's peripheral control register (PCR) with $E0 and storing the result back in the PCR.
 
 ## 9.10 Reading Data From a Diskette
 
@@ -7566,43 +7479,17 @@ in reading a GCR encoded byte of data.
 To help clarify the reading process let's follow a byte of data as it is read
 from a diskette.
 
-STEP 1. The head is positioned to the appropriate track and the clock divisor
-        is set to the correct value for this track.
-
-STEP 2. The track is read until the correct sector header block is found.
-
-STEP 3. Wait for the sync mark at the start of the data block.
-
-STEP 4. As the track passes over the record/play head a stream of weak
-        electrical pulses is induced in the head. A pulse is induced whenever
-        the magnetic field changes its orientation. The pulse is amplified
-        and shaped (1).
-
-STEP 5. The stream of pulses from the shaper circuitry (1) is fed to the
-        CLEAR input of the 74LS193 hexadecimal counter (UF4) and to the
-        74LS02 (UE5) NOR gate. Whenever a pulse occurs, the hexadecimal
-        counter (UF4) and the divide by N counter (UE7) are cleared to a
-        count of zero. This ensures that the clock is always synchronized
-        with the incoming stream of pulses.
-
-STEP 6. Once the hexadecimal counter has been cleared, it begins to count up
-        the clock pulses it receives from the divide by 16 counter. QA (not
-        shown) is the 1's bit of the counter. QB (2) is the 2's bit of the
-        counter. QC (3) and QD (4) are the 4's and 8's bits, respectively.
-
-STEP 7. On each ground to +5 volt transition of QB (2), a bit is shifted into
-        the 74LS164 serial to parallel shift register (UD2). The bit that is
-        shifted in (5) is found by NORing the QC (3) and QD (4) lines of the
-        counter. Note that whenever a pulse clears the divide by 16 counter,
-        the next bit is read as a "1." If the counter has not been cleared
-        before the next ground to +5 volt transition of QB (2), the next bit
-        is read as a "0."
-
-STEP 8. Once 8 bits have been clocked into the shift register, the byte ready
-        line goes high. This sets the overflow flag in the 6502 to indicate
-        that it is time to read the data byte from the 6522.
-
-STEP 9. The 6502 reads the data byte from the 6522 and stores it in RAM.
+STEP   |  PROCESS
+:----: |:----------------------------------------------------------------
+1.     |The head is positioned to the appropriate track and the clock divisor is set to the correct value for this track.
+2.     |The track is read until the correct sector header block is found.
+3.     |Wait for the sync mark at the start of the data block.
+4.     |As the track passes over the record/play head a stream of weak electrical pulses is induced in the head. A pulse is induced whenever the magnetic field changes its orientation. The pulse is amplified and shaped (1).
+5.     |The stream of pulses from the shaper circuitry (1) is fed to the CLEAR input of the 74LS193 hexadecimal counter (UF4) and to the 74LS02 (UE5) NOR gate. Whenever a pulse occurs, the hexadecimal counter (UF4) and the divide by N counter (UE7) are cleared to acount of zero. This ensures that the clock is always synchronized with the incoming stream of pulses.
+6.     |Once the hexadecimal counter has been cleared, it begins to count up the clock pulses it receives from the divide by 16 counter. QA (not shown) is the 1's bit of the counter. QB (2) is the 2's bit of the counter. QC (3) and QD (4) are the 4's and 8's bits, respectively.
+7.     |On each ground to +5 volt transition of QB (2), a bit is shifted into the 74LS164 serial to parallel shift register (UD2). The bit that is shifted in (5) is found by NORing the QC (3) and QD (4) lines of the counter. Note that whenever a pulse clears the divide by 16 counter, the next bit is read as a "1." If the counter has not been cleared before the next ground to +5 volt transition of QB (2), the next bit is read as a "0."
+8.     |Once 8 bits have been clocked into the shift register, the byte ready line goes high. This sets the overflow flag in the 6502 to indicate that it is time to read the data byte from the 6522.
+9.     |The 6502 reads the data byte from the 6522 and stores it in RAM.
 
 ## 9.11 Summary of Bugs in DOS 2.6
 
@@ -7611,125 +7498,121 @@ systems. In some cases, the bugs have been real; in other cases, imaginary.
 This section summarizes our findings regarding the bugs in DOS 2.6. Please
 note that this information applies only to the 1541.
 
-1. Incorrect dummy data block produced during formatting:
+### 1. Incorrect dummy data block produced during formatting:
 
-   During formatting, all the Commodore disk drives (except the old 2040's)
-   write out a dummy data block for each track and sector. On all the drives,
-   except the 1541, this dummy data block consists of 256 null bytes ($00).
-   On the 1541 the dummy data block consists of one $4B character followed by
-   255 $01 bytes. This is caused by an unnecessary INX instruction at $FC86.
-   If this byte were replaced by a NOP ($EA), the normal dummy data block
-   would be produced.
+During formatting, all the Commodore disk drives (except the old 2040's)
+write out a dummy data block for each track and sector. On all the drives,
+except the 1541, this dummy data block consists of 256 null bytes ($00).
+On the 1541 the dummy data block consists of one $4B character followed by
+255 $01 bytes. This is caused by an unnecessary INX instruction at $FC86.
+If this byte were replaced by a NOP ($EA), the normal dummy data block
+would be produced.
 
-   The difference in the dummy data blocks does not cause any real problems
-   and provides an easy way to identify a diskette formatted on the 1541.
+The difference in the dummy data blocks does not cause any real problems
+and provides an easy way to identify a diskette formatted on the 1541.
 
-2. The save and replace command "@0":
+### 2. The save and replace command "@0":
 
-   Over the years numerous writers have advised Commodore owners not to use
-   the save and replace command because it contained a bug. Our study of the
-   ROM routines and a lot of testing has convinced us that the bug in the
-   replace command is a myth. There are, however, two situations in which the
-   use of the @ replacement command can cause problems:
+Over the years numerous writers have advised Commodore owners not to use
+the save and replace command because it contained a bug. Our study of the
+ROM routines and a lot of testing has convinced us that the bug in the
+replace command is a myth. There are, however, two situations in which the
+use of the @ replacement command can cause problems:
 
-* a) Replacing an unclosed file, *SEQ, *PRG, etc:
+#### a) Replacing an unclosed file, *SEQ, *PRG, etc:
 
-   When you replace a file, the new file is written to diskette first. Then
-   the DOS proceeds to trace through the file chain of the old file and marks
-   the sectors it finds as available-for-use in the BAM. If the old file was
-   unclosed, the track and sector links may be incorrect and some of the
-   blocks in a different active file on the diskette may be freed (see a more
-   detailed description of what happens in Section 2.5 on scratching a file).
-   If this happens, subsequent writing to the diskette will overwrite the
-   data in this file. This is the most likely cause of user complaints about
-   a bug in the save and replace command on the 2040 and 4040 drives. The
-   code at $C835 prevents this from happening on the 1541 drive.
+When you replace a file, the new file is written to diskette first. Then
+the DOS proceeds to trace through the file chain of the old file and marks
+the sectors it finds as available-for-use in the BAM. If the old file was
+unclosed, the track and sector links may be incorrect and some of the
+blocks in a different active file on the diskette may be freed (see a more
+detailed description of what happens in Section 2.5 on scratching a file).
+If this happens, subsequent writing to the diskette will overwrite the
+data in this file. This is the most likely cause of user complaints about
+a bug in the save and replace command on the 2040 and 4040 drives. The
+code at $C835 prevents this from happening on the 1541 drive.
 
-* b) Not enough space on disk:
+#### b) Not enough space on disk:
 
-   When a file is replaced, the new file is written to diskette before the
-   old file is scratched. If there is not enough space on the disk for the
-   new copy of the file, the process aborts. When this occurs, the error
-   light will come on (72, DISK FULL). Usually, this makes people wonder if
-   something went wrong; so they VERIFY to be sure the file has been saved
-   correctly. The file verifies as OK. A check of the directory indicates no
-   unclosed files. However, the file may appear somewhat shorter than before.
-   This did not occur because your program has been compacted. Rather, it was
-   truncated by the DOS. It isn't all there! We hope you have a backup handy.
-   If not, you may still be able to recover your file. A printout of the BAM
-   and some quick work on editing the directory entry's starting track and
-   sector are in order. (See Chapter 8.) The sectors shown as unallocated
-   (free) in the BAM hold the only complete copy of your program, the
-   original version that is. The latter portions of the @ replacement version
-   of your program have been stored in disk WOM (Write Only Memory) by the
-   DOS. Bye, bye.
+When a file is replaced, the new file is written to diskette before the
+old file is scratched. If there is not enough space on the disk for the
+new copy of the file, the process aborts. When this occurs, the error
+light will come on (72, DISK FULL). Usually, this makes people wonder if
+something went wrong; so they VERIFY to be sure the file has been saved
+correctly. The file verifies as OK. A check of the directory indicates no
+unclosed files. However, the file may appear somewhat shorter than before.
+This did not occur because your program has been compacted. Rather, it was
+truncated by the DOS. It isn't all there! We hope you have a backup handy.
+If not, you may still be able to recover your file. A printout of the BAM
+and some quick work on editing the directory entry's starting track and
+sector are in order. (See Chapter 8.) The sectors shown as unallocated
+(free) in the BAM hold the only complete copy of your program, the
+original version that is. The latter portions of the @ replacement version
+of your program have been stored in disk WOM (Write Only Memory) by the
+DOS. Bye, bye.
 
-3. The Block-Read (B-R) command:
+### 3. The Block-Read (B-R) command:
 
-   This command has been replaced by the U1 command and with good reason. The
-   B-R command has two serious bugs that make it unusable on the 1541. The
-   use of this command is NOT RECOMMENDED! See Chapter 5 for the gory
-   details.
+This command has been replaced by the U1 command and with good reason. The
+B-R command has two serious bugs that make it unusable on the 1541. The
+use of this command is NOT RECOMMENDED! See Chapter 5 for the gory
+details.
 
-4. The Block-Write (B-W) command:
+### 4. The Block-Write (B-W) command:
 
-   This command has been replaced by the U2 command and with good reason
-   too.The B-W command is also unusable on the 1541. The use of this command
-   is NOT RECOMMENDED either. Chapter 5 again gives the scoop.
+This command has been replaced by the U2 command and with good reason
+too.The B-W command is also unusable on the 1541. The use of this command
+is NOT RECOMMENDED either. Chapter 5 again gives the scoop.
 
-5. The Block-Allocate (B-A) command:
+### 5. The Block-Allocate (B-A) command:
 
-   Although this command seems to work correctly on other Commodore drives,
-   it does not work properly on the 1541. This command really has two
-   functions:
+Although this command seems to work correctly on other Commodore drives, it
+does not work properly on the 1541. This command really has two
+functions:
 
-* a) To allocate a free sector in the BAM:
+#### a) To allocate a free sector in the BAM:
 
-   When the track and sector specified in the block-allocate command is
-   free(not in use) in the BAM, the block allocate command should allocate
-   the block in the BAM. The B-A command appears to do this correctly on the
-   1541.
+When the track and sector specified in the block-allocate command is
+free(not in use) in the BAM, the block allocate command should allocate
+the block in the BAM. The B-A command appears to do this correctly on 
+the 1541.
 
-* b) Find the next available track & sector:
+#### b) Find the next available track & sector:
 
-   If the track and sector specified in the block-allocate command is already
-   allocated (in use) in the BAM, the block allocate command should not
-   change the BAM in any way. It should return a 65, NO BLOCK error and
-   report the track and sector of the next available block in the BAM. This
-   feature of the B-A command was included to allow the programmer who is
-   creating his own random access files to determine the next free block that
-   he/she can use.
+If the track and sector specified in the block-allocate command is already
+allocated (in use) in the BAM, the block allocate command should not
+change the BAM in any way. It should return a 65, NO BLOCK error and
+report the track and sector of the next available block in the BAM. This
+feature of the B-A command was included to allow the programmer who is
+creating his own random access files to determine the next free block that
+he/she can use.
 
-   This feature of the B-A command does not work correctly on the 1541! The
-   command does return the track and sector of a free block all right, but
-   with a difference!
+This feature of the B-A command does not work correctly on the 1541! The
+command does return the track and sector of a free block all right, but
+with a difference!
 
-1. It occasionally returns a sector on track 18. This should not happen
-   because track 18 is reserved for the directory.
+1. It occasionally returns a sector on track 18. This should not happen because track 18 is reserved for the directory.
+2. It ALLOCATES ALL THE BLOCKS on the track that it returns in the error message in the BAM.
 
-2. It ALLOCATES ALL THE BLOCKS on the track that it returns in the error
-   message in the BAM.
+Because of these bugs, the use of the B-A command on the 1541 is NOT
+RECOMMENDED. However, the CERTIFY A DISKETTE program listed in Chapter 5
+does work. The reason for this is that this program stores a duplicate
+copy of the BAM in C64 RAM which is later rewritten to the diskette. This
+technique repairs the damage done by the B-A command.
 
-   Because of these bugs, the use of the B-A command on the 1541 is NOT
-   RECOMMENDED. However, the CERTIFY A DISKETTE program listed in Chapter 5
-   does work. The reason for this is that this program stores a duplicate
-   copy of the BAM in C64 RAM which is later rewritten to the diskette. This
-   technique repairs the damage done by the B-A command.
+### 6. UJ: or U: command:
 
-6. UJ: or U: command:
+Commodore disk drives have traditionally used one or both of these commands
+to enable the user to reset the drive (just as though the drive were turned
+OFF and then ON again). Neither command works correctly on the 1541 drive.
+The drive goes on a trip to never-never land and must be turned OFF and then ON again to recover from one of these commands. The
+command "U:" is the one to use to reset the 1541.
 
-   Commodore disk drives have traditionally used one or both of these
-   commands to enable the user to reset the drive (just as though the drive
-   were turned OFF and then ON again). Neither command works correctly on the
-   1541 drive. The drive goes on a trip to never-never land and must be
-   turned OFF and then ON again to recover from one of these commands. The
-   command "U:" is the one to use to reset the 1541.
+### 7. UI- command:
 
-7. UI- command:
-
-   The 1541 manual indicates that this command is used to set the disk drive
-   to operate correctly with the VIC-20. Current 1541's work with a VIC-20,
-   period.
+The 1541 manual indicates that this command is used to set the disk drive
+to operate correctly with the VIC-20. Current 1541's work with a VIC-20,
+period.
 
 ### Summary
 
@@ -7854,7 +7737,7 @@ Everything appears normal. Now let's write that sync mark.
     Replacement sync mark written   +----+----+----+----+----+
     by a 4040                     ??|N  S|S  N|N  S|S  N|N  S|
                                     +----+----+----+----+----+
-                                  ?? = effects of tansient currents
+                                  ?? = effects of transient currents
 
                 +----+----+----+----+----+----+----+----+----+
     Result      |N  S|S  N|N  S|S ??|N  S|S  N|N  S|S  N|N  S|
@@ -7873,7 +7756,7 @@ match this new one. What would happen? Take a look.
     Replacement sync mark written   +----+----+----+----+----+
     by a 4040                     ??|S  N|N  S|S  N|N  S|S  N|
                                     +----+----+----+----+----+
-                                  ?? = effects of tansient currents
+                                  ?? = effects of transient currents
 
                 +----+----+----+----+----+----+----+----+----+
     Result      |N  S|S  N|N  S|S   ??  N|N  S|S  N|N  S|S  N|
@@ -7970,13 +7853,13 @@ saving programs on a single diskette.
 To make your exploration of the 1541 easier we have developed two programs to
 assist you.
 
-a) Disk peek program
+#### a) Disk peek program
 
 This program allows you to look at a hex dump of any area of the 1541's RAM
 or ROM. This is a very useful tool for examining the contents of the 1541's
 RAM.
 
-b) Create a file program
+#### b) Create a file program
 
 This program allows you to read out any area of the 1541's RAM or ROM and
 store the contents into a program file with any load address you choose. You
@@ -8070,30 +7953,20 @@ In early 1984 Commodore began shipping the 1541 disk drives that contained a
 new $EOOO-$FFFF ROM. The part numbers of these ROMs are: original 901229-03
 revised 901229-05. The changes in the new ROM are:
 
-$E683           Eliminate JSR TO ITTERR($EA4E) to solve stack overflow
-$E68B           problems.
-
-$E780 to        Eliminate power-on boot of the utility loader to solve
-$E7A1           possible problems during initialization.
-
-$E9DC           Insert JMP to patch at $FF20.
-
-$EAA4           Insert JMP to patch at $EF10.
-
-$EBDB/DD/E0/E2  Change initialization of the serial bus.
-
-$FEE6           New ROM checksum.
-
-$FF10           New patch to change the initialization of the serial bus
-                during the power-up routine DSKINT.
-
-$FF20           New patch to the serial bus listen routine ACPTR.
+ADDRESS         |  CHANGES
+:---------------|:------------------------------
+$E683, $E68B    |Eliminate JSR TO ITTERR($EA4E) to solve stack overflow problems.
+$E780 to $E7A1  |Eliminate power-on boot of the utility loader to solve possible problems during initialization.
+$E9DC           |Insert JMP to patch at $FF20.
+$EAA4           |Insert JMP to patch at $EF10.
+$EBDB/DD/E0/E2  |Change initialization of the serial bus.
+$FEE6           |New ROM checksum.
+$FF10           |New patch to change the initialization of the serial bus during the power-up routine DSKINT.
+$FF20           |New patch to the serial bus listen routine ACPTR.
 
 The ROM in the SX-64 has an additional change. The header block gap at $F58D
 has been changed from $08 to $09 to eliminate the difference in header gap
 size between the 4040 and SX-64.
-
-
 
 
 
