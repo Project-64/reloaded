@@ -5345,37 +5345,50 @@ bytes are converted to GCR form at a time. The following step by step example
 demonstrates how this bit manipulation is performed by the DOS.
 
 STEP 1. Four 8-bit Data Bytes
-        $08     $10     $00     $12
+
+            $08     $10     $00     $12
 
 STEP 2. Hexadecimal to Binary Conversion
-        1. Binary Equivalents
+1. Binary Equivalents
+
             $08      $10      $00      $12
             00001000 00010000 00000000 00010010
 
 STEP 3. Binary to GCR Conversion
-        1. Four 8-bit Data Bytes
+1. Four 8-bit Data Bytes
+
            00001000 00010000 00000000 00010010
-        2. High and Low Nybbles
+
+2. High and Low Nybbles
+
            0000 1000 0001 0000 0000 0000 0001 0010
-        3. High and Low Nybble GCR Equivalents
+
+3. High and Low Nybble GCR Equivalents
+
            01010 01001 01011 01010 01010 01010 01011 10010
-        4. Four 10-bit GCR Bytes
+
+4. Four 10-bit GCR Bytes
+
            0101001001 0101101010 0101001010 0101110010
 
 STEP 4. 10-bit GCR to 8-bit GCR Conversion
-        1. Concatenate Four 10-bit GCR Bytes
+1. Concatenate Four 10-bit GCR Bytes
+
            0101001001010110101001010010100101110010
-        2. Five 8-bit Subdivisions
+
+2. Five 8-bit Subdivisions
+
            01010010 01010110 10100101 00101001 01110010
 
 STEP 5. Binary to Hexadecimal Conversion
-        1. Hexadecimal Equivalents
+1. Hexadecimal Equivalents
+
            01010010 01010110 10100101 00101001 01110010
            $52      $56      $A5      $29      $72
 
 STEP 6. Four 8-bit Data Bytes are Recorded as Five 8-bit GCR Bytes
 
-$08 $10 $00 $12 are recorded as $52 $56 $A5 $29 $72
+            $08 $10 $00 $12 are recorded as $52 $56 $A5 $29 $72
 
 Four normal 8-bit bytes are always written to diskette as five 8-bit GCR
 bytes by the DOS. The 1541 converts these same five 8-bit GCR bytes back to
@@ -5862,7 +5875,7 @@ FULL TRACK 21 ERROR SOURCE LISTING
     270 LDA #$01
     280 JMP $F969
 
-Full Track 21 Error Source Annotation
+### Full Track 21 Error Source Annotation
 
 This routine borrows from FORMT ($FAC7). Prior to formatting a track, the FDC
 erases it with sync marks ($FDA3). Experimentation has shown that an RTS from
@@ -6005,7 +6018,7 @@ SINGLE SECTOR 21 ERROR SOURCE LISTING
     560 LDA #$01
     570 JMP $F969
 
-Single Sector 21 Error Source Annotation
+### Single Sector 21 Error Source Annotation
 
 This routine finds the preceding sector and syncs up to its data block (lines
 200-210). Lines 250-350 wait out 325 GCR bytes. We flip to write in lines
@@ -6174,21 +6187,21 @@ SINGLE SECTOR 23 ERROR SOURCE LISTING
     720 LDA #$01
     730 JMP $F969
 
-Single Sector 23 Error Source Annotation
+### Single Sector 23 Error Source Annotation
 
-This routine borrows from WRIGHT ($F56E). Our entry point is 12 bytes into the
-routine. This bypasses the write protect test and the computation of the
+This routine borrows from WRIGHT ($F56E). Our entry point is 12 bytes into
+the routine. This bypasses the write protect test and the computation of the
 checksum. The driver routine reads the sector into $0400-$04FF. Lines 200-210
 of the source listing set the indirect buffer pointer to this workspace. The
 checksum is next incremented at $003A. Buffer number 1 is converted to GCR
 form. Recall that 260 data bytes are converted into 325 8-bit GCR bytes. More
 than one buffer is used to store the GCR image. The first 69 GCR bytes are
-stored in an overflow buffer at $01BB-$01FF. The remaining 256 bytes are found
-at $0400-$04FF. We sync up to the appropriate sector in line 300, count off the
-eight byte header gap, and flip to write mode. Five $FFs are then written to
-disk (the sync mark) followed first by the overflow buffer and then the regular
-buffer. We restore the indirect buffer pointer at $0031 to a $05 and jump to
-the error handler with a $01 in hand.
+stored in an overflow buffer at $01BB-$01FF. The remaining 256 bytes are
+found at $0400-$04FF. We sync up to the appropriate sector in line 300, count
+off the eight byte header gap, and flip to write mode. Five $FFs are then
+written to disk (the sync mark) followed first by the overflow buffer and
+then the regular buffer. We restore the indirect buffer pointer at $0031 to a
+$05 and jump to the error handler with a $01 in hand.
 
 ## 7.9 How to Duplicate a 23 Error on a Single Sector
 
@@ -6341,7 +6354,7 @@ DUPLICATE A SINGLE SECTOR 23 ERROR SOURCE LISTING
     660 LDA #$01
     670 JMP $F969
 
-Duplicate a Single Sector 23 Error Source Annotation
+### Duplicate a Single Sector 23 Error Source Annotation
 
 Identical to the 23A.PAL file with one exception. The checksum is left intact
 after a corrupted data block is read from the master using the job queue. The
@@ -6501,7 +6514,7 @@ FULL TRACK 23 ERROR SOURCE LISTING
     730 STA $02
     740 JMP $F975
 
-Full Track 23 Error Source Annotation
+### Full Track 23 Error Source Annotation
 
 See the annotation for 23A.PAL. The BASIC driver loops to do all sectors on a
 given track.
@@ -6654,7 +6667,7 @@ SINGLE SECTOR 20 ERROR SOURCE LISTING
     690 LDA #$01
     700 JMP $F969
 
-Single Sector 20 Error Source Annotation
+### Single Sector 20 Error Source Annotation
 
 This routine represents a halfhearted attempt to rewrite a header. It is
 dependent upon the preceding sector being intact. Lines 200-210 sync up to
@@ -6899,7 +6912,7 @@ FULL TRACK 20 ERROR SOURCE LISTING
     1310 ;
     1320 JMP $C194
     
-Full Track 20 Error Source Annotation    
+### Full Track 20 Error Source Annotation    
     
 This routine has a real surprise in store. Initialization in lines 220-290
 sets the drive number to 0 ($007F) rather than rely on a default. The track
@@ -7168,7 +7181,7 @@ FULL TRACK 27 SOURCE LISTING
     1330 ;
     1340 JMP #C194
 
-Full Track 27 Error Source Annotation
+### Full Track 27 Error Source Annotation
 
 See the annotation for 20M.PAL. The only major difference is in line 700
 above. Note the header block identifier ($08) in line 420 is left alone.
@@ -7469,7 +7482,7 @@ MULTIPLE ID FORMATTING SOURCE LISTING
     500 ;
     510 JMP #C194
 
-Multiple ID Formatting Source Annotation
+### Multiple ID Formatting Source Annotation
 
 This is a modification of the standard formatting routine, NEW ($EE0D).
 Embedded IDs are read from each track on the master and tabled in 1541 RAM
@@ -7758,7 +7771,7 @@ Parameters: A formatted diskette.
     1280 ;
     1290 DONE RTS            ;BACK TO BASIC
 
-1541 Backup Source Annotation
+### 1541 Backup Source Annotation
 
 The BASIC driver reads a sector from the master diskette into 1541 RAM using
 the job queue. The contents of the RAM are transferred into the C64 with a
@@ -7937,11 +7950,11 @@ COPY A FILE SOURCE LISTING
     600 JSR $FFCC            ; CLOSE2
     610 RTS
 
-Copy a File Source Annotation
+### Copy a File Source Annotation
 
 This routine emulates a LOAD and SAVE from machine language.
 
-Conclusion
+## Conclusion
 
 In conclusion, we hope that this chapter has taken some of the mystery out of
 DOS protection schemes. We encourage serious readers to study the program
@@ -7953,13 +7966,5 @@ will ever see.
 # CHAPTER 8 - GETTING OUT OF TROUBLE
 
     
-    
-    
-    
-    
-    
-    
-    
-
 
 -----------------------------------------------------Page 172-----------------------------------------------------
