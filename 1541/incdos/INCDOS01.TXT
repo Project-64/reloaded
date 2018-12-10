@@ -6881,9 +6881,523 @@ the buffer with the command you want there. Happy sleuthing!
 
 ## 9.5 Major FDC Routines
 
+One of the difficulties in finding an FDC routine to do the job you want is finding your way through the detailed ROM maps in Appendix B. This section summarizes the major FDC routines and their entry points.
+
+a) Initialization
+
+When the disk drive is first switched on, the reset line is pulsed lo. This
+causes the 6502 to RESET and it does an indirect JMP via the vector at $FFFC
+to the initialization procedure at $EAA0. As part of the set up procedure,
+the variables and I/O chips for the FDC are initialized by the CNTINT routine
+($F259-AF).
+
+b) Main FDC Idle Loop
+
+Every 10 milliseconds the 6522 timer generates an interrupt (IRQ) and the
+6502 begins to execute the main FDC loop looking for something to do. The
+main features of this loop are summarized below.
+
+OVERVIEW OF MAIN FDC LOOP ($F2B0)
+:--------------------------------
+
+    +-------------------------------+   No               +-----+
+    |    Any jobs in job queue?     |-------->   JMP to  | END |
+    +----------------+--------------+                    +-----+
+                     |Yes
+    +----------------+--------------+   Yes
+    |    Is it a JMP job ($D0)?     |-------->   Do JMP job ($F370)
+    +----------------+--------------+ 
+                     |No
+    +----------------+--------------+   Yes                         +-----+
+    |   Should drive motor be ON?   |-------->   Motor ON & JMP to  | END |
+    +----------------+--------------+                               +-----+
+                     |No
+    +----------------+--------------+   No               +-----+
+    |     Is drive up to speed?     |-------->   JMP to  | END |
+    +----------------+--------------+                    +-----+
+                     |Yes
+    +----------------+--------------+   Yes              +-----+
+    |     Is the head stepping?     |-------->   JMP to  | END |
+    +----------------+--------------+                    +-----+
+                     |No
+    +----------------+--------------+   Yes
+    |    Is this the right track?   |-------->   DO THE JOB
+    +----------------+--------------+ 
+                     |No
+    +----------------+----------------+
+    | Set # of the tracks to the step |
+    +----------------+----------------+ 
+                     |
+                  +-----+
+                  | END |  ($F99C)
+                  +-----+
+                     |
+    +----------------+--------------+   Yes
+    |    Change in write protect?   |<------->   Set the change in
+    +----------------+--------------+            status flag ($1C)
+                     |No
+    +----------------+--------------+   Yes
+    |    Is head between tracks?    |-------->   Move the head
+    +----------------+--------------+            JMP DOSTEP ($FA2E)
+                     |No
+    +----------------+--------------+   Yes
+    |     Turn drive motor OFF?     |<------->   Turn OFF motor
+    +----------------+--------------+
+                     |No
+    +----------------+--------------+   Yes
+    |   Is the head in step mode?   |-------->   JMP to the proper
+    +----------------+--------------+            stepping routine
+                     |No
+    +----------------+--------------+
+    |    RTS to the IRQ routine     |
+    +----------------+--------------+
+
+At the end of this loop, or when the job has been completed, the timer
+interrupt is reenabled and the 6502 leaves FDC mode.
+
+c) Major FDC Entry Points
+
+When in FDC mode the 6502 executes routines that directly control the
+operation of the disk drive. These include: turning the drive motor ON or
+OFF, controlling the stepper motor that moves the head from track to track,
+formatting a blank diskette, locating a specific sector and reading or
+writing data, and translating information back and forth between normal 8-bit
+bytes and the 10-bit GCR code that is actually recorded on a diskette's
+surface. The 6502 carries out these tasks in response to job requests placed
+in the job queue by the IP processor. The entry points for the major FDC
+routines are summarized below.
+
+Entry       | Routine   | Function
+:----------:|:---------:|:-----------------------------------------
+$F259       |CNTINT     |Initialize important variables and the I/O chips.
+$F2B0       |LCC        |Main FDC idle loop (IRQ entry every 10 millisec).
+$F367       |EXE        |Do execute job.
+$F37C       |BMP        |Bump head to track #1 (step out 45 tracks).
+$F3B1       |SEAK       |Seek any header on a track.
+$F4CA       |REED       |Read in data block of specified sector.
+$F56E       |WRIGHT     |Write out data block of specified sector.
+$F691       |VRFY       |Read back data bytes into five GCR bytes.
+$F6D0       |PUT4GB     |Convert four data bytes into five GCR bytes.
+$F78F       |BINGCR     |Convert entire data buffer into GCR write image.
+$F7E6       |GET4GB     |Convert five GCR bytes into four data bytes. Convert
+            |           |GCR image of data block into normal data.
+$F8E0       |GCRNIN     |Convert GCR image of data block into normal data.
+$F934       |CONHDR     |Convert header into a GCR search image. End of idle
+            |           |loop to control drive & stepper motor.
+$FAC7       |FORMT      |Format blank diskette.
+
+Since the read, write and format routines are of particular interest, let's
+look at them in more detail.
+
+d) Read Data Block of Specified Sector
+
+Before the read job code ($80) is placed in the job queue, the IP puts the
+desired track and sector numbers into the header table as indicated below.
+
+     Job queue       Use buffer        Track #      Sector #
+      location      #    address       address      address
+    -----------    ---------------    ---------    ----------
+       $0000        0    $0300-FF       $0006        $0007
+       $0001        1    $0400-FF       $0008        $0009      
+       $0002        2    $0500-FF       $000A        $000B
+       $0003        3    $0600-FF       $000C        $000D
+       $0004        4    $0700-FF       $000E        $000F
+       $0005        5    NO RAM         $0010        $0011
+
+Once the track and sector values are in place, the IP puts the read job code
+into the job queue in the location that corresponds to the data buffer where
+the data is to be stored. The next time the 6502 is in FDC mode it finds the
+job request. If necessary, it turns on the drive motor, waits for it to get
+up to speed, and moves the head to the proper track. It then executes the
+read routine outlined below:
+
+OVERVIEW OF THE FDC READ ROUTINE
+:----------------------------------------------------------------------------
+
+           +-------------------------------------+
+    $F4D1  |    Find correct sector              |
+           +-------------------------------------+
+           |    Read data: first 256 into the    |
+    $F4D4  |    data buffer and the rest into    |
+           |    the overflow buffer              |
+           +-------------------------------------+
+    $F4ED  |    Convert GCR to normal            |
+           +-------------------------------------+
+    $F4F0  |    Check data block ID              |
+           +-------------------------------------+
+    $F4FB  |    Check data checksum              |
+           +-------------------------------------+
+    $F505  |    Exit, read was OK                |
+           +-------------------------------------+
+
+e) Write Data Block of Specified Sector
+
+Before the write job code ($90) is placed in the job queue, the IP puts the
+desired track and sector numbers into the header table as indicated below.
+
+     Job queue       Use buffer        Track #      Sector #
+      location      #    address       address      address
+    -----------    ---------------    ---------    ----------
+       $0000        0    $0300-FF       $0006        $0007
+       $0001        1    $0400-FF       $0008        $0009      
+       $0002        2    $0500-FF       $000A        $000B
+       $0003        3    $0600-FF       $000C        $000D
+       $0004        4    $0700-FF       $000E        $000F
+       $0005        5    NO RAM         $0010        $0011
+
+Once the track and sector values are in place, the IP puts the write job code
+into the job queue in the location that corresponds to the data buffer
+containing the data to be written. The next time the 6502 is in FDC mode it
+finds the job request. If necessary, it turns on the drive motor, waits for
+it to get up to speed, and moves the head to the proper track. It then
+executes the write routine outlined below:
+
+OVERVIEW OF THE FDC WRITE ROUTINE
+:----------------------------------------------------------------------------
+
+           +-------------------------------------+
+    $F575  |    Calculate checksum.              |
+           +-------------------------------------+
+    $F57A  |    Test if write protect on.        |
+           +-------------------------------------+
+    $F586  |    Convert buffer to GCR.           |
+           +-------------------------------------+
+    $F589  |    Find correct sector.             |
+           +-------------------------------------+
+    $F58C  |    Wait out header gap.             |
+           +-------------------------------------+
+           |    Switch to write mode and         |
+    $F594  |    write out five $FF's as sync.    |
+           +-------------------------------------+
+    $F5B1  |    Write out overflow buffer.       |
+           +-------------------------------------+
+    $F5BF  |    Write out data buffer.           |
+           +-------------------------------------+
+    $F5CC  |    Switch to read mode.             |
+           +-------------------------------------+
+    $F5D9  |    Convert GCR back to 8-bit.       |
+           +-------------------------------------+
+    $F5DC  |    Change job code to VERIFY.       |
+           +-------------------------------------+
+    $F5E6  |    Go back to verify it.            |
+           +-------------------------------------+
+
+f) Format a Blank Diskette
+
+The IP format routine at $C8C6 sets up a JMP $FAC7 instruction at $0600 and
+then puts an EXECUTE job code ($E0) into the job queue ($0003). On its next
+pass through the idle loop the FDC finds the execute job code, executes the
+code at $0600, and jumps to the formatting routine outlined below.
+
+
+OVERVIEW OF THE FDC FORMATTING ROUTINE
+:----------------------------------------------------------------------------
+
+           +-------------------------------------+
+    $FAC7  |    Check if this is first entry.    |
+           |    If not, branch to $FAF5.         |
+           +-------------------------------------+
+    $FACB  |    Do bump to track #1 (CLUNK!)     |
+           +-------------------------------------+
+    $FAE3  |    Initialize error count and       |
+           |    bytes around track. Exit.        |
+           +-------------------------------------+
+    $FAF5  |    Check if on right track.         |
+           +-------------------------------------+
+    $FB00  |    Check for write protect tab.     |
+           +-------------------------------------+
+    $FB0C  |    Erase track with sync.           |
+           +-------------------------------------+
+    $FB0F  |    Write half of track with sync    |
+           |    and other half with non-sync.    |
+           +-------------------------------------+
+    $FB35  |    Time sync & non-sync parts.      |
+           +-------------------------------------+
+    $FB7D  |    Compare times and calculate      |
+           |    how long tail gaps should be.    |
+           +-------------------------------------+
+    $FC36  |    Create images of headers.        |
+           +-------------------------------------+
+    $FC86  |    Create dummy data block.         |
+           +-------------------------------------+
+    $FC8E  |    Convert headers to GCR.          |
+           +-------------------------------------+
+    $FC9E  |    Convert data block to GCR.       |
+           +-------------------------------------+
+    $FCAA  |    Write out sectors in sequence.   |
+           +-------------------------------------+
+    $FD24  |    Go to read mode and verify.      |
+           +-------------------------------------+
+    $FD8B  |    All sectors OK; do next track.   |
+           +-------------------------------------+
+    $FD96  |    All tracks done; exit.           |
+           +-------------------------------------+
+
+## 9.6 Using the FDC Routines
+
+Some of the floppy disk controller routines in the 1541's ROM are relatively
+easy to use. Others are much more difficult.
+
+The easy ones are those that do not involve reading or writing to a diskette.
+An example of this type of routine would be the GET4GB ($F7E6) routine that
+converts 5 GCR bytes into 4 normal 8-bit binary bytes. These routines can be
+executed by using the techniques described in Section 9.4.
+
+The tough ones are those that involve reading or writing to a diskette. To
+illustrate how to do this, we'll try something interesting. How about
+developing a routine that allows us to move the head anywhere on a diskette
+(say track 5) and read the next header (or whatever) that passes over the
+read/write head.
+
+First we have to find out how to move the head around. A quick check of the
+map of the I/O chips at the end of Appendix A tells us that the stepper motor
+that moves the head is controlled by bits 0 and 1 of DSKCNT ($1C00). Cycling
+these two bits causes the head to move. Hmm... Cycling the bits must mean:
+00-01-10-11-00 versus 11-10-01-00-11. Time out for a bit of testing. Here's
+our program:
+
+    100 REM MOVE THE 1541'S HEAD
+    110 PRINT"{CLR}{DOWN}COMMANDS: U=UP D=DOWN Q=QUIT"
+    120 OPEN 15,8,15,"I"
+    130 PRINT#15,"M-R"CHR$(0)CHR$(28)
+    140 GET#15,X$:X=ASC(X$+CHR$(0))
+    150 BI=X AND 3
+    160 PRINT" {HOME}{DOWN 3}BI="BI
+    170 GET A$
+    180 IF A$="U"THEN BI=BI+1
+    190 IF A$="D"THEN BI=BI-1
+    200 IF A$="Q"THEN CLOSE 15:END
+    210 BI=BI AND 3
+    220 R=(X AND 252)OR BI
+    230 PRINT#15,"M-W"CHR$(0)CHR$(28)CHR$(1)CHR$(R)
+    240 GOTO 130
+
+After much peeking through the drive door with a flashlight we discover that
+our program actually does make the head move. When we press "U" the head
+moves closer to the center (higher track numbers) and when we press "D" the
+head moves outward (lower track numbers). We've got it! Quick let's write it
+down before we forget.
+
+To move the head, cycle bits 0 and 1 of $1C00
+
+    00 -->  01 -->  10 -->  11 -->  00    head moves inwards
+     0       1       2       3       0
+
+    11 -->  10 -->  01 -->  00 -->  11    head moves outwards
+     3       2       1       0       3
+
+The only problem that remains is to find out how much the head moves each
+time. Hmm... If we read from a track and then peek at $1C00... Time for more
+testing:
+
+    10 REM CHECK PHASE FOR ALL TRACKS
+    20 OPEN 15,8,15,"I"
+    30 OPEN 1,8,5,"#"
+    40 FOR TR=1 TO 35
+    50 PRINT#15,"U1:5 0"TR;0
+    60 PRINT#15,"M-R"CHR$(0)CHR$(28)
+    70 GET#15,X$:X=ASC(X$+CHR$(0))
+    80 PRINT TR;X AND 3
+    90 NEXT
+    100 CLOSE1:CLOSE15
+
+When we run this test program, we get a very interesting table:
+
+     1  0     2  2     3  0     4  2     5  0     6  2     7  0
+     8  2     9  0    10  2    11  0    12  2    13  0    14  2
+    15  0    16  2    17  0    18  2    19  0    20  2    21  0
+    22  2    23  0    24  2    25  0    26  2    27  0    28  2
+    29  0    30  2    31  0    32  2    33  0    34  2    35  0
+
+The phase of the stepper motor is always even (0 or 2) when the head is on a
+track. Therefore, the head must be moving half a track at a time. Very
+interesting indeed!
+
+Now that we can move the head around, we want to find out how to read
+something. But before we go rummaging through the ROM's, wasn't there
+something about the clock rate being different for each zone? Ah, here it is.
+Bits 5 and 6 of $1C00 set the recording density. Let's see. Bit 5 represents
+32 and bit 6, 64. Let's change one line of our last test program and try
+again. Here's the new line:
+
+    80 PRINT TR;X AND 96
+
+When we run our revised program, we get another interesting table.
+
+     1  96     2  96     3  96     4  96     5  96     6  96     7  96
+     8  96     9  96    10  96    11  96    12  96    13  96    14  96
+    15  96    16  96    17  96    18  64    19  64    20  64    21  64
+    22  64    23  64    24  64    25  32    26  32    27  32    28  32
+    29  32    30  32    31   0    32   0    33   0    34   0    35   0
+
+By George, we've got it.
+
+                           $1C00
+    Zone    Tracks    Bit 6    Bit 5    Number
+      1       1-17      1        1        96
+      2      18-24      1        0        64
+      3      25-30      0        1        32
+      4      31-35      0        0         0
+
+Let's do some digging in those ROM's now. A quick scan through the table of
+Major FDC Entry Points in Section 9.5 (c) turns up SEAK ($F3B1), seek any
+header on the track. A check of the detailed analysis in Appendix B looks
+promising. A careful study of a disassembly of the routine indicates that
+this is just what we were looking for. And, we don't have to do much setup
+either. Here's all the information we need:
+
+1. The entry point is $F3B1.
+2. JOB ($45) should be $30 so the branch at $F3E6 is taken.
+3. JOBN ($3F) should contain the correct buffer number so the error handler
+   routine at $F969 works properly.
+
+Now comes the tricky part. Since the routine involves reading from or writing
+to a diskette, we cannot execute the routine using a memory-execute command.
+We have to use a two step process:
+
+1. Use a memory-write command to store a machine language routine (it does
+   the setup and then a JMP to $F969) into the start of one of the buffers
+   (we'll use buffer -0 at $0300).
+
+2. Force the 6502, while in FDC mode, to execute our routine by putting a
+   JUMP or EXECUTE job code in the appropriate spot in the job queue (we'll
+   put a JUMP code into $0000).
+
+The program listed below puts it all together for us. It may appear a bit
+intimidating at first. But, if you are interested in exploring the innards of
+your drive it is one of the most powerful tools presented in this manual. It
+allows you to move the head anywhere you want and read the next header
+passing over the read/write head. The screen display shows you where the head
+is, what track and sector was read, and describes any read errors that were
+encountered.
+
+    100 PRINT"{CLR}{DOWN}   MOVE THE 1541'S READ/WRITE HEAD"
+    110 PRINT"{DOWN 2}INSERT TEST DISK"
+    120 PRINT"{DOWN 2}PRESS {RVS}RETURN{ROFF} WHEN READY"
+    130 :
+    140 REM MACHINE CODE ROUTINE TO READ A HEADER
+    150 REM RESIDES AT $0300 (BUFFER #0)
+    160 :
+    170 DATA 169,48:    :REM LDA #$30
+    180 DATA 133,69:    :REM STA $45
+    190 DATA 169,00:    :REM LDA #$00
+    200 DATA 133,63:    :REM STA $3F
+    210 DATA 76,177,243 :REM JMP $F3B1
+    220 :
+    230 D$(0)="00":D$(1)="01":D$(2)="10":D$(3)="11"
+    240 DIM FD$(16)
+    250 FD$(0)="                         "
+    260 FD$(1)="01 ALL OK                "
+    270 FD$(2)="02 HEADER BLOCK NOT FOUND"
+    280 FD$(3)="03 NO SYNC CHARACTER     "
+    290 FD$(9)="09 HEADER BLOCK CHKSUM ER"
+    300 T=18:N1$="?":N2$="?":TR=255
+    310 GET A$:IF A$<>CHR$(13) GOTO 310
+    320 :
+    330 OPEN 15,8,15,"I"
+    340 :
+    350 REM DIG OUT MASTER DISK ID
+    360 :
+    370 PRINT#15,"M-R"CHR$(18)CHR$(0)CHR$(2)
+    380 GET#15,I1$:IFI1$=""THENI1$=CHR$(0)
+    390 GET#15,I2$:IFI2$=""THENI2$=CHR$(0)
+    400 :
+    410 PRINT"{CLR}"
+    420 :
+    430 REM READ THE DISK CONTROLLER PORT
+    440 :
+    450 PRINT#15,"M-R"CHR$(0)CHR$(28)
+    460 GET#15,A$:IF A$=""THEN A$=CHR$(0)
+    470 A=ASC(A$)
+    480 CV=3 AND A
+    490 A=(159ANDA)OR(96+32*((T>17)+(T>24)+(T>30)))
+    500 PRINT#15,"M-W"CHR$(0)CHR$(28)CHR$(1)CHR$(A OR 4)
+    510 :
+    520 REM DISPLAY VALUES
+    530 :
+    540 PRINT"{HOME}{DOWN}   MOVE THE 1541'S READ/WRITE HEAD"
+    550 PRINT"{DOWN}CURRENT PHASE ="CV
+    560 PRINT"BITS 1 & O OF $1C00 ARE "D$(CV)
+    570 PRINT"{DOWN}MASTER DISK ID: "I1$;I2$
+    580 PRINT"{DOWN}TRACK # FROM STEPPER:"T"{LEFT}    "
+    590 PRINT"{DOWN}FDC ERROR:"FD$(E)
+    600 T$=STR$(TR):S$=STR$(SE): IF E<>1 THEN T$="??":N1$="?":N2$="?":S$="??"
+    610 PRINT"{DOWN}TRACK # AS READ:  "RIGHT$(T$,2)
+    620 PRINT"SECTOR # AS READ: "RIGHT$(S$,2)
+    630 PRINT"ID OF TRACK READ: "N1$;N2$
+    640 PRINT"{DOWN 2}COMMANDS:"
+    650 PRINT"{DOWN}  F1 = MOVE HEAD OUT (LOWER TRACK #)
+    660 PRINT"  F3 = MOVE HEAD IN (HIGHER TRACK #)
+    670 PRINT"  F5 = ATTEMPT TO READ TRACK # & ID"
+    680 PRINT"  F7 = TERMINATE PROGRAM"
+    690 PRINT"   I = INITIALIZE (TO TRACK 18)"
+    700 P=PEEK(197)
+    710 IF P=3 GOTO 910
+    720 IF P=4 AND T>1 THEN C=-1: GOTO 800
+    730 IF P=5 AND T<35 THEN C=1: GOTO 800
+    740 IF P=6 GOTO 990
+    750 IF P=33 THEN PRINT#15,"I":T=18:E=0:A=214:GOTO480
+    760 GOTO 450
+    770 :
+    780 REM CHANGE PHASE IN RESPONSE TO COMMAND
+    790 :
+    800 CV=(CV + C)AND3
+    810 T=T+C*.5:IFT<1 THENT=1
+    820 IFT>36THENT=36
+    830 B=A AND 252
+    840 C=B+CV
+    850 PRINT#15,"M-W"CHR$(0)CHR$(28)CHR$(1)CHR$(C)
+    860 E=0
+    870 GOTO 450
+    880 :
+    890 REM TERMINATE PROGRAM (DRIVE OFF)
+    900 :
+    910 PRINT#15,"M-W"CHR$(0)CHR$(28)CHR$(1)CHR$(240)
+    920 FOR K=1TO10:GETA$:NEXT
+    930 CLOSE 15:END
+    940 :
+    950 REM ATTEMPT TO READ ANY HEADER
+    960 :
+    970 REM READ & SEND MACHINE CODE ROUTINE
+    980 :
+    990 RESTORE:C$=""
+    1000 FOR K=1 TO 11:READ X:C$=C$+CHR$(X):NEXT
+    1010 PRINT#15,"M-W"CHR$(0)CHR$(3)CHR$(11)C$
+    1020 :
+    1030 REM PUT JMP JOB IN THE JOB QUEUE
+    1040 :
+    1050 PRINT#15,"M-W"CHR$(0)CHR$(0)CHR$(1)CHR$(208)
+    1060 :
+    1070 REM WAIT FOR JOB TO FINISH
+    1080 :
+    1090 PRINT#15,"M-R"CHR$(0)CHR$(0)
+    1100 GET#15,E$:E=ASC(E$+CHR$(0))
+    1110 IF E>127 GOTO 790
+    1120 :
+    1130 REM "E" IS FDC ERROR CODE RETURNED
+    1140 IF E<>1 GOTO 450
+    1150 :
+    1160 REM CLEAN READ SO DIG OUT ID, TRACK & SECT
+    1170 :
+    1180 PRINT#15,"M-R"CHR$(22)CHR$(0)CHR$(4)
+    1190 GET#15,N1$
+    1200 GET#15,N2$
+    1210 GET#15,X$:TR=ASC(X$+CHR$(0))
+    1220 GET#15,X$:SE=ASC(X$+CHR$(0))
+    1230 GOTO 450
+
+Although this program allows you to move the head and read data in half-track
+increments, you can't double the capacity of your drive by using all 70
+"tracks." The magnetic path produced by the read/write head is just too wide.
+However, it may be possible to devise a protection scheme in which the
+"protected information" is recorded when the head is in an "odd phase" (1 or
+3). Crosstalk from the two odd-phase tracks, though, would make the diskette
+unreadable except by a specialized routine like this.
+
+## 9.7 The Recording Process
 
 
 
 
 
------------------------------------------------------Page 188-----------------------------------------------------
+-----------------------------------------------------Page 199-----------------------------------------------------
