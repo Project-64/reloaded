@@ -754,7 +754,7 @@ leaving off the disk ID. For example:
                     PRINT#15, "N0:TEST DISKETTE"
                     CLOSE 15
 
-    DOS 5.1:        >NO:DISK NAME
+    DOS 5.1:        >N0:DISK NAME
                     >N:DISK NAME
 
 Notice that no comma or ID follows the disk name. This command will work only
@@ -873,7 +873,7 @@ looks like this:
             PRINT#15, "C0:MY PROGRAM B/U=0:MY PROGRAM"
             CLOSE 15
 
-    DOS 5.l:
+    DOS 5.1:
             >C0:BACKUP=0:ORIGINAL
             >C:BACKUP=ORIGINAL
 
@@ -898,11 +898,11 @@ command. The syntax for this is as follows:
 
     EXAMPLE:
             OPEN 15, 8, 15
-            PRINT#15, "C0:MAILFILE=0:NAME,O:ADDRESS,0:CITY"
+            PRINT#15, "C0:MAILFILE=0:NAME,0:ADDRESS,0:CITY"
             CLOSE 15
 
-    DOS 5.l:
-            > CO:COMBINED=0:FILE1,0:FILE2,0:FILE3
+    DOS 5.1:
+            >C0:COMBINED=0:FILE1,0:FILE2,0:FILE3
             >C:COMBINED=FILE1,FILE2,FILE3
 
 Our large file now consists of several files appended together. While this
@@ -932,7 +932,7 @@ the write protect tab and key in:
                     PRINT#15, "S0:TESTING 123"
                     CLOSE 15
 
-    DOS 5.1:        >SO:FILE NAME
+    DOS 5.1:        >S0:FILE NAME
                     >S:FILE NAME
 
 The scratch command requires a single parameter, the file name, preceded by S
@@ -3418,24 +3418,17 @@ the screen.
 
 Line Range | Description
 :--------- |:----------------------------------------------------------------
-110        | Opens logical file number 15 (PRINT#15,) to device 8 with a
-           | secondary address of 15 (command channel).
+110        | Opens logical file number 15 (PRINT#15,) to device 8 with a secondary address of 15 (command channel).
 120        | Initializes drive 0.
 130-140    | Query the error channel.
-150        | Opens logical file number 2 (GET#2,) to device 8 with a
-           | secondary address of 2 (channel number 2) letting the 1541
-           | assign a buffer area.
-160        | Reads the block from drive 0, track 18, sector 0 into channel 2
-           | buffer area.
+150        | Opens logical file number 2 (GET#2,) to device 8 with a secondary address of 2 (channel number 2) letting the 1541 assign a buffer area.
+160        | Reads the block from drive 0, track 18, sector 0 into channel 2 buffer area.
 170-180    | Query the error channel.
 190        | Begin loop to read 256 bytes.
-200        | Transfer a byte from channel 2 buffer area to C 64 memory by way
-           | of the GET# command (GET# logical file number not the channel
-           | number).
+200        | Transfer a byte from channel 2 buffer area to C 64 memory by way of the GET# command (GET# logical file number not the channel number).
 210        | Test for equality with the null string "".
 220        | ASCII conversion of a byte.
-230        | Print the status variable (ST), our loop counter, and the ASCII
-           | value of the byte.
+230        | Print the status variable (ST), our loop counter, and the ASCII value of the byte.
 240        | Print the byte if it's within normal ASCII range.
 250        | Terminate comma tabulation.
 260        | Increment loop counter.
@@ -3534,8 +3527,7 @@ from track 18, sector 0.
 Line Range | Description
 :--------- |:----------------------------------------------------------------
 190        | Sets channel 2 pointer to position 144 in the buffer area.
-200-280    | Concatenate (build) the disk name one byte at a time by jamming
-           | it within printable ASCII range.
+200-280    | Concatenate (build) the disk name one byte at a time by jamming it within printable ASCII range.
 
 
     PRINT#15,"B-P:"2;144
@@ -3649,9 +3641,7 @@ formatting ID that is embedded in the header block of every sector.
 
 Line Range | Description
 :--------- |:----------------------------------------------------------------
-280        | Opens logical file number 2 (GET#2, PRINT#2,) to device 8 with a
-           | secondary address of 2 (channel number 2) letting the 1541
-           | assign a buffer area.
+280        | Opens logical file number 2 (GET#2, PRINT#2,) to device 8 with a secondary address of 2 (channel number 2) letting the 1541 assign a buffer area.
 310-380    | Query DOS version.
 550        | Pad new diskette name.
 560        | Reset channel 2 pointer to position 144.
@@ -3846,14 +3836,11 @@ buffer #0 with memory-read and GET# commands, and printed to the screen.
 
 Line Range | Description
 :--------- |:----------------------------------------------------------------
-150        | Opens logical file number 2 to device 8 with a secondary address
-           | of 2 assigning buffer number 0 ($0300 - $03FF) as a workspace.
-160        | Reads the block from drive 0, track 18, sector 0 into channel 2
-           | buffer area ($0300 - $03FF).
+150        | Opens logical file number 2 to device 8 with a secondary address of 2 assigning buffer number 0 ($0300 - $03FF) as a workspace.
+160        | Reads the block from drive 0, track 18, sector 0 into channel 2 buffer area ($0300 - $03FF).
 190        | Begin loop to read 256 bytes ($0300 - $03FF).
 200        | Indexed memory-read command ($0300 - $03FF).
-210        | Transfer a byte from channel 2 buffer area to C64 memory via the
-           | command channel (GET#15,).
+210        | Transfer a byte from channel 2 buffer area to C64 memory via the command channel (GET#15,).
 
 
 The alternate format of the standard memory-read command in line 200 is:
@@ -3894,15 +3881,11 @@ name.
 
 Line Range | Description
 :--------- |:----------------------------------------------------------------
-150        | Opens logical file number 2 to device 8 with a secondary
-           | address of 2 assigning buffer number 1 ($0400 - $04FF) as a
-           | workspace.
-160        | Reads the block from drive 0, track 18, sector 0 into channel 2
-           | buffer area ($0400 - $04FF).
+150        | Opens logical file number 2 to device 8 with a secondary address of 2 assigning buffer number 1 ($0400 - $04FF) as a workspace.
+160        | Reads the block from drive 0, track 18, sector 0 into channel 2 buffer area ($0400 - $04FF).
 190        | Memory-read command ($0490 - $049F).
 200        | Begin loop to read 16 characters.
-210        | Transfer a byte from channel 2 buffer area to C64 memory over
-           | the command channel (GET#15,).
+210        | Transfer a byte from channel 2 buffer area to C64 memory over the command channel (GET#15,).
 
 
 Inclusion of the third memory-read parameter means that we no longer have to
@@ -4071,26 +4054,19 @@ Line Range | Description
 :--------- |:----------------------------------------------------------------
 260-320    | Query DOS version ($0101).
 330-350    | Input file name.
-360-390    | Opens logical file number 2 to device 8 with a secondary address
-           | of 2 for a program read.
+360-390    | Opens logical file number 2 to device 8 with a secondary address of 2 for a program read.
 400-440    | Fetch file name track ($0018) and sector ($0019).
 450        | Close logical file number 2.
-490        | Reopens logical file number 2 to device 8 with a secondary
-           | address of 2 assigning buffer number 2 ($0500 - $05FF) as a
-           | workspace.
-500        | Reads the starting block of the filename from drive 0 as
-           | specified by $0018 and $0019 into channel 2 buffer area ($0500 -
-           | $05FF).
-540        | Three parameter memory-read command to fetch two byte load
-           | address ($0502 - $0503).
+490        | Reopens logical file number 2 to device 8 with a secondary address of 2 assigning buffer number 2 ($0500 - $05FF) as a workspace.
+500        | Reads the starting block of the filename from drive 0 as specified by $0018 and $0019 into channel 2 buffer area ($0500 - $05FF).
+540        | Three parameter memory-read command to fetch two byte load address ($0502 - $0503).
 550        | Fetch lo-byte of load address ($0502).
 570        | Fetch hi-byte of load address ($0503).
 590-640    | Decimal to hexadecimal conversion of load address.
 660-700    | Input new load address.
 710-780    | Hexadecimal to decimal conversion of new load address.
 790        | Memory-write of new two byte load address ($0502 - $0503).
-800        | Write channel 2 buffer ($0500 - $05FF) to drive 0, track
-           | ($0018), sector ($0019).
+800        | Write channel 2 buffer ($0500 - $05FF) to drive 0, track ($0018), sector ($0019).
 
 
 The alternate format of the memory-write command in line 790 is:
@@ -4168,17 +4144,12 @@ Line Range | Description
 190        | Query error channel.
 200        | The track and sector were not allocated.
 210        | Something is amiss so bail out.
-220        | Counter representing the number of sectors allocated in line
-           | 170.
+220        | Counter representing the number of sectors allocated in line 170.
 230        | Print track, sector, counter.
-240        | The sector just allocated already was but the DOS returns the
-           | next available track in the error message (65, NO BLOCK, track,
-           | sector).
-250        | If the next available track is zero then all 683 blocks on the
-           | diskette have been allocated.
+240        | The sector just allocated already was but the DOS returns the next available track in the error message (65, NO BLOCK, track, sector).
+250        | If the next available track is zero then all 683 blocks on the diskette have been allocated.
 260        | Don't allocate the directory.
-270        | The DOS returns the next available sector in the error message
-           | (65, NO BLOCK, track, sector).
+270        | The DOS returns the next available sector in the error message (65, NO BLOCK, track, sector).
 280        | Allocate the next available track and sector.
 290        | Close the direct-access channel.
 330-370    | Error handler.
@@ -4339,8 +4310,7 @@ Line Range | Description
 460-500    | Write worst-case binary pattern to buffer at $0400.
 510-540    | Initialize track, sector, and counters.
 550        | Block-allocate command.
-700        | Write worst-case binary pattern at $0400 - $04FF to a
-           | deallocated track and sector.
+700        | Write worst-case binary pattern at $0400 - $04FF to a deallocated track and sector.
 710        | Query error channel.
 720-740    | Error array.
 800-890    | Restore the BAM.
@@ -4530,8 +4500,7 @@ action!) Run this program using a test diskette.
 
 Line Range | Description
 :--------- |:----------------------------------------------------------------
-150        | Open a direct-access channel specifying buffer number 1
-           | ($0600 - $06FF).
+150        | Open a direct-access channel specifying buffer number 1 ($0600 - $06FF).
 160        | Block-read of track 1, sector 0 ($0600 - $06FF).
 190        | Write 1 byte ($60) to RAM at $0600.
 200        | Block-write to track 1, sector 0 ($0600 - $06FF).
@@ -4897,10 +4866,8 @@ programming.
  Line Range   | Description
 :------------ |:-------------------------------------------------------------
 370           | Initialize try counter.
-380           | Stuff the track and sector numbers into buffer number 0's
-              | header table ($0006-$0007).
-390           | Stuff job code number into buffer number 0's job queue table
-              | ($0000).
+380           | Stuff the track and sector numbers into buffer number 0's header table ($0006-$0007).
+390           | Stuff job code number into buffer number 0's job queue table ($0000).
 400-460       | Wait for FDC to complete the job.
 470           | Return with FDC error code in hand.
 
@@ -5030,13 +4997,10 @@ goodie.
 220-230       | READ sector 0 on track 18 into buffer number 1 ($0400-$04FF).
 240           | Query FDC error code.
 250           | Three parameter memory-read ($0490-$049F).
-260-340       | Concatenate the disk name one byte at a time by jamming it
-              | within printable ASCII range.
+260-340       | Concatenate the disk name one byte at a time by jamming it within printable ASCII range.
 390           | Initialize try counter.
-400           | Stuff the track and sector number into buffer number 1's
-              | header table ($0008-$0009).
-410           | Stuff the job code number into buffer number 1's job queue
-              | table ($0001).
+400           | Stuff the track and sector number into buffer number 1's header table ($0008-$0009).
+410           | Stuff the job code number into buffer number 1's job queue table ($0001).
 420-480       | Wait for FDC to complete the job.
 490           | Return with FDC error code in hand.
 
@@ -5143,8 +5107,7 @@ be poked into location $0002 in the job queue table.
  Line Range   | Description
 :------------ |:-------------------------------------------------------------
 290-320       | SEEK track 18.
-340-350       | READ contents of sector 0 from track 18 into buffer number 2
-              | ($0500-$05FF).
+340-350       | READ contents of sector 0 from track 18 into buffer number 2 ($0500-$05FF).
 550-560       | WRITE buffer number 2 ($0500-$05FF) to track 18, sector 0.
 770-890       | Error handler.
 
