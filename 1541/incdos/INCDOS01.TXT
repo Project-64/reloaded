@@ -6534,14 +6534,15 @@ The programs VIRTUAL DIRECTORY and EDIT TRACK & SECTOR, which are listed in
 Appendix C, help you to do this. Here's how you should use these programs to
 recover a scratched file.
 
-STEP 1. Load and run the VIRTUAL DIRECTORY program on the diskette. The
-        directory will be displayed in groups of eight entries. Scratched
-        files are highlighted in reverse video. Each group constitutes a
-        different sector on track 18. Count the groups to determine which
-        group the scratched entry is in. Note not only which group the
-        scratched entry is in, but also whether it is in the first half or
-        the last half of the group. (One of the first four file entries or
-        one of the last four.)
+### STEP 1.
+
+Load and run the VIRTUAL DIRECTORY program on the diskette. The directory 
+will be displayed in groups of eight entries. Scratched files are highlighted
+in reverse video. Each group constitutes a different sector on track 18.
+Count the groups to determine which group the scratched entry is in. Note not
+only which group the scratched entry is in, but also whether it is in the
+first half or the last half of the group. (One of the first four file entries
+or one of the last four.)
 
 Consult the table below to determine the number of the sector containing the
 entry.
@@ -6555,22 +6556,26 @@ entry.
            5 - 18,13           11 - 18,14           17 - 18,15 
            6 - 18,16           12 - 18,17           18 - 18,18 
 
-STEP 2. Load and run the EDIT TRACK & SECTOR program on the diskette with the
-        scratched file. When asked for the track and sector, enter track 18
-        and the sector number you read from the table. When prompted for the
-        starting byte, enter 00 if the scratched file entry was one of the
-        first four files in the group. Enter an 80 if the scratched file was
-        displayed among the last four in the group.
+### STEP 2.
 
-STEP 3. When the hex dump of the half-sector is displayed, cursor over to the 
-        third column of hexadecimal numbers on the display. Next locate the 
-        name of the file in the ASCII display on the right-hand side of the
-        screen. Move the cursor down until it is on the same line as the
-        start of the file name. If you have done things correctly you should
-        be on a row labeled with a $00, $20, $40, $60, $80, $A0, $C0, or $E0.
-        The byte under the cursor should be a 00. This is the file-type byte.
-        The 00 indicates a scratched file. Type over the 00 value with the
-        value that corresponds to the correct file type as indicated below.
+Load and run the EDIT TRACK & SECTOR program on the diskette with the
+scratched file. When asked for the track and sector, enter track 18 and the
+sector number you read from the table. When prompted for the starting byte,
+enter 00 if the scratched file entry was one of the first four files in the
+group. Enter an 80 if the scratched file was displayed among the last four in
+the group.
+
+### STEP 3.
+
+When the hex dump of the half-sector is displayed, cursor over to the third
+column of hexadecimal numbers on the display. Next locate the name of the
+file in the ASCII display on the right-hand side of the screen. Move the
+cursor down until it is on the same line as the start of the file name. If
+you have done things correctly you should be on a row labeled with a $00,
+$20, $40, $60, $80, $A0, $C0, or $E0. The byte under the cursor should be 
+a 00. This is the file-type byte. The 00 indicates a scratched file. Type
+over the 00 value with the value that corresponds to the correct file type as
+indicated below.
 
        File Type            Value  
     ----------------   ----------------
@@ -6580,16 +6585,21 @@ STEP 3. When the hex dump of the half-sector is displayed, cursor over to the
           USR                83
           DEL                80
 
-STEP 4. Hold down the SHIFT key and press the CLR/HOME key. This will 
-        terminate the edit mode. When asked whether to rewrite this track and
-        sector, press Y and the modified sector will be written to the
-        diskette in a few seconds.
+### STEP 4.
 
-STEP 5. Load and list the directory to see if the file name now appears. If
-        it does not, you made a mistake and things may have gone from bad to
-        worse. Hopefully, the file will be listed.
+Hold down the SHIFT key and press the CLR/HOME key. This will terminate the
+edit mode. When asked whether to rewrite this track and sector, press Y and
+the modified sector will be written to the diskette in a few seconds.
 
-STEP 6. VALIDATE the diskette by entering in direct mode:
+### STEP 5.
+
+Load and list the directory to see if the file name now appears. If it does
+not, you made a mistake and things may have gone from bad to worse.
+Hopefully, the file will be listed.
+
+### STEP 6.
+
+VALIDATE the diskette by entering in direct mode:
 
     OPEN 15,8,15,"V0":CLOSE15
 
@@ -6649,34 +6659,38 @@ instead.
 WARNING: The technique we are about to describe here is not for the faint
 hearted. Consult with your physician before attempting this exercise.
 
-STEP 1. Load and run the VALIDATE A DISKETTE program contained in Appendix C.
-        This program emulates the VALIDATE command from BASIC. It will chain
-        through each active file entry in the directory and highlight a bad
-        file without aborting.
+### STEP 1.
 
-STEP 2. Load and run FIND A FILE. This program will return the track and
-        sector locations of where the file resides in the directory as well
-        as where it starts on the diskette. The directory track and sector is
-        extraneous information for our present purpose. Note only the
-        starting track and sector.
+Load and run the VALIDATE A DISKETTE program contained in Appendix C. This
+program emulates the VALIDATE command from BASIC. It will chain through each
+active file entry in the directory and highlight a bad file without aborting.
 
-STEP 3. Load and run DISPLAY A CHAIN. This program requires you to input a
-        track and sector. Input the starting track and sector obtained in
-        step 2. The program will chain through all forward track and sectors
-        on the diskette from this entry point until an error is encountered.
-        (If the error is a soft error, STOP! Do not pass GO. Go directly to
-        section 8.2.) Ignore the sector where the error was encountered. The
-        file is virtually lost from that point on. (Recall that the link has
-        been destroyed.) Make note of the last successful track and sector
-        displayed.
+### STEP 2.
 
-STEP 4. Load and run EDIT TRACK & SECTOR. You will want to input the track
-        and sector obtained in step 3. The starting byte is always 00. Change
-        the first two bytes to 00 and FF, respectively. Rewrite the sector
-        when prompted to do so. You have in effect severed the forward track
-        and sector link described in Chapter 4. This allows you to manipulate
-        the front end of the file. It is the only portion of the file that is
-        clearly intact.
+Load and run FIND A FILE. This program will return the track and sector
+locations of where the file resides in the directory as well as where it
+starts on the diskette. The directory track and sector is extraneous
+information for our present purpose. Note only the starting track and sector.
+
+### STEP 3.
+
+Load and run DISPLAY A CHAIN. This program requires you to input a track and
+sector. Input the starting track and sector obtained in step 2. The program
+will chain through all forward track and sectors on the diskette from this
+entry point until an error is encountered. (If the error is a soft error,
+STOP! Do not pass GO. Go directly to section 8.2.) Ignore the sector where
+the error was encountered. The file is virtually lost from that point on.
+(Recall that the link has been destroyed.) Make note of the last successful
+track and sector displayed.
+
+### STEP 4.
+
+Load and run EDIT TRACK & SECTOR. You will want to input the track and sector
+obtained in step 3. The starting byte is always 00. Change the first two
+bytes to 00 and FF, respectively. Rewrite the sector when prompted to do so.
+You have in effect severed the forward track and sector link described in
+Chapter 4. This allows you to manipulate the front end of the file. It is the
+only portion of the file that is clearly intact.
 
 If it is a BASIC PRG file, the internal BASIC links have been destroyed. You
 can restore the links on the C64 with a machine language monitor or on the
@@ -6824,12 +6838,16 @@ Begin by making a grid with a space for each sector on the diskette like this:
                                 \  /
                                  \/
 
-Next, VALIDATE the original diskette and then load and run the program DISPLAY A BLOCK AVAILABILITY MAP listed in Appendix C. Working from the display on the CRT, indicate on your chart which sectors are in use by other files. Once you have done this, you should see a blank area centered around
+Next, VALIDATE the original diskette and then load and run the program
+DISPLAY A BLOCK AVAILABILITY MAP listed in Appendix C. Working from the
+display on the CRT, indicate on your chart which sectors are in use by other
+files. Once you have done this, you should see a blank area centered around
 track 18. This is where you lost files reside.
 
 Now, load and run the DISPLAY A CHAIN program. The first file probably starts
 on track 17, sector 0. Record the chain displayed to the screen on your
-chart. Once you have recorded the first chain, begin looking for the next one. It probably begins on an open space on track 17 or, if the first chain
+chart. Once you have recorded the first chain, begin looking for the next
+one. It probably begins on an open space on track 17 or, if the first chain
 was a long one, on track 19, sector 0. Work outward from track 18 until you
 have located all eight missing files.
 
@@ -6860,7 +6878,8 @@ track 18 will still be intact and so will most of your files. The DOS works
 outwards from track 18 when writing to a diskette. The outermost tracks were
 probably never in use.
 
-Now load and run the VALIDATE A DISKETTE program to assess the damage. Oftentimes all files are recovered.
+Now load and run the VALIDATE A DISKETTE program to assess the damage.
+Oftentimes all files are recovered.
 
 ## Conclusion
 
