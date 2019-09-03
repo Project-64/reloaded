@@ -2173,6 +2173,15 @@ directly to or from RAM.  This location points to the beginning
 address of the area of RAM to be used for the blocks of data that come
 after the initial header.
 
+195-196       $C3-$C4        MEMUSS
+Tape Load Temporary Addresses
+
+During a tape LOAD or SAVE, the first block, which contains the
+header, is loaded to or from the cassette buffer, and the rest of the
+data is LOADed or SAVEd directly to or from RAM. This location
+points to the beginning address of the area of RAM to be used for
+the blocks of data that come after the initial header.
+
 197           $C5            LSTX
 Matrix Coordinate of Last Key Pressed, 64=None Pressed
 
