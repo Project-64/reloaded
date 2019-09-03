@@ -14333,7 +14333,7 @@ B-19. Function Name: PLOT
   Description: A call to this routine with the accumulator carry flag
 set loads the current position of the cursor on the screen (in X,Y
 coordinates) into the Y and X registers. Y is the column number of the
-cursor location (6-39), and X is the row number of the location of the
+cursor location (0-39), and X is the row number of the location of the
 cursor (0-24). A call with the carry bit clear moves the cursor to X,Y
 as determined by the Y and X registers.
 
