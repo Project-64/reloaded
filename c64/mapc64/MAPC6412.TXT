@@ -2142,7 +2142,7 @@ block remaining to be read or written.
 Tape Input Byte Buffer
 
 This is used by the tape routines as a work area in which incoming
-characters area assembled.
+characters are assembled.
 
 192           $C0            CAS1
 Tape Motor Interlock
