@@ -10096,8 +10096,8 @@ The jump table entry for this documented Kernal is at 65520 ($FFF0).
 
 The routine allows the user to read or set the position of the cursor.
 If the carry flag is set with the SEC instruction before calling this
-subroutine, cursor column (X position) will be returned in the .X
-register, and the cursor row (Y position) will be returned in the .Y
+subroutine, cursor column (X position) will be returned in the .Y
+register, and the cursor row (Y position) will be returned in the .X
 register.  If the carry flag is cleared with a CLC instruction before
 entering this routine, and the .Y and .X registers are loaded with the
 desired row and column positions respectively, this routine will set
